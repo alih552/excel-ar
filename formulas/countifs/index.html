@@ -6,10 +6,11 @@
 <title>شرح دالة COUNTIFS في Excel بالعربي</title>
 <meta name="description" content="شرح دالة COUNTIFS في Excel: تعدّ الصفوف التي تتحقق فيها عدة شروط معاً. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="COUNTIFS، دالة COUNTIFS، شرح COUNTIFS، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/countifs/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة COUNTIFS في Excel بالعربي">
 <meta property="og:description" content="شرح دالة COUNTIFS في Excel: تعدّ الصفوف التي تتحقق فيها عدة شروط معاً. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/countifs/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,33 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=COUNTIFS(criteria_range1, criteria1, [criteria_range2, criteria2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">criteria_range1</code>: مطلوب</li><li><code dir="ltr">criteria1</code>: مطلوب</li><li><code dir="ltr">criteria_range2</code>: اختياري</li><li><code dir="ltr">criteria2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">criteria_range1</code>: النطاق الأول الذي يُفحص فيه الشرط الأول. (مطلوب)</li><li><code dir="ltr">criteria1</code>: الشرط الأول، رقم أو نص أو تعبير مثل &quot;&gt;1000&quot;. (مطلوب)</li><li><code dir="ltr">criteria_range2</code>: نطاق إضافي اختياري بنفس حجم النطاق الأول. (اختياري)</li><li><code dir="ltr">criteria2</code>: الشرط الثاني المقابل للنطاق الإضافي، ويمكن تكرار الأزواج. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم COUNTIFS؟</h2>
+<p>تستخدم الدالة <code dir="ltr">COUNTIFS</code> لعدّ الصفوف التي تحقق عدة شروط في وقت واحد، مثل عدد الموظفين في قسم معين وراتبهم أكبر من حد محدد، أو عدد الطلبات المسلّمة في شهر معين. هي النسخة متعددة الشروط من <code dir="ltr">COUNTIF</code>.</p>
+<h2 id="s-2">طريقة عملها</h2>
+<p>تعطيها زوجاً من الوسائط لكل شرط: نطاق ثم معيار. لا تُحتسب الخلية إلا إذا تحققت كل الشروط معاً (منطق <a href="/excel-ar/formulas/and/">AND</a>). يجب أن تكون كل النطاقات بنفس الحجم.</p>
+<h2 id="s-3">مثال عملي</h2>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>القسم</th><th>الراتب</th></tr></thead><tbody><tr><td>أحمد</td><td>مبيعات</td><td>900</td></tr><tr><td>سارة</td><td>مبيعات</td><td>1200</td></tr><tr><td>علي</td><td>حسابات</td><td>1100</td></tr><tr><td>منى</td><td>مبيعات</td><td>1500</td></tr></tbody></table></div>
+<p>لعدّ موظفي المبيعات الذين راتبهم أكبر من 1000:</p>
+<p><code dir="ltr">=COUNTIFS(B2:B5,&quot;مبيعات&quot;,C2:C5,&quot;&gt;1000&quot;)</code></p>
+<p>الناتج: 2 (سارة ومنى).</p>
+<h2 id="s-4">نطاق بين قيمتين</h2>
+<p>لعدّ القيم بين 1000 و1400 استخدم نفس العمود مرتين: <code dir="ltr">=COUNTIFS(C2:C5,&quot;&gt;=1000&quot;,C2:C5,&quot;&lt;=1400&quot;)</code> والناتج 2 (سارة وعلي).</p>
+<h2 id="s-5">استخدام خلية كمعيار</h2>
+<p>إذا كان اسم القسم في الخلية F1 فاكتب: <code dir="ltr">=COUNTIFS(B2:B5,F1,C2:C5,&quot;&gt;&quot;&amp;1000)</code>. ربط العملية بالنص يتم بالعلامة &amp;.</p>
+<h2 id="s-6">أخطاء شائعة</h2>
+<ul><li>اختلاف حجم النطاقات يعطي الخطأ #VALUE!.</li><li>نسيان وضع المعيار الرقمي بين علامتي اقتباس مثل &quot;&gt;1000&quot;.</li><li>مسافات زائدة في النص تجعل المطابقة تفشل؛ نظّف البيانات بـ <a href="/excel-ar/formulas/trim/">TRIM</a>.</li><li>الدالة لا تفرّق بين الأحرف الكبيرة والصغيرة.</li><li>لمنطق <a href="/excel-ar/formulas/or/">OR</a> اجمع نتيجتي COUNTIFS أو استخدم <a href="/excel-ar/formulas/sumproduct/">SUMPRODUCT</a>.</li></ul>
+<h2 id="s-7">نصائح</h2>
+<p>يمكنك استخدام الرمزين * و? كبدائل للنص، مثل &quot;مب*&quot; لكل ما يبدأ بهذه الحروف.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=COUNTIFS(B2:B40,&quot;أنثى&quot;,C2:C40,&quot;&gt;=90&quot;)</code></pre>
 <p>النتيجة: عدد الطالبات بدرجة 90 فأكثر</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=COUNTIFS(B2:B40;&quot;أنثى&quot;;C2:C40;&quot;&gt;=90&quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/and/" title="شرح دالة AND في Excel بالعربي">AND</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/or/" title="شرح دالة OR في Excel بالعربي">OR</a></li><li><a href="/excel-ar/formulas/sumproduct/" title="شرح دالة SUMPRODUCT في Excel بالعربي">SUMPRODUCT</a></li><li><a href="/excel-ar/formulas/count/" title="شرح دالة COUNT في Excel بالعربي">COUNT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

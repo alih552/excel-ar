@@ -6,10 +6,11 @@
 <title>شرح دالة COUNTIF في Excel بالعربي</title>
 <meta name="description" content="شرح دالة COUNTIF في Excel: تعدّ الخلايا التي تحقق شرطاً واحداً. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="COUNTIF، دالة COUNTIF، شرح COUNTIF، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/countif/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة COUNTIF في Excel بالعربي">
 <meta property="og:description" content="شرح دالة COUNTIF في Excel: تعدّ الخلايا التي تحقق شرطاً واحداً. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/countif/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,33 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=COUNTIF(range, criteria)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">range</code>: مطلوب</li><li><code dir="ltr">criteria</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">range</code>: النطاق الذي تريد فحص خلاياه وعدّ ما يطابق الشرط منها. (مطلوب)</li><li><code dir="ltr">criteria</code>: الشرط المطلوب: رقم أو نص أو تعبير مقارنة مثل &quot;&gt;60&quot; أو مرجع خلية، ويقبل الرموز * و ؟. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم COUNTIF؟</h2>
+<p>تستخدم الدالة <code dir="ltr">COUNTIF</code> لعدّ الخلايا في نطاق معيّن التي تحقق شرطًا واحدًا، مثل عدد الموظفين في قسم محدد، أو عدد الفواتير غير المدفوعة، أو عدد الطلاب الذين تجاوزت درجتهم حدًّا معينًا.</p>
+<h2 id="s-2">كيف تعمل؟</h2>
+<p>الصيغة العامة: <code dir="ltr">=COUNTIF(range, criteria)</code>. تفحص الدالة كل خلية في <code dir="ltr">range</code> وتعدّ فقط الخلايا التي تطابق <code dir="ltr">criteria</code>. الشرط قد يكون نصًّا أو رقمًا أو تعبيرًا يبدأ بعامل مقارنة مثل <code dir="ltr">&quot;&gt;50&quot;</code> أو <code dir="ltr">&quot;&lt;&gt;0&quot;</code>.</p>
+<h2 id="s-3">مثال عملي</h2>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>القسم</th><th>الدرجة</th></tr></thead><tbody><tr><td>أحمد</td><td>مبيعات</td><td>85</td></tr><tr><td>سارة</td><td>محاسبة</td><td>92</td></tr><tr><td>علي</td><td>مبيعات</td><td>70</td></tr><tr><td>ليلى</td><td>مبيعات</td><td>55</td></tr><tr><td>عمر</td><td>محاسبة</td><td>48</td></tr></tbody></table></div>
+<p>عدد موظفي المبيعات (القسم في العمود B):</p>
+<p><code dir="ltr">=COUNTIF(B2:B6,&quot;مبيعات&quot;)</code> ← النتيجة 3.</p>
+<p>عدد من درجتهم أكبر من 60:</p>
+<p><code dir="ltr">=COUNTIF(C2:C6,&quot;&gt;60&quot;)</code> ← النتيجة 3.</p>
+<p>استخدام قيمة من خلية بدل النص:</p>
+<p><code dir="ltr">=COUNTIF(B2:B6,E1)</code> حيث E1 تحتوي اسم القسم.</p>
+<p>لعدّ النصوص التي تحتوي حرفًا أو كلمة معينة استخدم الرموز البديلة: <code dir="ltr">=COUNTIF(A2:A6,&quot;*ع*&quot;)</code>.</p>
+<h2 id="s-4">أخطاء شائعة</h2>
+<ul><li>نسيان علامتي الاقتباس حول عامل المقارنة: الصحيح <code dir="ltr">&quot;&gt;60&quot;</code> وليس <code dir="ltr">&gt;60</code>.</li><li>دمج عامل المقارنة مع مرجع خلية دون استخدام <code dir="ltr">&amp;</code>: الصحيح <code dir="ltr">=COUNTIF(C2:C6,&quot;&gt;&quot;&amp;E1)</code>.</li><li>وجود مسافات زائدة في النص تجعل المطابقة تفشل؛ نظّف البيانات بالدالة <a href="/excel-ar/formulas/trim/">TRIM</a>.</li><li>محاولة وضع أكثر من شرط: استخدم <a href="/excel-ar/formulas/countifs/">COUNTIFS</a> لذلك.</li><li>الأرقام المخزنة كنص قد لا تُعدّ كما تتوقع.</li></ul>
+<h2 id="s-5">نصيحة</h2>
+<p>لكشف القيم المكررة في عمود ضع <code dir="ltr">=COUNTIF($A$2:$A$100,A2)</code> بجانب كل صف، وكل نتيجة أكبر من 1 تعني وجود تكرار.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=COUNTIF(C2:C40,&quot;&gt;=50&quot;)</code></pre>
 <p>النتيجة: عدد الناجحين بدرجة 50 فأكثر</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=COUNTIF(C2:C40;&quot;&gt;=50&quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/countifs/" title="شرح دالة COUNTIFS في Excel بالعربي">COUNTIFS</a></li><li><a href="/excel-ar/formulas/count/" title="شرح دالة COUNT في Excel بالعربي">COUNT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>
