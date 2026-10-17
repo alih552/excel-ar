@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://alih552.github.io/excel-ar/sitemap.xml
