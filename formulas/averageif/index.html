@@ -6,10 +6,11 @@
 <title>شرح دالة AVERAGEIF في Excel بالعربي</title>
 <meta name="description" content="شرح دالة AVERAGEIF في Excel: تحسب متوسط القيم التي يتحقق فيها شرط واحد. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="AVERAGEIF، دالة AVERAGEIF، شرح AVERAGEIF، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/averageif/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة AVERAGEIF في Excel بالعربي">
 <meta property="og:description" content="شرح دالة AVERAGEIF في Excel: تحسب متوسط القيم التي يتحقق فيها شرط واحد. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/averageif/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,9 +29,37 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=AVERAGEIF(range, criteria, [average_range])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">range</code>: مطلوب</li><li><code dir="ltr">criteria</code>: مطلوب</li><li><code dir="ltr">average_range</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">range</code>: النطاق الذي يُختبر فيه الشرط، مثل عمود أسماء الفروع. (مطلوب)</li><li><code dir="ltr">criteria</code>: الشرط الذي يحدد الخلايا المطلوبة، مثل نص بين علامتي تنصيص أو مقارنة مثل &quot;&gt;3500&quot;. (مطلوب)</li><li><code dir="ltr">average_range</code>: النطاق الذي يُحسب متوسطه للصفوف المطابقة، وإذا حذفته يُحسب متوسط النطاق الأول نفسه. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم AVERAGEIF</h2>
+<p>استخدم AVERAGEIF عندما تريد المتوسط لجزء من البيانات فقط يحدده شرط واحد: متوسط مبيعات فرع معين، أو متوسط رواتب قسم المحاسبة، أو متوسط درجات الطلاب الناجحين، أو متوسط الفواتير التي تزيد على حد معين. وهي تغنيك عن تصفية البيانات يدوياً ثم حساب المتوسط في كل مرة.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>الدالة تمر على النطاق الأول <code dir="ltr">range</code> وتختبر كل خلية فيه بالشرط <code dir="ltr">criteria</code>. والخلايا التي تحقق الشرط تأخذ الدالة ما يقابلها في <code dir="ltr">average_range</code> وتحسب متوسطه. وإذا حذفت <code dir="ltr">average_range</code> فإنها تحسب متوسط الخلايا المطابقة في النطاق الأول نفسه.</p>
+<p>صيغ الشرط الشائعة:</p>
+<ul><li>نص مطابق: <code dir="ltr">&quot;الكرخ&quot;</code>.</li><li>مقارنة رقمية: <code dir="ltr">&quot;&gt;3500&quot;</code> أو <code dir="ltr">&quot;&lt;&gt;0&quot;</code>، والعامل يوضع داخل علامات التنصيص.</li><li>شرط من خلية: <code dir="ltr">&quot;&gt;&quot;&amp;F1</code> إذا كان الحد مكتوباً في الخلية F1.</li><li>حروف بدل: <code dir="ltr">&quot;*كرخ*&quot;</code> تطابق أي نص يحتوي كلمة كرخ.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل مبيعات يومية لثلاثة فروع خلال ثلاثة أيام:</p>
+<div class="table-wrap"><table><thead><tr><th>التاريخ (A)</th><th>الفرع (B)</th><th>المبيعات (C)</th></tr></thead><tbody><tr><td>2026-03-01</td><td>الكرخ</td><td>4200</td></tr><tr><td>2026-03-01</td><td>الرصافة</td><td>3100</td></tr><tr><td>2026-03-02</td><td>الكرخ</td><td>3800</td></tr><tr><td>2026-03-02</td><td>الرصافة</td><td>2900</td></tr><tr><td>2026-03-03</td><td>الكرخ</td><td>4600</td></tr><tr><td>2026-03-03</td><td>المنصور</td><td>5000</td></tr></tbody></table></div>
+<p><strong>متوسط مبيعات فرع الكرخ:</strong></p>
+<pre dir="ltr"><code>=AVERAGEIF(B2:B7,&quot;الكرخ&quot;,C2:C7)</code></pre>
+<p>النتيجة 4200. فالدالة وجدت ثلاثة صفوف للكرخ قيمها 4200 و3800 و4600، ومجموعها 12600 مقسوماً على 3.</p>
+<p><strong>متوسط المبيعات اليومية التي تجاوزت 3500 في كل الفروع:</strong></p>
+<pre dir="ltr"><code>=AVERAGEIF(C2:C7,&quot;&gt;3500&quot;)</code></pre>
+<p>النتيجة 4400. هنا لم نكتب الوسيط الثالث، فحسبت الدالة متوسط القيم المطابقة نفسها: 4200 و3800 و4600 و5000.</p>
+<p><strong>متوسط المبيعات ابتداء من الثاني من آذار (مارس):</strong></p>
+<pre dir="ltr"><code>=AVERAGEIF(A2:A7,&quot;&gt;=&quot;&amp;DATE(2026,3,2),C2:C7)</code></pre>
+<p>النتيجة 4075، وهي متوسط آخر أربعة صفوف.</p>
+<p>ولجعل التقرير مرناً، اكتب اسم الفرع في الخلية E2 واستخدم <code dir="ltr">=AVERAGEIF(B2:B7,E2,C2:C7)</code>، فتتغير النتيجة كلما غيّرت اسم الفرع.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #DIV/0!</strong>: معناه أنه لا توجد أي خلية تحقق الشرط، وغالباً يكون السبب خطأ إملائياً في اسم الفرع أو مسافة زائدة في نهاية النص داخل الجدول. تأكد من تطابق النص، ويمكنك إظهار رسالة واضحة: <code dir="ltr">=IFERROR(AVERAGEIF(B2:B7,E2,C2:C7),&quot;لا توجد مبيعات&quot;)</code>.</li><li><strong>وضع العامل خارج علامات التنصيص</strong>: الصيغة <code dir="ltr">&gt;3500</code> بدون تنصيص لا تعمل، والصحيح <code dir="ltr">&quot;&gt;3500&quot;</code>. وعند الربط بخلية يبقى العامل داخل التنصيص ويُربط بعلامة &amp;.</li><li><strong>نطاقان مختلفان في الحجم</strong>: اجعل <code dir="ltr">range</code> و<code dir="ltr">average_range</code> بالحجم نفسه دائماً، مثل B2:B7 مع C2:C7، وإلا فقد تأخذ الدالة خلايا لم تقصدها.</li><li><strong>أرقام مخزنة كنص في عمود المبيعات</strong>: تتجاهلها الدالة فيخرج المتوسط خاطئاً دون أي رسالة.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لعدة شروط معاً، مثل فرع الكرخ وفي شهر آذار فقط، استخدم AVERAGEIFS. وانتبه إلى أن ترتيب وسائطها مختلف، فنطاق المتوسط يأتي أولاً.</li><li>الدالة لا تفرق بين الحروف الكبيرة والصغيرة في النصوص الإنجليزية.</li><li>متاحة منذ Excel 2007 وفي كل الإصدارات اللاحقة.</li><li>في الإعدادات العربية التي تستخدم الفاصلة المنقوطة: <code dir="ltr">=AVERAGEIF(B2:B7;&quot;الكرخ&quot;;C2:C7)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل يمكن أن يكون الشرط على عمود والمتوسط لعمود آخر؟</h3>
+<p>نعم، وهذا هو الاستخدام الأشهر: الشرط على عمود الفرع والمتوسط لعمود المبيعات، كما في المثال.</p>
+<h3>كيف أستثني الأصفار من المتوسط؟</h3>
+<p>اكتب الشرط <code dir="ltr">&quot;&lt;&gt;0&quot;</code> على العمود نفسه: <code dir="ltr">=AVERAGEIF(C2:C7,&quot;&lt;&gt;0&quot;)</code>.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=AVERAGEIF(B2:B40,&quot;الشعبة أ&quot;,C2:C40)</code></pre>
 <p>النتيجة: متوسط درجات الشعبة أ</p>
 <h2>إذا رفض Excel الصيغة</h2>

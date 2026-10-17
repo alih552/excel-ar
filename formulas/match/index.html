@@ -6,10 +6,11 @@
 <title>شرح دالة MATCH في Excel بالعربي</title>
 <meta name="description" content="شرح دالة MATCH في Excel: تعيد موقع قيمة داخل نطاق (رقم الصف أو العمود). استخدم 0 للمطابقة التامة. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="MATCH، دالة MATCH، شرح MATCH، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/match/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة MATCH في Excel بالعربي">
 <meta property="og:description" content="شرح دالة MATCH في Excel: تعيد موقع قيمة داخل نطاق (رقم الصف أو العمود). استخدم 0 للمطابقة التامة. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/match/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,41 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=MATCH(lookup_value, lookup_array, [match_type])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">lookup_value</code>: مطلوب</li><li><code dir="ltr">lookup_array</code>: مطلوب</li><li><code dir="ltr">match_type</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">lookup_value</code>: القيمة التي تبحث عن موقعها، وقد تكون رقماً أو نصاً أو مرجع خلية. (مطلوب)</li><li><code dir="ltr">lookup_array</code>: النطاق الذي تبحث فيه، ويجب أن يكون صفاً واحداً أو عموداً واحداً. (مطلوب)</li><li><code dir="ltr">match_type</code>: اختياري: 0 للمطابقة التامة، و1 (الافتراضي) لأكبر قيمة لا تتجاوز المطلوبة في نطاق مرتب تصاعدياً، و-1 لأصغر قيمة لا تقل عنها في نطاق مرتب تنازلياً. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم MATCH</h2>
+<p>تجيب MATCH عن سؤال واحد: في أي موقع داخل هذا النطاق توجد القيمة التي أبحث عنها؟ هي لا تعيد القيمة نفسها بل رقم ترتيبها. لهذا نادراً ما تُستخدم وحدها، وإنما تُدمج مع <a href="/excel-ar/formulas/index/">INDEX</a> لبناء بحث مرن، أو مع دوال أخرى تحتاج رقم صف أو عمود. وتفيد أيضاً للتحقق من وجود قيمة في قائمة، مثل التأكد من أن رقم الموظف مسجل في كشف الحضور.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تبحث الدالة عن القيمة في نطاق من صف واحد أو عمود واحد، ونوع المطابقة يحدد طريقة البحث:</p>
+<ul><li><strong>0</strong>: مطابقة تامة، والترتيب غير مهم. هذا ما تحتاجه في أغلب الحالات.</li><li><strong>1</strong> أو تركه فارغاً: تعيد موقع أكبر قيمة أصغر من أو تساوي القيمة المطلوبة، ويجب أن يكون النطاق مرتباً تصاعدياً.</li><li><strong>-1</strong>: تعيد موقع أصغر قيمة أكبر من أو تساوي القيمة المطلوبة، ويجب أن يكون النطاق مرتباً تنازلياً.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<h3>المطابقة التامة</h3>
+<p>كشف موظفين في قسم الموارد البشرية:</p>
+<div class="table-wrap"><table><thead><tr><th>الصف</th><th>A: رقم الموظف</th><th>B: الاسم</th><th>C: القسم</th></tr></thead><tbody><tr><td>2</td><td>E101</td><td>سارة محمود</td><td>المحاسبة</td></tr><tr><td>3</td><td>E102</td><td>خالد يوسف</td><td>المبيعات</td></tr><tr><td>4</td><td>E103</td><td>ليلى حسن</td><td>المخازن</td></tr><tr><td>5</td><td>E104</td><td>عمر سعيد</td><td>المبيعات</td></tr><tr><td>6</td><td>E105</td><td>هدى سالم</td><td>الموارد البشرية</td></tr></tbody></table></div>
+<p>الصيغة:</p>
+<pre dir="ltr"><code>=MATCH(&quot;E104&quot;,A2:A6,0)</code></pre>
+<p>تعيد <strong>4</strong>، لأن E104 هي القيمة الرابعة داخل النطاق A2:A6. لاحظ أنها في الصف الخامس من الورقة، لكن MATCH تعدّ من بداية النطاق لا من بداية الورقة.</p>
+<h3>المطابقة التقريبية لتصنيف الدرجات</h3>
+<p>جدول حدود التقديرات مرتب تصاعدياً:</p>
+<div class="table-wrap"><table><thead><tr><th>الصف</th><th>A: الحد الأدنى</th><th>B: التقدير</th></tr></thead><tbody><tr><td>2</td><td>0</td><td>ضعيف</td></tr><tr><td>3</td><td>50</td><td>مقبول</td></tr><tr><td>4</td><td>65</td><td>متوسط</td></tr><tr><td>5</td><td>75</td><td>جيد</td></tr><tr><td>6</td><td>85</td><td>ممتاز</td></tr></tbody></table></div>
+<p>الصيغة <code dir="ltr">=MATCH(78,A2:A6,1)</code> تعيد <strong>4</strong>، لأن أكبر حد لا يتجاوز 78 هو 75 وهو في الموقع الرابع. وعند دمجها مع INDEX بالشكل <code dir="ltr">=INDEX(B2:B6,MATCH(78,A2:A6,1))</code> تحصل على التقدير &quot;جيد&quot;.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #N/A</strong>: القيمة غير موجودة في النطاق، أو أنها في المطابقة التقريبية أصغر من أول قيمة فيه (مثل البحث عن -5 في جدول الحدود أعلاه). تحقق من المسافات الزائدة باستخدام <a href="/excel-ar/formulas/trim/">TRIM</a>، ومن أن الأرقام ليست مخزنة كنص في أحد الطرفين.</li><li><strong>نتيجة خاطئة دون رسالة خطأ</strong>: تحدث عند نسيان الوسيط الثالث، فيستخدم Excel المطابقة التقريبية على قائمة غير مرتبة. اكتب 0 دائماً عند البحث عن قيمة محددة.</li><li><strong>الخطأ #N/A مع نطاق من عدة أعمدة</strong>: يجب أن يكون نطاق البحث صفاً واحداً أو عموداً واحداً فقط.</li><li><strong>إخفاء الخطأ</strong>: استخدم <code dir="ltr">=IFERROR(MATCH(F2,A2:A6,0),&quot;غير مسجل&quot;)</code> لعرض رسالة واضحة بدل #N/A.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>MATCH لا تفرّق بين الحروف الكبيرة والصغيرة.</li><li>مع المطابقة التامة يمكنك استخدام أحرف البدل: النجمة لأي عدد من الحروف، وعلامة الاستفهام لحرف واحد، مثل <code dir="ltr">=MATCH(&quot;خالد*&quot;,B2:B6,0)</code> التي تعيد 2 في جدول الموظفين.</li><li>في Excel 365 وExcel 2021 تتوفر <a href="/excel-ar/formulas/xmatch/">XMATCH</a>، وهي تبحث بالمطابقة التامة افتراضياً ويمكنها البحث من آخر القائمة.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>لماذا أدمج MATCH مع INDEX بدل استخدام VLOOKUP؟</h3>
+<p>لأن هذا الدمج يبحث في أي عمود ويعيد من أي عمود، حتى لو كان عمود النتيجة على يسار عمود البحث، ولا يتأثر بإضافة أعمدة جديدة.</p>
+<h3>كيف أعرف إن كانت القيمة موجودة فقط؟</h3>
+<p>استخدم <code dir="ltr">=ISNUMBER(MATCH(F2,A2:A6,0))</code>، فتعيد TRUE إذا وُجدت القيمة وFALSE إذا لم توجد.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=INDEX(C2:C100,MATCH(F2,A2:A100,0))</code></pre>
 <p>النتيجة: بحث مرن بدل <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a></p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=INDEX(C2:C100;MATCH(F2;A2:A100;0))</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/xmatch/" title="شرح دالة XMATCH في Excel بالعربي">XMATCH</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/xmatch/" title="شرح دالة XMATCH في Excel بالعربي">XMATCH</a></li><li><a href="/excel-ar/formulas/choosecols/" title="شرح دالة CHOOSECOLS في Excel بالعربي">CHOOSECOLS</a></li><li><a href="/excel-ar/formulas/hlookup/" title="شرح دالة HLOOKUP في Excel بالعربي">HLOOKUP</a></li><li><a href="/excel-ar/formulas/large/" title="شرح دالة LARGE في Excel بالعربي">LARGE</a></li><li><a href="/excel-ar/formulas/lower/" title="شرح دالة LOWER في Excel بالعربي">LOWER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

@@ -6,10 +6,11 @@
 <title>شرح دالة WEEKDAY في Excel بالعربي</title>
 <meta name="description" content="شرح دالة WEEKDAY في Excel: تعيد رقم يوم الأسبوع لتاريخ؛ بالنوع 1 يكون الأحد 1 والسبت 7. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="WEEKDAY، دالة WEEKDAY، شرح WEEKDAY، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/weekday/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة WEEKDAY في Excel بالعربي">
 <meta property="og:description" content="شرح دالة WEEKDAY في Excel: تعيد رقم يوم الأسبوع لتاريخ؛ بالنوع 1 يكون الأحد 1 والسبت 7. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/weekday/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,38 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=WEEKDAY(serial_number, [return_type])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">serial_number</code>: مطلوب</li><li><code dir="ltr">return_type</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">serial_number</code>: التاريخ الذي تريد معرفة يوم الأسبوع فيه، مكتوباً في خلية أو ناتجاً عن دالة تاريخ. (مطلوب)</li><li><code dir="ltr">return_type</code>: رقم يحدد اليوم الذي يبدأ منه العدّ، مثل 1 ليكون الأحد 1، أو 15 لتكون الجمعة 1، والافتراضي 1. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم WEEKDAY</h2>
+<p>تحتاج <code dir="ltr">WEEKDAY</code> كلما أردت أن تعرف أي يوم من أيام الأسبوع يقع فيه تاريخ ما، ثم تبني على ذلك قراراً. أمثلتها في العمل كثيرة: تمييز أيام العطلة في سجل الحضور، واحتساب ساعات العمل الإضافي في يوم الإجازة بمعدل مختلف، وتلوين الصفوف التي تقع في نهاية الأسبوع، أو منع تحديد موعد تسليم في يوم عطلة.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تأخذ الدالة تاريخاً وتعيد رقماً صحيحاً يمثل يوم الأسبوع. ويحدد الوسيط الثاني من أي يوم يبدأ العدّ:</p>
+<div class="table-wrap"><table><thead><tr><th>return_type</th><th>بداية العدّ</th><th>المدى</th></tr></thead><tbody><tr><td>1 أو بلا قيمة</td><td>الأحد = 1</td><td>1 إلى 7</td></tr><tr><td>2</td><td>الاثنين = 1</td><td>1 إلى 7</td></tr><tr><td>3</td><td>الاثنين = 0</td><td>0 إلى 6</td></tr><tr><td>11 إلى 17</td><td>يأخذ الرقم 1: الاثنين مع 11، والثلاثاء مع 12، وهكذا حتى الأحد مع 17</td><td>1 إلى 7</td></tr></tbody></table></div>
+<p>النوع 15 مفيد في البلدان التي عطلتها الجمعة والسبت، لأنه يجعل الجمعة 1 والسبت 2، فيكفي شرط واحد لتمييز يومي العطلة. والنوع 16 يجعل السبت 1، وهو مناسب لمن يبدأ أسبوعه بالسبت.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل عمل إضافي لموظف، والتواريخ في العمود A من A2 إلى A6:</p>
+<div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>اليوم</th><th>النتيجة بالنوع 1</th><th>النتيجة بالنوع 15</th><th>الحالة</th></tr></thead><tbody><tr><td>2026-03-05</td><td>الخميس</td><td>5</td><td>7</td><td>دوام</td></tr><tr><td>2026-03-06</td><td>الجمعة</td><td>6</td><td>1</td><td>عطلة</td></tr><tr><td>2026-03-07</td><td>السبت</td><td>7</td><td>2</td><td>عطلة</td></tr><tr><td>2026-03-08</td><td>الأحد</td><td>1</td><td>3</td><td>دوام</td></tr><tr><td>2026-03-09</td><td>الاثنين</td><td>2</td><td>4</td><td>دوام</td></tr></tbody></table></div>
+<p>لكتابة حالة كل يوم في العمود E، ضع في الخلية E2 ثم اسحبها للأسفل:</p>
+<pre dir="ltr"><code>=IF(WEEKDAY(A2,15)&lt;=2,&quot;عطلة&quot;,&quot;دوام&quot;)</code></pre>
+<p>النتيجة في الخلية E3، أي يوم 2026-03-06: <strong>عطلة</strong>، لأن WEEKDAY بالنوع 15 أعادت 1 للجمعة. أما يوم 2026-03-08 فتعيد له 3، فيظهر &quot;دوام&quot;.</p>
+<p>ولعدّ أيام العطلة في السجل كله بصيغة واحدة:</p>
+<pre dir="ltr"><code>=SUMPRODUCT(--(WEEKDAY(A2:A6,15)&lt;=2))</code></pre>
+<p>والنتيجة <strong>2</strong>، وهما الجمعة والسبت.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>#VALUE!:</strong> التاريخ مكتوب كنص لا يفهمه Excel، كأن يكون مستورداً من نظام آخر. حوّله إلى تاريخ حقيقي بالدالة DATEVALUE أو بأداة &quot;نص إلى أعمدة&quot;.</li><li><strong>#NUM!:</strong> رقم النوع غير موجود في القائمة، مثل 4 أو 10.</li><li><strong>صف بلا تاريخ يظهر &quot;عطلة&quot;:</strong> الخلية الفارغة تُقرأ صفراً، ويعدّه Excel يوم سبت، فتعيد الدالة 7 بالنوع الافتراضي و2 بالنوع 15 بدل أن تعطي خطأ. أضف شرطاً مثل <code dir="ltr">=IF(A2=&quot;&quot;,&quot;&quot;,IF(WEEKDAY(A2,15)&lt;=2,&quot;عطلة&quot;,&quot;دوام&quot;))</code>.</li><li><strong>أرقام لا تطابق ما تتوقعه:</strong> تأكد من النوع المستخدم. فالجمعة تساوي 6 بالنوع الافتراضي، لكنها 5 بالنوع 2 و1 بالنوع 15.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لعرض اسم اليوم نفسه بدل رقمه استخدم <a href="/excel-ar/formulas/text/">TEXT</a>، مثل <code dir="ltr">=TEXT(A2,&quot;dddd&quot;)</code>، فتظهر التسمية بلغة إعدادات الجهاز.</li><li>لحساب أيام العمل بين تاريخين مع عطلة مخصصة، فإن <a href="/excel-ar/formulas/networkdays-intl/">NETWORKDAYS.INTL</a> أسهل من بناء شروط WEEKDAY بنفسك.</li><li>يمكن استخدام الدالة في التنسيق الشرطي لتلوين صفوف العطلة تلقائياً.</li><li>الأنواع 1 و2 و3 تعمل في كل الإصدارات، أما الأنواع من 11 إلى 17 فمتوفرة منذ Excel 2010.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تتأثر النتيجة بتنسيق الخلية الهجري؟</h3>
+<p>لا، فالتاريخ في Excel رقم واحد مهما كان تنسيق عرضه، ويوم الأسبوع لا يتغير بتغير التقويم.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=IF(WEEKDAY(A2)=6,&quot;جمعة&quot;,&quot;دوام&quot;)</code></pre>
 <p>النتيجة: تمييز أيام الجمعة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=IF(WEEKDAY(A2)=6;&quot;جمعة&quot;;&quot;دوام&quot;)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/networkdays-intl/" title="شرح دالة NETWORKDAYS.INTL في Excel بالعربي">NETWORKDAYS.INTL</a></li><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li><li><a href="/excel-ar/formulas/day/" title="شرح دالة DAY في Excel بالعربي">DAY</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

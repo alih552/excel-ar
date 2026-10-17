@@ -6,10 +6,11 @@
 <title>شرح دالة TEXTJOIN في Excel بالعربي</title>
 <meta name="description" content="شرح دالة TEXTJOIN في Excel: تدمج النصوص مع فاصل تختاره، ويمكنها تجاهل الخلايا الفارغة. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="TEXTJOIN، دالة TEXTJOIN، شرح TEXTJOIN، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/textjoin/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة TEXTJOIN في Excel بالعربي">
 <meta property="og:description" content="شرح دالة TEXTJOIN في Excel: تدمج النصوص مع فاصل تختاره، ويمكنها تجاهل الخلايا الفارغة. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/textjoin/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,36 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=TEXTJOIN(delimiter, ignore_empty, text1, [text2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">delimiter</code>: مطلوب</li><li><code dir="ltr">ignore_empty</code>: مطلوب</li><li><code dir="ltr">text1</code>: مطلوب</li><li><code dir="ltr">text2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">delimiter</code>: النص الذي يوضع بين كل قيمتين، مثل &quot;، &quot; أو مسافة، ويكتب بين علامتي تنصيص. (مطلوب)</li><li><code dir="ltr">ignore_empty</code>: اكتب TRUE لتتخطى الدالة الخلايا الفارغة، أو FALSE لتضع الفاصل مكانها أيضاً. (مطلوب)</li><li><code dir="ltr">text1</code>: أول قيمة أو نطاق تريد دمجه، مثل A2:A20. (مطلوب)</li><li><code dir="ltr">text2</code>: قيم أو نطاقات إضافية اختيارية تدمج بعد الأولى، وأقصى عدد للقيم كلها 252. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم TEXTJOIN</h2>
+<p>عندما تريد جمع عدة قيم نصية في خلية واحدة يفصل بينها فاصل ثابت: أسماء الغائبين في يوم واحد، أو أصناف طلبية واحدة، أو بيانات موظف في سطر واحد. قبل هذه الدالة كان الدمج يتم بعلامة &amp; أو بالدالة CONCATENATE خلية خلية، مع كتابة الفاصل يدوياً بين كل قيمتين ومعالجة الخلايا الفارغة بصيغ إضافية. TEXTJOIN تقبل نطاقاً كاملاً وتضع الفاصل تلقائياً.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li><strong>الفاصل</strong> هو النص الذي يوضع بين كل قيمتين، مثل &quot;، &quot; أو &quot; - &quot; أو مسافة واحدة. يمكن أن يكون نصاً فارغاً &quot;&quot; فتلتصق القيم ببعضها.</li><li><strong>تجاهل الفراغات</strong>: إذا كان TRUE تخطت الدالة الخلايا الفارغة فلا يظهر فاصلان متتاليان، وإذا كان FALSE وضعت الفاصل حتى مكان الخلية الفارغة.</li><li>بعد ذلك تكتب القيم: خلايا منفردة أو نطاقات أو مصفوفات ناتجة من صيغة، حتى 252 وسيطاً.</li><li>الأرقام تدخل بقيمتها المخزنة لا بتنسيقها الظاهر في الخلية، والنتيجة نص دائماً.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل حضور يومي فيه اسم الموظف في العمود A والقسم في B والحالة في C، والمطلوب خلية واحدة تذكر أسماء الغائبين لإرسالها في تقرير الصباح:</p>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>القسم</th><th>الحالة</th></tr></thead><tbody><tr><td>علي حسن</td><td>المبيعات</td><td>حاضر</td></tr><tr><td>سارة محمود</td><td>المحاسبة</td><td>غائب</td></tr><tr><td>حيدر كريم</td><td>المبيعات</td><td>غائب</td></tr><tr><td>نور الهدى</td><td>المخازن</td><td>حاضر</td></tr><tr><td>يوسف عادل</td><td>المحاسبة</td><td>غائب</td></tr></tbody></table></div>
+<p>الصيغة:</p>
+<pre dir="ltr"><code>=TEXTJOIN(&quot;، &quot;,TRUE,IF(C2:C6=&quot;غائب&quot;,A2:A6,&quot;&quot;))</code></pre>
+<p>النتيجة: سارة محمود، حيدر كريم، يوسف عادل</p>
+<p>تعمل <a href="/excel-ar/formulas/if/">IF</a> على كل صف: تعيد الاسم إذا كانت الحالة غائب، وتعيد نصاً فارغاً في غير ذلك. ثم تدمج TEXTJOIN الأسماء بالفاصل، ولأن الوسيط الثاني TRUE فإنها تتخطى النصوص الفارغة فلا تظهر فواصل زائدة.</p>
+<p>ولأسماء غائبي قسم المحاسبة فقط أضف شرطاً ثانياً:</p>
+<pre dir="ltr"><code>=TEXTJOIN(&quot;، &quot;,TRUE,IF((C2:C6=&quot;غائب&quot;)*(B2:B6=&quot;المحاسبة&quot;),A2:A6,&quot;&quot;))</code></pre>
+<p>فتعيد: سارة محمود، يوسف عادل</p>
+<h3>دمج أعمدة الصف الواحد</h3>
+<p><code dir="ltr">=TEXTJOIN(&quot; - &quot;,TRUE,A2:C2)</code> تعيد للصف الأول: علي حسن - المبيعات - حاضر.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #NAME?</strong>: النسخة لا تعرف الدالة. TEXTJOIN متاحة في Excel 2019 وما بعده و Excel 365، ولا تعمل في 2016 وما قبله.</li><li><strong>الخطأ #VALUE!</strong>: يظهر إذا تجاوز طول النتيجة 32767 حرفاً، وهو الحد الأقصى لما تحمله خلية واحدة.</li><li><strong>فواصل متكررة</strong>: الوسيط الثاني FALSE والنطاق فيه خلايا فارغة. اجعله TRUE.</li><li><strong>الصيغة مع IF تعيد قيمة واحدة فقط</strong>: في Excel 2019 يجب إدخال الصيغة التي تحتوي IF على نطاق بالضغط على Ctrl+Shift+Enter، أما في Excel 365 فتكفي Enter.</li><li><strong>التواريخ تظهر أرقاماً</strong>: التاريخ يدخل كرقمه التسلسلي. استخدم <a href="/excel-ar/formulas/text/">TEXT</a> داخلها مثل <code dir="ltr">TEXT(D2:D6,&quot;dd/mm/yyyy&quot;)</code>.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لكتابة كل قيمة في سطر مستقل داخل الخلية استخدم CHAR(10) فاصلاً، ثم فعّل التفاف النص للخلية.</li><li>في Excel 365 و 2021 يمكنك استبدال IF بالدالة <a href="/excel-ar/formulas/filter/">FILTER</a>: <code dir="ltr">=TEXTJOIN(&quot;، &quot;,TRUE,FILTER(A2:A6,C2:C6=&quot;غائب&quot;))</code>.</li><li>للأسماء دون تكرار ضع <a href="/excel-ar/formulas/unique/">UNIQUE</a> حول النطاق داخل الدالة، وهي أيضاً متاحة في Excel 365 و 2021 فقط.</li><li>في الإعدادات الإقليمية العربية تفصل الوسائط بالفاصلة المنقوطة: <code dir="ltr">=TEXTJOIN(&quot;، &quot;;TRUE;A2:A6)</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=TEXTJOIN(&quot;، &quot;,TRUE,A2:A10)</code></pre>
 <p>النتيجة: قائمة الأسماء مفصولة بفواصل</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=TEXTJOIN(&quot;، &quot;;TRUE;A2:A10)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li><li><a href="/excel-ar/formulas/unique/" title="شرح دالة UNIQUE في Excel بالعربي">UNIQUE</a></li><li><a href="/excel-ar/formulas/concat/" title="شرح دالة CONCAT في Excel بالعربي">CONCAT</a></li><li><a href="/excel-ar/formulas/textsplit/" title="شرح دالة TEXTSPLIT في Excel بالعربي">TEXTSPLIT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

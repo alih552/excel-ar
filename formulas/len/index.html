@@ -6,10 +6,11 @@
 <title>شرح دالة LEN في Excel بالعربي</title>
 <meta name="description" content="شرح دالة LEN في Excel: تعيد عدد حروف النص، بما فيها المسافات. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="LEN، دالة LEN، شرح LEN، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/len/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة LEN في Excel بالعربي">
 <meta property="og:description" content="شرح دالة LEN في Excel: تعيد عدد حروف النص، بما فيها المسافات. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/len/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,45 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=LEN(text)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">text</code>: النص أو الخلية التي تريد عد حروفها، بما فيها المسافات والحركات. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم LEN</h2>
+<p>الدالة LEN تعد حروف النص. قد يبدو ذلك بسيطاً، لكنها من أكثر الأدوات فائدة في تدقيق البيانات: التأكد من أن رموز الموظفين أو المواد بالطول المعتمد، واكتشاف المسافات الزائدة غير المرئية التي تفشل البحث، وعد الكلمات في خانة الملاحظات، وحساب عدد مرات تكرار حرف معين.</p>
+<p>كما أنها جزء أساسي في صيغ استخراج النصوص مع <a href="/excel-ar/formulas/right/">RIGHT</a> و <a href="/excel-ar/formulas/mid/">MID</a>، حين تحتاج إلى معرفة طول النص لتحديد ما تقتطعه.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li>تحسب الدالة كل الحروف بما فيها المسافات وعلامات الترقيم والحركات العربية.</li><li>الخلية الفارغة طولها 0.</li><li>مع الأرقام تعد أرقام القيمة المخزنة لا شكلها المعروض: خلية فيها 1500 بتنسيق يعرض فاصلة الآلاف وخانتين عشريتين طولها 4.</li><li>التاريخ يُخزن رقماً تسلسلياً، لذلك تعيد LEN لخلية تاريخ عادة 5، وهو عدد أرقام الرقم التسلسلي مثل 45658.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>قسم الموارد البشرية اعتمد رموزاً للموظفين من ستة حروف بالضبط، ويريد التحقق من القائمة قبل رفعها إلى نظام الرواتب. الرموز في العمود A:</p>
+<div class="table-wrap"><table><thead><tr><th>رمز الموظف</th><th>الطول</th><th>الحالة</th></tr></thead><tbody><tr><td>EMP104</td><td>6</td><td>صحيح</td></tr><tr><td>EMP1052</td><td>7</td><td>راجع الرمز</td></tr><tr><td>EMP77</td><td>5</td><td>راجع الرمز</td></tr><tr><td>EMP310</td><td>6</td><td>صحيح</td></tr></tbody></table></div>
+<p>الطول في الخلية B2:</p>
+<pre dir="ltr"><code>=LEN(A2)</code></pre>
+<p>والحالة في الخلية C2:</p>
+<pre dir="ltr"><code>=IF(LEN(A2)=6,&quot;صحيح&quot;,&quot;راجع الرمز&quot;)</code></pre>
+<p>النتيجة: صحيح للرمزين EMP104 و EMP310 لأن طول كل منهما 6، وراجع الرمز للرمز EMP1052 لأن فيه رقماً زائداً، وللرمز EMP77 لأن فيه رقماً ناقصاً.</p>
+<p>لعد الرموز الصحيحة في القائمة كلها بصيغة واحدة:</p>
+<pre dir="ltr"><code>=SUMPRODUCT(--(LEN(A2:A5)=6))</code></pre>
+<p>النتيجة: 2.</p>
+<h2 id="s-4">استخدامات أخرى</h2>
+<h3>عد الكلمات في خلية</h3>
+<p>لعد كلمات العبارة &quot;تقرير المبيعات الشهري للفرع&quot; في الخلية A2:</p>
+<pre dir="ltr"><code>=LEN(TRIM(A2))-LEN(SUBSTITUTE(TRIM(A2),&quot; &quot;,&quot;&quot;))+1</code></pre>
+<p>النتيجة: 4. طول العبارة 27 حرفاً، وبعد حذف المسافات يصبح 24، والفرق 3 مسافات تعني 4 كلمات.</p>
+<h3>كشف المسافات الزائدة</h3>
+<p>إذا فشل البحث عن رمز يبدو صحيحاً فقارن <code dir="ltr">=LEN(A2)</code> مع <code dir="ltr">=LEN(TRIM(A2))</code>. إذا اختلفت النتيجتان ففي الخلية مسافة زائدة في البداية أو النهاية.</p>
+<h2 id="s-5">أخطاء شائعة وحلولها</h2>
+<h3>طول أكبر من المتوقع</h3>
+<p>السبب الأكثر شيوعاً هو مسافة في نهاية النص لا تظهر للعين، أو حركات عربية مكتوبة في الاسم. استخدم <a href="/excel-ar/formulas/trim/">TRIM</a> للمسافات، وانتبه أن &quot;مُحمّد&quot; بالحركات أطول من &quot;محمد&quot;.</p>
+<h3>الأصفار في بداية الرقم</h3>
+<p>الرمز 00451 المكتوب كرقم يخزنه Excel 451 وطوله 3. إذا كانت الأصفار جزءاً من الرمز فنسّق العمود كنص قبل إدخال البيانات.</p>
+<h3>ظهور خطأ في النتيجة</h3>
+<p>LEN نفسها لا تولد أخطاء تقريباً، لكنها تعيد الخطأ إذا كانت الخلية المرجعية تحتوي خطأ مثل <code dir="ltr">#N/A</code>.</p>
+<h2 id="s-6">نصائح</h2>
+<ul><li>LEN متوفرة في كل نسخ Excel.</li><li>تعد الدالة LEN الحروف العربية والإنجليزية بالطريقة نفسها، حرفاً لكل حرف.</li><li>يمكنك استخدامها في التنسيق الشرطي لتلوين الرموز ذات الطول الخاطئ تلقائياً.</li><li>في إعدادات Windows العربية: <code dir="ltr">=IF(LEN(A2)=6;&quot;صحيح&quot;;&quot;راجع الرمز&quot;)</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=LEN(A2)</code></pre>
 <p>النتيجة: طول الاسم بالحروف</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/substitute/" title="شرح دالة SUBSTITUTE في Excel بالعربي">SUBSTITUTE</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

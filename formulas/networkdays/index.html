@@ -6,10 +6,11 @@
 <title>شرح دالة NETWORKDAYS في Excel بالعربي</title>
 <meta name="description" content="شرح دالة NETWORKDAYS في Excel: تحسب أيام العمل بين تاريخين وتستثني السبت والأحد والعطل التي تحددها. للعطلة الجمعة والسبت استخدم NETWORKDAYS.INTL بالرقم 7. مع…">
 <meta name="keywords" content="NETWORKDAYS، دالة NETWORKDAYS، شرح NETWORKDAYS، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/networkdays/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة NETWORKDAYS في Excel بالعربي">
 <meta property="og:description" content="شرح دالة NETWORKDAYS في Excel: تحسب أيام العمل بين تاريخين وتستثني السبت والأحد والعطل التي تحددها. للعطلة الجمعة والسبت استخدم NETWORKDAYS.INTL بالرقم 7. مع…">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/networkdays/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,34 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=NETWORKDAYS(start_date, end_date, [holidays])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">start_date</code>: مطلوب</li><li><code dir="ltr">end_date</code>: مطلوب</li><li><code dir="ltr">holidays</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">start_date</code>: تاريخ بداية الفترة، ويدخل في العد إذا كان يوم عمل. (مطلوب)</li><li><code dir="ltr">end_date</code>: تاريخ نهاية الفترة، ويدخل في العد أيضًا إذا كان يوم عمل. (مطلوب)</li><li><code dir="ltr">holidays</code>: اختياري: نطاق أو قائمة تواريخ العطل الرسمية التي تستبعد من أيام العمل. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم NETWORKDAYS</h2>
+<p>تحسب الدالة عدد أيام العمل الفعلية بين تاريخين، مع استبعاد عطلة نهاية الأسبوع والعطل الرسمية إن وجدت. تفيد في:</p>
+<ul><li>حساب أيام العمل المستحقة لموظف جديد في شهره الأول لأغراض الرواتب.</li><li>تقدير مدة تنفيذ مشروع أو مهمة بأيام العمل لا بالأيام التقويمية.</li><li>قياس زمن إنجاز الطلبات أو المعاملات منذ استلامها.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تعد الدالة كل الأيام من تاريخ البداية حتى تاريخ النهاية <strong>شاملة الطرفين</strong>، ثم تستبعد يومي السبت والأحد، ثم تستبعد أي تاريخ من قائمة العطل يقع في يوم عمل. إذا كان تاريخ البداية بعد تاريخ النهاية تكون النتيجة سالبة.</p>
+<p>يمكن أن تحتوي قائمة العطل على تواريخ السنة كلها، فالدالة تتجاهل ما يقع منها خارج الفترة أو في يوم سبت أو أحد، ولا تخصم أي يوم مرتين.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>فريق يعمل بعطلة السبت والأحد، وقائمة العطل الرسمية في النطاق F2:F3 تحتوي على 2026-03-22 (يوم أحد) و2026-03-23 (يوم اثنين). المهام كالتالي:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: المهمة</th><th>B: البداية</th><th>C: النهاية</th></tr></thead><tbody><tr><td>2</td><td>جرد المخزن</td><td>2026-03-01</td><td>2026-03-31</td></tr><tr><td>3</td><td>مراجعة العقود</td><td>2026-03-10</td><td>2026-03-26</td></tr><tr><td>4</td><td>إعداد الميزانية</td><td>2026-04-01</td><td>2026-04-15</td></tr></tbody></table></div>
+<p>اكتب في D2 ثم اسحب الصيغة:</p>
+<pre dir="ltr"><code>=NETWORKDAYS(B2,C2,$F$2:$F$3)</code></pre>
+<p>النتائج:</p>
+<ul><li><strong>جرد المخزن: 21 يومًا</strong>. في مارس 2026 يوجد 22 يوم عمل من الاثنين إلى الجمعة، وتستبعد عطلة 23 مارس فقط، لأن 22 مارس يوم أحد وهو عطلة أصلًا.</li><li><strong>مراجعة العقود: 12 يومًا</strong> من أصل 13 يوم عمل، بعد استبعاد يوم الاثنين 23 مارس.</li><li><strong>إعداد الميزانية: 11 يومًا</strong>، ولا تؤثر القائمة لأن العطلتين خارج الفترة.</li></ul>
+<p>لاحظ تثبيت نطاق العطل بعلامة الدولار حتى لا يتحرك عند سحب الصيغة.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: أحد التاريخين نص وليس تاريخًا حقيقيًا. تأكد أن الخلية تقبل العمليات الحسابية، أو حوّلها بدالة DATEVALUE.</li><li><strong>نتيجة أكبر بيوم واحد من المتوقع</strong>: الدالة تشمل يومي البداية والنهاية. إذا أردت عد الأيام بعد يوم البداية فقط، وكان يوم البداية يوم عمل، فاطرح 1 من النتيجة.</li><li><strong>العطل لا تخصم</strong>: غالبًا تكون تواريخ العطل مكتوبة نصًا، أو أن العطلة تقع في سبت أو أحد فلا يتغير شيء.</li><li><strong>أيام الجمعة محسوبة كأيام عمل</strong>: عطلة NETWORKDAYS ثابتة على السبت والأحد ولا يمكن تغييرها، فاستخدم NETWORKDAYS.INTL بالرمز 7 للجمعة والسبت أو 16 للجمعة وحدها.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>ضع قائمة العطل في ورقة مستقلة وسمّها باسم مثل Holidays، ثم اكتب <code dir="ltr">=NETWORKDAYS(B2,C2,Holidays)</code>.</li><li>لحساب أيام العمل المتبقية حتى موعد التسليم: <code dir="ltr">=NETWORKDAYS(TODAY(),C2,Holidays)</code>.</li><li>لإيجاد تاريخ ينتهي بعد عدد معين من أيام العمل استخدم الدالة WORKDAY.</li><li>بالفاصلة المنقوطة تكتب: <code dir="ltr">=NETWORKDAYS(B2;C2;$F$2:$F$3)</code>.</li><li>الدالة مدمجة في Excel منذ إصدار 2007، وكانت قبله ضمن الوظيفة الإضافية Analysis ToolPak.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=NETWORKDAYS.INTL(A2,B2,7,H2:H10)</code></pre>
 <p>النتيجة: أيام الدوام مع عطلة الجمعة والسبت</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=NETWORKDAYS.INTL(A2;B2;7;H2:H10)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/networkdays-intl/" title="شرح دالة NETWORKDAYS.INTL في Excel بالعربي">NETWORKDAYS.INTL</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/networkdays-intl/" title="شرح دالة NETWORKDAYS.INTL في Excel بالعربي">NETWORKDAYS.INTL</a></li><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

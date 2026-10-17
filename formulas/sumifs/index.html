@@ -6,10 +6,11 @@
 <title>شرح دالة SUMIFS في Excel بالعربي</title>
 <meta name="description" content="شرح دالة SUMIFS في Excel: تجمع القيم التي تتحقق فيها عدة شروط معاً. لاحظ أن نطاق الجمع يأتي أولاً. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="SUMIFS، دالة SUMIFS، شرح SUMIFS، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/sumifs/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة SUMIFS في Excel بالعربي">
 <meta property="og:description" content="شرح دالة SUMIFS في Excel: تجمع القيم التي تتحقق فيها عدة شروط معاً. لاحظ أن نطاق الجمع يأتي أولاً. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/sumifs/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,39 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=SUMIFS(sum_range, criteria_range1, criteria1, [criteria_range2, criteria2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">sum_range</code>: مطلوب</li><li><code dir="ltr">criteria_range1</code>: مطلوب</li><li><code dir="ltr">criteria1</code>: مطلوب</li><li><code dir="ltr">criteria_range2</code>: اختياري</li><li><code dir="ltr">criteria2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">sum_range</code>: الخلايا التي تحتوي الأرقام المطلوب جمعها، وتأتي أولًا في هذه الدالة. (مطلوب)</li><li><code dir="ltr">criteria_range1</code>: النطاق الأول الذي يفحص فيه الشرط الأول، ويجب أن يساوي نطاق الجمع في الحجم. (مطلوب)</li><li><code dir="ltr">criteria1</code>: الشرط الأول المطبق على criteria_range1، مثل اسم فرع أو مقارنة رقمية. (مطلوب)</li><li><code dir="ltr">criteria_range2</code>: نطاق إضافي يفحص فيه شرط ثانٍ، ويمكن إضافة أزواج أخرى من النطاقات والشروط. (اختياري)</li><li><code dir="ltr">criteria2</code>: الشرط الثاني المطبق على criteria_range2، ويجب أن تتحقق كل الشروط معًا. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم SUMIFS</h2>
+<p>تجمع دالة SUMIFS الأرقام التي تحقق عدة شروط في الوقت نفسه. وهي الأداة المناسبة لتقارير المبيعات والمخزون التي تسأل أسئلة مركبة، مثل:</p>
+<ul><li>كمية صنف معين بيعت في فرع معين.</li><li>مبيعات فرع خلال شهر محدد بين تاريخين.</li><li>ساعات العمل الإضافية لقسم معين خلال أسبوع.</li><li>مجموع الفواتير غير المسددة لعميل معين التي تجاوزت تاريخ استحقاقها.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تبدأ الدالة بنطاق الجمع، ثم تأخذ أزواجًا من نطاق شرط وشرط. لا يدخل الصف في المجموع إلا إذا حقق جميع الشروط، أي أن الشروط مرتبطة بعلاقة &quot;و&quot;. انتبه إلى أن ترتيب الوسائط هنا يختلف عن <a href="/excel-ar/formulas/sumif/">SUMIF</a>، فنطاق الجمع يأتي أولًا لا آخرًا.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>لديك سجل حركة مبيعات الأجهزة في النطاق A2:D7:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: التاريخ</th><th>B: الفرع</th><th>C: المنتج</th><th>D: الكمية</th></tr></thead><tbody><tr><td>2</td><td>2026-03-02</td><td>الشمالي</td><td>طابعة</td><td>12</td></tr><tr><td>3</td><td>2026-03-05</td><td>الجنوبي</td><td>حاسوب</td><td>8</td></tr><tr><td>4</td><td>2026-03-09</td><td>الشمالي</td><td>حاسوب</td><td>5</td></tr><tr><td>5</td><td>2026-03-15</td><td>الشمالي</td><td>طابعة</td><td>7</td></tr><tr><td>6</td><td>2026-04-01</td><td>الشمالي</td><td>طابعة</td><td>10</td></tr><tr><td>7</td><td>2026-03-20</td><td>الجنوبي</td><td>طابعة</td><td>9</td></tr></tbody></table></div>
+<p>لمعرفة عدد الطابعات المبيعة في الفرع الشمالي:</p>
+<pre dir="ltr"><code>=SUMIFS(D2:D7,B2:B7,&quot;الشمالي&quot;,C2:C7,&quot;طابعة&quot;)</code></pre>
+<p>النتيجة <strong>29</strong>، وهي مجموع كميات الصفوف 2 و5 و6.</p>
+<p>ولحصر النتيجة في شهر مارس فقط، أضف شرطين على عمود التاريخ:</p>
+<pre dir="ltr"><code>=SUMIFS(D2:D7,B2:B7,&quot;الشمالي&quot;,C2:C7,&quot;طابعة&quot;,A2:A7,&quot;&gt;=&quot;&amp;DATE(2026,3,1),A2:A7,&quot;&lt;=&quot;&amp;DATE(2026,3,31))</code></pre>
+<p>النتيجة <strong>19</strong>، لأن الصف 6 مؤرخ في أبريل فخرج من المجموع.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر عندما تختلف أحجام النطاقات، كأن يكون نطاق الجمع D2:D7 ونطاق الشرط B2:B6. يجب أن تكون كل النطاقات بعدد الصفوف نفسه.</li><li><strong>النتيجة صفر</strong>: تحقق من المسافات الزائدة في النصوص، ومن أن التواريخ تواريخ حقيقية لا نصوص. التاريخ المكتوب كنص لا يطابق شرط المقارنة.</li><li><strong>نقل صيغة من SUMIF دون تعديل الترتيب</strong>: إذا وضعت نطاق الجمع في آخر الصيغة فستحصل على خطأ أو نتيجة خاطئة. تذكر أن نطاق الجمع أولًا.</li><li><strong>توقع علاقة &quot;أو&quot; بين الشروط</strong>: الدالة تشترط تحقق كل الشروط. لجمع الطابعات أو الحواسيب معًا استخدم <code dir="ltr">=SUM(SUMIFS(D2:D7,C2:C7,{&quot;طابعة&quot;,&quot;حاسوب&quot;}))</code>، والنتيجة 51.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>ضع الفرع والمنتج والتاريخين في خلايا منفصلة فوق التقرير، واجعل الشروط تشير إليها، فيصبح التقرير تفاعليًا.</li><li>يمكنك استخدام أحرف البدل في الشروط النصية: النجمة لأي عدد من الأحرف، وعلامة الاستفهام لحرف واحد.</li><li>عند تحويل البيانات إلى جدول Excel تصبح الصيغة أوضح، مثل استخدام اسم العمود بدل النطاق.</li><li>الدالة متاحة منذ Excel 2007، وفي الإعدادات الإقليمية العربية تستخدم الفاصلة المنقوطة بين كل الوسائط.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>كم شرطًا يمكن إضافته؟</h3>
+<p>حتى 127 زوجًا من النطاقات والشروط، وهذا يكفي لأي تقرير عملي.</p>
+<h3>هل يمكن استخدام SUMIFS بشرط واحد؟</h3>
+<p>نعم، وتعطي النتيجة نفسها التي تعطيها SUMIF، ويفضلها بعض المستخدمين لأن ترتيب وسائطها ثابت مهما زادت الشروط.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=SUMIFS(D2:D100,A2:A100,&quot;بغداد&quot;,B2:B100,&quot;أجهزة&quot;)</code></pre>
 <p>النتيجة: مبيعات الأجهزة في بغداد</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=SUMIFS(D2:D100;A2:A100;&quot;بغداد&quot;;B2:B100;&quot;أجهزة&quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/sumif/" title="شرح دالة SUMIF في Excel بالعربي">SUMIF</a></li><li><a href="/excel-ar/formulas/date/" title="شرح دالة DATE في Excel بالعربي">DATE</a></li><li><a href="/excel-ar/formulas/eomonth/" title="شرح دالة EOMONTH في Excel بالعربي">EOMONTH</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/sumproduct/" title="شرح دالة SUMPRODUCT في Excel بالعربي">SUMPRODUCT</a></li><li><a href="/excel-ar/formulas/year/" title="شرح دالة YEAR في Excel بالعربي">YEAR</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

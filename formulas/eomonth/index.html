@@ -6,10 +6,11 @@
 <title>شرح دالة EOMONTH في Excel بالعربي</title>
 <meta name="description" content="شرح دالة EOMONTH في Excel: تعيد آخر يوم في الشهر بعد عدد من الأشهر تحدده (0 للشهر نفسه). مع الصيغة ومثال عملي.">
 <meta name="keywords" content="EOMONTH، دالة EOMONTH، شرح EOMONTH، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/eomonth/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة EOMONTH في Excel بالعربي">
 <meta property="og:description" content="شرح دالة EOMONTH في Excel: تعيد آخر يوم في الشهر بعد عدد من الأشهر تحدده (0 للشهر نفسه). مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/eomonth/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,42 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=EOMONTH(start_date, months)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">start_date</code>: مطلوب</li><li><code dir="ltr">months</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">start_date</code>: التاريخ الذي يبدأ منه الحساب، ولا يهم أي يوم من الشهر هو. (مطلوب)</li><li><code dir="ltr">months</code>: عدد الأشهر قبل تاريخ البداية أو بعده: 0 للشهر نفسه و1 للتالي و-1 للسابق. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم EOMONTH</h2>
+<p>EOMONTH هي الدالة المناسبة عندما يكون الموعد المطلوب «نهاية الشهر» وليس يوماً محدداً. من أكثر استخداماتها:</p>
+<ul><li>حساب تاريخ استحقاق فاتورة تُدفع في نهاية الشهر التالي.</li><li>تحديد بداية الشهر ونهايته لتقارير المبيعات الشهرية.</li><li>معرفة عدد أيام أي شهر، بما فيها شباط (فبراير) في السنوات الكبيسة.</li><li>تجميع الحركات حسب الشهر بدلاً من التاريخ الكامل.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تأخذ الدالة تاريخ البداية، وتتحرك بعدد الأشهر الذي تحدده، ثم تعيد آخر يوم في الشهر الذي وصلت إليه. لا يهم أي يوم في الشهر كان تاريخ البداية؛ فالتاريخ 2026-01-03 والتاريخ 2026-01-29 يعطيان النتيجة نفسها.</p>
+<ul><li>القيمة 0 تعني نهاية الشهر نفسه.</li><li>القيمة 1 تعني نهاية الشهر التالي.</li><li>القيمة -1 تعني نهاية الشهر السابق، وإذا أضفت إليها 1 حصلت على أول يوم في الشهر الحالي.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>شركة توزيع تمنح عملاءها مهلة سداد حتى نهاية الشهر الذي يلي شهر الفاتورة:</p>
+<div class="table-wrap"><table><thead><tr><th>الفاتورة</th><th>تاريخ الفاتورة (B)</th><th>تاريخ الاستحقاق (C)</th><th>أول يوم في شهر الفاتورة (D)</th></tr></thead><tbody><tr><td>ف-201</td><td>2026-01-10</td><td>2026-02-28</td><td>2026-01-01</td></tr><tr><td>ف-202</td><td>2026-01-31</td><td>2026-02-28</td><td>2026-01-01</td></tr><tr><td>ف-203</td><td>2026-02-14</td><td>2026-03-31</td><td>2026-02-01</td></tr><tr><td>ف-204</td><td>2026-11-05</td><td>2026-12-31</td><td>2026-11-01</td></tr></tbody></table></div>
+<p>في الخلية C2 اكتب:</p>
+<pre dir="ltr"><code>=EOMONTH(B2,1)</code></pre>
+<p>ونسّق الخلية كتاريخ. النتيجة 2026-02-28، لأن الشهر التالي لكانون الثاني هو شباط، وآخر يوم فيه سنة 2026 هو 28 لأنها ليست سنة كبيسة. لاحظ أن الفاتورتين الأولى والثانية لهما الموعد نفسه رغم اختلاف يوم الإصدار.</p>
+<p>وفي الخلية D2 اكتب:</p>
+<pre dir="ltr"><code>=EOMONTH(B2,-1)+1</code></pre>
+<p>فتعيد 2026-01-01، أي أول يوم في شهر الفاتورة. هذه الطريقة مفيدة لتجميع الفواتير حسب الشهر في جدول محوري أو مع <a href="/excel-ar/formulas/sumifs/">SUMIFS</a>.</p>
+<p>ولجمع مبيعات شهر كامل، إذا كان في الخلية F1 أي تاريخ من ذلك الشهر وكانت قيم المبيعات في العمود E:</p>
+<pre dir="ltr"><code>=SUMIFS(E2:E500,B2:B500,&quot;&gt;=&quot;&amp;EOMONTH(F1,-1)+1,B2:B500,&quot;&lt;=&quot;&amp;EOMONTH(F1,0))</code></pre>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: تاريخ البداية نص لا يفهمه Excel، أو عدد الأشهر ليس رقماً. تحقق من نوع البيانات في الخلية.</li><li><strong>الخطأ #NUM!</strong>: يظهر إذا كانت النتيجة تاريخاً خارج المدى الذي يدعمه Excel، أي قبل سنة 1900 أو بعد سنة 9999.</li><li><strong>نتائج خاطئة مع تواريخ فيها وقت</strong>: الدالة تعيد آخر يوم في الشهر عند الساعة 00:00 من بدايته، فتستبعد مقارنة <code dir="ltr">&lt;=</code> أي حركة سُجّلت في ذلك اليوم مع وقتها، مثل الساعة 14:30. استخدم <code dir="ltr">&lt;</code> مع <code dir="ltr">EOMONTH(F1,0)+1</code> في هذه الحالة.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لمعرفة عدد أيام الشهر استخدم <code dir="ltr">=DAY(EOMONTH(B2,0))</code>، فتعيد 28 أو 29 لشباط بحسب السنة.</li><li>إذا كان عدد الأشهر كسرياً يأخذ Excel الجزء الصحيح منه فقط.</li><li>مع الإعدادات الإقليمية التي تستخدم الفاصلة المنقوطة تصبح صيغة أول الشهر <code dir="ltr">=EOMONTH(B2;-1)+1</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>ما الفرق بين EOMONTH وEDATE؟</h3>
+<p><a href="/excel-ar/formulas/edate/">EDATE</a> تحافظ على اليوم نفسه من الشهر، أما EOMONTH فتعيد دائماً آخر يوم في الشهر الناتج.</p>
+<h3>كيف أحصل على آخر يوم في الشهر الحالي؟</h3>
+<p>اكتب <code dir="ltr">=EOMONTH(TODAY(),0)</code> ونسّق الخلية كتاريخ.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=EOMONTH(A2,0)</code></pre>
 <p>النتيجة: آخر يوم في شهر الفاتورة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=EOMONTH(A2;0)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/sumifs/" title="شرح دالة SUMIFS في Excel بالعربي">SUMIFS</a></li><li><a href="/excel-ar/formulas/edate/" title="شرح دالة EDATE في Excel بالعربي">EDATE</a></li><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li><li><a href="/excel-ar/formulas/day/" title="شرح دالة DAY في Excel بالعربي">DAY</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

@@ -6,10 +6,11 @@
 <title>شرح دالة XMATCH في Excel بالعربي</title>
 <meta name="description" content="شرح دالة XMATCH في Excel: النسخة الحديثة من MATCH: المطابقة التامة افتراضية، ويمكن البحث من الأسفل إلى الأعلى. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="XMATCH، دالة XMATCH، شرح XMATCH، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/xmatch/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة XMATCH في Excel بالعربي">
 <meta property="og:description" content="شرح دالة XMATCH في Excel: النسخة الحديثة من MATCH: المطابقة التامة افتراضية، ويمكن البحث من الأسفل إلى الأعلى. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/xmatch/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,42 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=XMATCH(lookup_value, lookup_array, [match_mode], [search_mode])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">lookup_value</code>: مطلوب</li><li><code dir="ltr">lookup_array</code>: مطلوب</li><li><code dir="ltr">match_mode</code>: اختياري</li><li><code dir="ltr">search_mode</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">lookup_value</code>: القيمة التي تريد معرفة موقعها داخل القائمة. (مطلوب)</li><li><code dir="ltr">lookup_array</code>: عمود واحد أو صف واحد تبحث فيه، ويُحسب الموقع من أول خانة فيه. (مطلوب)</li><li><code dir="ltr">match_mode</code>: نوع المطابقة: 0 تامة وهي الافتراضية، و-1 تامة أو أقرب قيمة أصغر، و1 تامة أو أقرب قيمة أكبر، و2 لأحرف البدل. (اختياري)</li><li><code dir="ltr">search_mode</code>: اتجاه البحث: 1 من الأول وهو الافتراضي، و-1 من الآخر، و2 أو -2 للبحث الثنائي في بيانات مرتبة. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم XMATCH</h2>
+<p>تعيد <code dir="ltr">XMATCH</code> <strong>موقع</strong> القيمة داخل قائمة، أي رقم ترتيبها، لا القيمة نفسها. وتظهر فائدتها عندما تحتاج هذا الرقم لتبني عليه صيغة أخرى: مع <a href="/excel-ar/formulas/index/">INDEX</a> لجلب قيمة من عمود آخر، أو لمعرفة ترتيب فرع في قائمة، أو لتحديد الشريحة التي يقع فيها رقم مبيعات موظف لحساب عمولته. وهي البديل الحديث للدالة MATCH، بإعدادات افتراضية أكثر أماناً.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تبحث الدالة في صف واحد أو عمود واحد، وتعيد رقم الخانة التي وجدت فيها القيمة، والعدّ يبدأ من 1 عند أول خانة في النطاق. وتتحكم بالبحث عبر وسيطين:</p>
+<ul><li><strong>match_mode:</strong> القيمة 0 للمطابقة التامة وهي الافتراضية، و-1 للمطابقة التامة أو أقرب قيمة أصغر، و1 للمطابقة التامة أو أقرب قيمة أكبر، و2 لأحرف البدل.</li><li><strong>search_mode:</strong> القيمة 1 للبحث من الأول وهي الافتراضية، و-1 من الآخر، و2 و-2 للبحث الثنائي في بيانات مرتبة.</li></ul>
+<p>والفرق الجوهري عن MATCH أن MATCH تفترض المطابقة التقريبية إذا لم تحدد النوع، فتعطي نتائج خاطئة بصمت في القوائم غير المرتبة، أما XMATCH فتبدأ بالمطابقة التامة.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>مبيعات الفروع لشهر واحد، الفروع في A2:A6 والمبيعات في B2:B6، وجدول شرائح العمولة في D2:E5، والعمود C فارغ للفصل بينهما:</p>
+<div class="table-wrap"><table><thead><tr><th>الفرع</th><th>المبيعات</th><th></th><th>الحد الأدنى للشريحة</th><th>نسبة العمولة</th></tr></thead><tbody><tr><td>الرياض</td><td>4200</td><td></td><td>0</td><td>2%</td></tr><tr><td>القاهرة</td><td>3100</td><td></td><td>2000</td><td>3%</td></tr><tr><td>دبي</td><td>3600</td><td></td><td>3000</td><td>4%</td></tr><tr><td>بغداد</td><td>2800</td><td></td><td>4000</td><td>5%</td></tr><tr><td>عمان</td><td>1900</td><td></td><td></td><td></td></tr></tbody></table></div>
+<p>لمعرفة موقع فرع دبي في القائمة:</p>
+<pre dir="ltr"><code>=XMATCH(&quot;دبي&quot;,A2:A6)</code></pre>
+<p>النتيجة: <strong>3</strong>، لأن دبي هو الاسم الثالث في النطاق.</p>
+<p>ولجلب مبيعات دبي باستخدام هذا الموقع:</p>
+<pre dir="ltr"><code>=INDEX(B2:B6,XMATCH(&quot;دبي&quot;,A2:A6))</code></pre>
+<p>النتيجة: <strong>3600</strong>.</p>
+<p>ولتحديد الشريحة التي تقع فيها مبيعات دبي:</p>
+<pre dir="ltr"><code>=XMATCH(3600,D2:D5,-1)</code></pre>
+<p>النتيجة: <strong>3</strong>. لم تجد الدالة 3600 نفسها، فأخذت أقرب قيمة أصغر منها وهي 3000 في الخانة الثالثة. ثم تكتب <code dir="ltr">=INDEX(E2:E5,XMATCH(B4,D2:D5,-1))</code> لتحصل على نسبة العمولة 4%.</p>
+<p>ومع أحرف البدل: <code dir="ltr">=XMATCH(&quot;ال*&quot;,A2:A6,2)</code> تعيد <strong>1</strong>، لأن أول اسم يبدأ بـ&quot;ال&quot; هو الرياض.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>#N/A:</strong> القيمة غير موجودة، أو لا توجد قيمة أصغر منها مع -1. ضع الصيغة داخل <a href="/excel-ar/formulas/iferror/">IFERROR</a>، وتأكد من عدم وجود مسافات زائدة.</li><li><strong>نتيجة لا تطابق رقم الصف في الورقة:</strong> الموقع يُحسب من بداية النطاق لا من الصف 1. فإذا بدأ النطاق من A2 فالرقم 3 يعني الصف 4.</li><li><strong>#VALUE!:</strong> النطاق يمتد على عدة صفوف وأعمدة معاً. اجعله عموداً واحداً أو صفاً واحداً.</li><li><strong>#NAME?:</strong> الإصدار لا يدعم الدالة.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>مع search_mode يساوي -1 يبدأ البحث من آخر القائمة، لكن الرقم الناتج يبقى محسوباً من أولها.</li><li>يمكن تمرير قائمة قيم للبحث مرة واحدة، مثل <code dir="ltr">=XMATCH(A2:A3,A2:A6)</code>، فتعيد مصفوفة مواقع تنسكب في خلايا متجاورة.</li><li>الدالة متوفرة في Excel 365 وExcel 2021 وما بعدهما وفي Excel على الويب، وفي الإصدارات الأقدم استخدم <code dir="ltr">MATCH</code> مع كتابة 0 صراحة.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تحتاج المطابقة التقريبية إلى ترتيب البيانات؟</h3>
+<p>لا تحتاجه مع البحث الافتراضي، وإنما يلزم الترتيب فقط عند اختيار البحث الثنائي بالقيمة 2 أو -2.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=XMATCH(&quot;أحمد&quot;,A2:A100,0,-1)</code></pre>
 <p>النتيجة: موقع آخر ظهور للاسم</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=XMATCH(&quot;أحمد&quot;;A2:A100;0;-1)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

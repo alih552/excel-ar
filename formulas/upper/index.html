@@ -6,10 +6,11 @@
 <title>شرح دالة UPPER في Excel بالعربي</title>
 <meta name="description" content="شرح دالة UPPER في Excel: تحوّل الحروف الإنجليزية إلى حروف كبيرة. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="UPPER، دالة UPPER، شرح UPPER، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/upper/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة UPPER في Excel بالعربي">
 <meta property="og:description" content="شرح دالة UPPER في Excel: تحوّل الحروف الإنجليزية إلى حروف كبيرة. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/upper/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,34 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=UPPER(text)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">text</code>: النص أو الخلية التي تريد تحويل حروفها الإنجليزية إلى حروف كبيرة. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم UPPER</h2>
+<p>تحتاجها عندما تحتوي بياناتك على حروف إنجليزية مكتوبة بأشكال مختلفة: رموز منتجات، أو أرقام لوحات، أو رموز فروع، أو أرقام قطع غيار. يكتب أحد الموظفين bgd ويكتب آخر Bgd وثالث BGD، فيبدو الملف غير مرتب، وتفشل المقارنات الدقيقة بالدالة EXACT. الدالة UPPER توحد الشكل بتحويل كل الحروف الإنجليزية إلى حروف كبيرة.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li>تحول الحروف اللاتينية الصغيرة إلى كبيرة، وتترك الكبيرة كما هي.</li><li>لا تؤثر في الحروف العربية لأنها لا تملك حالة كبيرة وصغيرة، ولا في الأرقام والرموز.</li><li>النتيجة نص دائماً، حتى لو كان الإدخال رقماً.</li><li>لها دالتان شقيقتان: <a href="/excel-ar/formulas/lower/">LOWER</a> للحروف الصغيرة، و <a href="/excel-ar/formulas/proper/">PROPER</a> لجعل أول حرف من كل كلمة كبيراً.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل مخزن أدخل فيه الموظفون رموز الأصناف يدوياً في العمود A، والمطلوب رموز موحدة في العمود B قبل ربطها بالقائمة الرئيسية للأصناف:</p>
+<div class="table-wrap"><table><thead><tr><th>الرمز كما أدخل</th><th>اسم الصنف</th><th>الرمز بعد UPPER</th></tr></thead><tbody><tr><td>bgd-lap-15</td><td>حاسوب محمول</td><td>BGD-LAP-15</td></tr><tr><td>Bsr-mon-24</td><td>شاشة</td><td>BSR-MON-24</td></tr><tr><td>erb-KBD-07</td><td>لوحة مفاتيح</td><td>ERB-KBD-07</td></tr><tr><td>BGD-prn-03</td><td>طابعة</td><td>BGD-PRN-03</td></tr></tbody></table></div>
+<p>الصيغة في الخلية C2:</p>
+<pre dir="ltr"><code>=UPPER(A2)</code></pre>
+<p>النتيجة: BGD-LAP-15. تغيرت الحروف فقط، وبقيت الشرطات والأرقام كما هي.</p>
+<h3>التنظيف والتوحيد معاً</h3>
+<p>البيانات المدخلة يدوياً تحمل غالباً مسافات زائدة أيضاً، فاجمع الدالتين:</p>
+<pre dir="ltr"><code>=UPPER(TRIM(A2))</code></pre>
+<h3>منع الحروف الصغيرة عند الإدخال</h3>
+<p>لإجبار المستخدمين على الإدخال بحروف كبيرة، حدد العمود ثم افتح التحقق من صحة البيانات واختر مخصص واكتب القاعدة:</p>
+<pre dir="ltr"><code>=EXACT(A2,UPPER(A2))</code></pre>
+<p>فيرفض Excel أي رمز فيه حرف صغير.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الحروف العربية لم تتغير</strong>: هذا متوقع، فالدالة خاصة بالحروف التي لها حالتان.</li><li><strong>الصيغة تعيد خطأ</strong>: إذا كانت الخلية الأصلية تحتوي خطأ مثل #N/A فإن UPPER تعيده كما هو. عالج الأصل أو استخدم <a href="/excel-ar/formulas/iferror/">IFERROR</a>.</li><li><strong>الرموز ما زالت صغيرة في العمود الأصلي</strong>: UPPER لا تعدل الخلية نفسها بل تعيد نسخة جديدة. انسخ عمود النتائج والصقه كقيم فوق العمود الأصلي ثم احذف عمود الصيغ.</li><li><strong>استخدام UPPER قبل البحث دون حاجة</strong>: الدوال <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a> و <a href="/excel-ar/formulas/xlookup/">XLOOKUP</a> و <a href="/excel-ar/formulas/match/">MATCH</a> لا تفرق بين الحروف الكبيرة والصغيرة أصلاً، ففائدة UPPER في توحيد العرض والطباعة والمقارنة بالدالة EXACT.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>في Excel 365 و 2021 يمكن تحويل عمود كامل بصيغة واحدة تمتد تلقائياً: <code dir="ltr">=UPPER(A2:A200)</code>.</li><li>لتحويل سريع دون صيغة يمكنك كتابة أول رمز بحروف كبيرة في العمود المجاور ثم الضغط على Ctrl+E للتعبئة السريعة، لكن النتيجة قيم ثابتة لا تتحدث إذا تغير الأصل.</li><li>في الإعدادات الإقليمية العربية تفصل الوسائط بالفاصلة المنقوطة: <code dir="ltr">=EXACT(A2;UPPER(A2))</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=UPPER(A2)</code></pre>
 <p>النتيجة: رموز المنتجات بحروف كبيرة</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/lower/" title="شرح دالة LOWER في Excel بالعربي">LOWER</a></li><li><a href="/excel-ar/formulas/proper/" title="شرح دالة PROPER في Excel بالعربي">PROPER</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/xlookup/" title="شرح دالة XLOOKUP في Excel بالعربي">XLOOKUP</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

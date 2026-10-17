@@ -6,10 +6,11 @@
 <title>شرح دالة TAKE في Excel بالعربي</title>
 <meta name="description" content="شرح دالة TAKE في Excel: تأخذ عدداً محدداً من الصفوف أو الأعمدة من بداية النطاق، أو من نهايته إذا كان الرقم سالباً. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="TAKE، دالة TAKE، شرح TAKE، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/take/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة TAKE في Excel بالعربي">
 <meta property="og:description" content="شرح دالة TAKE في Excel: تأخذ عدداً محدداً من الصفوف أو الأعمدة من بداية النطاق، أو من نهايته إذا كان الرقم سالباً. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/take/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,41 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=TAKE(array, rows, [columns])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array</code>: مطلوب</li><li><code dir="ltr">rows</code>: مطلوب</li><li><code dir="ltr">columns</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">array</code>: النطاق أو المصفوفة التي تريد أخذ جزء منها، ويمكن أن تكون نتيجة دالة أخرى مثل SORT. (مطلوب)</li><li><code dir="ltr">rows</code>: عدد الصفوف المطلوبة من بداية النطاق، أو رقم سالب لأخذها من نهايته، ويمكن تركه فارغًا لأخذ كل الصفوف. (مطلوب)</li><li><code dir="ltr">columns</code>: عدد الأعمدة المطلوبة من بداية النطاق، أو رقم سالب لأخذها من آخره، وإذا تركته تؤخذ كل الأعمدة. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم TAKE</h2>
+<p>تعيد دالة TAKE عددًا محددًا من الصفوف أو الأعمدة من بداية نطاق أو من نهايته. وتظهر قيمتها خصوصًا عندما تجمعها مع دوال المصفوفات الأخرى، مثل:</p>
+<ul><li>عرض أعلى ثلاثة موظفين في ساعات العمل الإضافية بعد ترتيب الكشف.</li><li>عرض آخر خمس فواتير مسجلة في سجل يزداد يوميًا.</li><li>استخراج العمودين الأولين فقط من جدول كبير لعرضهما في تقرير.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>الوسيطة rows تحدد عدد الصفوف: الرقم الموجب يأخذ من الأعلى، والسالب يأخذ من الأسفل. والوسيطة columns تعمل بالطريقة نفسها مع الأعمدة. وإذا أردت أعمدة فقط مع كل الصفوف، اترك مكان rows فارغًا بين فاصلتين. النتيجة مصفوفة تنسكب في الخلايا المجاورة، وتتحدث تلقائيًا مع تغير المصدر.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>لديك كشف بساعات العمل الإضافية لشهر واحد في النطاق A2:C7:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: الموظف</th><th>B: القسم</th><th>C: الساعات الإضافية</th></tr></thead><tbody><tr><td>2</td><td>رنا</td><td>المبيعات</td><td>34</td></tr><tr><td>3</td><td>عمر</td><td>المخازن</td><td>12</td></tr><tr><td>4</td><td>هدى</td><td>المبيعات</td><td>27</td></tr><tr><td>5</td><td>باسل</td><td>الحسابات</td><td>19</td></tr><tr><td>6</td><td>نادية</td><td>المخازن</td><td>41</td></tr><tr><td>7</td><td>كريم</td><td>الحسابات</td><td>8</td></tr></tbody></table></div>
+<p>لعرض أول ثلاثة صفوف من الكشف:</p>
+<pre dir="ltr"><code>=TAKE(A2:C7,3)</code></pre>
+<p>تعيد الصيغة صفوف رنا وعمر وهدى بأعمدتها الثلاثة. ولعرض آخر صفين اكتب <code dir="ltr">=TAKE(A2:C7,-2)</code> فتحصل على نادية وكريم.</p>
+<p>والاستخدام الأهم هو استخراج الأعلى بعد الترتيب:</p>
+<pre dir="ltr"><code>=TAKE(SORT(A2:C7,3,-1),3)</code></pre>
+<p>ترتب <a href="/excel-ar/formulas/sort/">SORT</a> الكشف تنازليًا حسب الساعات، ثم تأخذ TAKE أول ثلاثة صفوف، فتكون النتيجة:</p>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>القسم</th><th>الساعات الإضافية</th></tr></thead><tbody><tr><td>نادية</td><td>المخازن</td><td>41</td></tr><tr><td>رنا</td><td>المبيعات</td><td>34</td></tr><tr><td>هدى</td><td>المبيعات</td><td>27</td></tr></tbody></table></div>
+<p>ولعرض اسم الموظف وقسمه فقط لكل الصفوف: <code dir="ltr">=TAKE(A2:C7,,2)</code>.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #CALC!</strong>: يظهر عندما يكون rows أو columns صفرًا، لأن النتيجة ستكون فارغة. اكتب رقمًا غير الصفر.</li><li><strong>الخطأ #SPILL!</strong>: منطقة الانسكاب تحتوي بيانات. أفرغ الخلايا التي ستشغلها النتيجة.</li><li><strong>الخطأ #NAME?</strong>: إصدار Excel لديك لا يعرف الدالة، فهي غير موجودة في Excel 2021 وما قبله.</li><li><strong>طلب صفوف أكثر من الموجود</strong>: إذا كتبت 10 لنطاق من ستة صفوف فلن يظهر خطأ، بل تعاد الصفوف الستة كلها.</li><li><strong>صفوف فارغة في النتيجة</strong>: إذا كان النطاق يشمل خلايا فارغة في نهايته فستعد ضمن الصفوف عند الأخذ من الأسفل. استخدم جدول Excel أو <a href="/excel-ar/formulas/filter/">FILTER</a> لاستبعادها.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>الدالة متاحة في Microsoft 365 وExcel 2024 وExcel للويب.</li><li>الدالة المعاكسة لها هي DROP، التي تحذف عددًا من الصفوف أو الأعمدة وتعيد الباقي.</li><li>لعرض آخر فاتورة تُضاف دائمًا إلى سجل في جدول Excel، استخدم اسم الجدول مع رقم سالب، فتتبع الصيغة الصفوف الجديدة.</li><li>في الإعدادات الإقليمية العربية تكتب الصيغة <code dir="ltr">=TAKE(A2:C7;3)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>ما الفرق بين TAKE وFILTER؟</h3>
+<p>FILTER تختار الصفوف حسب شرط على قيمها، أما TAKE فتختار حسب الموقع فقط: الأول أو الأخير.</p>
+<h3>هل يمكن أخذ صف وعمود معًا؟</h3>
+<p>نعم، <code dir="ltr">=TAKE(A2:C7,1,1)</code> تعيد الخلية الأولى فقط، وهي اسم رنا.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=TAKE(SORT(A2:B50,2,-1),5)</code></pre>
 <p>النتيجة: أعلى 5 موظفين حسب المبيعات</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=TAKE(SORT(A2:B50;2;-1);5)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/sort/" title="شرح دالة SORT في Excel بالعربي">SORT</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/sort/" title="شرح دالة SORT في Excel بالعربي">SORT</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li><li><a href="/excel-ar/formulas/choosecols/" title="شرح دالة CHOOSECOLS في Excel بالعربي">CHOOSECOLS</a></li><li><a href="/excel-ar/formulas/large/" title="شرح دالة LARGE في Excel بالعربي">LARGE</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

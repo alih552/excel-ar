@@ -6,10 +6,11 @@
 <title>شرح دالة SUMPRODUCT في Excel بالعربي</title>
 <meta name="description" content="شرح دالة SUMPRODUCT في Excel: تضرب عناصر النطاقات المتقابلة ثم تجمع النواتج، مثل حساب إجمالي الفاتورة من الكمية والسعر. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="SUMPRODUCT، دالة SUMPRODUCT، شرح SUMPRODUCT، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/sumproduct/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة SUMPRODUCT في Excel بالعربي">
 <meta property="og:description" content="شرح دالة SUMPRODUCT في Excel: تضرب عناصر النطاقات المتقابلة ثم تجمع النواتج، مثل حساب إجمالي الفاتورة من الكمية والسعر. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/sumproduct/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,43 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=SUMPRODUCT(array1, [array2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array1</code>: مطلوب</li><li><code dir="ltr">array2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">array1</code>: النطاق أو المصفوفة الأولى التي تضرب عناصرها في العناصر المقابلة من المصفوفات الأخرى. (مطلوب)</li><li><code dir="ltr">array2</code>: مصفوفات إضافية بالحجم نفسه تضرب في الأولى عنصرًا بعنصر قبل جمع النواتج. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم SUMPRODUCT</h2>
+<p>تضرب دالة SUMPRODUCT العناصر المتقابلة في عدة نطاقات ثم تجمع نواتج الضرب في رقم واحد. استخدامها المباشر هو حساب الإجماليات التي تحتاج ضربًا قبل الجمع، مثل:</p>
+<ul><li>القيمة الإجمالية للمخزون من عمود الكمية وعمود قيمة الوحدة.</li><li>إجمالي أجور العمل الإضافي من عمود الساعات وعمود أجر الساعة في كشف الرواتب.</li><li>المعدل الموزون لدرجات الطالب حسب عدد ساعات كل مادة.</li></ul>
+<p>كما تستخدم بديلًا مرنًا لدوال <a href="/excel-ar/formulas/sumifs/">SUMIFS</a> و<a href="/excel-ar/formulas/countifs/">COUNTIFS</a> عندما تحتاج إلى شروط لا تدعمها تلك الدوال.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>إذا أعطيتها نطاقين، تضرب الخلية الأولى من الأول في الخلية الأولى من الثاني، والثانية في الثانية، وهكذا، ثم تجمع كل النواتج. ويجب أن تكون النطاقات بالحجم نفسه. وعند استخدام شرط داخلها مثل (B2:B6=&quot;الرئيسي&quot;) تتحول نتيجة المقارنة إلى 1 للصف المطابق و0 لغيره، فيلغي الصفر الصفوف غير المطلوبة.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>لديك جرد للأدوات المكتبية في مخزنين:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: الصنف</th><th>B: المخزن</th><th>C: الكمية</th><th>D: قيمة الوحدة</th></tr></thead><tbody><tr><td>2</td><td>رزم ورق</td><td>الرئيسي</td><td>40</td><td>25</td></tr><tr><td>3</td><td>علب حبر</td><td>الفرعي</td><td>15</td><td>60</td></tr><tr><td>4</td><td>ملفات</td><td>الرئيسي</td><td>120</td><td>3</td></tr><tr><td>5</td><td>أقلام</td><td>الفرعي</td><td>200</td><td>2</td></tr><tr><td>6</td><td>دباسات</td><td>الرئيسي</td><td>18</td><td>12</td></tr></tbody></table></div>
+<p>لحساب القيمة الإجمالية للمخزون كله:</p>
+<pre dir="ltr"><code>=SUMPRODUCT(C2:C6,D2:D6)</code></pre>
+<p>النتيجة <strong>2876</strong>. تحسب الدالة قيمة كل صف على حدة، فرزم الورق مثلًا قيمتها 1000 لأن 40 في 25 تساوي 1000، وعلب الحبر قيمتها 900، ثم تجمع قيم الصفوف الخمسة.</p>
+<p>ولحساب قيمة المخزن الرئيسي وحده:</p>
+<pre dir="ltr"><code>=SUMPRODUCT((B2:B6=&quot;الرئيسي&quot;)*C2:C6*D2:D6)</code></pre>
+<p>النتيجة <strong>1576</strong>، وهي مجموع قيم الصفوف 2 و4 و6 فقط: رزم الورق والملفات والدباسات.</p>
+<p>ولعد الأصناف التي تزيد كميتها على 50:</p>
+<pre dir="ltr"><code>=SUMPRODUCT(--(C2:C6&gt;50))</code></pre>
+<p>النتيجة <strong>2</strong> (الملفات والأقلام). العلامتان -- تحولان TRUE وFALSE إلى 1 و0.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر عندما تختلف أحجام النطاقات، مثل C2:C6 مع D2:D7. وحّد بداية النطاقات ونهايتها.</li><li><strong>الخطأ #VALUE! مع النصوص</strong>: في صيغة الضرب بالنجمة، تسبب خلية نصية في أحد النطاقات هذا الخطأ. أما عند الفصل بالفواصل فتعامل الدالة النص كصفر، فاختر الشكل المناسب حسب بياناتك.</li><li><strong>النتيجة صفر مع الشروط</strong>: إذا استخدمت شرطًا وحده دون تحويل، مثل <code dir="ltr">=SUMPRODUCT(C2:C6&gt;50)</code>، فستعيد صفرًا لأن القيم المنطقية لا تُجمع. أضف -- أو اضرب الشرط في نطاق.</li><li><strong>بطء المصنف</strong>: تجنب استخدام أعمدة كاملة مثل C:C داخلها، لأنها تحسب أكثر من مليون صف. حدد النطاق الفعلي.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لعلاقة &quot;أو&quot; بين شرطين اجمع الشرطين بدل ضربهما: <code dir="ltr">=SUMPRODUCT(((B2:B6=&quot;الرئيسي&quot;)+(C2:C6&gt;100)&gt;0)*C2:C6*D2:D6)</code> تعيد 1976، وهي قيمة أصناف المخزن الرئيسي مضافًا إليها الأقلام لأن كميتها تزيد على 100.</li><li>تقبل الدالة شروطًا محسوبة على عمود تواريخ، مثل <code dir="ltr">(MONTH(E2:E50)=3)</code> لاختيار شهر مارس، وهو ما لا تستطيعه SUMIFS مباشرة.</li><li>لا تحتاج الدالة إلى Ctrl+Shift+Enter في أي إصدار، وهي متاحة في جميع إصدارات Excel.</li><li>في الإعدادات الإقليمية العربية تكتب <code dir="ltr">=SUMPRODUCT(C2:C6;D2:D6)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>ما الفرق بينها وبين SUMIFS؟</h3>
+<p>SUMIFS أسرع وأسهل للشروط البسيطة، أما SUMPRODUCT فتسمح بالضرب بين الأعمدة وبشروط محسوبة مثل الشهر أو طول النص.</p>
+<h3>هل يمكن حساب معدل موزون بها؟</h3>
+<p>نعم، اقسم ناتجها على مجموع الأوزان: <code dir="ltr">=SUMPRODUCT(C2:C6,D2:D6)/SUM(C2:C6)</code> يعطي متوسط قيمة الوحدة مرجحًا بالكمية، وهو في المثال نحو 7.32 لأن 2876 مقسومة على 393.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=SUMPRODUCT(B2:B20,C2:C20)</code></pre>
 <p>النتيجة: مجموع (الكمية × سعر الوحدة)</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=SUMPRODUCT(B2:B20;C2:C20)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/countifs/" title="شرح دالة COUNTIFS في Excel بالعربي">COUNTIFS</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/sumifs/" title="شرح دالة SUMIFS في Excel بالعربي">SUMIFS</a></li><li><a href="/excel-ar/formulas/countifs/" title="شرح دالة COUNTIFS في Excel بالعربي">COUNTIFS</a></li><li><a href="/excel-ar/formulas/month/" title="شرح دالة MONTH في Excel بالعربي">MONTH</a></li><li><a href="/excel-ar/formulas/and/" title="شرح دالة AND في Excel بالعربي">AND</a></li><li><a href="/excel-ar/formulas/sumif/" title="شرح دالة SUMIF في Excel بالعربي">SUMIF</a></li><li><a href="/excel-ar/formulas/year/" title="شرح دالة YEAR في Excel بالعربي">YEAR</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

@@ -6,10 +6,11 @@
 <title>شرح دالة CHOOSECOLS في Excel بالعربي</title>
 <meta name="description" content="شرح دالة CHOOSECOLS في Excel: تُرجع أعمدة محددة فقط من جدول أو نطاق، وبالترتيب الذي تختاره. الأرقام السالبة تعدّ الأعمدة من النهاية. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="CHOOSECOLS، دالة CHOOSECOLS، شرح CHOOSECOLS، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/choosecols/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة CHOOSECOLS في Excel بالعربي">
 <meta property="og:description" content="شرح دالة CHOOSECOLS في Excel: تُرجع أعمدة محددة فقط من جدول أو نطاق، وبالترتيب الذي تختاره. الأرقام السالبة تعدّ الأعمدة من النهاية. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/choosecols/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,39 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=CHOOSECOLS(array, col_num1, [col_num2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array</code>: مطلوب</li><li><code dir="ltr">col_num1</code>: مطلوب</li><li><code dir="ltr">col_num2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">array</code>: الجدول أو النطاق الذي تريد أخذ أعمدة منه. (مطلوب)</li><li><code dir="ltr">col_num1</code>: رقم العمود الأول المطلوب بحسب ترتيبه داخل النطاق، والرقم السالب يعدّ من آخر عمود. (مطلوب)</li><li><code dir="ltr">col_num2</code>: أرقام أعمدة إضافية تُعرض بالترتيب الذي تكتبه. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم CHOOSECOLS</h2>
+<p>تحتاج إلى CHOOSECOLS عندما يكون لديك جدول بأعمدة كثيرة وتريد عرض بعضها فقط في تقرير، دون نسخ الأعمدة يدوياً أو إخفائها. مثلاً: من جدول الموظفين الكامل تريد قائمة بالاسم والراتب فقط لإرسالها إلى قسم الرواتب، أو من سجل المخزون تريد اسم الصنف والكمية فقط. والنتيجة مرتبطة بالجدول الأصلي، فإذا عدّلت بياناته تحدّث التقرير تلقائياً.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>الوسيط الأول <code dir="ltr">array</code> هو الجدول أو النطاق، وبعده تكتب أرقام الأعمدة المطلوبة بحسب ترتيبها داخل النطاق لا بحسب حروف أعمدة الورقة. فالعمود رقم 1 هو أول عمود في النطاق الذي اخترته. ويمكنك كتابة الأرقام بأي ترتيب، فتظهر الأعمدة بالترتيب الذي كتبته. والرقم السالب يعدّ من النهاية، فالرقم -1 يعني آخر عمود.</p>
+<p>النتيجة مصفوفة ديناميكية تنسكب في الخلايا المجاورة، لذلك تكتب الصيغة في خلية واحدة فقط.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>جدول موظفين في النطاق A1:E5، والصف الأول فيه العناوين:</p>
+<div class="table-wrap"><table><thead><tr><th>الرقم الوظيفي</th><th>الاسم</th><th>القسم</th><th>الراتب</th><th>تاريخ التعيين</th></tr></thead><tbody><tr><td>101</td><td>سارة</td><td>المبيعات</td><td>950</td><td>2021-04-12</td></tr><tr><td>102</td><td>خالد</td><td>المحاسبة</td><td>1100</td><td>2019-09-01</td></tr><tr><td>103</td><td>ليلى</td><td>الموارد البشرية</td><td>880</td><td>2023-01-15</td></tr><tr><td>104</td><td>عمر</td><td>المبيعات</td><td>1020</td><td>2020-06-20</td></tr></tbody></table></div>
+<p>اكتب في الخلية G1:</p>
+<pre dir="ltr"><code>=CHOOSECOLS(A1:E5,2,4)</code></pre>
+<p>تنسكب النتيجة في خمسة صفوف وعمودين، أي العمود الثاني (الاسم) والعمود الرابع (الراتب) مع عنوانيهما:</p>
+<div class="table-wrap"><table><thead><tr><th>الاسم</th><th>الراتب</th></tr></thead><tbody><tr><td>سارة</td><td>950</td></tr><tr><td>خالد</td><td>1100</td></tr><tr><td>ليلى</td><td>880</td></tr><tr><td>عمر</td><td>1020</td></tr></tbody></table></div>
+<p>أمثلة أخرى على الجدول نفسه:</p>
+<ul><li><code dir="ltr">=CHOOSECOLS(A1:E5,4,2)</code> تعرض الراتب أولاً ثم الاسم.</li><li><code dir="ltr">=CHOOSECOLS(A1:E5,-1)</code> تعرض آخر عمود فقط، وهو تاريخ التعيين. وقد تظهر التواريخ المنسكبة أرقاماً تسلسلية مثل 44298، فنسّق خلايا النتيجة بتنسيق التاريخ.</li><li><code dir="ltr">=CHOOSECOLS(FILTER(A2:E5,C2:C5=&quot;المبيعات&quot;),2,4)</code> تعرض الاسم والراتب لموظفي المبيعات فقط، فتكون النتيجة صفين: سارة 950 وعمر 1020.</li><li><code dir="ltr">=SORT(CHOOSECOLS(A2:E5,2,4),2,-1)</code> ترتب الأسماء حسب الراتب من الأعلى: خالد ثم عمر ثم سارة ثم ليلى.</li></ul>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر إذا كتبت رقم عمود صفراً أو أكبر من عدد أعمدة النطاق، كأن تطلب العمود 6 من نطاق فيه خمسة أعمدة.</li><li><strong>الخطأ #SPILL!</strong>: معناه أن الخلايا التي يجب أن تنسكب فيها النتيجة ليست فارغة. امسح ما تحتها وعلى جانبها أو انقل الصيغة إلى مكان فارغ.</li><li><strong>الخطأ #NAME?</strong>: يعني أن إصدار Excel لديك لا يعرف الدالة.</li><li><strong>الخلط بين رقم العمود في النطاق ورقم العمود في الورقة</strong>: إذا بدأ نطاقك من العمود C فإن العمود C هو رقم 1 في الدالة.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>الدالة متاحة في Microsoft 365 وExcel 2024 وExcel للويب، وليست موجودة في Excel 2021 وما قبله.</li><li>لاختيار العمود باسمه بدلاً من رقمه، استخدم <a href="/excel-ar/formulas/match/">MATCH</a>: <code dir="ltr">=CHOOSECOLS(A1:E5,MATCH(&quot;الراتب&quot;,A1:E1,0))</code> تعيد عمود الراتب لأن MATCH تعيد الرقم 4.</li><li>أخواتها: CHOOSEROWS لاختيار صفوف محددة، و<a href="/excel-ar/formulas/take/">TAKE</a> وDROP لأخذ أول الأعمدة أو آخرها أو حذفها.</li><li>في الإعدادات العربية التي تستخدم الفاصلة المنقوطة: <code dir="ltr">=CHOOSECOLS(A1:E5;2;4)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تتغير النتيجة إذا أضفت صفاً جديداً للجدول؟</h3>
+<p>إذا كان النطاق ثابتاً مثل A1:E5 فلن يدخل الصف الجديد. حوّل البيانات إلى جدول Excel واستخدم اسمه في الصيغة، فيتسع النطاق تلقائياً.</p>
+<h3>هل يمكن تعديل الخلايا الناتجة مباشرة؟</h3>
+<p>لا، لأنها نتيجة صيغة منسكبة. عدّل البيانات في الجدول الأصلي، أو انسخ النتيجة والصقها كقيم.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=CHOOSECOLS(A2:E100,1,4)</code></pre>
 <p>النتيجة: تعرض عمود الاسم (الأول) وعمود الراتب (الرابع) فقط</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=CHOOSECOLS(A2:E100;1;4)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/take/" title="شرح دالة TAKE في Excel بالعربي">TAKE</a></li><li><a href="/excel-ar/formulas/textsplit/" title="شرح دالة TEXTSPLIT في Excel بالعربي">TEXTSPLIT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

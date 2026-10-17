@@ -6,10 +6,11 @@
 <title>شرح دالة SUBSTITUTE في Excel بالعربي</title>
 <meta name="description" content="شرح دالة SUBSTITUTE في Excel: تستبدل نصاً بنص آخر داخل الخلية. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="SUBSTITUTE، دالة SUBSTITUTE، شرح SUBSTITUTE، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/substitute/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة SUBSTITUTE في Excel بالعربي">
 <meta property="og:description" content="شرح دالة SUBSTITUTE في Excel: تستبدل نصاً بنص آخر داخل الخلية. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/substitute/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,37 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=SUBSTITUTE(text, old_text, new_text, [instance_num])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li><li><code dir="ltr">old_text</code>: مطلوب</li><li><code dir="ltr">new_text</code>: مطلوب</li><li><code dir="ltr">instance_num</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">text</code>: النص الأصلي أو الخلية التي تحتوي النص الذي تريد استبدال جزء منه. (مطلوب)</li><li><code dir="ltr">old_text</code>: الحروف أو الكلمة التي تبحث عنها داخل النص لاستبدالها، مع مراعاة حالة الأحرف الإنجليزية. (مطلوب)</li><li><code dir="ltr">new_text</code>: النص الجديد الذي يحل محل النص القديم، ويمكن أن يكون فارغًا &quot;&quot; لحذفه. (مطلوب)</li><li><code dir="ltr">instance_num</code>: رقم التكرار الذي تريد استبداله فقط، وإذا تركته تُستبدل كل التكرارات. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم SUBSTITUTE</h2>
+<p>تبحث دالة SUBSTITUTE عن نص محدد داخل خلية وتستبدله بنص آخر، دون أن تحتاج إلى معرفة موقعه. وهي من أكثر الدوال فائدة في تنظيف البيانات المنسوخة من الأنظمة الأخرى، مثل:</p>
+<ul><li>توحيد رموز الفواتير أو الأصناف بتغيير الفاصل بين أجزائها.</li><li>حذف المسافات الزائدة أو الرموز غير المرغوبة من أسماء الموظفين.</li><li>إزالة فواصل الآلاف من أرقام وصلت كنص حتى يمكن جمعها.</li><li>توحيد الهمزات في الأسماء العربية لتسهيل البحث والمطابقة.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تمر الدالة على النص وتستبدل كل ظهور للنص القديم بالنص الجديد، وتعيد النتيجة نصًا جديدًا دون تغيير الخلية الأصلية. وإذا حددت الوسيطة الرابعة فلن تستبدل إلا ذلك التكرار بعينه، فالرقم 2 مثلًا يعني الظهور الثاني فقط. والدالة حساسة لحالة الأحرف الإنجليزية، فهي تميز بين inv وINV.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>لديك عمود برموز فواتير بالشكل الآتي، وتريد تعديلها لتناسب نظامًا جديدًا:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: رمز الفاتورة</th><th>B: الصيغة</th><th>C: النتيجة</th></tr></thead><tbody><tr><td>2</td><td>INV-26-145</td><td><code dir="ltr">=SUBSTITUTE(A2,&quot;-&quot;,&quot;/&quot;)</code></td><td>INV/26/145</td></tr><tr><td>3</td><td>INV-26-146</td><td><code dir="ltr">=SUBSTITUTE(A3,&quot;-&quot;,&quot;/&quot;,1)</code></td><td>INV/26-146</td></tr><tr><td>4</td><td>INV-26-147</td><td><code dir="ltr">=SUBSTITUTE(A4,&quot;INV&quot;,&quot;FAC&quot;)</code></td><td>FAC-26-147</td></tr><tr><td>5</td><td>inv-26-148</td><td><code dir="ltr">=SUBSTITUTE(A5,&quot;INV&quot;,&quot;FAC&quot;)</code></td><td>inv-26-148</td></tr></tbody></table></div>
+<p>في الصف 2 استُبدلت الشرطتان كلتاهما بشرطة مائلة. وفي الصف 3 استُبدلت الشرطة الأولى فقط لأن instance_num يساوي 1. وفي الصف 5 لم يتغير شيء لأن الرمز مكتوب بأحرف صغيرة والدالة تبحث عن INV بأحرف كبيرة.</p>
+<p>ولمعرفة عدد الشرطات في الرمز الأول:</p>
+<pre dir="ltr"><code>=LEN(A2)-LEN(SUBSTITUTE(A2,&quot;-&quot;,&quot;&quot;))</code></pre>
+<p>النتيجة <strong>2</strong>، لأن طول النص 10 أحرف، ويصبح 8 بعد حذف الشرطتين.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>النتيجة لا تتغير</strong>: تحقق من حالة الأحرف الإنجليزية، ومن وجود مسافة غير مرئية. النصوص المنسوخة من صفحات الويب تحتوي أحيانًا مسافة غير منقسمة رمزها 160 تبدو كالمسافة العادية، فاستبدلها بالصيغة <code dir="ltr">=SUBSTITUTE(A2,UNICHAR(160),&quot; &quot;)</code>.</li><li><strong>الأرقام لا تُجمع بعد التنظيف</strong>: نتيجة الدالة نص دائمًا، فإذا حذفت فاصلة الآلاف من &quot;1,250&quot; فلفّ الصيغة بالدالة VALUE: <code dir="ltr">=VALUE(SUBSTITUTE(A2,&quot;,&quot;,&quot;&quot;))</code> لتحصل على الرقم 1250.</li><li><strong>الخطأ #VALUE!</strong>: يظهر إذا كان instance_num صفرًا أو رقمًا سالبًا، فاكتب رقمًا من 1 فما فوق.</li><li><strong>الخلط مع REPLACE</strong>: الدالة REPLACE تستبدل حسب الموقع وعدد الأحرف، أما SUBSTITUTE فتستبدل حسب محتوى النص. استخدم الأولى عندما تعرف المكان، والثانية عندما تعرف النص.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لإجراء عدة استبدالات مرة واحدة ضع الدوال داخل بعضها. فلتوحيد الهمزات في الأسماء العربية: <code dir="ltr">=SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(A2,&quot;أ&quot;,&quot;ا&quot;),&quot;إ&quot;,&quot;ا&quot;),&quot;آ&quot;,&quot;ا&quot;)</code>.</li><li>في Microsoft 365 يمكنك تمرير عمود كامل مثل A2:A5 فتنسكب النتائج في عدة خلايا.</li><li>لحذف المسافات الزائدة بين الكلمات استخدم <a href="/excel-ar/formulas/trim/">TRIM</a>، ثم SUBSTITUTE لما تبقى من رموز.</li><li>الدالة متاحة في جميع إصدارات Excel، وفي الإعدادات الإقليمية العربية تكتب بالفاصلة المنقوطة.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل يمكن استبدال النص في الخلية نفسها؟</h3>
+<p>لا، فالصيغة تعيد النتيجة في خلية أخرى. بعد التأكد منها انسخ النتائج والصقها كقيم مكان الأصل إن أردت.</p>
+<h3>هل تدعم الدالة أحرف البدل مثل النجمة؟</h3>
+<p>لا، فهي تبحث عن النص حرفيًا. للاستبدال بنمط مرن استخدم أمر البحث والاستبدال (Ctrl+H) الذي يقبل أحرف البدل، أو الدالة REGEXREPLACE في الإصدارات الحديثة من Microsoft 365.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=SUBSTITUTE(A2,&quot;-&quot;,&quot;&quot;)</code></pre>
 <p>النتيجة: حذف الشرطات من الرقم</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=SUBSTITUTE(A2;&quot;-&quot;;&quot;&quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/count/" title="شرح دالة COUNT في Excel بالعربي">COUNT</a></li><li><a href="/excel-ar/formulas/len/" title="شرح دالة LEN في Excel بالعربي">LEN</a></li><li><a href="/excel-ar/formulas/proper/" title="شرح دالة PROPER في Excel بالعربي">PROPER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

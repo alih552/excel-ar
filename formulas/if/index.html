@@ -6,10 +6,11 @@
 <title>شرح دالة IF في Excel بالعربي</title>
 <meta name="description" content="شرح دالة IF في Excel: تختبر شرطاً وتعيد قيمة إذا كان صحيحاً وقيمة أخرى إذا كان خاطئاً. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="IF، دالة IF، شرح IF، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/if/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة IF في Excel بالعربي">
 <meta property="og:description" content="شرح دالة IF في Excel: تختبر شرطاً وتعيد قيمة إذا كان صحيحاً وقيمة أخرى إذا كان خاطئاً. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/if/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,46 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=IF(logical_test, [value_if_true], [value_if_false])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">logical_test</code>: مطلوب</li><li><code dir="ltr">value_if_true</code>: اختياري</li><li><code dir="ltr">value_if_false</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">logical_test</code>: الشرط الذي يُختبر، وهو مقارنة أو تعبير نتيجته TRUE أو FALSE مثل B2&lt;=C2. (مطلوب)</li><li><code dir="ltr">value_if_true</code>: القيمة أو الصيغة التي تعيدها الدالة إذا تحقق الشرط. (اختياري)</li><li><code dir="ltr">value_if_false</code>: القيمة أو الصيغة التي تعيدها الدالة إذا لم يتحقق الشرط، وإذا حذفتها تعيد FALSE. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم IF</h2>
+<p>IF هي الأساس لكل قرار داخل جدول البيانات: إذا تحقق شيء فافعل كذا، وإلا فافعل غيره. تجدها في أغلب ملفات العمل اليومية:</p>
+<ul><li>تنبيه المخزن عندما تنخفض كمية صنف إلى حد إعادة الطلب.</li><li>احتساب ساعات العمل الإضافية في كشف الرواتب.</li><li>تصنيف الموظفين حسب نسبة الحضور.</li><li>إخفاء نتيجة صيغة إذا كانت الخلية المرتبطة بها فارغة.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تبدأ الدالة بالاختبار المنطقي، وهو مقارنة نتيجتها TRUE أو FALSE، مثل <code dir="ltr">B2&lt;=C2</code> أو <code dir="ltr">D2=&quot;نعم&quot;</code>. إذا كانت النتيجة TRUE تعيد value_if_true، وإلا تعيد value_if_false. والرقم وحده يصلح شرطاً أيضاً: أي رقم غير الصفر يُعدّ TRUE، والصفر يُعدّ FALSE. يمكن أن تكون كل قيمة منهما رقماً أو نصاً بين علامتي تنصيص أو مرجع خلية أو صيغة كاملة.</p>
+<p>عوامل المقارنة المتاحة هي <code dir="ltr">=</code> و<code dir="ltr">&lt;&gt;</code> و<code dir="ltr">&gt;</code> و<code dir="ltr">&lt;</code> و<code dir="ltr">&gt;=</code> و<code dir="ltr">&lt;=</code>. وإذا حذفت value_if_false ولم يتحقق الشرط تعيد الدالة FALSE.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>جدول متابعة المخزن، والمطلوب كتابة تنبيه لكل صنف بلغ حد إعادة الطلب أو نزل عنه:</p>
+<div class="table-wrap"><table><thead><tr><th>الصنف (A)</th><th>الكمية المتوفرة (B)</th><th>حد إعادة الطلب (C)</th><th>الحالة (D)</th></tr></thead><tbody><tr><td>ورق طباعة</td><td>120</td><td>50</td><td>كافٍ</td></tr><tr><td>حبر طابعة</td><td>8</td><td>10</td><td>اطلب الآن</td></tr><tr><td>ملفات بلاستيكية</td><td>50</td><td>50</td><td>اطلب الآن</td></tr><tr><td>أقلام</td><td>300</td><td>100</td><td>كافٍ</td></tr></tbody></table></div>
+<p>في الخلية D2 اكتب:</p>
+<pre dir="ltr"><code>=IF(B2&lt;=C2,&quot;اطلب الآن&quot;,&quot;كافٍ&quot;)</code></pre>
+<p>النتيجة للصف الأول «كافٍ» لأن 120 أكبر من 50. وفي الصف الثالث «اطلب الآن» لأن الكمية تساوي الحد تماماً، والمقارنة <code dir="ltr">&lt;=</code> تشمل حالة التساوي. لو استخدمت <code dir="ltr">&lt;</code> لظهرت «كافٍ» لهذا الصنف.</p>
+<h2 id="s-4">حساب ساعات العمل الإضافية</h2>
+<p>إذا كانت ساعات الموظف الشهرية في B2 والحد الأساسي 160 ساعة، وأجر الساعة الإضافية في C2:</p>
+<pre dir="ltr"><code>=IF(B2&gt;160,(B2-160)*C2,0)</code></pre>
+<p>لموظف عمل 172 ساعة وأجر ساعته الإضافية 6000 تكون النتيجة 72000، أي 12 ساعة مضروبة في 6000. ولمن عمل 150 ساعة تكون النتيجة 0.</p>
+<h2 id="s-5">شروط متداخلة وشروط مركّبة</h2>
+<p>في كشف حضور آخر، إذا كانت نسبة حضور الموظف في B2 مكتوبة رقماً مثل 97، فلتصنيفها إلى ثلاث فئات:</p>
+<pre dir="ltr"><code>=IF(B2&gt;=95,&quot;ممتاز&quot;,IF(B2&gt;=85,&quot;جيد&quot;,&quot;يحتاج متابعة&quot;))</code></pre>
+<p>نسبة 97 تعطي «ممتاز»، و88 تعطي «جيد»، و80 تعطي «يحتاج متابعة». رتّب الشروط من الأعلى إلى الأدنى لأن الدالة تتوقف عند أول شرط يتحقق؛ لو بدأت بالشرط <code dir="ltr">B2&gt;=85</code> لحصلت نسبة 97 على «جيد».</p>
+<p>ولشرطين معاً استخدم <a href="/excel-ar/formulas/and/">AND</a> داخل الاختبار، فإذا كان عدد الإنذارات في C2 فإن <code dir="ltr">=IF(AND(B2&gt;=95,C2=0),&quot;مكافأة&quot;,&quot;&quot;)</code> تعيد «مكافأة» لمن جمع حضوراً عالياً ولم يتلقَّ أي إنذار.</p>
+<h2 id="s-6">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #NAME?</strong>: كتبت نصاً دون علامتي تنصيص، مثل <code dir="ltr">=IF(B2&lt;=C2,اطلب,كافٍ)</code>. ضع كل نص بين علامتي تنصيص مستقيمتين.</li><li><strong>نتيجة خاطئة مع الأرقام النصية</strong>: إذا كانت الكمية مخزنة كنص فإن Excel يعدّ أي نص أكبر من أي رقم، فتعيد <code dir="ltr">B2&lt;=C2</code> القيمة FALSE دائماً. حوّل العمود إلى أرقام عبر «نص إلى أعمدة» أو الدالة VALUE.</li><li><strong>ظهور FALSE بدل خلية فارغة</strong>: حذفت الوسيط الثالث. اكتب <code dir="ltr">&quot;&quot;</code> لتبقى الخلية فارغة.</li><li><strong>صيغة متداخلة طويلة يصعب تتبعها</strong>: عندما تتجاوز الشروط ثلاثة أو أربعة، فكّر في <a href="/excel-ar/formulas/ifs/">IFS</a>، أو في جدول شرائح مع <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a> بالمطابقة التقريبية، أو <a href="/excel-ar/formulas/xlookup/">XLOOKUP</a> في Excel 365 و2021 وما بعدهما.</li></ul>
+<h2 id="s-7">نصائح</h2>
+<ul><li>IF متوفرة في جميع الإصدارات، أما IFS فتحتاج إلى Excel 2019 أو 365 أو ما بعدهما.</li><li>استخدم <code dir="ltr">=IF(B2=&quot;&quot;,&quot;&quot;,B2*C2)</code> لإخفاء الحسابات في الصفوف التي لم تُملأ بعد.</li><li>مع الإعدادات الإقليمية التي تستخدم الفاصلة المنقوطة تصبح الصيغة <code dir="ltr">=IF(B2&lt;=C2;&quot;اطلب الآن&quot;;&quot;كافٍ&quot;)</code>.</li></ul>
+<h2 id="s-8">أسئلة شائعة</h2>
+<h3>كم دالة IF يمكن وضعها داخل بعضها؟</h3>
+<p>يسمح Excel منذ إصدار 2007 بأربعة وستين مستوى، لكن الصيغة تصبح صعبة القراءة قبل ذلك بكثير.</p>
+<h3>هل تفرّق IF بين الحروف الكبيرة والصغيرة؟</h3>
+<p>لا، المقارنة <code dir="ltr">A2=&quot;yes&quot;</code> تعطي صحيحاً مع YES أيضاً. استخدم EXACT إذا احتجت إلى التمييز.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=IF(C2&gt;=50,&quot;ناجح&quot;,&quot;راسب&quot;)</code></pre>
 <p>النتيجة: النتيجة حسب الدرجة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=IF(C2&gt;=50;&quot;ناجح&quot;;&quot;راسب&quot;)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/and/" title="شرح دالة AND في Excel بالعربي">AND</a></li><li><a href="/excel-ar/formulas/countblank/" title="شرح دالة COUNTBLANK في Excel بالعربي">COUNTBLANK</a></li><li><a href="/excel-ar/formulas/ifs/" title="شرح دالة IFS في Excel بالعربي">IFS</a></li><li><a href="/excel-ar/formulas/let/" title="شرح دالة LET في Excel بالعربي">LET</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/and/" title="شرح دالة AND في Excel بالعربي">AND</a></li><li><a href="/excel-ar/formulas/ifs/" title="شرح دالة IFS في Excel بالعربي">IFS</a></li><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/xlookup/" title="شرح دالة XLOOKUP في Excel بالعربي">XLOOKUP</a></li><li><a href="/excel-ar/formulas/abs/" title="شرح دالة ABS في Excel بالعربي">ABS</a></li><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li><li><a href="/excel-ar/formulas/let/" title="شرح دالة LET في Excel بالعربي">LET</a></li><li><a href="/excel-ar/formulas/or/" title="شرح دالة OR في Excel بالعربي">OR</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

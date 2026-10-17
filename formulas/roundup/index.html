@@ -6,10 +6,11 @@
 <title>شرح دالة ROUNDUP في Excel بالعربي</title>
 <meta name="description" content="شرح دالة ROUNDUP في Excel: تقرّب الرقم دائماً إلى الأعلى. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="ROUNDUP، دالة ROUNDUP، شرح ROUNDUP، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/roundup/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة ROUNDUP في Excel بالعربي">
 <meta property="og:description" content="شرح دالة ROUNDUP في Excel: تقرّب الرقم دائماً إلى الأعلى. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/roundup/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,38 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=ROUNDUP(number, num_digits)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">number</code>: مطلوب</li><li><code dir="ltr">num_digits</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">number</code>: الرقم أو الصيغة التي تريد رفعها إلى الخانة التالية عند وجود أي كسر. (مطلوب)</li><li><code dir="ltr">num_digits</code>: عدد الخانات المطلوب: موجب للخانات العشرية، وصفر لأقرب عدد صحيح أعلى، وسالب للعشرات والمئات. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم ROUNDUP</h2>
+<p>ترفع ROUNDUP الرقم دائمًا بعيدًا عن الصفر ما دام فيه أي كسر، مهما كان صغيرًا. تحتاجها عندما يكون النقص غير مقبول:</p>
+<ul><li>حساب عدد الحافلات اللازمة لنقل الموظفين أو الطلاب، فلا يصح ترك أحد دون مقعد.</li><li>حساب عدد الصناديق أو العبوات المطلوبة لشحن كمية معينة.</li><li>تحديد ربع السنة من رقم الشهر.</li><li>حساب عدد الصفحات اللازمة لطباعة قائمة طويلة.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تحتفظ الدالة بعدد الخانات الذي تحدده، وإذا وجدت بعدها أي قيمة غير الصفر رفعت الخانة الأخيرة بمقدار واحد. القيمة 0 تعني عددًا صحيحًا، والموجبة خانات عشرية، والسالبة عشرات ومئات.</p>
+<div class="table-wrap"><table><thead><tr><th>الصيغة</th><th>النتيجة</th></tr></thead><tbody><tr><td><code dir="ltr">=ROUNDUP(12.341,1)</code></td><td>12.4</td></tr><tr><td><code dir="ltr">=ROUNDUP(7.01,0)</code></td><td>8</td></tr><tr><td><code dir="ltr">=ROUNDUP(1210,-2)</code></td><td>1300</td></tr><tr><td><code dir="ltr">=ROUNDUP(-2.1,0)</code></td><td><code dir="ltr">-3</code></td></tr></tbody></table></div>
+<p>مع الأرقام السالبة يكون الاتجاه بعيدًا عن الصفر، لذلك يصبح <code dir="ltr">-2.1</code> هو <code dir="ltr">-3</code>.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>شركة تنظم رحلة لموظفيها، وكل حافلة تتسع لـ 14 راكبًا. عدد الموظفين في كل قسم:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: القسم</th><th>B: عدد الموظفين</th></tr></thead><tbody><tr><td>2</td><td>الإدارة</td><td>30</td></tr><tr><td>3</td><td>المبيعات</td><td>42</td></tr><tr><td>4</td><td>المخازن</td><td>15</td></tr><tr><td>5</td><td>الحسابات</td><td>9</td></tr></tbody></table></div>
+<p>اكتب في C2:</p>
+<pre dir="ltr"><code>=ROUNDUP(B2/14,0)</code></pre>
+<p>حاصل القسمة 2.14، والنتيجة <strong>3</strong> حافلات للإدارة، لأن حافلتين لا تكفيان لثلاثين موظفًا. وفي الصفوف التالية: المبيعات 3 تمامًا، والمخازن 2، والحسابات 1.</p>
+<p>أما إذا جُمعت الأقسام في حافلات مشتركة فالصيغة:</p>
+<pre dir="ltr"><code>=ROUNDUP(SUM(B2:B5)/14,0)</code></pre>
+<p>مجموع الموظفين 96، وحاصل القسمة 6.86، فتعيد الصيغة <strong>7</strong> حافلات بدل 9 عند الحساب لكل قسم على حدة.</p>
+<h3>ربع السنة من التاريخ</h3>
+<p>إذا كان التاريخ في A2 فالصيغة <code dir="ltr">=ROUNDUP(MONTH(A2)/3,0)</code> تعيد رقم الربع من 1 إلى 4، فشهر مايو مثلًا يعطي 2.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر عندما يكون أحد الوسيطين نصًا لا يمكن تحويله إلى رقم. تأكد أن عدد الموظفين أو الكمية مخزن رقمًا.</li><li><strong>الخطأ #DIV/0!</strong>: يحدث إذا وضعت سعة الحافلة أو العبوة في خلية وكانت فارغة أو صفرًا. استخدم <a href="/excel-ar/formulas/iferror/">IFERROR</a> أو تحقق من الخلية قبل القسمة.</li><li><strong>نتيجة أكبر بواحد بلا سبب ظاهر</strong>: قد يكون في الرقم كسر صغير جدًا ناتج عن عمليات حسابية سابقة، مثل 3.0000001 فيصبح 4. قرّب الناتج أولًا بالدالة <a href="/excel-ar/formulas/round/">ROUND</a> ثم طبّق ROUNDUP.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>ROUNDUP متاحة في جميع إصدارات Excel وفي Google Sheets.</li><li>للتقريب للأعلى إلى مضاعف معين مثل 5 أو 25 استخدم CEILING.MATH.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=ROUNDUP(A2/12,0)</code></pre>
 <p>النتيجة: عدد الكراتين اللازمة لكل 12 قطعة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=ROUNDUP(A2/12;0)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/month/" title="شرح دالة MONTH في Excel بالعربي">MONTH</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/round/" title="شرح دالة ROUND في Excel بالعربي">ROUND</a></li><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

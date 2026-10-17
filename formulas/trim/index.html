@@ -6,10 +6,11 @@
 <title>شرح دالة TRIM في Excel بالعربي</title>
 <meta name="description" content="شرح دالة TRIM في Excel: تحذف المسافات الزائدة في بداية النص ونهايته، وتترك مسافة واحدة بين الكلمات. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="TRIM، دالة TRIM، شرح TRIM، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/trim/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة TRIM في Excel بالعربي">
 <meta property="og:description" content="شرح دالة TRIM في Excel: تحذف المسافات الزائدة في بداية النص ونهايته، وتترك مسافة واحدة بين الكلمات. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/trim/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,13 +29,35 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=TRIM(text)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">text</code>: النص أو الخلية التي تريد حذف المسافات الزائدة منها. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم TRIM</h2>
+<p>المسافات الزائدة من أكثر أسباب فشل الصيغ شيوعاً، لأنها لا ترى بالعين. اسم موظف مكتوب بمسافة في آخره لا يطابق الاسم نفسه دونها، فتعيد <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a> أو <a href="/excel-ar/formulas/xlookup/">XLOOKUP</a> الخطأ #N/A، وتعد <a href="/excel-ar/formulas/countif/">COUNTIF</a> الاسمين قيمتين مختلفتين، وتظهر المدينة الواحدة مرتين في الجدول المحوري. تحدث هذه المسافات عادة عند نسخ البيانات من نظام آخر أو من ملف PDF أو عند الإدخال اليدوي السريع. الدالة TRIM تنظف النص قبل أن تعتمد عليه.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li>تحذف كل المسافات قبل أول كلمة وبعد آخر كلمة.</li><li>إذا كان بين كلمتين أكثر من مسافة أبقت مسافة واحدة فقط.</li><li>لا تغير الحروف نفسها، ولا تحذف المسافة الواحدة الطبيعية بين الكلمات.</li><li>النتيجة نص، حتى لو كانت الخلية الأصلية رقماً.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>قائمة أسماء موظفين مستوردة من نظام الحضور، فيها مسافات زائدة في مواضع مختلفة. لأن المسافات لا تظهر في الجدول، نعرض عدد الحروف بالدالة <a href="/excel-ar/formulas/len/">LEN</a> قبل التنظيف وبعده:</p>
+<div class="table-wrap"><table><thead><tr><th>الاسم في العمود A</th><th>موضع المسافات الزائدة</th><th>LEN قبل</th><th>LEN بعد TRIM</th></tr></thead><tbody><tr><td>أحمد جاسم</td><td>مسافتان في البداية ومسافتان إضافيتان في الوسط ومسافة في النهاية</td><td>14</td><td>9</td></tr><tr><td>زينب علي</td><td>مسافتان في النهاية</td><td>10</td><td>8</td></tr><tr><td>مصطفى كامل</td><td>مسافة في البداية</td><td>11</td><td>10</td></tr></tbody></table></div>
+<p>الصيغة في الخلية B2:</p>
+<pre dir="ltr"><code>=TRIM(A2)</code></pre>
+<p>النتيجة: أحمد جاسم، بطول 9 أحرف: أربعة أحرف لكل اسم ومسافة واحدة بينهما.</p>
+<p>ولمعرفة عدد المسافات المحذوفة في كل خلية:</p>
+<pre dir="ltr"><code>=LEN(A2)-LEN(TRIM(A2))</code></pre>
+<p>وتعيد 5 للصف الأول، و 2 للثاني، و 1 للثالث.</p>
+<h3>استخدامها داخل البحث</h3>
+<p>إذا كان الاسم الذي تبحث عنه في E2 قد يحتوي مسافات زائدة، وكان جدول الرواتب في ورقة أخرى أسماؤه في العمود H ورواتبه في العمود I، فنظف الاسم داخل الصيغة:</p>
+<pre dir="ltr"><code>=XLOOKUP(TRIM(E2),H2:H50,I2:I50)</code></pre>
+<p>الدالة XLOOKUP متاحة في Excel 365 و 2021، وفي النسخ الأقدم تعمل الفكرة نفسها مع VLOOKUP: <code dir="ltr">=VLOOKUP(TRIM(E2),H2:I50,2,FALSE)</code>.</p>
+<p>أما إذا كانت المسافات في جدول البحث نفسه فنظف عمود الجدول أولاً، ثم انسخه والصقه كقيم مكان الأصل.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>ما زالت هناك مسافة بعد TRIM</strong>: الأرجح أنها المسافة غير القابلة للكسر CHAR(160) التي تأتي مع النصوص المنسوخة من الويب، وTRIM لا تحذفها. استبدلها أولاً: <code dir="ltr">=TRIM(SUBSTITUTE(A2,CHAR(160),&quot; &quot;))</code>.</li><li><strong>أسطر جديدة داخل الخلية</strong>: TRIM لا تحذف فواصل الأسطر. أضف CLEAN: <code dir="ltr">=TRIM(CLEAN(A2))</code>.</li><li><strong>رقم لا يجمع بعد التنظيف</strong>: TRIM تعيد نصاً. حوله إلى رقم: <code dir="ltr">=VALUE(TRIM(A2))</code>.</li><li><strong>الخطأ #N/A في البحث رغم التنظيف</strong>: قد يكون الفرق في حرف لا في مسافة، مثل الألف بهمزة ودونها في أحمد واحمد. قارن القيمتين بالدالة EXACT لتتأكد من تطابقهما حرفاً بحرف.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>في Excel 365 و 2021 يمكن تنظيف عمود كامل بصيغة واحدة تمتد تلقائياً: <code dir="ltr">=TRIM(A2:A500)</code>.</li><li>اجمع التنظيف كاملاً في صيغة واحدة عند استيراد البيانات: <code dir="ltr">=TRIM(CLEAN(SUBSTITUTE(A2,CHAR(160),&quot; &quot;)))</code>.</li><li>في الإعدادات الإقليمية العربية تفصل الوسائط بالفاصلة المنقوطة: <code dir="ltr">=TRIM(SUBSTITUTE(A2;CHAR(160);&quot; &quot;))</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=TRIM(A2)</code></pre>
 <p>النتيجة: تنظيف الأسماء المنسوخة من نظام آخر</p>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/countblank/" title="شرح دالة COUNTBLANK في Excel بالعربي">COUNTBLANK</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/countifs/" title="شرح دالة COUNTIFS في Excel بالعربي">COUNTIFS</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/xlookup/" title="شرح دالة XLOOKUP في Excel بالعربي">XLOOKUP</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/len/" title="شرح دالة LEN في Excel بالعربي">LEN</a></li><li><a href="/excel-ar/formulas/substitute/" title="شرح دالة SUBSTITUTE في Excel بالعربي">SUBSTITUTE</a></li><li><a href="/excel-ar/formulas/concat/" title="شرح دالة CONCAT في Excel بالعربي">CONCAT</a></li><li><a href="/excel-ar/formulas/count/" title="شرح دالة COUNT في Excel بالعربي">COUNT</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

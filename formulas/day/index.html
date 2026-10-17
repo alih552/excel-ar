@@ -6,10 +6,11 @@
 <title>شرح دالة DAY في Excel بالعربي</title>
 <meta name="description" content="شرح دالة DAY في Excel: تعيد رقم اليوم في الشهر (من 1 إلى 31) من تاريخ. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="DAY، دالة DAY، شرح DAY، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/day/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة DAY في Excel بالعربي">
 <meta property="og:description" content="شرح دالة DAY في Excel: تعيد رقم اليوم في الشهر (من 1 إلى 31) من تاريخ. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/day/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,40 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=DAY(serial_number)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">serial_number</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">serial_number</code>: التاريخ الذي تريد استخراج رقم اليوم منه، ويكون عادةً مرجع خلية فيها تاريخ أو نتيجة دالة تعيد تاريخاً. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم DAY</h2>
+<p>تحتاج دالة DAY كلما أردت التعامل مع رقم اليوم وحده بعيداً عن الشهر والسنة. من أشهر استخداماتها في العمل المكتبي:</p>
+<ul><li>حساب الأيام التي عملها موظف جديد في شهر مباشرته، لاحتساب راتب جزئي.</li><li>تقسيم الفواتير أو الحضور إلى النصف الأول والنصف الثاني من الشهر.</li><li>معرفة عدد أيام أي شهر عند دمجها مع <a href="/excel-ar/formulas/eomonth/">EOMONTH</a>.</li><li>التحقق من أن موعد الدفع يقع قبل يوم معيّن في الشهر.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>يحفظ Excel كل تاريخ رقماً تسلسلياً، وتقرأ DAY هذا الرقم وتعيد منه رقم اليوم وحده، وهو عدد صحيح بين 1 و31. الوسيط الوحيد يمكن أن يكون مرجع خلية فيها تاريخ، أو نتيجة دالة أخرى تعيد تاريخاً مثل <a href="/excel-ar/formulas/today/">TODAY</a> أو EOMONTH، أو تاريخاً مكتوباً بين علامتي تنصيص يفهمه Excel.</p>
+<p>النتيجة رقم عادي وليست تاريخاً، لذلك إذا ظهرت لك بشكل غريب مثل تاريخ في سنة 1900 فالسبب أن الخلية منسّقة كتاريخ؛ غيّر تنسيقها إلى «عام».</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>قسم الموارد البشرية يريد احتساب عدد أيام العمل الفعلية في شهر المباشرة لكل موظف جديد، مع احتساب يوم المباشرة نفسه:</p>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>تاريخ المباشرة (B)</th><th>يوم المباشرة (C)</th><th>أيام العمل في الشهر (D)</th></tr></thead><tbody><tr><td>سارة</td><td>2026-03-07</td><td>7</td><td>25</td></tr><tr><td>حسن</td><td>2026-03-18</td><td>18</td><td>14</td></tr><tr><td>ليلى</td><td>2026-04-01</td><td>1</td><td>30</td></tr><tr><td>كريم</td><td>2026-04-29</td><td>29</td><td>2</td></tr></tbody></table></div>
+<p>في الخلية C2 اكتب:</p>
+<pre dir="ltr"><code>=DAY(B2)</code></pre>
+<p>والنتيجة 7، لأن سارة باشرت في اليوم السابع من آذار (مارس). اسحب الصيغة إلى الأسفل لتحصل على 18 و1 و29.</p>
+<p>وفي الخلية D2 اكتب:</p>
+<pre dir="ltr"><code>=DAY(EOMONTH(B2,0))-DAY(B2)+1</code></pre>
+<p>الجزء <code dir="ltr">DAY(EOMONTH(B2,0))</code> يعيد عدد أيام الشهر (31 لشهر آذار)، لأن EOMONTH مع الصفر تعيد آخر يوم في شهر التاريخ نفسه، ثم نطرح يوم المباشرة ونضيف واحداً لأن يوم المباشرة يُحسب. النتيجة لسارة 31 ناقص 7 زائد 1 أي 25 يوماً، ولكريم في نيسان (أبريل) 30 ناقص 29 زائد 1 أي يومان فقط.</p>
+<p>ولتصنيف تاريخ ضمن نصف الشهر:</p>
+<pre dir="ltr"><code>=IF(DAY(B2)&lt;=15,&quot;النصف الأول&quot;,&quot;النصف الثاني&quot;)</code></pre>
+<p>تعيد «النصف الأول» لسارة و«النصف الثاني» لحسن.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر عندما تكون الخلية نصاً لا يفهمه Excel كتاريخ، مثل تاريخ منسوخ من نظام آخر بصيغة غير مألوفة. حوّل العمود إلى تاريخ حقيقي عبر «نص إلى أعمدة» أو الدالة DATEVALUE.</li><li><strong>نتيجة غير متوقعة من تاريخ نصي</strong>: التاريخ 03/07/2026 قد يُفهم السابع من مارس أو الثالث من يوليو بحسب الإعدادات الإقليمية. اكتب التواريخ بصيغة سنة-شهر-يوم أو استخدم الدالة <a href="/excel-ar/formulas/date/">DATE</a> لتجنّب الالتباس.</li><li><strong>خلية فارغة تعيد 0</strong>: الخلية الفارغة تُعامل كالرقم صفر، فتعيد DAY القيمة 0 بدل أن تبقى النتيجة فارغة. أضف شرطاً مثل <code dir="ltr">=IF(B2=&quot;&quot;,&quot;&quot;,DAY(B2))</code>.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>DAY متوفرة في جميع إصدارات Excel، ومعها أختاها <a href="/excel-ar/formulas/month/">MONTH</a> و<a href="/excel-ar/formulas/year/">YEAR</a> لاستخراج الشهر والسنة.</li><li>لمعرفة عدد أيام الشهر الحالي استخدم <code dir="ltr">=DAY(EOMONTH(TODAY(),0))</code>.</li><li>إذا كانت إعداداتك الإقليمية تستخدم الفاصلة المنقوطة بين الوسائط فاكتب الصيغة المركّبة هكذا: <code dir="ltr">=DAY(EOMONTH(B2;0))-DAY(B2)+1</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تعيد DAY اسم اليوم مثل الأحد أو الاثنين؟</h3>
+<p>لا، فهي تعيد رقم اليوم في الشهر فقط. لاسم اليوم استخدم <code dir="ltr">=TEXT(B2,&quot;dddd&quot;)</code> أو رقمه في الأسبوع عبر <a href="/excel-ar/formulas/weekday/">WEEKDAY</a>.</p>
+<h3>هل تعمل DAY مع التاريخ والوقت معاً؟</h3>
+<p>نعم، تتجاهل الجزء الخاص بالوقت وتعيد رقم اليوم من التاريخ.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=DAY(A2)</code></pre>
 <p>النتيجة: يوم الاستحقاق</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/eomonth/" title="شرح دالة EOMONTH في Excel بالعربي">EOMONTH</a></li><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li><li><a href="/excel-ar/formulas/date/" title="شرح دالة DATE في Excel بالعربي">DATE</a></li><li><a href="/excel-ar/formulas/month/" title="شرح دالة MONTH في Excel بالعربي">MONTH</a></li><li><a href="/excel-ar/formulas/year/" title="شرح دالة YEAR في Excel بالعربي">YEAR</a></li><li><a href="/excel-ar/formulas/weekday/" title="شرح دالة WEEKDAY في Excel بالعربي">WEEKDAY</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

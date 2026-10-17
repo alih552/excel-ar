@@ -2,9 +2,73 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://alih552.github.io/excel-ar/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/abs/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/and/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/average/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/averageif/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/choose/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/choosecols/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/concat/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/count/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/counta/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/countblank/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/countif/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/countifs/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/date/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/datedif/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/day/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/edate/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/eomonth/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/filter/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/find/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/hlookup/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/if/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/iferror/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/ifs/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/index/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/int/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/large/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/left/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/len/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/let/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/lower/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/match/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/max/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/mid/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/min/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/mod/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/month/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/networkdays/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/networkdays-intl/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/now/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/or/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/pmt/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/proper/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/rank-eq/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/right/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/round/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/rounddown/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/roundup/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/search/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/small/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/sort/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/substitute/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/sum/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/sumif/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/sumifs/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/sumproduct/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/take/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/text/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/textjoin/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/textsplit/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/today/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/trim/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/unique/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/upper/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/vlookup/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/weekday/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/workday-intl/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/xlookup/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/xmatch/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/year/</loc><lastmod>2026-10-17</lastmod></url>
 </urlset>

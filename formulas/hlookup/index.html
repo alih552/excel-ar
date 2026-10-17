@@ -6,10 +6,11 @@
 <title>شرح دالة HLOOKUP في Excel بالعربي</title>
 <meta name="description" content="شرح دالة HLOOKUP في Excel: مثل VLOOKUP لكنها تبحث في الصف الأول من الجدول وتعيد قيمة من صف تحدده. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="HLOOKUP، دالة HLOOKUP، شرح HLOOKUP، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/hlookup/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة HLOOKUP في Excel بالعربي">
 <meta property="og:description" content="شرح دالة HLOOKUP في Excel: مثل VLOOKUP لكنها تبحث في الصف الأول من الجدول وتعيد قيمة من صف تحدده. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/hlookup/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,46 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=HLOOKUP(lookup_value, table_array, row_index_num, [range_lookup])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">lookup_value</code>: مطلوب</li><li><code dir="ltr">table_array</code>: مطلوب</li><li><code dir="ltr">row_index_num</code>: مطلوب</li><li><code dir="ltr">range_lookup</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">lookup_value</code>: القيمة التي تبحث عنها في الصف الأول من الجدول، مثل اسم فرع أو شهر. (مطلوب)</li><li><code dir="ltr">table_array</code>: نطاق الجدول الأفقي الذي يحتوي صف العناوين في أعلاه والبيانات تحته. (مطلوب)</li><li><code dir="ltr">row_index_num</code>: رقم الصف داخل النطاق الذي تريد القيمة منه، ويُعدّ من أعلى النطاق فالصف الأول منه رقمه 1. (مطلوب)</li><li><code dir="ltr">range_lookup</code>: اكتب FALSE للمطابقة التامة، أو TRUE أو احذفه للمطابقة التقريبية مع صف أول مرتب تصاعدياً. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم HLOOKUP</h2>
+<p>تناسب HLOOKUP الجداول الأفقية التي تكون فيها العناوين في الصف الأول والبيانات تحتها، مثل تقارير الفروع أو الأشهر الموزعة على الأعمدة. من الأمثلة:</p>
+<ul><li>جلب مبيعات فرع معيّن في ربع محدد من تقرير ربعي.</li><li>إيجاد نسبة العمولة من جدول شرائح مكتوب أفقياً.</li><li>قراءة قيمة من جدول جاهز لا تريد إعادة ترتيبه عمودياً.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>البحث يجري في الصف الأول فقط من table_array، ورقم الصف row_index_num يُعدّ من أعلى النطاق لا من أعلى الورقة: الصف الأول من النطاق رقمه 1 مهما كان موقعه في الورقة.</p>
+<ul><li>اكتب FALSE في range_lookup للمطابقة التامة، وهو الخيار الصحيح عند البحث عن أسماء.</li><li>اكتب TRUE أو احذف الوسيط للمطابقة التقريبية، وتحتاج حينها إلى أن يكون الصف الأول مرتباً تصاعدياً.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>تقرير بعدد الوحدات المبيعة لكل فرع في كل ربع، في النطاق A1:E4:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>B</th><th>C</th><th>D</th><th>E</th></tr></thead><tbody><tr><td>الفرع</td><td>بغداد</td><td>البصرة</td><td>أربيل</td><td>النجف</td></tr><tr><td>الربع الأول</td><td>820</td><td>640</td><td>510</td><td>390</td></tr><tr><td>الربع الثاني</td><td>910</td><td>700</td><td>560</td><td>430</td></tr><tr><td>الربع الثالث</td><td>870</td><td>720</td><td>600</td><td>450</td></tr></tbody></table></div>
+<p>المطلوب: مبيعات أربيل في الربع الثاني. اكتب:</p>
+<pre dir="ltr"><code>=HLOOKUP(&quot;أربيل&quot;,B1:E4,3,FALSE)</code></pre>
+<p>النتيجة 560. وجدت الدالة «أربيل» في العمود D من الصف الأول، ثم نزلت إلى الصف الثالث من النطاق، وهو صف الربع الثاني.</p>
+<p>ولجعل التقرير تفاعلياً ضع اسم الفرع في الخلية H1 ورقم الصف في H2:</p>
+<pre dir="ltr"><code>=HLOOKUP(H1,B1:E4,H2,FALSE)</code></pre>
+<p>إذا كتبت في H1 «النجف» وفي H2 الرقم 4 تحصل على 450.</p>
+<h2 id="s-4">المطابقة التقريبية لشرائح العمولة</h2>
+<p>جدول شرائح في النطاق B7:E8، الصف الأول فيه الحد الأدنى للمبيعات مرتباً تصاعدياً:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>B</th><th>C</th><th>D</th><th>E</th></tr></thead><tbody><tr><td>الحد الأدنى</td><td>0</td><td>1000000</td><td>3000000</td><td>5000000</td></tr><tr><td>نسبة العمولة</td><td>1%</td><td>2%</td><td>3.5%</td><td>5%</td></tr></tbody></table></div>
+<p>لمندوب مبيعاته 3600000:</p>
+<pre dir="ltr"><code>=HLOOKUP(3600000,B7:E8,2,TRUE)</code></pre>
+<p>تعيد 3.5%، لأن الدالة تأخذ أكبر حد لا يتجاوز قيمة البحث، وهو 3000000.</p>
+<h2 id="s-5">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #N/A</strong>: القيمة غير موجودة في الصف الأول، أو كانت في المطابقة التقريبية أصغر من أول قيمة في الصف. تحقق من الإملاء ومن المسافات الزائدة، ومن الفرق بين الهمزات مثل «اربيل» و«أربيل».</li><li><strong>الخطأ #REF!</strong>: رقم الصف أكبر من عدد صفوف النطاق، مثل طلب الصف 5 من B1:E4.</li><li><strong>الخطأ #VALUE!</strong>: رقم الصف أقل من 1.</li><li><strong>نتيجة خاطئة دون أي رسالة</strong>: نسيت كتابة FALSE فبحثت الدالة تقريبياً في صف غير مرتب. اكتب FALSE دائماً عند البحث عن نصوص.</li><li><strong>تغيّر النتيجة عند نسخ الصيغة</strong>: ثبّت النطاق بعلامة الدولار في المراجع، فيصبح <code dir="ltr">$B$1:$E$4</code> بعد الضغط على F4.</li></ul>
+<h2 id="s-6">نصائح</h2>
+<ul><li>HLOOKUP متوفرة في جميع إصدارات Excel.</li><li>في Excel 365 وExcel 2021 وما بعدهما تغني <a href="/excel-ar/formulas/xlookup/">XLOOKUP</a> عنها، فهي تبحث أفقياً وعمودياً ولا تحتاج إلى رقم صف.</li><li>إذا تغيّر ترتيب الصفوف كثيراً فاحسب رقم الصف بالدالة <a href="/excel-ar/formulas/match/">MATCH</a> بدلاً من كتابته ثابتاً: <code dir="ltr">=HLOOKUP(&quot;أربيل&quot;,B1:E4,MATCH(&quot;الربع الثاني&quot;,A1:A4,0),FALSE)</code> تعيد 560 أيضاً.</li><li>مع الإعدادات الإقليمية التي تستخدم الفاصلة المنقوطة تصبح الصيغة <code dir="ltr">=HLOOKUP(H1;B1:E4;H2;FALSE)</code>.</li></ul>
+<h2 id="s-7">أسئلة شائعة</h2>
+<h3>هل تستطيع HLOOKUP إعادة قيمة من صف أعلى من صف البحث؟</h3>
+<p>لا، فهي تبحث في الصف الأول من النطاق وتعيد من الصفوف التي تحته فقط. إذا كان صف البحث في الوسط فاستخدم <a href="/excel-ar/formulas/index/">INDEX</a> مع MATCH أو XLOOKUP.</p>
+<h3>هل تفرّق HLOOKUP بين الحروف الكبيرة والصغيرة؟</h3>
+<p>لا، فهي تعامل Sales وsales كقيمة واحدة.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=HLOOKUP(&quot;آذار&quot;,B1:M3,2,FALSE)</code></pre>
 <p>النتيجة: مبيعات شهر آذار</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=HLOOKUP(&quot;آذار&quot;;B1:M3;2;FALSE)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/xlookup/" title="شرح دالة XLOOKUP في Excel بالعربي">XLOOKUP</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

@@ -6,10 +6,11 @@
 <title>شرح دالة NOW في Excel بالعربي</title>
 <meta name="description" content="شرح دالة NOW في Excel: تعيد التاريخ والوقت الحاليين وتتحدث مع كل إعادة حساب. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="NOW، دالة NOW، شرح NOW، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/now/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة NOW في Excel بالعربي">
 <meta property="og:description" content="شرح دالة NOW في Excel: تعيد التاريخ والوقت الحاليين وتتحدث مع كل إعادة حساب. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/now/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -27,9 +28,30 @@
 <p class="lead">تعيد التاريخ والوقت الحاليين وتتحدث مع كل إعادة حساب.</p>
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=NOW()</code></pre>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم NOW</h2>
+<p>تعيد الدالة NOW التاريخ والوقت الحاليين معًا حسب ساعة الجهاز. تستخدمها عندما يهمك الوقت وليس التاريخ فقط، مثل:</p>
+<ul><li>حساب عدد الساعات المنقضية منذ فتح طلب دعم فني أو شكوى عميل.</li><li>معرفة المهام المتأخرة عن موعدها بالساعة والدقيقة.</li><li>إظهار وقت آخر تحديث لتقرير يومي عند فتحه أو طباعته.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>الدالة لا تأخذ أي معامل، وتكتب بقوسين فارغين. تعيد رقمًا تسلسليًا جزؤه الصحيح هو التاريخ وجزؤه العشري هو الوقت من اليوم؛ فمثلًا 0.5 تعني الساعة الثانية عشرة ظهرًا. لذلك يمكنك طرح وقتين للحصول على الفرق بالأيام، ثم ضربه في 24 للحصول على الساعات.</p>
+<p>NOW دالة متقلبة، أي أنها تعيد الحساب كلما تغيرت أي خلية في الملف أو عند فتحه أو الضغط على F9. لا تتحدث كل ثانية من تلقاء نفسها.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل طلبات الدعم الفني في قسم تقنية المعلومات، وتاريخ فتح الطلب في العمود B ووقته في العمود C:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: رقم الطلب</th><th>B: تاريخ الفتح</th><th>C: وقت الفتح</th></tr></thead><tbody><tr><td>2</td><td>501</td><td>2026-10-18</td><td>09:00</td></tr><tr><td>3</td><td>502</td><td>2026-10-18</td><td>11:15</td></tr><tr><td>4</td><td>503</td><td>2026-10-17</td><td>16:30</td></tr></tbody></table></div>
+<p>لحساب الساعات المنقضية اكتب في D2:</p>
+<pre dir="ltr"><code>=(NOW()-(B2+C2))*24</code></pre>
+<p>جمع B2 وC2 يعطي لحظة الفتح كاملة. إذا كانت ساعة الجهاز تشير إلى الساعة 14:30 من يوم 18 أكتوبر 2026، فالنتيجة <strong>5.5</strong> ساعات للطلب 501، و<strong>3.25</strong> ساعات للطلب 502، و<strong>22</strong> ساعة للطلب 503. نسّق العمود بتنسيق رقم عادي وليس تاريخًا.</p>
+<p>ولتمييز الطلبات التي تجاوزت يوم عمل كامل:</p>
+<pre dir="ltr"><code>=IF((NOW()-(B2+C2))*24&gt;8,&quot;متأخر&quot;,&quot;ضمن المهلة&quot;)</code></pre>
+<p>تعيد &quot;ضمن المهلة&quot; للطلبين الأولين و&quot;متأخر&quot; للطلب 503.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>القيمة تتغير ولا تريدها أن تتغير</strong>: إذا أردت تسجيل وقت ثابت لا يتبدل فلا تستخدم NOW، بل اضغط Ctrl+Shift+; لإدخال الوقت الحالي، وCtrl+; لإدخال التاريخ الحالي كقيم ثابتة.</li><li><strong>ظهور رقم عشري غريب</strong>: الخلية منسقة كرقم. اختر تنسيق تاريخ ووقت مخصصًا مثل yyyy-mm-dd hh:mm.</li><li><strong>نتيجة الطرح تظهر كتاريخ</strong>: غيّر تنسيق خلية الفرق إلى رقم أو إلى [h]:mm لعرض الساعات الكلية.</li><li><strong>بطء الملف</strong>: كل صيغة تعتمد على NOW تعاد مع كل تعديل، فكثرتها في ملف كبير تبطئ الحساب. ضع NOW في خلية واحدة وارجع إليها من باقي الصيغ، وقلل الصيغ التي تعتمد عليها قدر الإمكان.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>إذا احتجت التاريخ فقط فاستخدم <a href="/excel-ar/formulas/today/">TODAY</a>، فهي أوضح وتعيد قيمة دون وقت.</li><li>لاستخراج الوقت وحده: <code dir="ltr">=NOW()-TODAY()</code> أو <code dir="ltr">=MOD(NOW(),1)</code> مع تنسيق وقت.</li><li>لعرض وقت التحديث في عنوان التقرير: <code dir="ltr">=TEXT(NOW(),&quot;yyyy-mm-dd hh:mm&quot;)</code>.</li><li>في إعدادات المنطقة العربية بالفاصلة المنقوطة: <code dir="ltr">=TEXT(NOW();&quot;hh:mm&quot;)</code>.</li><li>الدالة متاحة في جميع إصدارات Excel، والوقت يؤخذ من إعدادات الجهاز لا من الإنترنت.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=NOW()</code></pre>
 <p>النتيجة: وقت آخر تحديث للتقرير</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

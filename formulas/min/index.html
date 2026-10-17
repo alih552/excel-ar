@@ -6,10 +6,11 @@
 <title>شرح دالة MIN في Excel بالعربي</title>
 <meta name="description" content="شرح دالة MIN في Excel: تعيد أصغر رقم في النطاق. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="MIN، دالة MIN، شرح MIN، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/min/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة MIN في Excel بالعربي">
 <meta property="og:description" content="شرح دالة MIN في Excel: تعيد أصغر رقم في النطاق. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/min/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,38 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=MIN(number1, [number2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">number1</code>: مطلوب</li><li><code dir="ltr">number2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">number1</code>: الرقم أو الخلية أو النطاق الأول الذي تبحث فيه عن أصغر قيمة. (مطلوب)</li><li><code dir="ltr">number2</code>: أرقام أو نطاقات إضافية اختيارية تدخل في المقارنة، حتى 255 وسيطاً. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم MIN</h2>
+<p>تعيد MIN أصغر رقم في مجموعة قيم، وتفيد في مواقف عملية كثيرة: اختيار أقل عرض بين عروض الموردين، ومعرفة الصنف الأقل كمية في المخزن، وأقصر مدة إنجاز لطلب، وأقدم تاريخ في سجل. وتُستخدم كذلك لوضع سقف أعلى لنتيجة حسابية، مثل ألا تتجاوز ساعات العمل الإضافي حداً معيناً.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تقبل الدالة أرقاماً وخلايا ونطاقات، حتى 255 وسيطاً، وتعيد أصغرها.</p>
+<ul><li>الخلايا الفارغة والنصوص والقيم المنطقية داخل النطاق تُتجاهل.</li><li>الخلية التي تحتوي على صفر تدخل في الحساب، وهذا أهم فرق يجب الانتباه له.</li><li>إذا لم يكن في النطاق أي رقم تعيد الدالة 0.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>عروض خمسة موردين لتوريد الكمية نفسها من مواد التنظيف، أحدهم لم يرسل عرضه بعد:</p>
+<div class="table-wrap"><table><thead><tr><th>الصف</th><th>A: المورد</th><th>B: قيمة العرض</th></tr></thead><tbody><tr><td>2</td><td>مورد الشمال</td><td>18500</td></tr><tr><td>3</td><td>مورد الجنوب</td><td>17250</td></tr><tr><td>4</td><td>مورد الوسط</td><td>(فارغة)</td></tr><tr><td>5</td><td>مورد الساحل</td><td>19800</td></tr><tr><td>6</td><td>مورد الشرق</td><td>17900</td></tr></tbody></table></div>
+<p>الصيغة:</p>
+<pre dir="ltr"><code>=MIN(B2:B6)</code></pre>
+<p>تعيد <strong>17250</strong>، وهو عرض مورد الجنوب. تجاهلت الدالة الخلية الفارغة B4 ولم تعتبرها صفراً.</p>
+<p>لمعرفة اسم المورد صاحب أقل عرض:</p>
+<pre dir="ltr"><code>=INDEX(A2:A6,MATCH(MIN(B2:B6),B2:B6,0))</code></pre>
+<p>وتعيد &quot;مورد الجنوب&quot;.</p>
+<h3>استخدام MIN كسقف أعلى</h3>
+<p>إذا كانت سياسة الشركة ألا تُحتسب أكثر من 40 ساعة إضافية في الشهر، والساعات الفعلية في الخلية D2، فاكتب:</p>
+<pre dir="ltr"><code>=MIN(D2,40)</code></pre>
+<p>إذا كانت الساعات 46 تعيد الصيغة 40، وإذا كانت 31 تعيد 31 كما هي.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>النتيجة 0 بشكل غير متوقع</strong>: لو كتب أحدهم صفراً في B4 بدل تركها فارغة، ستعيد MIN صفراً. الحل استخدام <code dir="ltr">=MINIFS(B2:B6,B2:B6,&quot;&gt;0&quot;)</code> التي تتجاهل الأصفار وتعيد 17250.</li><li><strong>الأرقام المخزنة كنص</strong>: تتجاهلها الدالة دون تنبيه، فقد تحصل على نتيجة أكبر من المتوقع. تأكد من أن العمود منسق كأرقام.</li><li><strong>خطأ داخل النطاق</strong>: أي خلية فيها #N/A أو #VALUE! تجعل النتيجة خطأً. استخدم <code dir="ltr">=AGGREGATE(5,6,B2:B6)</code> لتجاهل الأخطاء، حيث 5 تعني الأصغر.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>MINIFS متاحة في Excel 2019 وExcel 2021 وExcel 365، وتسمح بشروط متعددة مثل أقل عرض لموردي مدينة محددة.</li><li>لثاني أصغر قيمة استخدم <a href="/excel-ar/formulas/small/">SMALL</a>، مثل <code dir="ltr">=SMALL(B2:B6,2)</code> التي تعيد 17900.</li><li>الجمع بين MIN و<a href="/excel-ar/formulas/max/">MAX</a> يحصر النتيجة بين حدين: <code dir="ltr">=MAX(0,MIN(D2,40))</code> تبقي القيمة بين صفر و40.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تعمل MIN مع التواريخ؟</h3>
+<p>نعم، لأن التواريخ أرقام تسلسلية في Excel، فتعيد MIN أقدم تاريخ في النطاق. نسّق خلية النتيجة كتاريخ حتى تظهر بشكل صحيح.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=MIN(C2:C40)</code></pre>
 <p>النتيجة: أدنى درجة في الصف</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/small/" title="شرح دالة SMALL في Excel بالعربي">SMALL</a></li><li><a href="/excel-ar/formulas/max/" title="شرح دالة MAX في Excel بالعربي">MAX</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

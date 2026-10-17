@@ -6,10 +6,11 @@
 <title>شرح دالة IFERROR في Excel بالعربي</title>
 <meta name="description" content="شرح دالة IFERROR في Excel: تعيد نتيجة الصيغة، أو قيمة بديلة تختارها إذا ظهر خطأ مثل #N/A أو #DIV/0!. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="IFERROR، دالة IFERROR، شرح IFERROR، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/iferror/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة IFERROR في Excel بالعربي">
 <meta property="og:description" content="شرح دالة IFERROR في Excel: تعيد نتيجة الصيغة، أو قيمة بديلة تختارها إذا ظهر خطأ مثل #N/A أو #DIV/0!. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/iferror/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,43 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=IFERROR(value, value_if_error)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">value</code>: مطلوب</li><li><code dir="ltr">value_if_error</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">value</code>: الصيغة أو القيمة التي يحسبها Excel أولاً ويتحقق هل نتيجتها خطأ. (مطلوب)</li><li><code dir="ltr">value_if_error</code>: القيمة التي تظهر بدل الخطأ، مثل 0 أو نص فارغ أو عبارة توضيحية. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم IFERROR</h2>
+<p>تظهر رسائل الخطأ في جداول العمل اليومية لأسباب متوقعة: قسمة على خانة فارغة أو صفر، أو بحث عن رمز غير مسجل، أو قيمة نصية في عمود أرقام. هذه الرسائل تشوّه التقارير، وتنتقل إلى كل صيغة تعتمد على الخلية فيظهر الخطأ نفسه في المجاميع والملخصات. الدالة IFERROR تلتقط أي خطأ من هذه الأخطاء وتضع مكانه قيمة تختارها: صفر، أو خانة فارغة، أو عبارة توضيحية.</p>
+<p>استخدمها عندما يكون الخطأ متوقعاً ومفهوم السبب، مثل فرع جديد لم يسجل فواتير بعد، أو موظف لم يُضف إلى جدول الرواتب حتى الآن.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>يحسب Excel الوسيط الأول أولاً. إذا كانت نتيجته سليمة أعادها كما هي، وإذا كانت خطأً من الأنواع التالية أعاد الوسيط الثاني بدلاً منها:</p>
+<ul><li><code dir="ltr">#DIV/0!</code> عند القسمة على صفر أو خلية فارغة.</li><li><code dir="ltr">#N/A</code> عندما لا تجد دوال البحث القيمة المطلوبة.</li><li><code dir="ltr">#VALUE!</code> عند استخدام نص في عملية حسابية.</li><li><code dir="ltr">#REF!</code> و <code dir="ltr">#NAME?</code> و <code dir="ltr">#NUM!</code> و <code dir="ltr">#NULL!</code>.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>جدول مبيعات شهرية لأربعة فروع، والمطلوب حساب متوسط قيمة الفاتورة في العمود D. فرع أربيل افتُتح حديثاً ولم يسجل أي فاتورة:</p>
+<div class="table-wrap"><table><thead><tr><th>الفرع</th><th>المبيعات</th><th>عدد الفواتير</th><th>متوسط الفاتورة</th></tr></thead><tbody><tr><td>بغداد</td><td>4500000</td><td>150</td><td>30000</td></tr><tr><td>البصرة</td><td>2400000</td><td>96</td><td>25000</td></tr><tr><td>أربيل</td><td>0</td><td>0</td><td>0</td></tr><tr><td>الموصل</td><td>1365000</td><td>42</td><td>32500</td></tr></tbody></table></div>
+<p>اكتب في الخلية D2 الصيغة التالية ثم اسحبها إلى D5:</p>
+<pre dir="ltr"><code>=IFERROR(B2/C2,0)</code></pre>
+<p>النتيجة: 30000 لبغداد لأن 4500000 مقسومة على 150 تساوي 30000، و 25000 للبصرة، و 32500 للموصل. أما أربيل فالقسمة فيها 0 على 0، وبدون IFERROR كانت الخلية ستعرض <code dir="ltr">#DIV/0!</code>، لكن الصيغة أعادت 0 بدلاً منها.</p>
+<p>إذا أردت أن تبقى الخلية فارغة بدل الصفر فاكتب <code dir="ltr">=IFERROR(B2/C2,&quot;&quot;)</code>.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<h3>إخفاء أخطاء حقيقية</h3>
+<p>الدالة تلتقط كل الأخطاء بلا تمييز، ومنها <code dir="ltr">#NAME?</code> الناتج عن خطأ إملائي في اسم دالة، أو <code dir="ltr">#REF!</code> بعد حذف عمود. إذا لففت صيغة فيها خطأ كتابة بـ IFERROR فستظهر القيمة البديلة دائماً ولن تنتبه للمشكلة. الحل: اكتب الصيغة وتأكد أنها تعمل أولاً، ثم أضف IFERROR في النهاية.</p>
+<h3>الصفر يغير المتوسط</h3>
+<p>إذا أعادت IFERROR الرقم 0 ثم حسبت متوسط العمود بـ <a href="/excel-ar/formulas/average/">AVERAGE</a> فسيدخل الصفر في الحساب وينخفض المتوسط. أما النص الفارغ &quot;&quot; فتتجاهله AVERAGE. اختر القيمة البديلة حسب ما ستفعله بالعمود لاحقاً.</p>
+<h3>البحث عن قيمة غير موجودة فقط</h3>
+<p>عندما يكون الخطأ الوحيد المتوقع هو عدم العثور على القيمة، استخدم IFNA بدلاً من IFERROR، فهي تلتقط <code dir="ltr">#N/A</code> فقط وتترك باقي الأخطاء ظاهرة لتنبهك.</p>
+<h2 id="s-5">نصائح</h2>
+<ul><li>الدالة متوفرة منذ Excel 2007، وتعمل في Excel 365 و 2021 و Excel للويب.</li><li>في Excel 365 و Excel 2021 يمكنك تطبيقها على نطاق كامل دفعة واحدة: <code dir="ltr">=IFERROR(B2:B5/C2:C5,0)</code> وتنسكب النتائج في أربع خلايا.</li><li>يمكن أن تكون القيمة البديلة صيغة أخرى، مثل البحث في جدول ثانٍ إذا فشل البحث في الأول.</li><li>في إعدادات Windows العربية قد تحتاج إلى الفاصلة المنقوطة: <code dir="ltr">=IFERROR(B2/C2;0)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تبطئ IFERROR الملف؟</h3>
+<p>في الجداول العادية لا يظهر فرق ملحوظ، لأن Excel يحسب الصيغة الأصلية مرة واحدة ثم يقرر ما يعرضه.</p>
+<h3>هل يمكن عرض رسالة نصية بدل الخطأ؟</h3>
+<p>نعم، اكتب النص بين علامتي تنصيص، مثل <code dir="ltr">=IFERROR(B2/C2,&quot;لا توجد فواتير&quot;)</code>.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=IFERROR(VLOOKUP(A2,F:G,2,FALSE),&quot;غير موجود&quot;)</code></pre>
 <p>النتيجة: رسالة بدل الخطأ</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=IFERROR(VLOOKUP(A2;F:G;2;FALSE);&quot;غير موجود&quot;)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/average/" title="شرح دالة AVERAGE في Excel بالعربي">AVERAGE</a></li><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li><li><a href="/excel-ar/formulas/concat/" title="شرح دالة CONCAT في Excel بالعربي">CONCAT</a></li><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

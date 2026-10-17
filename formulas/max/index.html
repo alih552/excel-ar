@@ -6,10 +6,11 @@
 <title>شرح دالة MAX في Excel بالعربي</title>
 <meta name="description" content="شرح دالة MAX في Excel: تعيد أكبر رقم في النطاق. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="MAX، دالة MAX، شرح MAX، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/max/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة MAX في Excel بالعربي">
 <meta property="og:description" content="شرح دالة MAX في Excel: تعيد أكبر رقم في النطاق. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/max/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,34 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=MAX(number1, [number2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">number1</code>: مطلوب</li><li><code dir="ltr">number2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">number1</code>: الرقم أو الخلية أو النطاق الأول الذي تبحث فيه عن أكبر قيمة. (مطلوب)</li><li><code dir="ltr">number2</code>: أرقام أو نطاقات إضافية اختيارية تدخل في المقارنة، حتى 255 وسيطاً. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم MAX</h2>
+<p>تستخدم MAX لمعرفة أكبر قيمة في مجموعة أرقام: أعلى مبيعات بين الفروع، أو أطول مدة تأخير في سجل الحضور، أو أعلى كمية صُرفت من المخزن، أو أحدث تاريخ في قائمة فواتير. فالتواريخ في Excel أرقام تسلسلية، لذلك تعيد MAX على عمود تواريخ آخر تاريخ فيه.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تقبل الدالة حتى 255 وسيطاً، وكل وسيط قد يكون رقماً أو خلية أو نطاقاً كاملاً، ثم تعيد أكبر رقم بينها جميعاً.</p>
+<ul><li>الخلايا الفارغة والنصوص والقيم المنطقية داخل النطاقات تُتجاهل.</li><li>القيم المنطقية والأرقام المكتوبة كنص مباشرة داخل الصيغة تُحسب، فالقيمة TRUE تُعامل كأنها 1.</li><li>إذا لم يحتوِ النطاق على أي رقم تعيد الدالة 0.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>مبيعات خمسة فروع خلال شهرين:</p>
+<div class="table-wrap"><table><thead><tr><th>الصف</th><th>A: الفرع</th><th>B: يناير</th><th>C: فبراير</th></tr></thead><tbody><tr><td>2</td><td>الرياض</td><td>182000</td><td>195500</td></tr><tr><td>3</td><td>القاهرة</td><td>143250</td><td>151000</td></tr><tr><td>4</td><td>عمّان</td><td>167800</td><td>158900</td></tr><tr><td>5</td><td>الدار البيضاء</td><td>121400</td><td>139600</td></tr><tr><td>6</td><td>بغداد</td><td>98750</td><td>110300</td></tr></tbody></table></div>
+<p>لمعرفة أعلى مبيعات في يناير:</p>
+<pre dir="ltr"><code>=MAX(B2:B6)</code></pre>
+<p>النتيجة <strong>182000</strong> وهي مبيعات فرع الرياض.</p>
+<p>ولمعرفة أعلى رقم شهري في الشهرين معاً:</p>
+<pre dir="ltr"><code>=MAX(B2:C6)</code></pre>
+<p>النتيجة <strong>195500</strong>، أي مبيعات الرياض في فبراير. وإذا كانت الأعمدة غير متجاورة فافصل النطاقات بفاصلة، مثل <code dir="ltr">=MAX(B2:B6,D2:D6)</code> لو أُضيف عمود مارس في D بعد عمود فاصل.</p>
+<p>لمعرفة اسم الفرع صاحب أعلى مبيعات في يناير، ادمج MAX مع <a href="/excel-ar/formulas/index/">INDEX</a> و<a href="/excel-ar/formulas/match/">MATCH</a>:</p>
+<pre dir="ltr"><code>=INDEX(A2:A6,MATCH(MAX(B2:B6),B2:B6,0))</code></pre>
+<p>وتعيد &quot;الرياض&quot;.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>النتيجة 0 رغم وجود أرقام</strong>: الأرقام مخزنة غالباً كنص، وتظهر عادة بمحاذاة النصوص لا الأرقام، مع مثلث أخضر صغير في زاوية الخلية. حوّلها إلى أرقام من خيار التحويل الذي يظهر بجانب الخلية، أو بضربها في 1.</li><li><strong>الخطأ #DIV/0! أو #N/A في النتيجة</strong>: يكفي وجود خلية خطأ واحدة في النطاق لتعيد MAX الخطأ نفسه. استخدم <code dir="ltr">=AGGREGATE(4,6,B2:B6)</code> لتجاهل الأخطاء، حيث 4 تعني الأكبر و6 تعني تجاهل الأخطاء.</li><li><strong>النتيجة لا تتغير بعد إضافة فرع جديد</strong>: النطاق في الصيغة ثابت. حوّل البيانات إلى جدول Excel حتى يتسع النطاق تلقائياً.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لأكبر قيمة بشرط، مثل أعلى مبيعات لفروع منطقة معينة، استخدم MAXIFS المتاحة في Excel 2019 وما بعدها وفي Excel 365.</li><li>لثاني أو ثالث أكبر قيمة استخدم <a href="/excel-ar/formulas/large/">LARGE</a>، مثل <code dir="ltr">=LARGE(B2:B6,2)</code> التي تعيد 167800 في المثال.</li><li>يمكن استخدام MAX لوضع حد أدنى لنتيجة، فالصيغة <code dir="ltr">=MAX(0,D2-E2)</code> تمنع ظهور نتيجة سالبة.</li><li>MAX متاحة في جميع إصدارات Excel، وAGGREGATE متاحة منذ Excel 2010.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=MAX(C2:C40)</code></pre>
 <p>النتيجة: أعلى درجة في الصف</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/large/" title="شرح دالة LARGE في Excel بالعربي">LARGE</a></li><li><a href="/excel-ar/formulas/min/" title="شرح دالة MIN في Excel بالعربي">MIN</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

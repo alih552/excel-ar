@@ -6,10 +6,11 @@
 <title>شرح دالة ROUNDDOWN في Excel بالعربي</title>
 <meta name="description" content="شرح دالة ROUNDDOWN في Excel: تقرّب الرقم دائماً إلى الأسفل. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="ROUNDDOWN، دالة ROUNDDOWN، شرح ROUNDDOWN، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/rounddown/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة ROUNDDOWN في Excel بالعربي">
 <meta property="og:description" content="شرح دالة ROUNDDOWN في Excel: تقرّب الرقم دائماً إلى الأسفل. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/rounddown/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,38 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=ROUNDDOWN(number, num_digits)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">number</code>: مطلوب</li><li><code dir="ltr">num_digits</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">number</code>: الرقم أو الصيغة التي تريد حذف الكسور الزائدة منها دون رفعها. (مطلوب)</li><li><code dir="ltr">num_digits</code>: عدد الخانات التي تبقى: موجب للخانات العشرية، وصفر لعدد صحيح، وسالب للعشرات والمئات. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم ROUNDDOWN</h2>
+<p>تقرّب ROUNDDOWN الرقم دائمًا نحو الصفر، أي تقطع الخانات الزائدة دون أن ترفع الرقم مهما كانت الخانة التالية كبيرة. تفيد عندما لا يصح احتساب ما لم يكتمل:</p>
+<ul><li>حساب عدد العبوات الكاملة التي يمكن تجهيزها من كمية في المخزن.</li><li>حساب سنوات الخدمة المكتملة للموظف دون احتساب السنة الجارية.</li><li>حساب عدد الحصص أو الوجبات الكاملة من كمية محدودة من المواد.</li><li>عرض نسب الإنجاز دون مبالغة، فالمشروع المنجز بنسبة 99.8 لا يظهر 100.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تحتفظ الدالة بعدد الخانات الذي تحدده وتحذف كل ما بعده. القيمة 0 تعني عددًا صحيحًا، والقيم الموجبة تعني خانات عشرية، والسالبة تعني التقريب إلى العشرات أو المئات أو الآلاف للأسفل.</p>
+<div class="table-wrap"><table><thead><tr><th>الصيغة</th><th>النتيجة</th></tr></thead><tbody><tr><td><code dir="ltr">=ROUNDDOWN(3.789,2)</code></td><td>3.78</td></tr><tr><td><code dir="ltr">=ROUNDDOWN(3.789,0)</code></td><td>3</td></tr><tr><td><code dir="ltr">=ROUNDDOWN(1789,-2)</code></td><td>1700</td></tr><tr><td><code dir="ltr">=ROUNDDOWN(-3.7,0)</code></td><td><code dir="ltr">-3</code></td></tr></tbody></table></div>
+<p>لاحظ السطر الأخير: الاتجاه نحو الصفر، لذلك يصبح <code dir="ltr">-3.7</code> هو <code dir="ltr">-3</code> وليس <code dir="ltr">-4</code>.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>مستودع قرطاسية يجهز كراتين تحتوي كل منها 12 قطعة، ويريد معرفة عدد الكراتين الكاملة الممكنة من كل صنف:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: الصنف</th><th>B: الكمية المتوفرة</th></tr></thead><tbody><tr><td>2</td><td>أقلام</td><td>250</td></tr><tr><td>3</td><td>دفاتر</td><td>96</td></tr><tr><td>4</td><td>مماحي</td><td>61</td></tr><tr><td>5</td><td>مساطر</td><td>143</td></tr></tbody></table></div>
+<p>اكتب في C2:</p>
+<pre dir="ltr"><code>=ROUNDDOWN(B2/12,0)</code></pre>
+<p>حاصل القسمة 20.83، والنتيجة <strong>20</strong> كرتونة كاملة للأقلام. وفي الصفوف التالية: الدفاتر 8 تمامًا، والمماحي 5، والمساطر 11.</p>
+<p>ولمعرفة القطع المتبقية خارج الكراتين اكتب في D2 الصيغة <code dir="ltr">=B2-C2*12</code> فتحصل على <strong>10</strong> أقلام متبقية.</p>
+<h3>سنوات الخدمة المكتملة</h3>
+<p>إذا كان تاريخ التعيين في B2 فالصيغة التالية تعيد السنوات الكاملة حتى اليوم:</p>
+<pre dir="ltr"><code>=ROUNDDOWN(YEARFRAC(B2,TODAY(),1),0)</code></pre>
+<p>فالموظف الذي أمضى أربع سنوات وعشرة أشهر يظهر له 4. الوسيط 1 في YEARFRAC يجعلها تحسب بالأيام الفعلية بدل نظام 30/360 الافتراضي. وقد تختلف النتيجة بيوم واحد قرب ذكرى التعيين، فإذا احتجت دقة تامة فاستخدم <code dir="ltr">=DATEDIF(B2,TODAY(),&quot;Y&quot;)</code> التي تعيد السنوات المكتملة مباشرة، مع أنها غير موثقة في قائمة دوال Excel.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر عندما تكون الكمية نصًا، مثل رقم مكتوب بجانبه وحدة داخل الخلية نفسها. ضع الوحدة في عمود منفصل.</li><li><strong>الخلط مع <a href="/excel-ar/formulas/int/">INT</a></strong>: الدالة INT تقرّب نحو الأسفل على خط الأعداد، فتعطي <code dir="ltr">-4</code> للرقم <code dir="ltr">-3.7</code>، بينما ROUNDDOWN تعطي <code dir="ltr">-3</code>. مع الأرقام الموجبة النتيجتان متطابقتان.</li><li><strong>نتيجة صفر غير متوقعة</strong>: تحدث عند استخدام رقم سالب كبير في num_digits مع رقم صغير، مثل <code dir="ltr">=ROUNDDOWN(85,-2)</code> التي تعيد 0.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>ROUNDDOWN متاحة في جميع إصدارات Excel، وتعطي النتيجة نفسها التي تعطيها TRUNC، والفرق أن TRUNC تسمح بحذف الوسيط الثاني فتعتبره صفرًا.</li><li>للتقريب للأسفل إلى مضاعف معين مثل 5 أو 50 استخدم FLOOR.MATH.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=ROUNDDOWN(B2,1)</code></pre>
 <p>النتيجة: حذف ما بعد المنزلة العشرية الأولى</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=ROUNDDOWN(B2;1)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li><li><a href="/excel-ar/formulas/int/" title="شرح دالة INT في Excel بالعربي">INT</a></li><li><a href="/excel-ar/formulas/round/" title="شرح دالة ROUND في Excel بالعربي">ROUND</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

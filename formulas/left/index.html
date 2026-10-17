@@ -6,10 +6,11 @@
 <title>شرح دالة LEFT في Excel بالعربي</title>
 <meta name="description" content="شرح دالة LEFT في Excel: تعيد عدداً من الحروف من بداية النص. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="LEFT، دالة LEFT، شرح LEFT، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/left/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة LEFT في Excel بالعربي">
 <meta property="og:description" content="شرح دالة LEFT في Excel: تعيد عدداً من الحروف من بداية النص. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/left/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,40 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=LEFT(text, [num_chars])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li><li><code dir="ltr">num_chars</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">text</code>: النص أو الخلية التي تريد اقتطاع حروف من بدايتها. (مطلوب)</li><li><code dir="ltr">num_chars</code>: عدد الحروف التي تأخذها من البداية، وإذا حذفته أخذت الدالة حرفاً واحداً. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم LEFT</h2>
+<p>كثير من البيانات في المكاتب تأتي مدمجة في خلية واحدة: الاسم الثلاثي كاملاً، أو رقم فاتورة يبدأ برمز الفرع، أو رمز مادة يبدأ بالفئة. الدالة LEFT تقتطع عدداً محدداً من الحروف من بداية النص، فتفصل الجزء الذي تحتاجه في عمود مستقل يمكنك فرزه وتصفيته وتلخيصه.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li>تبدأ الدالة من أول حرف في النص وتأخذ العدد الذي تحدده.</li><li>إذا حذفت الوسيط الثاني أخذت حرفاً واحداً فقط.</li><li>إذا كان العدد أكبر من طول النص أعادت النص كاملاً بلا خطأ.</li><li>المسافات وعلامات الترقيم والحركات العربية تحسب كل منها حرفاً.</li><li>النتيجة نص دائماً، حتى لو كانت أرقاماً.</li></ul>
+<p>مع أن العربية تكتب من اليمين، فإن بداية النص في Excel هي أول حرف كتبته، أي أقصى اليمين في الكلمة العربية. لذلك تعيد LEFT أول الكلمة العربية لا آخرها.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>قائمة أسماء موظفين ثلاثية أو ثنائية في العمود A، والمطلوب استخراج الاسم الأول في العمود B لاستخدامه في رسائل الترحيب. عدد حروف الاسم الأول يختلف من موظف لآخر، لذلك نبحث عن أول مسافة بالدالة <a href="/excel-ar/formulas/find/">FIND</a> ونأخذ ما قبلها:</p>
+<div class="table-wrap"><table><thead><tr><th>الاسم الكامل</th><th>الاسم الأول</th></tr></thead><tbody><tr><td>محمد كاظم جواد</td><td>محمد</td></tr><tr><td>فاطمة عبد الله</td><td>فاطمة</td></tr><tr><td>زينب حسين</td><td>زينب</td></tr><tr><td>مريم صالح الربيعي</td><td>مريم</td></tr></tbody></table></div>
+<p>الصيغة في الخلية B2:</p>
+<pre dir="ltr"><code>=LEFT(A2,FIND(&quot; &quot;,A2)-1)</code></pre>
+<p>النتيجة: محمد. تجد FIND المسافة في الموقع 5 لأن &quot;محمد&quot; أربعة حروف، فنطرح واحداً لنأخذ 4 حروف دون المسافة. وفي الخلية A3 تجد المسافة في الموقع 6 لأن &quot;فاطمة&quot; خمسة حروف، فتعيد الصيغة فاطمة.</p>
+<h3>استخراج رمز ثابت الطول</h3>
+<p>إذا كانت أرقام الفواتير مثل BGD-1045 و BSR-0388 تبدأ دائماً بثلاثة حروف للفرع فإن <code dir="ltr">=LEFT(A2,3)</code> تعيد BGD، ويمكنك بعدها حساب عدد فواتير كل فرع بالدالة <a href="/excel-ar/formulas/countif/">COUNTIF</a>.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<h3>الخطأ #VALUE!</h3>
+<ul><li>يظهر في المثال إذا كانت الخلية تحتوي اسماً واحداً بلا مسافة، لأن FIND لا تجد ما تبحث عنه. الحل: <code dir="ltr">=IFERROR(LEFT(A2,FIND(&quot; &quot;,A2)-1),A2)</code> لتعيد الاسم كما هو.</li><li>ويظهر أيضاً إذا كان عدد الحروف سالباً.</li></ul>
+<h3>الأسماء المركبة</h3>
+<p>اسم مثل &quot;عبد الرحمن&quot; فيه مسافة داخلية، فتعيد الصيغة كلمة &quot;عبد&quot; فقط. راجع هذه الحالات يدوياً، أو اكتب الأسماء المركبة بلا مسافة إذا كان ذلك معتمداً في مؤسستك.</p>
+<h3>مسافة في بداية الخلية</h3>
+<p>البيانات المنسوخة من أنظمة أخرى تحمل أحياناً مسافة في أولها، فتعيد الصيغة نتيجة فارغة. نظّف النص أولاً: <code dir="ltr">=LEFT(TRIM(A2),FIND(&quot; &quot;,TRIM(A2))-1)</code>.</p>
+<h3>الأرقام والتواريخ</h3>
+<p>نتيجة LEFT نص، فلا تجمعها <a href="/excel-ar/formulas/sum/">SUM</a> مباشرة. حوّلها إلى رقم بالدالة VALUE. وإذا طبقت LEFT على خلية تاريخ فستعمل على الرقم التسلسلي المخزن لا على التاريخ المعروض، فاستخدم <a href="/excel-ar/formulas/year/">YEAR</a> أو <a href="/excel-ar/formulas/text/">TEXT</a> بدلاً منها.</p>
+<h2 id="s-5">نصائح</h2>
+<ul><li>LEFT متوفرة في كل نسخ Excel.</li><li>الحركات مثل الفتحة والشدة تحسب حروفاً، فقد تقتطع LEFT من &quot;مُحمّد&quot; أقل مما تتوقع.</li><li>في Microsoft 365 و Excel 2024 تعطي الدالة TEXTBEFORE النتيجة نفسها بصيغة أبسط: <code dir="ltr">=TEXTBEFORE(A2,&quot; &quot;)</code>، لكنها تعيد <code dir="ltr">#N/A</code> إذا لم تجد مسافة. وهي غير موجودة في Excel 2021.</li><li>في إعدادات Windows العربية: <code dir="ltr">=LEFT(A2;FIND(&quot; &quot;;A2)-1)</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=LEFT(A2,3)</code></pre>
 <p>النتيجة: أول ثلاثة أحرف من الرمز</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=LEFT(A2;3)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/year/" title="شرح دالة YEAR في Excel بالعربي">YEAR</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

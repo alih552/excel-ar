@@ -6,10 +6,11 @@
 <title>شرح دالة LARGE في Excel بالعربي</title>
 <meta name="description" content="شرح دالة LARGE في Excel: تعيد القيمة رقم k من الأكبر، مثل ثاني أو ثالث أعلى قيمة. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="LARGE، دالة LARGE، شرح LARGE، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/large/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة LARGE في Excel بالعربي">
 <meta property="og:description" content="شرح دالة LARGE في Excel: تعيد القيمة رقم k من الأكبر، مثل ثاني أو ثالث أعلى قيمة. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/large/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,41 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=LARGE(array, k)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array</code>: مطلوب</li><li><code dir="ltr">k</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">array</code>: نطاق الأرقام الذي تبحث فيه، وتتجاهل الدالة ما فيه من نصوص وخلايا فارغة. (مطلوب)</li><li><code dir="ltr">k</code>: ترتيب القيمة المطلوبة من الأعلى: 1 لأعلى قيمة و 2 للثانية وهكذا. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم LARGE</h2>
+<p>الدالة <a href="/excel-ar/formulas/max/">MAX</a> تعطيك أعلى قيمة فقط، أما LARGE فتعطيك القيمة التي ترتيبها k من الأعلى: الأولى أو الثانية أو العاشرة. تستخدمها لإعداد قوائم أفضل ثلاثة مندوبين، وأعلى خمس درجات في الصف، وأكبر الفواتير في الشهر، وأعلى أيام المبيعات في الموسم.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li>تتعامل الدالة مع القيم الرقمية في النطاق كأنها مرتبة تنازلياً، دون أن تغير ترتيب الجدول، ثم تعيد القيمة في الموقع k.</li><li>عندما تكون k تساوي 1 فالنتيجة هي نفس نتيجة MAX.</li><li>الخلايا الفارغة والنصوص والقيم المنطقية داخل النطاق تتجاهلها الدالة.</li><li>القيم المكررة تحسب كل واحدة منها في موقع مستقل.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>جدول مبيعات ثمانية مندوبين خلال شهر، الأسماء في A2:A9 والمبيعات بالوحدات في B2:B9:</p>
+<div class="table-wrap"><table><thead><tr><th>المندوب</th><th>مبيعات الشهر</th></tr></thead><tbody><tr><td>علي</td><td>4200</td></tr><tr><td>نور</td><td>5800</td></tr><tr><td>كرار</td><td>3900</td></tr><tr><td>هدى</td><td>5800</td></tr><tr><td>زينب</td><td>6100</td></tr><tr><td>عمر</td><td>2750</td></tr><tr><td>رنا</td><td>4950</td></tr><tr><td>يوسف</td><td>3300</td></tr></tbody></table></div>
+<p>لمعرفة ثاني أعلى مبيعات:</p>
+<pre dir="ltr"><code>=LARGE(B2:B9,2)</code></pre>
+<p>النتيجة: 5800. وإذا رتبت القيم من الأعلى تصبح: 6100 ثم 5800 ثم 5800 ثم 4950 ثم 4200 ثم 3900 ثم 3300 ثم 2750. لذلك فإن <code dir="ltr">=LARGE(B2:B9,1)</code> تعيد 6100، و <code dir="ltr">=LARGE(B2:B9,3)</code> تعيد 5800 أيضاً لأن القيمة مكررة، و <code dir="ltr">=LARGE(B2:B9,4)</code> تعيد 4950.</p>
+<h3>مجموع أعلى ثلاث قيم</h3>
+<pre dir="ltr"><code>=SUM(LARGE(B2:B9,{1,2,3}))</code></pre>
+<p>النتيجة: 17700، وهي حاصل جمع 6100 و 5800 و 5800. إذا رفض Excel الأقواس المعقوفة في إعداداتك فاجمع ثلاث دوال: <code dir="ltr">=LARGE(B2:B9,1)+LARGE(B2:B9,2)+LARGE(B2:B9,3)</code>.</p>
+<h3>اسم صاحب أعلى مبيعات</h3>
+<pre dir="ltr"><code>=INDEX(A2:A9,MATCH(LARGE(B2:B9,1),B2:B9,0))</code></pre>
+<p>النتيجة: زينب.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<h3>الخطأ #NUM!</h3>
+<p>يظهر في ثلاث حالات: إذا كانت k صفراً أو سالبة، أو إذا كانت أكبر من عدد القيم الرقمية في النطاق، كأن تطلب القيمة التاسعة من ثماني قيم، أو إذا كان النطاق خالياً من الأرقام.</p>
+<h3>الاسم نفسه يتكرر عند التعادل</h3>
+<p>عند استخدام <a href="/excel-ar/formulas/index/">INDEX</a> مع <a href="/excel-ar/formulas/match/">MATCH</a> لجلب أسماء المركزين الثاني والثالث، ستعيد MATCH اسم نور مرتين لأنها تتوقف عند أول 5800 تجدها، ولن يظهر اسم هدى. في Microsoft 365 و Excel 2024 الحل الأسهل هو <code dir="ltr">=TAKE(SORTBY(A2:B9,B2:B9,-1),3)</code> التي تعيد أول ثلاثة صفوف بأسمائها: زينب ثم نور ثم هدى. الدالة <a href="/excel-ar/formulas/take/">TAKE</a> غير موجودة في Excel 2021، وفيه تعطي <code dir="ltr">=INDEX(SORTBY(A2:A9,B2:B9,-1),SEQUENCE(3))</code> الأسماء الثلاثة نفسها.</p>
+<h3>أرقام مخزنة كنص</h3>
+<p>إذا استوردت المبيعات من نظام آخر وظهر مثلث أخضر صغير في زاوية الخلايا فقد تكون الأرقام مخزنة نصوصاً، وستتجاهلها LARGE. حوّلها إلى أرقام قبل الحساب.</p>
+<h2 id="s-5">نصائح</h2>
+<ul><li>LARGE متوفرة في كل نسخ Excel.</li><li>للقيمة رقم k من الأصغر استخدم الدالة <a href="/excel-ar/formulas/small/">SMALL</a> بالطريقة نفسها.</li><li>ضع رقم k في خلية منفصلة واكتب مرجعها في الصيغة، فتغير الترتيب المطلوب دون تعديل الصيغة.</li><li>في إعدادات Windows العربية: <code dir="ltr">=LARGE(B2:B9;2)</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=LARGE(C2:C40,2)</code></pre>
 <p>النتيجة: ثاني أعلى درجة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=LARGE(C2:C40;2)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/max/" title="شرح دالة MAX في Excel بالعربي">MAX</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/take/" title="شرح دالة TAKE في Excel بالعربي">TAKE</a></li><li><a href="/excel-ar/formulas/small/" title="شرح دالة SMALL في Excel بالعربي">SMALL</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

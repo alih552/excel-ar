@@ -6,10 +6,11 @@
 <title>شرح دالة COUNTA في Excel بالعربي</title>
 <meta name="description" content="شرح دالة COUNTA في Excel: تعدّ الخلايا غير الفارغة أياً كان محتواها: أرقام أو نصوص أو تواريخ. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="COUNTA، دالة COUNTA، شرح COUNTA، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/counta/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة COUNTA في Excel بالعربي">
 <meta property="og:description" content="شرح دالة COUNTA في Excel: تعدّ الخلايا غير الفارغة أياً كان محتواها: أرقام أو نصوص أو تواريخ. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/counta/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,9 +29,31 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=COUNTA(value1, [value2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">value1</code>: مطلوب</li><li><code dir="ltr">value2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">value1</code>: النطاق أو القيمة الأولى التي تُعدّ إذا لم تكن فارغة، أياً كان نوع المحتوى. (مطلوب)</li><li><code dir="ltr">value2</code>: نطاقات أو قيم إضافية تُعدّ خلاياها غير الفارغة مع النطاق الأول. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم COUNTA</h2>
+<p>تفيد الدالة <code dir="ltr">COUNTA</code> عندما تريد معرفة عدد الخلايا المعبّأة في نطاق، بصرف النظر عمّا فيها. فهي الخيار المناسب لعدّ الأسماء في قائمة الموظفين، أو عدد الطلبات المسجّلة في سجل الوارد، أو عدد الحقول التي أكملها الموظفون في نموذج تقييم. وعلى خلاف <a href="/excel-ar/formulas/count/">COUNT</a>، لا تشترط أن يكون المحتوى رقماً.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تعدّ الدالة كل خلية فيها أي شيء: رقم، نص، تاريخ، قيمة منطقية، أو حتى رسالة خطأ. ولا تتجاهل إلا الخلايا الفارغة تماماً.</p>
+<p>انتبه إلى أن بعض الخلايا تبدو فارغة وهي ليست كذلك، مثل خلية فيها مسافة واحدة، أو خلية فيها صيغة تُرجع نصاً فارغاً <code dir="ltr">&quot;&quot;</code>. هذه الخلايا تعدّها COUNTA لأنها تحتوي شيئاً.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل تقييم أداء ربع سنوي، وبعض المديرين كتبوا درجة رقمية وبعضهم كتب تقديراً نصياً، وبقيت خانتان بلا تقييم:</p>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>القسم</th><th>التقييم</th></tr></thead><tbody><tr><td>أحمد</td><td>المبيعات</td><td>85</td></tr><tr><td>سارة</td><td>المحاسبة</td><td>ممتاز</td></tr><tr><td>علي</td><td>المبيعات</td><td></td></tr><tr><td>ليلى</td><td>المخازن</td><td>92</td></tr><tr><td>عمر</td><td>المحاسبة</td><td></td></tr><tr><td>هدى</td><td>المبيعات</td><td>جيد جداً</td></tr></tbody></table></div>
+<p>البيانات في الصفوف من 2 إلى 7. لمعرفة عدد الموظفين الذين وصلهم تقييم بأي شكل:</p>
+<pre dir="ltr"><code>=COUNTA(C2:C7)</code></pre>
+<p>النتيجة: <strong>4</strong>، وهي الدرجتان 85 و92 والتقديران &quot;ممتاز&quot; و&quot;جيد جداً&quot;.</p>
+<p>للمقارنة، الصيغة <code dir="ltr">=COUNT(C2:C7)</code> تعطي <strong>2</strong> فقط، لأنها لا تعدّ إلا الأرقام. وعدد الموظفين في القائمة كلها يُعرف بالصيغة <code dir="ltr">=COUNTA(A2:A7)</code> وتعطي <strong>6</strong>.</p>
+<p>ومن ذلك تستنتج أن تقييمين لم يُسلّما بعد، وهو ما تعطيه مباشرة الصيغة <code dir="ltr">=COUNTA(A2:A7)-COUNTA(C2:C7)</code>.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>العدد أكبر من المتوقع:</strong> غالباً توجد خلايا فيها مسافات أو صيغ تُرجع <code dir="ltr">&quot;&quot;</code>. اضغط على الخلية التي تبدو فارغة وانظر إلى شريط الصيغة، ثم احذف محتواها بمفتاح Delete.</li><li><strong>عدّ عنوان العمود بالخطأ:</strong> إذا اخترت العمود كاملاً مثل <code dir="ltr">=COUNTA(A:A)</code> فسيدخل العنوان في العدّ. اطرح 1 من النتيجة، أو ابدأ النطاق من الصف الثاني.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لعدّ الخلايا الفارغة بدل المعبّأة استخدم <a href="/excel-ar/formulas/countblank/">COUNTBLANK</a> على النطاق نفسه.</li><li>إذا كانت القائمة متصلة بلا فراغات، فالصيغة <code dir="ltr">=INDEX(A:A,COUNTA(A:A))</code> تُرجع آخر قيمة فيها، وتتحدث تلقائياً كلما أضفت اسماً جديداً.</li><li>الدالة متاحة في جميع إصدارات Excel. وفي الإعدادات العربية التي تستخدم الفاصلة المنقوطة تُكتب الصيغة متعددة النطاقات هكذا: <code dir="ltr">=COUNTA(A2:A7;C2:C7)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تعدّ COUNTA الصفوف المخفية أو المصفّاة؟</h3>
+<p>نعم، فهي تعدّ كل خلية غير فارغة حتى لو كان صفها مخفياً. لعدّ الظاهر فقط بعد التصفية استخدم <code dir="ltr">=SUBTOTAL(103,C2:C7)</code>.</p>
+<h3>هل تعدّ COUNTA الخلايا التي فيها خطأ مثل #N/A؟</h3>
+<p>نعم، رسالة الخطأ محتوى، فتدخل الخلية في العدّ.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=COUNTA(A2:A200)</code></pre>
 <p>النتيجة: عدد الأسماء المسجّلة في القائمة</p>
 <h2>دوال ذات صلة</h2>

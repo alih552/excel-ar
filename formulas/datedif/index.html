@@ -6,10 +6,11 @@
 <title>شرح دالة DATEDIF في Excel بالعربي</title>
 <meta name="description" content="شرح دالة DATEDIF في Excel: تحسب الفرق بين تاريخين بالسنوات (&quot;y&quot;) أو الأشهر (&quot;m&quot;) أو الأيام (&quot;d&quot;). لا تظهر في قائمة الدوال لكنها تعمل. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="DATEDIF، دالة DATEDIF، شرح DATEDIF، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/datedif/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة DATEDIF في Excel بالعربي">
 <meta property="og:description" content="شرح دالة DATEDIF في Excel: تحسب الفرق بين تاريخين بالسنوات (&quot;y&quot;) أو الأشهر (&quot;m&quot;) أو الأيام (&quot;d&quot;). لا تظهر في قائمة الدوال لكنها تعمل. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/datedif/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,37 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=DATEDIF(start_date, end_date, unit)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">start_date</code>: مطلوب</li><li><code dir="ltr">end_date</code>: مطلوب</li><li><code dir="ltr">unit</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">start_date</code>: تاريخ البداية، مثل تاريخ الميلاد أو تاريخ التعيين، ويجب ألا يأتي بعد تاريخ النهاية. (مطلوب)</li><li><code dir="ltr">end_date</code>: تاريخ النهاية الذي يُحسب الفرق حتى يصل إليه، مثل تاريخ اليوم أو تاريخ انتهاء العقد. (مطلوب)</li><li><code dir="ltr">unit</code>: رمز بين علامتي تنصيص: &quot;y&quot; للسنوات الكاملة و&quot;m&quot; للأشهر و&quot;d&quot; للأيام، و&quot;ym&quot; و&quot;yd&quot; و&quot;md&quot; لما يتبقى بعد السنوات أو الأشهر الكاملة. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم DATEDIF</h2>
+<p>الدالة <code dir="ltr">DATEDIF</code> هي الطريقة الأوضح في Excel لحساب المدة بين تاريخين بوحدات كاملة. وتظهر الحاجة إليها في حساب مدة خدمة الموظفين لمكافأة نهاية الخدمة أو الترقيات، وحساب أعمار الطلاب عند التسجيل، ومعرفة عدد الأشهر المنقضية من عقد إيجار أو ضمان جهاز.</p>
+<p>وهي دالة قديمة أبقاها Excel للتوافق مع برنامج Lotus 1-2-3، فلا يقترحها الإكمال التلقائي ولا يعرض Excel تلميح وسائطها أثناء الكتابة، لذلك اكتبها كاملة مع وسائطها الثلاثة.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تحسب الدالة الفرق بين <code dir="ltr">start_date</code> و<code dir="ltr">end_date</code> بالوحدة التي يحددها <code dir="ltr">unit</code>:</p>
+<div class="table-wrap"><table><thead><tr><th>الرمز</th><th>ما يُرجعه</th></tr></thead><tbody><tr><td>&quot;y&quot;</td><td>عدد السنوات الكاملة</td></tr><tr><td>&quot;m&quot;</td><td>عدد الأشهر الكاملة</td></tr><tr><td>&quot;d&quot;</td><td>عدد الأيام</td></tr><tr><td>&quot;ym&quot;</td><td>الأشهر الباقية بعد طرح السنوات الكاملة</td></tr><tr><td>&quot;md&quot;</td><td>الأيام الباقية بعد طرح الأشهر الكاملة</td></tr><tr><td>&quot;yd&quot;</td><td>الأيام الباقية بعد طرح السنوات الكاملة</td></tr></tbody></table></div>
+<p>وكلمة &quot;كاملة&quot; هنا مهمة: الموظف الذي أكمل سنتين وأحد عشر شهراً تعطيه الوحدة &quot;y&quot; سنتين فقط، ولا تقرّب النتيجة.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>كشف مدة الخدمة لثلاثة موظفين حتى تاريخ التقييم السنوي، والتواريخ بترتيب يوم/شهر/سنة:</p>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>تاريخ التعيين</th></tr></thead><tbody><tr><td>أحمد</td><td>10/05/2018</td></tr><tr><td>سارة</td><td>20/11/2021</td></tr><tr><td>علي</td><td>01/03/2025</td></tr></tbody></table></div>
+<p>تواريخ التعيين في B2:B4، وتاريخ التقييم 31/12/2026 في الخلية E1. لحساب سنوات الخدمة الكاملة لأحمد:</p>
+<pre dir="ltr"><code>=DATEDIF(B2,$E$1,&quot;y&quot;)</code></pre>
+<p>النتيجة: <strong>8</strong>، لأن أحمد أكمل ثماني سنوات في الشهر الخامس من 2026 ولم يكمل التاسعة بعد.</p>
+<p>والأشهر الباقية بعد السنوات: <code dir="ltr">=DATEDIF(B2,$E$1,&quot;ym&quot;)</code> والنتيجة <strong>7</strong>. وإجمالي الأشهر: <code dir="ltr">=DATEDIF(B2,$E$1,&quot;m&quot;)</code> والنتيجة <strong>103</strong>.</p>
+<p>ولعرض المدة في خلية واحدة بصيغة مقروءة:</p>
+<pre dir="ltr"><code>=&quot;سنوات: &quot;&amp;DATEDIF(B2,$E$1,&quot;y&quot;)&amp;&quot; / أشهر: &quot;&amp;DATEDIF(B2,$E$1,&quot;ym&quot;)</code></pre>
+<p>النتيجة لأحمد: &quot;سنوات: 8 / أشهر: 7&quot;، وبسحب الصيغة تظهر لسارة &quot;سنوات: 5 / أشهر: 1&quot;، ولعلي &quot;سنوات: 1 / أشهر: 9&quot;.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #NUM! مع أن الترتيب صحيح:</strong> راجع خلية تاريخ النهاية، فإن كانت فارغة قرأها Excel صفراً، فيصبح تاريخ البداية أحدث منها. احمِ الصيغة بشرط مثل <code dir="ltr">=IF($E$1=&quot;&quot;,&quot;&quot;,DATEDIF(B2,$E$1,&quot;y&quot;))</code>.</li><li><strong>الخطأ #VALUE!:</strong> أحد التاريخين نص لا يفهمه Excel تاريخاً، كأن يكون مكتوباً بترتيب لا يوافق إعدادات الجهاز. أنشئ التاريخ بالدالة <a href="/excel-ar/formulas/date/">DATE</a> لتجنب ذلك.</li><li><strong>الخطأ #NAME?:</strong> يظهر عند نسيان علامتي التنصيص حول الوحدة، مثل <code dir="ltr">=DATEDIF(B2,E1,y)</code>، لأن Excel يعدّ y اسماً غير معرّف. الصحيح <code dir="ltr">&quot;y&quot;</code>.</li><li><strong>نتائج غريبة مع &quot;md&quot;:</strong> هذه الوحدة قد تعطي أرقاماً غير دقيقة في بعض الحالات، خاصة حول نهاية الأشهر القصيرة. وبديلها الآمن للأيام الباقية بعد الأشهر الكاملة: <code dir="ltr">=$E$1-EDATE(B2,DATEDIF(B2,$E$1,&quot;m&quot;))</code>، وتعطي لأحمد 21 يوماً.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لتحويل المدة إلى سنوات بكسور عشرية بدل الوحدات الكاملة استخدم <code dir="ltr">=YEARFRAC(B2,$E$1)</code>، وهي مفيدة عندما تُحسب مكافأة أو استحقاق بنسبة الجزء الفعلي من السنة.</li><li>لعدد الأيام وحدها لا تحتاج إلى DATEDIF، فطرح التاريخين <code dir="ltr">=$E$1-B2</code> يعطي النتيجة نفسها، مع تنسيق الخلية بتنسيق عام لا بتنسيق تاريخ.</li><li>الدالة تعمل في جميع إصدارات Excel على Windows وMac، لكنها لا تحظى بتطوير جديد، وتنصح Microsoft نفسها بتجنب الوحدة &quot;md&quot;، فاعتمد على الوحدات &quot;y&quot; و&quot;m&quot; و&quot;ym&quot; في التقارير الرسمية.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=DATEDIF(A2,TODAY(),&quot;y&quot;)</code></pre>
 <p>النتيجة: العمر بالسنوات</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=DATEDIF(A2;TODAY();&quot;y&quot;)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li><li><a href="/excel-ar/formulas/date/" title="شرح دالة DATE في Excel بالعربي">DATE</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

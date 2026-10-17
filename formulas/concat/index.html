@@ -6,10 +6,11 @@
 <title>شرح دالة CONCAT في Excel بالعربي</title>
 <meta name="description" content="شرح دالة CONCAT في Excel: تدمج عدة نصوص أو خلايا في نص واحد. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="CONCAT، دالة CONCAT، شرح CONCAT، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/concat/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة CONCAT في Excel بالعربي">
 <meta property="og:description" content="شرح دالة CONCAT في Excel: تدمج عدة نصوص أو خلايا في نص واحد. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/concat/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,42 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=CONCAT(text1, [text2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text1</code>: مطلوب</li><li><code dir="ltr">text2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">text1</code>: النص أو الخلية أو النطاق الأول الذي تريد دمجه. (مطلوب)</li><li><code dir="ltr">text2</code>: نصوص أو خلايا إضافية تُلصق بعد الأول بالترتيب، مثل مسافة بين علامتي تنصيص ثم اسم العائلة. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم CONCAT</h2>
+<p>تستخدم CONCAT لدمج محتوى عدة خلايا أو نصوص في نص واحد: بناء الاسم الكامل من الاسم الأول واسم الأب واسم العائلة، أو تكوين رمز فاتورة من رمز الفرع ورقم الفاتورة، أو كتابة جملة تلخيص مثل &quot;عدد الطلبات اليوم 45&quot; لتظهر في رأس التقرير.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تأخذ الدالة نصاً واحداً أو أكثر، وتلصقها متتالية بالترتيب الذي كتبته دون أي فاصل بينها. لذلك إذا أردت مسافة أو شرطة بين الأجزاء فعليك إضافتها بنفسك كنص بين علامتي تنصيص مثل <code dir="ltr">&quot; &quot;</code> أو <code dir="ltr">&quot;-&quot;</code>. وتقبل الدالة مراجع خلايا مفردة ونطاقات كاملة، والأرقام تُحوّل إلى نص كما هي مخزنة.</p>
+<p>وهي البديل الحديث للدالة CONCATENATE، والفرق الأساسي أن CONCAT تقبل نطاقاً مثل <code dir="ltr">A2:C2</code> بينما القديمة تحتاج كل خلية على حدة.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>جدول عملاء فيه الأسماء ورمز الفرع ورقم آخر فاتورة:</p>
+<div class="table-wrap"><table><thead><tr><th>الاسم الأول (A)</th><th>اسم الأب (B)</th><th>اسم العائلة (C)</th><th>الفرع (D)</th><th>رقم الفاتورة (E)</th></tr></thead><tbody><tr><td>محمد</td><td>علي</td><td>الحسني</td><td>BGD</td><td>1045</td></tr><tr><td>زينب</td><td>حسن</td><td>العبيدي</td><td>BSR</td><td>1046</td></tr><tr><td>كريم</td><td>جاسم</td><td>الربيعي</td><td>ERB</td><td>1047</td></tr></tbody></table></div>
+<p><strong>الاسم الكامل</strong> في الخلية F2:</p>
+<pre dir="ltr"><code>=CONCAT(A2,&quot; &quot;,B2,&quot; &quot;,C2)</code></pre>
+<p>النتيجة: محمد علي الحسني. والمسافتان بين علامتي التنصيص هما ما يفصل الكلمات.</p>
+<p><strong>رمز الفاتورة</strong> في الخلية G2:</p>
+<pre dir="ltr"><code>=CONCAT(D2,&quot;-&quot;,E2)</code></pre>
+<p>النتيجة: BGD-1045، وفي الصف الثالث BSR-1046.</p>
+<p><strong>دمج نطاق كامل:</strong></p>
+<pre dir="ltr"><code>=CONCAT(A2:C2)</code></pre>
+<p>النتيجة: محمدعليالحسني، أي الكلمات ملتصقة لأن الدالة لا تضع فاصلاً تلقائياً. ولهذا الغرض تحديداً توجد <a href="/excel-ar/formulas/textjoin/">TEXTJOIN</a>، فالصيغة <code dir="ltr">=TEXTJOIN(&quot; &quot;,TRUE,A2:C2)</code> تعطي الاسم مع المسافات.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>ضياع تنسيق التاريخ والأرقام</strong>: إذا دمجت خلية فيها التاريخ 2026-03-15 فستظهر بدلاً منه القيمة 46096، وهي الرقم التسلسلي الذي يخزن به Excel التاريخ. الحل استخدام <a href="/excel-ar/formulas/text/">TEXT</a>: <code dir="ltr">=CONCAT(&quot;تاريخ الفاتورة &quot;,TEXT(H2,&quot;yyyy-mm-dd&quot;))</code>. وبالطريقة نفسها تضيع الأصفار في بداية الرقم، فاستخدم <code dir="ltr">TEXT(E2,&quot;00000&quot;)</code> إذا احتجت إليها.</li><li><strong>الخطأ #NAME?</strong>: يعني أن الإصدار لا يدعم CONCAT، كما في Excel 2016 غير المشترك وما قبله. استخدم فيه CONCATENATE أو علامة &amp;.</li><li><strong>انتقال الخطأ من الخلايا</strong>: إذا كانت إحدى الخلايا المدمجة تحتوي #N/A فستعيد CONCAT الخطأ نفسه. عالج الخلية الأصلية أو استخدم <a href="/excel-ar/formulas/iferror/">IFERROR</a> حولها.</li><li><strong>الخطأ #VALUE!</strong>: يظهر إذا تجاوز النص الناتج 32767 حرفاً، وهو الحد الأقصى لمحتوى الخلية.</li><li><strong>مسافات زائدة</strong>: إذا كانت البيانات الأصلية تنتهي بمسافة فستظهر مسافتان في النتيجة، فاستخدم <a href="/excel-ar/formulas/trim/">TRIM</a> حول الصيغة.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>العلامة &amp; تؤدي العمل نفسه: <code dir="ltr">=A2&amp;&quot; &quot;&amp;B2&amp;&quot; &quot;&amp;C2</code> تساوي الصيغة الأولى في المثال.</li><li>لإضافة سطر جديد داخل الخلية استخدم <code dir="ltr">CHAR(10)</code> بين الأجزاء، وفعّل خيار التفاف النص في الخلية.</li><li>CONCAT متاحة في Excel 2019 وExcel 2021 وExcel 2024 وMicrosoft 365.</li><li>في الإعدادات العربية التي تستخدم الفاصلة المنقوطة: <code dir="ltr">=CONCAT(A2;&quot; &quot;;B2;&quot; &quot;;C2)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>ما الفرق بين CONCAT وTEXTJOIN؟</h3>
+<p>TEXTJOIN تضع فاصلاً تختاره بين كل جزأين ويمكنها تجاهل الخلايا الفارغة، أما CONCAT فتلصق الأجزاء كما هي.</p>
+<h3>هل تعمل CONCAT مع الأرقام؟</h3>
+<p>نعم، لكنها تعيد النتيجة نصاً دائماً، فلا تصلح للحسابات بعد ذلك إلا بتحويلها إلى رقم.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=CONCAT(A2,&quot; &quot;,B2)</code></pre>
 <p>النتيجة: الاسم الأول ثم اسم العائلة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=CONCAT(A2;&quot; &quot;;B2)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/textjoin/" title="شرح دالة TEXTJOIN في Excel بالعربي">TEXTJOIN</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

@@ -6,10 +6,11 @@
 <title>شرح دالة NETWORKDAYS.INTL في Excel بالعربي</title>
 <meta name="description" content="شرح دالة NETWORKDAYS.INTL في Excel: تحسب عدد أيام العمل بين تاريخين مع تحديد أيام العطلة الأسبوعية، مثل الجمعة والسبت في العراق. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="NETWORKDAYS.INTL، دالة NETWORKDAYS.INTL، شرح NETWORKDAYS.INTL، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/networkdays-intl/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة NETWORKDAYS.INTL في Excel بالعربي">
 <meta property="og:description" content="شرح دالة NETWORKDAYS.INTL في Excel: تحسب عدد أيام العمل بين تاريخين مع تحديد أيام العطلة الأسبوعية، مثل الجمعة والسبت في العراق. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/networkdays-intl/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,35 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=NETWORKDAYS.INTL(start_date, end_date, [weekend], [holidays])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">start_date</code>: مطلوب</li><li><code dir="ltr">end_date</code>: مطلوب</li><li><code dir="ltr">weekend</code>: اختياري</li><li><code dir="ltr">holidays</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">start_date</code>: تاريخ بداية الفترة، ويحسب ضمن الأيام إذا كان يوم عمل. (مطلوب)</li><li><code dir="ltr">end_date</code>: تاريخ نهاية الفترة، ويحسب ضمن الأيام إذا كان يوم عمل. (مطلوب)</li><li><code dir="ltr">weekend</code>: اختياري: رقم أو نص من سبعة أحرف يحدد أيام العطلة الأسبوعية، مثل 7 للجمعة والسبت، والافتراضي السبت والأحد. (اختياري)</li><li><code dir="ltr">holidays</code>: اختياري: نطاق تواريخ العطل الرسمية التي تستبعد من أيام العمل. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم NETWORKDAYS.INTL</h2>
+<p>هذه هي النسخة المرنة من <a href="/excel-ar/formulas/networkdays/">NETWORKDAYS</a>، وتسمح لك بتحديد أيام العطلة الأسبوعية بنفسك. وهي الخيار المناسب في معظم الدول العربية التي تكون العطلة فيها الجمعة والسبت، أو الجمعة وحدها، أو حتى الخميس والجمعة في بعض المؤسسات. تستخدمها في:</p>
+<ul><li>حساب أيام الدوام الفعلية للموظفين لاحتساب الرواتب والإجازات.</li><li>تقدير مدة المشاريع حسب أيام عمل الشركة الحقيقية.</li><li>قياس زمن معالجة الطلبات في فروع تختلف عطلها.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تعد الدالة الأيام من البداية إلى النهاية شاملة الطرفين، ثم تستبعد أيام العطلة الأسبوعية التي يحددها المعامل weekend، ثم تستبعد العطل الرسمية. أهم رموز weekend:</p>
+<div class="table-wrap"><table><thead><tr><th>الرمز</th><th>أيام العطلة</th></tr></thead><tbody><tr><td>1</td><td>السبت والأحد (الافتراضي)</td></tr><tr><td>6</td><td>الخميس والجمعة</td></tr><tr><td>7</td><td>الجمعة والسبت</td></tr><tr><td>11</td><td>الأحد فقط</td></tr><tr><td>16</td><td>الجمعة فقط</td></tr><tr><td>17</td><td>السبت فقط</td></tr></tbody></table></div>
+<p>ويمكن بدل الرقم كتابة نص من سبعة أحرف يبدأ من الاثنين، حيث 1 يعني عطلة و0 يعني دوامًا. فالنص &quot;0000110&quot; يعني أن الجمعة والسبت عطلة.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>شركة عطلتها الجمعة والسبت، والعطل الرسمية في النطاق F2:F3 هي 2026-03-22 (أحد) و2026-03-23 (اثنين):</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: الموظف</th><th>B: بداية الفترة</th><th>C: نهاية الفترة</th></tr></thead><tbody><tr><td>2</td><td>سارة</td><td>2026-03-01</td><td>2026-03-31</td></tr><tr><td>3</td><td>خالد</td><td>2026-03-10</td><td>2026-03-26</td></tr><tr><td>4</td><td>ليلى</td><td>2026-02-15</td><td>2026-03-05</td></tr></tbody></table></div>
+<p>اكتب في D2 واسحب الصيغة:</p>
+<pre dir="ltr"><code>=NETWORKDAYS.INTL(B2,C2,7,$F$2:$F$3)</code></pre>
+<p>النتائج:</p>
+<ul><li><strong>سارة: 21 يومًا</strong>. في مارس 2026 يوجد 23 يوم دوام من الأحد إلى الخميس، ويخصم منها يوما العطلة الرسمية لأن الأحد والاثنين يوما دوام في هذه الشركة.</li><li><strong>خالد: 11 يومًا</strong>، أي 13 يوم دوام ناقص العطلتين.</li><li><strong>ليلى: 15 يومًا</strong>، ولا تتأثر بالعطل لأنها خارج الفترة.</li></ul>
+<p>للمقارنة، لو استخدمت NETWORKDAYS العادية لفترة سارة لحصلت على 21 أيضًا لكن لسبب مختلف، ولفترة ليلى على 14 بدل 15، لأنها تعتبر الجمعة يوم عمل والأحد عطلة. لذلك لا تعتمد على تطابق النتائج صدفة.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر إذا كان أحد التاريخين نصًا، أو إذا كان نص weekend بطول غير سبعة أحرف أو فيه أحرف غير 0 و1.</li><li><strong>الخطأ #NUM!</strong>: يظهر عند استخدام رمز weekend غير موجود مثل 8 أو 20.</li><li><strong>عطلة رسمية لا تخصم</strong>: إذا وقعت العطلة الرسمية في يوم هو أصلًا عطلة أسبوعية حسب weekend فلن تتغير النتيجة، لأن اليوم مستبعد من قبل.</li><li><strong>ترتيب الأيام في النص</strong>: يبدأ من الاثنين وليس من السبت أو الأحد، وهذا أكثر سبب للنتائج الخاطئة.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>إذا كانت عطلتك الجمعة فقط فاستخدم الرمز 16 أو النص &quot;0000100&quot;.</li><li>لحساب أيام الدوام المتبقية حتى نهاية المشروع: <code dir="ltr">=NETWORKDAYS.INTL(TODAY(),C2,7,Holidays)</code>.</li><li>الدالة المقابلة لإيجاد تاريخ بعد عدد من أيام العمل هي <a href="/excel-ar/formulas/workday-intl/">WORKDAY.INTL</a>.</li><li>بالفاصلة المنقوطة: <code dir="ltr">=NETWORKDAYS.INTL(B2;C2;7;$F$2:$F$3)</code>.</li><li>متاحة منذ Excel 2010 وفي كل الإصدارات اللاحقة.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=NETWORKDAYS.INTL(A2,B2,7)</code></pre>
 <p>النتيجة: عدد أيام العمل بين التاريخين مع اعتبار الجمعة والسبت عطلة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=NETWORKDAYS.INTL(A2;B2;7)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/networkdays/" title="شرح دالة NETWORKDAYS في Excel بالعربي">NETWORKDAYS</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/networkdays/" title="شرح دالة NETWORKDAYS في Excel بالعربي">NETWORKDAYS</a></li><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li><li><a href="/excel-ar/formulas/workday-intl/" title="شرح دالة WORKDAY.INTL في Excel بالعربي">WORKDAY.INTL</a></li><li><a href="/excel-ar/formulas/weekday/" title="شرح دالة WEEKDAY في Excel بالعربي">WEEKDAY</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

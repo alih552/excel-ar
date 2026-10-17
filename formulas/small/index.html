@@ -6,10 +6,11 @@
 <title>شرح دالة SMALL في Excel بالعربي</title>
 <meta name="description" content="شرح دالة SMALL في Excel: تعيد القيمة رقم k من الأصغر. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="SMALL، دالة SMALL، شرح SMALL، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/small/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة SMALL في Excel بالعربي">
 <meta property="og:description" content="شرح دالة SMALL في Excel: تعيد القيمة رقم k من الأصغر. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/small/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,35 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=SMALL(array, k)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array</code>: مطلوب</li><li><code dir="ltr">k</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">array</code>: النطاق أو المصفوفة التي تحتوي القيم الرقمية المراد البحث بينها، مثل عمود الدرجات أو الكميات. (مطلوب)</li><li><code dir="ltr">k</code>: ترتيب القيمة المطلوبة من الأصغر: 1 لأصغر قيمة، و2 للتي تليها، وهكذا. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم SMALL</h2>
+<p>تعيد SMALL القيمة التي تحتل الترتيب k من الأصغر في مجموعة أرقام. فهي أعم من <a href="/excel-ar/formulas/min/">MIN</a> التي تعطي أصغر قيمة فقط، لأنها تستطيع إعطاء الثانية والثالثة وما بعدهما. من استخداماتها:</p>
+<ul><li>معرفة أقل ثلاث درجات في الصف لمتابعة الطلاب المتعثرين.</li><li>إيجاد أقل عروض الموردين للمقارنة بينها.</li><li>عرض أقصر مدد التوصيل أو أقل كميات المخزون التي تحتاج إلى إعادة طلب.</li><li>استخراج أقدم التواريخ، فالتاريخ في Excel رقم والأقدم هو الأصغر.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>ترتب الدالة القيم الرقمية في النطاق ترتيبًا تصاعديًا داخليًا دون تغيير الجدول، ثم تعيد القيمة في الموضع k. تتجاهل الخلايا الفارغة والنصوص والقيم المنطقية. أما القيم المتكررة فتحسب كل واحدة منها على حدة، فإذا تكررت أصغر قيمة مرتين كانت النتيجة لـ k=1 وk=2 متساوية.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>درجات ستة طلاب في امتحان الرياضيات:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: الطالب</th><th>B: الدرجة</th></tr></thead><tbody><tr><td>2</td><td>أحمد</td><td>78</td></tr><tr><td>3</td><td>فاطمة</td><td>92</td></tr><tr><td>4</td><td>حسن</td><td>65</td></tr><tr><td>5</td><td>زينب</td><td>88</td></tr><tr><td>6</td><td>محمد</td><td>65</td></tr><tr><td>7</td><td>هدى</td><td>71</td></tr></tbody></table></div>
+<p>لإيجاد أقل درجة:</p>
+<pre dir="ltr"><code>=SMALL(B2:B7,1)</code></pre>
+<p>النتيجة <strong>65</strong>. وعند استخدام k=2 تعيد أيضًا <strong>65</strong> لأن حسن ومحمد حصلا على الدرجة نفسها، ومع k=3 تعيد <strong>71</strong> وهي درجة هدى.</p>
+<p>ولمعرفة اسم صاحب أقل درجة، ادمجها مع <a href="/excel-ar/formulas/index/">INDEX</a> و<a href="/excel-ar/formulas/match/">MATCH</a>:</p>
+<pre dir="ltr"><code>=INDEX(A2:A7,MATCH(SMALL(B2:B7,1),B2:B7,0))</code></pre>
+<p>تعيد الصيغة <strong>حسن</strong>، لأن MATCH تتوقف عند أول ظهور للدرجة 65 في الجدول.</p>
+<p>ولحساب متوسط أقل درجتين: <code dir="ltr">=AVERAGE(SMALL(B2:B7,{1,2}))</code> وتعيد 65.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #NUM!</strong>: يظهر عندما تكون k صفرًا أو سالبة، أو أكبر من عدد القيم الرقمية في النطاق، كأن تطلب k=7 والنطاق فيه ست درجات فقط.</li><li><strong>تجاهل قيم ظاهرة</strong>: الأرقام المخزنة كنصوص لا تدخل في المقارنة. حوّلها إلى أرقام قبل استخدام الدالة.</li><li><strong>تكرار الاسم نفسه مع INDEX وMATCH</strong>: عند تعادل القيم تعيد MATCH أول اسم دائمًا. في Excel 365 وExcel 2021 استخدم <a href="/excel-ar/formulas/filter/">FILTER</a> لعرض جميع الأسماء التي حصلت على الدرجة نفسها.</li><li><strong>نتيجة صفر غير متوقعة</strong>: الخلايا التي فيها صفر ليست فارغة، فتظهر كأصغر قيمة. استبعدها بالصيغة <code dir="ltr">=SMALL(IF(B2:B7&gt;0,B2:B7),1)</code>، وفي الإصدارات الأقدم من Excel 2021 أدخلها بالضغط على Ctrl+Shift+Enter.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>SMALL متاحة في جميع إصدارات Excel. وفي Excel 365 وExcel 2021 تكتب <code dir="ltr">=SMALL(B2:B7,{1,2,3})</code> فتنسكب أقل ثلاث درجات في ثلاث خلايا متجاورة في صف واحد.</li><li>الدالة المقابلة لها <a href="/excel-ar/formulas/large/">LARGE</a> تعيد القيم من الأكبر.</li><li>قد يتغير الفاصل داخل الأقواس المعقوفة أيضًا حسب إعدادات المنطقة. إذا رفض Excel الثابت <code dir="ltr">{1,2,3}</code> فاكتب قيم k في خلايا مستقلة وأشر إليها، مثل <code dir="ltr">=SMALL($B$2:$B$7,D2)</code> مع وضع 1 و2 و3 في D2:D4.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=SMALL(C2:C40,3)</code></pre>
 <p>النتيجة: ثالث أدنى درجة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=SMALL(C2:C40;3)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/min/" title="شرح دالة MIN في Excel بالعربي">MIN</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/large/" title="شرح دالة LARGE في Excel بالعربي">LARGE</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

@@ -6,10 +6,11 @@
 <title>شرح دالة OR في Excel بالعربي</title>
 <meta name="description" content="شرح دالة OR في Excel: تعيد TRUE إذا كان شرط واحد على الأقل صحيحاً. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="OR، دالة OR، شرح OR، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/or/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة OR في Excel بالعربي">
 <meta property="og:description" content="شرح دالة OR في Excel: تعيد TRUE إذا كان شرط واحد على الأقل صحيحاً. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/or/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,39 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=OR(logical1, [logical2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">logical1</code>: مطلوب</li><li><code dir="ltr">logical2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">logical1</code>: الشرط الأول الذي يختبر، ويعيد TRUE أو FALSE مثل B2&gt;3. (مطلوب)</li><li><code dir="ltr">logical2</code>: اختياري: شروط إضافية تختبر مع الأول، ويصل مجموع الشروط إلى 255 شرطًا. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم OR</h2>
+<p>تختبر الدالة OR عدة شروط معًا، وتعيد TRUE إذا تحقق <strong>شرط واحد على الأقل</strong>، وتعيد FALSE فقط إذا لم يتحقق أي منها. تحتاجها عندما يكفي سبب واحد لاتخاذ قرار، مثل:</p>
+<ul><li>تنبيه الموظف إذا زاد غيابه عن حد معين أو تكرر تأخيره.</li><li>رسوب الطالب إذا قلت درجته في أي مادة أساسية عن درجة النجاح.</li><li>تمييز الأصناف التي نفد مخزونها أو انتهت صلاحيتها.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تقيّم الدالة كل شرط على حدة، ثم تجمع النتائج بمنطق &quot;أو&quot;. غالبًا لا تستخدم وحدها بل داخل <a href="/excel-ar/formulas/if/">IF</a> لتحويل TRUE وFALSE إلى نص مفهوم أو حساب معين. يمكن أن يكون الشرط مقارنة، أو خلية تحتوي قيمة منطقية، أو نطاقًا من القيم المنطقية.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل الحضور الشهري لقسم المبيعات، والسياسة تقول: ينبه الموظف إذا زادت أيام غيابه عن 3 <strong>أو</strong> زادت مرات تأخيره عن 5:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: الموظف</th><th>B: أيام الغياب</th><th>C: مرات التأخير</th></tr></thead><tbody><tr><td>2</td><td>أحمد</td><td>1</td><td>2</td></tr><tr><td>3</td><td>سارة</td><td>4</td><td>0</td></tr><tr><td>4</td><td>علي</td><td>2</td><td>7</td></tr><tr><td>5</td><td>مريم</td><td>3</td><td>5</td></tr></tbody></table></div>
+<p>اكتب في D2 واسحب الصيغة:</p>
+<pre dir="ltr"><code>=OR(B2&gt;3,C2&gt;5)</code></pre>
+<p>النتائج: أحمد <strong>FALSE</strong>، سارة <strong>TRUE</strong> بسبب الغياب، علي <strong>TRUE</strong> بسبب التأخير، مريم <strong>FALSE</strong> لأن 3 ليست أكبر من 3 و5 ليست أكبر من 5.</p>
+<p>ولتحويل النتيجة إلى عبارة واضحة:</p>
+<pre dir="ltr"><code>=IF(OR(B2&gt;3,C2&gt;5),&quot;تنبيه&quot;,&quot;منتظم&quot;)</code></pre>
+<p>تعيد &quot;تنبيه&quot; لسارة وعلي، و&quot;منتظم&quot; لأحمد ومريم.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر إذا أعطيت الدالة نطاقًا لا يحتوي أي قيمة منطقية، مثل نطاق كله نصوص. النصوص والخلايا الفارغة داخل النطاقات تتجاهل.</li><li><strong>كتابة الشرط كنص</strong>: الصيغة <code dir="ltr">=OR(B2,&quot;&gt;3&quot;)</code> خاطئة. الشرط يكتب مقارنة مباشرة <code dir="ltr">B2&gt;3</code>، وليس بصيغة المعايير المستخدمة في <a href="/excel-ar/formulas/countif/">COUNTIF</a>.</li><li><strong>الخلط بين OR و<a href="/excel-ar/formulas/and/">AND</a></strong>: إذا أردت أن تتحقق كل الشروط معًا فاستخدم AND. OR تعيد TRUE مع شرط واحد.</li><li><strong>مقارنة خلية بعدة قيم</strong>: لا تكتب <code dir="ltr">B2=&quot;بغداد&quot;,&quot;البصرة&quot;</code>، بل كرر الخلية في كل شرط: <code dir="ltr">=OR(B2=&quot;بغداد&quot;,B2=&quot;البصرة&quot;)</code>.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لاختبار خلية مقابل قائمة قيم بشكل مختصر: <code dir="ltr">=OR(B2={&quot;بغداد&quot;,&quot;البصرة&quot;,&quot;أربيل&quot;})</code>.</li><li>لمعرفة إن كان أي موظف في النطاق تجاوز الحد: <code dir="ltr">=OR(B2:B5&gt;3)</code>. في Excel 365 و2021 تعمل مباشرة، وفي الإصدارات الأقدم تدخل بالضغط على Ctrl+Shift+Enter.</li><li>في التنسيق الشرطي اكتب <code dir="ltr">=OR($B2&gt;3,$C2&gt;5)</code> لتلوين الصف كاملًا.</li><li>في إعدادات المنطقة العربية: <code dir="ltr">=IF(OR(B2&gt;3;C2&gt;5);&quot;تنبيه&quot;;&quot;منتظم&quot;)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>كم شرطًا يمكن أن تأخذ OR؟</h3>
+<p>حتى 255 شرطًا، لكن إذا كثرت الشروط فالأفضل استخدام نطاق أو قائمة قيم كما في النصائح.</p>
+<h3>هل توجد دالة تعيد TRUE لشرط واحد فقط دون غيره؟</h3>
+<p>نعم، الدالة XOR المتاحة منذ Excel 2013. مع شرطين تعيد TRUE إذا تحقق أحدهما فقط، ومع أكثر من شرطين تعيد TRUE عندما يكون عدد الشروط المتحققة فرديًا.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=IF(OR(B2=&quot;مدير&quot;,B2=&quot;مشرف&quot;),&quot;صلاحية كاملة&quot;,&quot;محدودة&quot;)</code></pre>
 <p>النتيجة: الصلاحية حسب الوظيفة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=IF(OR(B2=&quot;مدير&quot;;B2=&quot;مشرف&quot;);&quot;صلاحية كاملة&quot;;&quot;محدودة&quot;)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/countifs/" title="شرح دالة COUNTIFS في Excel بالعربي">COUNTIFS</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/and/" title="شرح دالة AND في Excel بالعربي">AND</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

@@ -6,10 +6,11 @@
 <title>شرح دالة MONTH في Excel بالعربي</title>
 <meta name="description" content="شرح دالة MONTH في Excel: تعيد رقم الشهر (من 1 إلى 12) من تاريخ. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="MONTH، دالة MONTH، شرح MONTH، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/month/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة MONTH في Excel بالعربي">
 <meta property="og:description" content="شرح دالة MONTH في Excel: تعيد رقم الشهر (من 1 إلى 12) من تاريخ. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/month/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,37 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=MONTH(serial_number)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">serial_number</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">serial_number</code>: التاريخ الذي تريد استخراج رقم شهره، ويكون خلية فيها تاريخ حقيقي أو دالة تعيد تاريخًا مثل TODAY. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم MONTH</h2>
+<p>تحتاج دالة MONTH كلما أردت تجميع البيانات أو تصفيتها حسب الشهر بدل اليوم الكامل. من أمثلة ذلك في العمل اليومي:</p>
+<ul><li>تلخيص فواتير المبيعات شهرًا بشهر دون إنشاء عمود يدوي للشهر.</li><li>معرفة الموظفين الذين يحل موعد تجديد عقودهم في شهر معين.</li><li>حساب عدد أيام الغياب في كل شهر من سجل الحضور.</li><li>تلوين الصفوف التي تخص الشهر الحالي بالتنسيق الشرطي.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>يحفظ Excel كل تاريخ رقمًا تسلسليًا يمثل عدد الأيام منذ بداية عام 1900، والتنسيق هو ما يجعله يظهر بشكل تاريخ. تقرأ MONTH هذا الرقم وتعيد رقم الشهر فقط، وهو عدد صحيح من 1 (يناير) إلى 12 (ديسمبر). النتيجة رقم عادي يمكن مقارنته أو جمعه أو استخدامه داخل دوال أخرى.</p>
+<p>تعيد الدالة رقم الشهر الميلادي دائمًا، حتى لو كانت الخلية منسقة لعرض التاريخ بالتقويم الهجري.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>لديك سجل فواتير لفرع المبيعات، والتواريخ في العمود A والقيم في العمود C:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: تاريخ الفاتورة</th><th>B: رقم الفاتورة</th><th>C: القيمة</th></tr></thead><tbody><tr><td>2</td><td>2026-01-15</td><td>101</td><td>1200</td></tr><tr><td>3</td><td>2026-02-03</td><td>102</td><td>850</td></tr><tr><td>4</td><td>2026-03-10</td><td>103</td><td>2300</td></tr><tr><td>5</td><td>2026-03-22</td><td>104</td><td>640</td></tr><tr><td>6</td><td>2026-04-05</td><td>105</td><td>1500</td></tr></tbody></table></div>
+<p>لاستخراج شهر الفاتورة الأولى اكتب في الخلية D2:</p>
+<pre dir="ltr"><code>=MONTH(A2)</code></pre>
+<p>النتيجة <strong>1</strong> لأن الفاتورة صدرت في يناير. اسحب الصيغة إلى الأسفل فتحصل على 2 ثم 3 ثم 3 ثم 4.</p>
+<p>ولمعرفة إجمالي مبيعات شهر مارس مباشرة دون عمود مساعد:</p>
+<pre dir="ltr"><code>=SUMPRODUCT((MONTH(A2:A6)=3)*C2:C6)</code></pre>
+<p>تعيد الصيغة <strong>2940</strong>، وهي مجموع قيمتي الفاتورتين المؤرختين في مارس، أي الصفين 4 و5. تنشئ MONTH هنا قائمة بأرقام الأشهر، ثم تتحول المقارنة إلى قيم 1 و0 تضرب في القيم.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر عندما يكون التاريخ نصًا لا يفهمه Excel، كأن يكون منسوخًا من نظام آخر بصيغة غير معروفة. حوّل العمود إلى تواريخ بأداة &quot;نص إلى أعمدة&quot; أو بدالة DATEVALUE.</li><li><strong>نتيجة 1 لخلية فارغة</strong>: الخلية الفارغة تعامل كصفر، وصفر يقابل يناير 1900، لذلك تعيد MONTH القيمة 1. استخدم شرطًا مثل <code dir="ltr">=IF(A2=&quot;&quot;,&quot;&quot;,MONTH(A2))</code> لتجنب ذلك.</li><li><strong>ظهور النتيجة كتاريخ</strong>: إذا ورثت الخلية تنسيق التاريخ فقد تظهر النتيجة 3 بالشكل 1900-01-03، فغيّر تنسيقها إلى &quot;عام&quot;.</li><li><strong>خلط الأعوام</strong>: MONTH لا تعرف السنة، فشهر مارس 2025 ومارس 2026 يعطيان 3 كلاهما. أضف شرط <a href="/excel-ar/formulas/year/">YEAR</a> عند تحليل بيانات أكثر من سنة.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لعرض اسم الشهر بدل رقمه استخدم <code dir="ltr">=TEXT(A2,&quot;mmmm&quot;)</code>، وتظهر الأسماء بلغة إعدادات الجهاز.</li><li>لمعرفة إن كان التاريخ في الشهر الحالي من السنة الحالية: <code dir="ltr">=AND(MONTH(A2)=MONTH(TODAY()),YEAR(A2)=YEAR(TODAY()))</code>.</li><li>في إعدادات المنطقة العربية التي تستخدم الفاصلة المنقوطة تكتب الصيغ بالشكل <code dir="ltr">=TEXT(A2;&quot;mmmm&quot;)</code>.</li><li>الدالة متاحة في جميع إصدارات Excel، وتعمل أيضًا في Google Sheets بالطريقة نفسها.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل يمكن الحصول على الربع من الشهر؟</h3>
+<p>نعم، الصيغة <code dir="ltr">=ROUNDUP(MONTH(A2)/3,0)</code> تعيد رقم الربع من 1 إلى 4.</p>
+<h3>ما الفرق بين MONTH وتنسيق الخلية بالشهر؟</h3>
+<p>التنسيق يغيّر طريقة العرض فقط وتبقى القيمة تاريخًا كاملًا، أما MONTH فتعيد رقمًا مستقلًا يصلح للمقارنة والتجميع.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=MONTH(A2)</code></pre>
 <p>النتيجة: شهر الفاتورة</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/year/" title="شرح دالة YEAR في Excel بالعربي">YEAR</a></li><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li><li><a href="/excel-ar/formulas/date/" title="شرح دالة DATE في Excel بالعربي">DATE</a></li><li><a href="/excel-ar/formulas/day/" title="شرح دالة DAY في Excel بالعربي">DAY</a></li><li><a href="/excel-ar/formulas/roundup/" title="شرح دالة ROUNDUP في Excel بالعربي">ROUNDUP</a></li><li><a href="/excel-ar/formulas/sumproduct/" title="شرح دالة SUMPRODUCT في Excel بالعربي">SUMPRODUCT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

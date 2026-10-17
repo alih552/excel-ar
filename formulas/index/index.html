@@ -6,10 +6,11 @@
 <title>شرح دالة INDEX في Excel بالعربي</title>
 <meta name="description" content="شرح دالة INDEX في Excel: تعيد القيمة الموجودة في صف وعمود محددين داخل نطاق، وتُستخدم كثيراً مع MATCH. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="INDEX، دالة INDEX، شرح INDEX، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/index/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة INDEX في Excel بالعربي">
 <meta property="og:description" content="شرح دالة INDEX في Excel: تعيد القيمة الموجودة في صف وعمود محددين داخل نطاق، وتُستخدم كثيراً مع MATCH. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/index/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,45 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=INDEX(array, row_num, [column_num])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array</code>: مطلوب</li><li><code dir="ltr">row_num</code>: مطلوب</li><li><code dir="ltr">column_num</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">array</code>: النطاق أو الجدول الذي تريد جلب القيمة منه، ويفضل أن يكون بدون صف العناوين. (مطلوب)</li><li><code dir="ltr">row_num</code>: رقم الصف داخل النطاق محسوباً من أوله، والصفر يعيد العمود كاملاً. (مطلوب)</li><li><code dir="ltr">column_num</code>: رقم العمود داخل النطاق محسوباً من أوله، ويمكن حذفه إذا كان النطاق عموداً واحداً. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم INDEX</h2>
+<p>الدالة INDEX تجيب عن سؤال بسيط: ما القيمة الموجودة في الصف رقم كذا والعمود رقم كذا داخل هذا الجدول؟ قد يبدو ذلك محدود الفائدة وحده، لكن قوتها الحقيقية تظهر عند دمجها مع MATCH، فيصبح لديك بحث مرن في أي اتجاه: من اليمين أو من اليسار، وبصف وعمود معاً، وهو ما لا تستطيعه <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a>.</p>
+<p>تستخدم في جداول الأسعار والمخزون الموزع على الفروع، وجداول الرواتب حسب الدرجة والمرحلة، وجداول الحضور التي فيها أسماء في الصفوف وأيام في الأعمدة.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li>تحدد أولاً النطاق الذي تبحث فيه، بدون صف العناوين عادة.</li><li>رقم الصف يحسب من بداية النطاق لا من بداية الورقة. فإذا بدأ النطاق من الصف 2 فإن الرقم 1 يعني الصف 2 في الورقة.</li><li>رقم العمود كذلك يحسب من أول عمود في النطاق. إذا كان النطاق عموداً واحداً يمكنك حذفه.</li><li>إذا كتبت 0 مكان رقم الصف أعادت الدالة العمود كاملاً، وإذا كتبته مكان رقم العمود أعادت الصف كاملاً.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>جدول كميات القرطاسية المتوفرة في مخازن ثلاثة فروع. الأصناف في A2:A6 وأسماء الفروع في B1:D1:</p>
+<div class="table-wrap"><table><thead><tr><th>الصنف</th><th>بغداد</th><th>البصرة</th><th>أربيل</th></tr></thead><tbody><tr><td>ورق طباعة</td><td>120</td><td>85</td><td>60</td></tr><tr><td>أقلام حبر</td><td>340</td><td>210</td><td>150</td></tr><tr><td>دفاتر</td><td>95</td><td>140</td><td>70</td></tr><tr><td>ملفات بلاستيك</td><td>60</td><td>45</td><td>110</td></tr><tr><td>حبر طابعة</td><td>25</td><td>18</td><td>12</td></tr></tbody></table></div>
+<p>لمعرفة القيمة في الصف الثالث والعمود الثاني من النطاق:</p>
+<pre dir="ltr"><code>=INDEX(B2:D6,3,2)</code></pre>
+<p>النتيجة: 140، وهي كمية الدفاتر في البصرة. الصف الثالث من النطاق هو صف الدفاتر، والعمود الثاني هو عمود البصرة.</p>
+<h3>البحث بالاسم بدل الرقم</h3>
+<p>نادراً ما تعرف رقم الصف مسبقاً، لذلك تحسبه MATCH من اسم الصنف واسم الفرع:</p>
+<pre dir="ltr"><code>=INDEX(B2:D6,MATCH(&quot;حبر طابعة&quot;,A2:A6,0),MATCH(&quot;أربيل&quot;,B1:D1,0))</code></pre>
+<p>تعيد MATCH الأولى 5 لأن حبر الطابعة هو الصنف الخامس، وتعيد الثانية 3 لأن أربيل هو الفرع الثالث، فتكون النتيجة 12. ضع اسم الصنف والفرع في خليتين واكتب مرجعيهما مكان النصين، فتحصل على أداة استعلام يغير فيها المستخدم الاسم فتتغير النتيجة.</p>
+<h3>جمع عمود كامل</h3>
+<pre dir="ltr"><code>=SUM(INDEX(B2:D6,0,2))</code></pre>
+<p>النتيجة: 498، وهي مجموع عمود البصرة: 85 و 210 و 140 و 45 و 18.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<h3>الخطأ #REF!</h3>
+<p>يظهر عندما يكون رقم الصف أو العمود أكبر من حجم النطاق، مثل طلب الصف 7 من نطاق فيه خمسة صفوف. تأكد أن النطاق يشمل كل البيانات.</p>
+<h3>الخطأ #N/A</h3>
+<p>يأتي غالباً من MATCH عندما لا تجد الاسم، بسبب مسافة زائدة أو اختلاف في كتابة الهمزة أو التاء المربوطة. استخدم <a href="/excel-ar/formulas/trim/">TRIM</a> لتنظيف البيانات، أو لف الصيغة بـ <a href="/excel-ar/formulas/iferror/">IFERROR</a>.</p>
+<h3>الخطأ #VALUE!</h3>
+<p>يظهر إذا كان رقم الصف أو العمود نصاً لا يمكن تحويله إلى رقم.</p>
+<h3>نتيجة منزاحة بصف واحد</h3>
+<p>يحدث هذا عندما يبدأ نطاق INDEX من صف العناوين بينما يبدأ نطاق MATCH من صف البيانات. اجعل النطاقين يبدآن من الصف نفسه.</p>
+<h2 id="s-5">نصائح</h2>
+<ul><li>الدالة متوفرة في كل نسخ Excel، وهذا يجعل INDEX مع MATCH خياراً آمناً عند مشاركة الملف مع من يستخدم نسخاً قديمة لا تحتوي <a href="/excel-ar/formulas/xlookup/">XLOOKUP</a>.</li><li>للدالة شكل ثانٍ يأخذ عدة نطاقات ورقم المنطقة كوسيط رابع، ويستخدم نادراً.</li><li>في Excel 365 و 2021 تنسكب نتيجة <code dir="ltr">=INDEX(B2:D6,0,2)</code> وحدها في خمس خلايا متتالية، أما في النسخ الأقدم فاستخدمها داخل دالة مثل <a href="/excel-ar/formulas/sum/">SUM</a> كما في المثال.</li><li>في إعدادات Windows العربية اكتبها هكذا: <code dir="ltr">=INDEX(B2:D6;3;2)</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=INDEX(C2:C100,5)</code></pre>
 <p>النتيجة: القيمة الخامسة في العمود C</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=INDEX(C2:C100;5)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/xlookup/" title="شرح دالة XLOOKUP في Excel بالعربي">XLOOKUP</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

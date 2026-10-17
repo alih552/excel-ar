@@ -6,10 +6,11 @@
 <title>شرح دالة TODAY في Excel بالعربي</title>
 <meta name="description" content="شرح دالة TODAY في Excel: تعيد تاريخ اليوم وتتحدث تلقائياً كل يوم. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="TODAY، دالة TODAY، شرح TODAY، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/today/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة TODAY في Excel بالعربي">
 <meta property="og:description" content="شرح دالة TODAY في Excel: تعيد تاريخ اليوم وتتحدث تلقائياً كل يوم. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/today/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -27,11 +28,30 @@
 <p class="lead">تعيد تاريخ اليوم وتتحدث تلقائياً كل يوم.</p>
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=TODAY()</code></pre>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم TODAY</h2>
+<p>أي حساب يعتمد على تاريخ اليوم يحتاج هذه الدالة: عدد أيام تأخر الفواتير عن موعد استحقاقها، والأيام المتبقية على انتهاء عقد أو إقامة، وأعمار الموظفين ومدة خدمتهم، وتنبيه المخزن إلى المواد القريبة من انتهاء صلاحيتها. بدلاً من كتابة تاريخ اليوم بيدك كل صباح، تقرأ TODAY التاريخ من جهاز الحاسوب وتتحدث تلقائياً.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li>لا تأخذ أي وسيط، لكن القوسين ضروريان: <code dir="ltr">=TODAY()</code>.</li><li>تعيد التاريخ دون وقت، أي منتصف ليل اليوم الحالي. إذا أردت الوقت أيضاً فاستخدم <a href="/excel-ar/formulas/now/">NOW</a>.</li><li>التاريخ في Excel رقم تسلسلي، لذلك يمكن طرح تاريخين للحصول على عدد الأيام بينهما، أو إضافة أيام إلى التاريخ.</li><li>دالة متغيرة تعيد الحساب عند فتح الملف وعند كل إعادة حساب في المصنف، فالنتيجة تتغير من يوم لآخر.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>قائمة فواتير لم تسدد بعد فيها رقم الفاتورة في العمود A وتاريخ استحقاقها في العمود B. نفترض أن تاريخ اليوم 20/10/2026:</p>
+<div class="table-wrap"><table><thead><tr><th>رقم الفاتورة</th><th>تاريخ الاستحقاق</th><th>أيام التأخير</th><th>الحالة</th></tr></thead><tbody><tr><td>INV-301</td><td>05/10/2026</td><td>15</td><td>متأخرة</td></tr><tr><td>INV-302</td><td>18/10/2026</td><td>2</td><td>متأخرة</td></tr><tr><td>INV-303</td><td>30/10/2026</td><td>-10</td><td>ضمن المهلة</td></tr></tbody></table></div>
+<p>الصيغة في العمود C لحساب أيام التأخير:</p>
+<pre dir="ltr"><code>=TODAY()-B2</code></pre>
+<p>النتيجة في الصف الأول 15، لأن بين 05/10/2026 و 20/10/2026 خمسة عشر يوماً. وفي الصف الأخير تظهر -10 لأن موعد الاستحقاق لم يأت بعد، فالرقم السالب يعني الأيام المتبقية.</p>
+<p>الصيغة في العمود D للحالة:</p>
+<pre dir="ltr"><code>=IF(TODAY()&gt;B2,&quot;متأخرة&quot;,&quot;ضمن المهلة&quot;)</code></pre>
+<p>وغداً ستزيد أيام التأخير يوماً واحداً دون أن تغير شيئاً في الملف.</p>
+<h3>صيغ مفيدة أخرى</h3>
+<ul><li>مدة الخدمة بالسنوات الكاملة من تاريخ التعيين في E2: <code dir="ltr">=DATEDIF(E2,TODAY(),&quot;y&quot;)</code>. الدالة <a href="/excel-ar/formulas/datedif/">DATEDIF</a> قديمة ولا تظهر في قائمة الدوال ولا في الإكمال التلقائي، لكنها تعمل إذا كتبتها كاملة.</li><li>الأيام المتبقية حتى نهاية الشهر الحالي: <code dir="ltr">=EOMONTH(TODAY(),0)-TODAY()</code>، وتعيد 11 في المثال لأن الشهر ينتهي في 31/10/2026.</li><li>مواد تنتهي صلاحيتها خلال 30 يوماً: <code dir="ltr">=IF(F2-TODAY()&lt;=30,&quot;تنبيه&quot;,&quot;&quot;)</code>.</li></ul>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>النتيجة تظهر تاريخاً غريباً مثل 15/01/1900</strong>: الخلية منسقة كتاريخ، والمطلوب عدد أيام. غيّر تنسيق الخلية إلى عام أو رقم.</li><li><strong>الخطأ #VALUE!</strong>: تاريخ الاستحقاق مكتوب كنص لا يستطيع Excel قراءته كتاريخ. أعد إدخاله أو حوله بالدالة DATEVALUE.</li><li><strong>التاريخ خاطئ</strong>: TODAY تقرأ تاريخ الجهاز، فإذا كان تاريخ الحاسوب غير مضبوط كانت النتيجة خاطئة.</li><li><strong>التاريخ لا يتحدث</strong>: الحساب في الملف مضبوط على اليدوي. اضغط F9 أو أعد الحساب إلى تلقائي من قائمة الصيغ.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>إذا أردت تسجيل تاريخ ثابت لا يتغير، مثل تاريخ استلام طلب، فلا تستخدم TODAY. اضغط Ctrl و ; معاً ليكتب Excel تاريخ اليوم كقيمة ثابتة.</li><li>كثرة الدوال المتغيرة مثل TODAY في ملف كبير قد تبطئ الحساب، فضع TODAY في خلية واحدة وأشر إليها من بقية الصيغ.</li><li>في الإعدادات الإقليمية العربية تفصل الوسائط بالفاصلة المنقوطة: <code dir="ltr">=IF(TODAY()&gt;B2;&quot;متأخرة&quot;;&quot;ضمن المهلة&quot;)</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=TODAY()-A2</code></pre>
 <p>النتيجة: عدد الأيام منذ تاريخ الطلب</p>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/datedif/" title="شرح دالة DATEDIF في Excel بالعربي">DATEDIF</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/now/" title="شرح دالة NOW في Excel بالعربي">NOW</a></li><li><a href="/excel-ar/formulas/datedif/" title="شرح دالة DATEDIF في Excel بالعربي">DATEDIF</a></li><li><a href="/excel-ar/formulas/date/" title="شرح دالة DATE في Excel بالعربي">DATE</a></li><li><a href="/excel-ar/formulas/day/" title="شرح دالة DAY في Excel بالعربي">DAY</a></li><li><a href="/excel-ar/formulas/edate/" title="شرح دالة EDATE في Excel بالعربي">EDATE</a></li><li><a href="/excel-ar/formulas/eomonth/" title="شرح دالة EOMONTH في Excel بالعربي">EOMONTH</a></li><li><a href="/excel-ar/formulas/month/" title="شرح دالة MONTH في Excel بالعربي">MONTH</a></li><li><a href="/excel-ar/formulas/networkdays/" title="شرح دالة NETWORKDAYS في Excel بالعربي">NETWORKDAYS</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

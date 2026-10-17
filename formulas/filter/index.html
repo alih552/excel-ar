@@ -6,10 +6,11 @@
 <title>شرح دالة FILTER في Excel بالعربي</title>
 <meta name="description" content="شرح دالة FILTER في Excel: تعيد الصفوف التي تحقق شرطاً، وتتحدث النتيجة تلقائياً عند تغيّر البيانات (Excel 365). مع الصيغة ومثال عملي.">
 <meta name="keywords" content="FILTER، دالة FILTER، شرح FILTER، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/filter/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة FILTER في Excel بالعربي">
 <meta property="og:description" content="شرح دالة FILTER في Excel: تعيد الصفوف التي تحقق شرطاً، وتتحدث النتيجة تلقائياً عند تغيّر البيانات (Excel 365). مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/filter/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,43 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=FILTER(array, include, [if_empty])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array</code>: مطلوب</li><li><code dir="ltr">include</code>: مطلوب</li><li><code dir="ltr">if_empty</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">array</code>: النطاق أو الجدول الذي تريد استخراج الصفوف منه، ويمكن أن يكون عموداً واحداً أو عدة أعمدة. (مطلوب)</li><li><code dir="ltr">include</code>: شرط يعيد TRUE أو FALSE لكل صف بعدد صفوف array نفسه، ويمكن دمج عدة شروط فيه بالضرب أو الجمع. (مطلوب)</li><li><code dir="ltr">if_empty</code>: القيمة أو النص الذي يظهر إذا لم يحقق أي صف الشرط، بدلاً من الخطأ #CALC!. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم FILTER</h2>
+<p>استخدم FILTER عندما تريد نسخة حيّة من جزء من الجدول تتغيّر وحدها كلما تغيّرت البيانات الأصلية، بدلاً من التصفية اليدوية من زر التصفية. من الأمثلة:</p>
+<ul><li>عرض طلبات فرع معيّن في ورقة تقرير منفصلة.</li><li>استخراج الموظفين الذين تجاوزت غياباتهم حداً معيّناً.</li><li>قائمة بالأصناف التي نفد مخزونها أو اقتربت من النفاد.</li><li>لوحة متابعة يختار فيها المستخدم الفرع من قائمة منسدلة فتتغيّر النتيجة.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تكتب الدالة في خلية واحدة، فتنسكب النتيجة على الخلايا المجاورة بعدد الصفوف والأعمدة المطلوب. الوسيط include مصفوفة من القيم TRUE وFALSE بعدد صفوف array نفسه، وكل صف قيمته TRUE يظهر في النتيجة، والصفوف تبقى بترتيبها الأصلي.</p>
+<p>لربط أكثر من شرط:</p>
+<ul><li>الضرب <code dir="ltr">*</code> يعني «و»: يجب أن يتحقق الشرطان معاً.</li><li>الجمع <code dir="ltr">+</code> يعني «أو»: يكفي أن يتحقق أحدهما.</li></ul>
+<p>ضع كل شرط بين قوسين حتى يُحسب قبل الضرب أو الجمع.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>جدول طلبات في النطاق A1:D7:</p>
+<div class="table-wrap"><table><thead><tr><th>رقم الطلب (A)</th><th>الفرع (B)</th><th>المندوب (C)</th><th>قيمة الطلب (D)</th></tr></thead><tbody><tr><td>1001</td><td>بغداد</td><td>علي</td><td>250000</td></tr><tr><td>1002</td><td>البصرة</td><td>مريم</td><td>180000</td></tr><tr><td>1003</td><td>بغداد</td><td>يوسف</td><td>420000</td></tr><tr><td>1004</td><td>أربيل</td><td>نور</td><td>310000</td></tr><tr><td>1005</td><td>بغداد</td><td>علي</td><td>95000</td></tr><tr><td>1006</td><td>البصرة</td><td>سلمى</td><td>500000</td></tr></tbody></table></div>
+<p>المطلوب: طلبات فرع بغداد التي لا تقل قيمتها عن 200000. اكتب في الخلية F2:</p>
+<pre dir="ltr"><code>=FILTER(A2:D7,(B2:B7=&quot;بغداد&quot;)*(D2:D7&gt;=200000),&quot;لا توجد طلبات&quot;)</code></pre>
+<p>النتيجة صفّان ينسكبان من F2 إلى I3: الطلب 1001 للمندوب علي بقيمة 250000، والطلب 1003 للمندوب يوسف بقيمة 420000. الطلب 1005 استُبعد لأن قيمته أقل من الحد، رغم أنه من بغداد.</p>
+<p>أما شرط «أو»، أي طلبات البصرة أو أي طلب تتجاوز قيمته 400000:</p>
+<pre dir="ltr"><code>=FILTER(A2:D7,(B2:B7=&quot;البصرة&quot;)+(D2:D7&gt;400000))</code></pre>
+<p>فيعيد ثلاثة صفوف: 1002 و1003 و1006. الطلب 1006 يحقق الشرطين معاً فيصبح ناتج الجمع له 2، وأي ناتج غير الصفر يُعدّ TRUE، لذلك يظهر مرة واحدة فقط.</p>
+<p>ولعرض أسماء المندوبين وحدهم يكفي أن يكون array عموداً واحداً: <code dir="ltr">=FILTER(C2:C7,B2:B7=&quot;أربيل&quot;)</code> تعيد «نور».</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #SPILL!</strong>: توجد قيمة في إحدى الخلايا التي تحتاجها النتيجة للانسكاب. امسح تلك الخلايا أو انقل الصيغة إلى مكان فارغ.</li><li><strong>الخطأ #CALC!</strong>: لم يحقق أي صف الشرط ولم تكتب الوسيط if_empty. أضف نصاً مثل &quot;لا توجد نتائج&quot;.</li><li><strong>الخطأ #VALUE!</strong>: نطاق الشرط لا يطابق عدد صفوف array، مثل A2:D7 مع B2:B8. اجعل النطاقات تبدأ وتنتهي في الصفوف نفسها.</li><li><strong>الخطأ #NAME?</strong>: الإصدار لا يدعم الدالة، مثل Excel 2019 وما قبله، وفيه يُستعاض عنها بالتصفية المتقدمة أو بصيغ صفيف تجمع <a href="/excel-ar/formulas/index/">INDEX</a> و<a href="/excel-ar/formulas/small/">SMALL</a>.</li><li><strong>لا تظهر نتائج رغم وجودها</strong>: غالباً بسبب مسافة زائدة في الخلايا. جرّب <code dir="ltr">TRIM(B2:B7)=&quot;بغداد&quot;</code> في الشرط.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>تعمل FILTER أيضاً في Excel 2024 وExcel للويب، ولا يحسبها Excel 2019 وما قبله، فانتبه قبل مشاركة الملف مع من يستخدم إصداراً أقدم.</li><li>اجمعها مع <a href="/excel-ar/formulas/sort/">SORT</a> لترتيب النتيجة: <code dir="ltr">=SORT(FILTER(A2:D7,B2:B7=&quot;بغداد&quot;),4,-1)</code> ترتب طلبات بغداد من الأعلى قيمة إلى الأقل.</li><li>حوّل البيانات إلى جدول منسّق حتى تتوسع النطاقات تلقائياً عند إضافة طلبات جديدة.</li><li>مع الإعدادات الإقليمية التي تستخدم الفاصلة المنقوطة تصبح صيغة الشرطين <code dir="ltr">=FILTER(A2:D7;(B2:B7=&quot;بغداد&quot;)*(D2:D7&gt;=200000);&quot;لا توجد طلبات&quot;)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل يمكنني تعديل خلية داخل نتيجة FILTER؟</h3>
+<p>لا، النتيجة مرتبطة بالصيغة. عدّل البيانات الأصلية وستتحدّث النتيجة وحدها.</p>
+<h3>كيف أعرف عدد الصفوف الناتجة؟</h3>
+<p>استخدم <code dir="ltr">=ROWS(FILTER(A2:D7,B2:B7=&quot;بغداد&quot;))</code>، فتعيد 3 في المثال أعلاه.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=FILTER(A2:D100,C2:C100=&quot;بغداد&quot;,&quot;لا توجد نتائج&quot;)</code></pre>
 <p>النتيجة: كل طلبات بغداد</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=FILTER(A2:D100;C2:C100=&quot;بغداد&quot;;&quot;لا توجد نتائج&quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/small/" title="شرح دالة SMALL في Excel بالعربي">SMALL</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/sort/" title="شرح دالة SORT في Excel بالعربي">SORT</a></li><li><a href="/excel-ar/formulas/and/" title="شرح دالة AND في Excel بالعربي">AND</a></li><li><a href="/excel-ar/formulas/choosecols/" title="شرح دالة CHOOSECOLS في Excel بالعربي">CHOOSECOLS</a></li><li><a href="/excel-ar/formulas/let/" title="شرح دالة LET في Excel بالعربي">LET</a></li><li><a href="/excel-ar/formulas/search/" title="شرح دالة SEARCH في Excel بالعربي">SEARCH</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

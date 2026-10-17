@@ -6,10 +6,11 @@
 <title>شرح دالة IFS في Excel بالعربي</title>
 <meta name="description" content="شرح دالة IFS في Excel: تختبر عدة شروط بالترتيب وتعيد قيمة أول شرط صحيح، بديلاً عن IF المتداخلة. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="IFS، دالة IFS، شرح IFS، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/ifs/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة IFS في Excel بالعربي">
 <meta property="og:description" content="شرح دالة IFS في Excel: تختبر عدة شروط بالترتيب وتعيد قيمة أول شرط صحيح، بديلاً عن IF المتداخلة. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/ifs/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,45 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=IFS(logical_test1, value_if_true1, [logical_test2, value_if_true2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">logical_test1</code>: مطلوب</li><li><code dir="ltr">value_if_true1</code>: مطلوب</li><li><code dir="ltr">logical_test2</code>: اختياري</li><li><code dir="ltr">value_if_true2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">logical_test1</code>: الشرط الأول الذي يفحصه Excel، مثل B2=0، ويجب أن تكون نتيجته صحيحاً أو خطأ. (مطلوب)</li><li><code dir="ltr">value_if_true1</code>: القيمة التي تعيدها الدالة إذا تحقق الشرط الأول. (مطلوب)</li><li><code dir="ltr">logical_test2</code>: الشرط الثاني، ولا يُفحص إلا إذا لم يتحقق الشرط الأول. (اختياري)</li><li><code dir="ltr">value_if_true2</code>: القيمة التي تعيدها الدالة إذا تحقق الشرط الثاني، وهكذا لبقية الأزواج. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم IFS</h2>
+<p>عندما تحتاج إلى تصنيف قيمة إلى أكثر من فئتين، كان الحل التقليدي هو IF متداخلة داخل بعضها، وهي صيغة طويلة يصعب قراءتها وتكثر فيها الأقواس. الدالة IFS تكتب الشروط متتالية في صيغة واحدة مسطحة: شرط ثم نتيجته، ثم شرط ثم نتيجته، وهكذا.</p>
+<p>تناسب IFS أعمال التصنيف المتكررة في المكاتب: تقدير الطلاب حسب الدرجة، وفئة الحافز حسب المبيعات، وحالة الدوام حسب دقائق التأخير، ومستوى المخزون حسب الكمية المتبقية.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>يفحص Excel الشروط بالترتيب الذي كتبتها به. عند أول شرط صحيح يعيد القيمة المرافقة له ويتوقف، ولا ينظر إلى الشروط التي بعده. لذلك فإن ترتيب الشروط هو أهم ما في الصيغة.</p>
+<p>يمكن كتابة ما يصل إلى 127 زوجاً من الشروط والنتائج في صيغة واحدة.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>قسم الموارد البشرية يصنف الموظفين حسب مجموع دقائق التأخير في الشهر. العمود A فيه الاسم، والعمود B دقائق التأخير، والمطلوب التصنيف في العمود C:</p>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>دقائق التأخير</th><th>التصنيف</th></tr></thead><tbody><tr><td>سارة</td><td>0</td><td>منضبط</td></tr><tr><td>أحمد</td><td>12</td><td>تأخير بسيط</td></tr><tr><td>ليلى</td><td>45</td><td>تأخير متوسط</td></tr><tr><td>مصطفى</td><td>95</td><td>تأخير كبير</td></tr><tr><td>حسين</td><td>15</td><td>تأخير بسيط</td></tr></tbody></table></div>
+<p>الصيغة في الخلية C2:</p>
+<pre dir="ltr"><code>=IFS(B2=0,&quot;منضبط&quot;,B2&lt;=15,&quot;تأخير بسيط&quot;,B2&lt;=60,&quot;تأخير متوسط&quot;,TRUE,&quot;تأخير كبير&quot;)</code></pre>
+<p>طريقة الوصول إلى كل نتيجة:</p>
+<ol><li>سارة: الشرط الأول صحيح لأن التأخير صفر، فالنتيجة منضبط.</li><li>أحمد: الشرط الأول خطأ، والثاني صحيح لأن 12 أقل من 15، فالنتيجة تأخير بسيط.</li><li>ليلى: 45 أكبر من 15 لكنها لا تتجاوز 60، فالنتيجة تأخير متوسط.</li><li>مصطفى: لم يتحقق أي من الشروط الثلاثة، فوصل Excel إلى الشرط TRUE وهو صحيح دائماً، فالنتيجة تأخير كبير.</li><li>حسين: 15 تساوي الحد تماماً، والشرط &quot;أقل من أو يساوي&quot; يشملها، فالنتيجة تأخير بسيط.</li></ol>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<h3>الخطأ #N/A</h3>
+<p>يظهر عندما لا يتحقق أي شرط. في المثال لو حذفنا الزوج الأخير لظهر <code dir="ltr">#N/A</code> أمام مصطفى. الحل أن تختم الصيغة دائماً بالشرط TRUE ومعه القيمة الافتراضية.</p>
+<h3>نتائج غير منطقية بسبب الترتيب</h3>
+<p>لو كتبت الشرط <code dir="ltr">B2&lt;=60</code> قبل <code dir="ltr">B2&lt;=15</code> لصُنف أحمد وحسين تأخيراً متوسطاً، لأن الشرط الأوسع تحقق أولاً. رتّب الحدود من الأصغر إلى الأكبر عند استخدام &quot;أقل من&quot;، ومن الأكبر إلى الأصغر عند استخدام &quot;أكبر من&quot;.</p>
+<h3>الخطأ #NAME?</h3>
+<p>يعني غالباً أن نسخة Excel لا تعرف الدالة، كأن يُفتح الملف في Excel 2016 الدائمة أو ما قبلها. الحل هو استخدام IF متداخلة إذا كان الملف سيُشارك مع مستخدمي هذه النسخ.</p>
+<h3>الخطأ #VALUE!</h3>
+<p>يظهر إذا أعاد أحد الشروط شيئاً غير TRUE أو FALSE، كأن تكتب مرجع خلية نصية مكان الشرط.</p>
+<h2 id="s-5">نصائح</h2>
+<ul><li>IFS متوفرة في Excel 2019 و 2021 و Microsoft 365 و Excel للويب، وغير متوفرة في نسخة Excel 2016 الدائمة وما قبلها.</li><li>إذا كانت المقارنة بقيم ثابتة متساوية (رمز الفرع مثلاً) فالدالة SWITCH أقصر وأوضح، وهي متوفرة في النسخ نفسها.</li><li>إذا كثرت الفئات فضع الحدود في جدول جانبي واستخدم <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a> بالتطابق التقريبي على جدول مرتب تصاعدياً، أو <a href="/excel-ar/formulas/xlookup/">XLOOKUP</a> في Excel 2021 و 365، فتعديل الجدول أسهل من تعديل الصيغة.</li><li>في إعدادات Windows العربية افصل الوسائط بالفاصلة المنقوطة: <code dir="ltr">=IFS(B2=0;&quot;منضبط&quot;;TRUE;&quot;متأخر&quot;)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل يمكن استخدام AND داخل IFS؟</h3>
+<p>نعم، كل شرط يمكن أن يكون مركباً، مثل <code dir="ltr">AND(B2&gt;0,B2&lt;=15)</code>.</p>
+<h3>ما الفرق بين IFS و IF المتداخلة في النتيجة؟</h3>
+<p>إذا ختمت IFS بالشرط TRUE فالنتيجة واحدة، والفرق في سهولة القراءة والتعديل. أما بدونه فتعيد IFS الخطأ <code dir="ltr">#N/A</code> حين لا يتحقق أي شرط، بينما تعيد IF المتداخلة FALSE إذا حذفت وسيطها الأخير.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=IFS(C2&gt;=90,&quot;امتياز&quot;,C2&gt;=80,&quot;جيد جداً&quot;,C2&gt;=50,&quot;ناجح&quot;,TRUE,&quot;راسب&quot;)</code></pre>
 <p>النتيجة: التقدير</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=IFS(C2&gt;=90;&quot;امتياز&quot;;C2&gt;=80;&quot;جيد جداً&quot;;C2&gt;=50;&quot;ناجح&quot;;TRUE;&quot;راسب&quot;)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/xlookup/" title="شرح دالة XLOOKUP في Excel بالعربي">XLOOKUP</a></li><li><a href="/excel-ar/formulas/and/" title="شرح دالة AND في Excel بالعربي">AND</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

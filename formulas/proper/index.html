@@ -6,10 +6,11 @@
 <title>شرح دالة PROPER في Excel بالعربي</title>
 <meta name="description" content="شرح دالة PROPER في Excel: تجعل الحرف الأول من كل كلمة إنجليزية كبيراً والباقي صغيراً. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="PROPER، دالة PROPER، شرح PROPER، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/proper/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة PROPER في Excel بالعربي">
 <meta property="og:description" content="شرح دالة PROPER في Excel: تجعل الحرف الأول من كل كلمة إنجليزية كبيراً والباقي صغيراً. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/proper/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,35 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=PROPER(text)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">text</code>: النص المراد تحويله، ويكون خلية أو نصًا بين علامتي تنصيص أو صيغة تعيد نصًا. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم PROPER</h2>
+<p>تحول الدالة PROPER أول حرف من كل كلمة إلى حرف كبير وبقية الحروف إلى صغيرة. تفيد مع البيانات المكتوبة بالحروف اللاتينية، وهي شائعة حتى في الملفات العربية:</p>
+<ul><li>توحيد أسماء العملاء أو الموظفين المكتوبة بالإنجليزية في كشوف الرواتب أو قوائم الشحن.</li><li>ترتيب أسماء المدن والفروع المستوردة من نظام آخر بحروف كبيرة كلها.</li><li>تجهيز الأسماء قبل طباعة الشهادات أو بطاقات الموظفين.</li></ul>
+<p>الحروف العربية لا تتأثر بالدالة لأنها لا تعرف حروفًا كبيرة وصغيرة، فتبقى كما هي.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تجعل الدالة أول حرف في النص كبيرًا، وكذلك كل حرف يأتي بعد شيء ليس حرفًا، مثل المسافة أو الشرطة أو الرقم أو الفاصلة العلوية، وتجعل بقية الحروف صغيرة. النتيجة نص جديد، والخلية الأصلية لا تتغير.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>قائمة أسماء موظفين أدخلت من نموذج تسجيل بطرق مختلفة:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: الاسم كما أدخل</th><th>B: النتيجة</th></tr></thead><tbody><tr><td>2</td><td>aHMED kareem</td><td>Ahmed Kareem</td></tr><tr><td>3</td><td>SARA ALI</td><td>Sara Ali</td></tr><tr><td>4</td><td>omar  hassan</td><td>Omar Hassan</td></tr><tr><td>5</td><td>al-mansour BRANCH</td><td>Al-Mansour Branch</td></tr></tbody></table></div>
+<p>اكتب في B2 واسحب الصيغة إلى الأسفل:</p>
+<pre dir="ltr"><code>=PROPER(TRIM(A2))</code></pre>
+<p>النتيجة في B2 هي <strong>Ahmed Kareem</strong>. أضفنا <a href="/excel-ar/formulas/trim/">TRIM</a> لأن الاسم في A4 فيه مسافتان بين الكلمتين، فتزيل TRIM المسافة الزائدة ثم تنسق PROPER الحروف. وفي A5 يصبح حرف m الذي يلي الشرطة كبيرًا أيضًا.</p>
+<p>لاستبدال الأسماء الأصلية بالنتائج: انسخ العمود B، ثم الصق فوق العمود A باختيار &quot;لصق القيم&quot;، ثم احذف العمود المساعد.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>حروف كبيرة في غير مكانها</strong>: الدالة تكبّر أي حرف بعد رمز ليس حرفًا، فالكلمة it&#39;s تصبح It&#39;S، والعبارة 2nd floor تصبح 2Nd Floor. صحّح هذه الحالات بدالة <a href="/excel-ar/formulas/substitute/">SUBSTITUTE</a>، مثل <code dir="ltr">=SUBSTITUTE(PROPER(A2),&quot;&#39;S&quot;,&quot;&#39;s&quot;)</code>.</li><li><strong>اختصارات تفقد شكلها</strong>: كلمات مثل HR أو IT تصبح Hr وIt. إذا كانت قليلة فعدلها يدويًا بعد التحويل.</li><li><strong>أسماء مثل McDonald</strong>: تصبح Mcdonald لأن الدالة لا تعرف قواعد الأسماء الخاصة.</li><li><strong>الأرقام تتحول إلى نص</strong>: إذا طبقت PROPER على رقم تعيده نصًا، فلا تستخدمها على أعمدة الأرقام.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>الدالتان المكملتان هما <a href="/excel-ar/formulas/upper/">UPPER</a> لتحويل كل الحروف إلى كبيرة، و<a href="/excel-ar/formulas/lower/">LOWER</a> لتحويلها إلى صغيرة.</li><li>في Excel 365 و2021 يمكن تحويل العمود كله بصيغة واحدة: <code dir="ltr">=PROPER(TRIM(A2:A5))</code> فتمتد النتائج تلقائيًا. في الإصدارات الأقدم اكتب الصيغة في B2 واسحبها.</li><li>أداة &quot;التعبئة السريعة&quot; (Ctrl+E) بديل سريع إذا كتبت أول نتيجة يدويًا.</li><li>لا يختلف شكل الصيغة في إعدادات الفاصلة المنقوطة لأنها بمعامل واحد، لكن مع SUBSTITUTE تكتب <code dir="ltr">=SUBSTITUTE(PROPER(A2);&quot;&#39;S&quot;;&quot;&#39;s&quot;)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تعمل PROPER مع الأسماء العربية؟</h3>
+<p>لا تغيّر فيها شيئًا، لأن العربية لا تميز بين الحروف الكبيرة والصغيرة. استخدمها مع الأجزاء اللاتينية فقط.</p>
+<h3>هل تحذف PROPER المسافات الزائدة؟</h3>
+<p>لا، لذلك نجمعها مع TRIM كما في المثال.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=PROPER(A2)</code></pre>
 <p>النتيجة: ali hassan تصبح Ali Hassan</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/substitute/" title="شرح دالة SUBSTITUTE في Excel بالعربي">SUBSTITUTE</a></li><li><a href="/excel-ar/formulas/upper/" title="شرح دالة UPPER في Excel بالعربي">UPPER</a></li><li><a href="/excel-ar/formulas/lower/" title="شرح دالة LOWER في Excel بالعربي">LOWER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

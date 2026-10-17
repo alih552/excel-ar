@@ -6,10 +6,11 @@
 <title>شرح دالة LOWER في Excel بالعربي</title>
 <meta name="description" content="شرح دالة LOWER في Excel: تحوّل الحروف الإنجليزية إلى حروف صغيرة. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="LOWER، دالة LOWER، شرح LOWER، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/lower/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة LOWER في Excel بالعربي">
 <meta property="og:description" content="شرح دالة LOWER في Excel: تحوّل الحروف الإنجليزية إلى حروف صغيرة. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/lower/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,35 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=LOWER(text)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">text</code>: النص أو الخلية التي تريد تحويل حروفها الإنجليزية الكبيرة إلى حروف صغيرة. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم LOWER</h2>
+<p>تستخدم LOWER عندما تصلك بيانات مكتوبة بالحروف الإنجليزية بطرق مختلفة، مثل رموز الأصناف أو أسماء المستخدمين أو أسماء الأقسام، وتريد توحيدها قبل الفرز أو المقارنة أو التصدير إلى نظام آخر. فالموظف قد يكتب <code dir="ltr">LAP-Blue</code> وزميله يكتب <code dir="ltr">lap-blue</code>، وهما في الحقيقة القيمة نفسها.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تأخذ الدالة نصاً واحداً وتعيده بعد تحويل كل الحروف اللاتينية الكبيرة إلى صغيرة. أما الحروف العربية فلا تتغير لأنها لا تعرف حالة كبيرة وصغيرة، وكذلك الأرقام والرموز مثل الشرطة والمسافة.</p>
+<ul><li>النتيجة دائماً نص، حتى لو كان المدخل رقماً.</li><li>لا تغيّر الدالة الخلية الأصلية، بل تعيد نسخة معدّلة في الخلية التي كتبت فيها الصيغة.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>قائمة رموز أصناف في مخزن أدخلها أكثر من موظف بطرق مختلفة:</p>
+<div class="table-wrap"><table><thead><tr><th>الصف</th><th>A: الرمز كما أُدخل</th><th>B: النتيجة</th></tr></thead><tbody><tr><td>2</td><td>LAP-Blue-15</td><td>lap-blue-15</td></tr><tr><td>3</td><td>Mouse-WL-02</td><td>mouse-wl-02</td></tr><tr><td>4</td><td>kbd-AR-01</td><td>kbd-ar-01</td></tr><tr><td>5</td><td>قسم IT</td><td>قسم it</td></tr></tbody></table></div>
+<p>اكتب في الخلية B2:</p>
+<pre dir="ltr"><code>=LOWER(A2)</code></pre>
+<p>ثم اسحب الصيغة حتى B5. في الصف الثاني تعيد الصيغة <strong>lap-blue-15</strong>، وفي الصف الخامس بقيت كلمة &quot;قسم&quot; كما هي وتحولت IT فقط إلى it.</p>
+<p>لإزالة المسافات الزائدة مع التوحيد في خطوة واحدة، اجمع الدالة مع <a href="/excel-ar/formulas/trim/">TRIM</a>:</p>
+<pre dir="ltr"><code>=LOWER(TRIM(A2))</code></pre>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>تحوّل التاريخ إلى رقم</strong>: إذا طبقت LOWER على خلية فيها تاريخ، ستحصل على الرقم التسلسلي للتاريخ كنص، لأن الدالة تقرأ القيمة لا التنسيق. استخدم <code dir="ltr">=LOWER(TEXT(A2,&quot;dd-mmm-yyyy&quot;))</code> إذا احتجت التاريخ كنص.</li><li><strong>الأرقام أصبحت نصاً</strong>: الناتج نص، لذلك لن تعمل عليه دالة <a href="/excel-ar/formulas/sum/">SUM</a> مباشرة. لا تستخدم LOWER على أعمدة الأرقام أصلاً.</li><li><strong>الخطأ #REF! بعد حذف العمود الأصلي</strong>: الصيغة تشير إلى العمود A، فإذا حذفته فقدت مرجعها. إذا أردت الاحتفاظ بالنتيجة وحدها، انسخ العمود B ثم الصق القيم فقط قبل حذف العمود A.</li><li><strong>ظهور خطأ مثل #N/A أو #VALUE!</strong>: LOWER لا تنتج هذه الأخطاء بنفسها، بل تنقل الخطأ الموجود في الخلية الأصلية كما هو. عالج الخطأ في مصدره، أو استخدم <code dir="ltr">=IFERROR(LOWER(A2),&quot;&quot;)</code>.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>دوال مثل <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a> و<a href="/excel-ar/formulas/match/">MATCH</a> و<a href="/excel-ar/formulas/countif/">COUNTIF</a> لا تفرّق بين الحروف الكبيرة والصغيرة، لذلك لا تحتاج LOWER من أجلها. لكن الدالتين EXACT و<a href="/excel-ar/formulas/find/">FIND</a> تفرّقان، وكذلك بعض الأنظمة التي تستورد ملفاتك.</li><li>الدالة المعاكسة هي <a href="/excel-ar/formulas/upper/">UPPER</a>، أما <a href="/excel-ar/formulas/proper/">PROPER</a> فتجعل أول حرف من كل كلمة كبيراً.</li><li>LOWER متاحة في كل إصدارات Excel دون استثناء.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تؤثر LOWER على النص العربي؟</h3>
+<p>لا، الحروف العربية تبقى كما هي تماماً، ويتغير فقط ما في النص من حروف إنجليزية كبيرة.</p>
+<h3>كيف أوحّد عموداً كاملاً دون عمود مساعد؟</h3>
+<p>في Excel 365 وExcel 2021 يمكنك كتابة <code dir="ltr">=LOWER(A2:A500)</code> في خلية واحدة فتنتشر النتائج تلقائياً، ثم تنسخها كقيم فوق العمود الأصلي.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=LOWER(A2)</code></pre>
 <p>النتيجة: توحيد كتابة البريد الإلكتروني</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/upper/" title="شرح دالة UPPER في Excel بالعربي">UPPER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

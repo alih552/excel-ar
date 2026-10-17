@@ -6,10 +6,11 @@
 <title>شرح دالة TEXT في Excel بالعربي</title>
 <meta name="description" content="شرح دالة TEXT في Excel: تحوّل رقماً أو تاريخاً إلى نص بالتنسيق الذي تختاره. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="TEXT، دالة TEXT، شرح TEXT، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/text/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة TEXT في Excel بالعربي">
 <meta property="og:description" content="شرح دالة TEXT في Excel: تحوّل رقماً أو تاريخاً إلى نص بالتنسيق الذي تختاره. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/text/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,40 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=TEXT(value, format_text)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">value</code>: مطلوب</li><li><code dir="ltr">format_text</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">value</code>: الرقم أو التاريخ أو الخلية التي تريد عرضها كنص بشكل محدد. (مطلوب)</li><li><code dir="ltr">format_text</code>: رمز التنسيق بين علامتي تنصيص، مثل &quot;dd/mm/yyyy&quot; للتاريخ أو &quot;#,##0&quot; للأرقام. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم TEXT</h2>
+<p>تحتاج TEXT عندما تريد أن يظهر رقم أو تاريخ داخل جملة أو رمز بالشكل الذي تختاره، لا بالشكل الخام الذي يخزنه Excel. فإذا دمجت تاريخاً مع نص بعلامة &amp; ظهر في صورة رقم تسلسلي مثل 46096 بدل 15/03/2026، وإذا دمجت رقماً كبيراً ظهر بلا فواصل الآلاف. الدالة TEXT تحل ذلك، وتفيد أيضاً في توحيد أرقام الموظفين بطول ثابت مثل 00045، وفي استخراج اسم اليوم أو الشهر من تاريخ.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li>الوسيط الأول هو القيمة: رقم أو تاريخ أو خلية أو عملية حسابية.</li><li>الوسيط الثاني هو رمز التنسيق بين علامتي تنصيص، وهو الرمز نفسه الذي تكتبه في نافذة تنسيق الخلايا ضمن التنسيق المخصص.</li><li>النتيجة نص دائماً، فلا تصلح بعدها للجمع أو الطرح مباشرة.</li></ul>
+<p>أشهر الرموز:</p>
+<div class="table-wrap"><table><thead><tr><th>الرمز</th><th>معناه</th><th>مثال على النتيجة</th></tr></thead><tbody><tr><td>dd/mm/yyyy</td><td>يوم/شهر/سنة</td><td>15/03/2026</td></tr><tr><td>mmmm</td><td>اسم الشهر</td><td>March أو مارس حسب إعدادات اللغة</td></tr><tr><td>dddd</td><td>اسم اليوم</td><td>Sunday أو الأحد حسب إعدادات اللغة</td></tr><tr><td>#,##0</td><td>رقم صحيح بفواصل الآلاف</td><td>1,250,000</td></tr><tr><td>0.00</td><td>منزلتان عشريتان</td><td>87.50</td></tr><tr><td>00000</td><td>طول ثابت بأصفار في البداية</td><td>00045</td></tr><tr><td>0%</td><td>نسبة مئوية</td><td>12%</td></tr></tbody></table></div>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل فواتير فيه رقم الفاتورة في العمود A وتاريخها في العمود B وإجمالي كمية القطع في العمود C، والمطلوب سطر وصفي جاهز للطباعة في العمود D:</p>
+<div class="table-wrap"><table><thead><tr><th>رقم الفاتورة</th><th>التاريخ</th><th>عدد القطع</th></tr></thead><tbody><tr><td>INV-101</td><td>15/03/2026</td><td>12500</td></tr><tr><td>INV-102</td><td>02/04/2026</td><td>875</td></tr><tr><td>INV-103</td><td>28/04/2026</td><td>4300</td></tr></tbody></table></div>
+<p>الصيغة في الخلية D2:</p>
+<pre dir="ltr"><code>=&quot;فاتورة &quot;&amp;A2&amp;&quot; بتاريخ &quot;&amp;TEXT(B2,&quot;dd/mm/yyyy&quot;)&amp;&quot; وعدد قطعها &quot;&amp;TEXT(C2,&quot;#,##0&quot;)</code></pre>
+<p>النتيجة في الصف الأول: فاتورة INV-101 بتاريخ 15/03/2026 وعدد قطعها 12,500. ولو كتبت B2 مباشرة دون TEXT لظهر الرقم التسلسلي 46096 الذي يخزن به Excel هذا التاريخ.</p>
+<p>ولمعرفة يوم الأسبوع لكل فاتورة اكتب <code dir="ltr">=TEXT(B2,&quot;dddd&quot;)</code>، فتعيد للصف الأول يوم الأحد (أو Sunday إذا كانت إعدادات اللغة إنجليزية)، لأن 15/03/2026 يوافق يوم أحد.</p>
+<h3>أرقام موظفين بطول ثابت</h3>
+<p>إذا كانت أرقام الموظفين 45 و 312 و 7 وتريدها بخمس خانات فإن <code dir="ltr">=TEXT(A2,&quot;00000&quot;)</code> تعيد 00045 و 00312 و 00007، ويمكنك دمجها مع رمز القسم مثل <code dir="ltr">=&quot;HR-&quot;&amp;TEXT(A2,&quot;00000&quot;)</code>.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #NAME?</strong>: كتبت رمز التنسيق دون علامتي تنصيص، مثل <code dir="ltr">TEXT(B2,dd/mm/yyyy)</code>. ضع الرمز بين علامتي تنصيص دائماً.</li><li><strong>الخطأ #VALUE!</strong>: قد يظهر عندما يكون رمز التنسيق غير صالح. راجع الرمز وجربه أولاً في نافذة تنسيق الخلايا.</li><li><strong>النتيجة لا تجمع</strong>: لأن TEXT تعيد نصاً. احسب على القيمة الأصلية، واستخدم TEXT في عمود العرض فقط.</li><li><strong>الدقائق بدل الشهر</strong>: الرمز mm يعني الشهر، لكنه يعني الدقائق إذا جاء بعد h أو قبل ss. اكتب <code dir="ltr">TEXT(A2,&quot;hh:mm&quot;)</code> للوقت و <code dir="ltr">TEXT(A2,&quot;mm/yyyy&quot;)</code> للشهر والسنة.</li><li><strong>التاريخ لا يتغير</strong>: إذا كان التاريخ مخزناً كنص لا كتاريخ حقيقي فقد تعيده الدالة كما هو. حوله إلى تاريخ أولاً ثم طبق TEXT.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>إذا كنت تريد فقط تغيير شكل الخلية دون دمجها مع نص فاستخدم تنسيق الخلايا بدل TEXT، لأن القيمة تبقى رقماً قابلاً للحساب.</li><li>رمز التنسيق يقرأ بحسب إعدادات المنطقة في الجهاز؛ ففي الإعدادات التي تكون فيها الفاصلة العشرية فاصلة لا نقطة يكتب الرمز #.##0,00 بدل #,##0.00، لذلك قد تعطي الصيغة نفسها نتيجة مختلفة إذا فتح الملف على جهاز بإعدادات أخرى.</li><li>في الإعدادات الإقليمية العربية تفصل الوسائط بالفاصلة المنقوطة: <code dir="ltr">=TEXT(B2;&quot;dd/mm/yyyy&quot;)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>كيف أظهر اسم الشهر بالعربية؟</h3>
+<p>اسم الشهر واليوم يتبعان إعدادات اللغة والمنطقة في نظام التشغيل، فإذا كانت عربية ظهر الاسم بالعربية مع الرمز mmmm أو dddd.</p>
+<h3>هل يمكن استخدام TEXT مع ناتج صيغة أخرى؟</h3>
+<p>نعم، مثل <code dir="ltr">=TEXT(SUM(C2:C4),&quot;#,##0&quot;)</code> التي تعيد 17,675 لمجموع الجدول أعلاه.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=TEXT(A2,&quot;dd/mm/yyyy&quot;)</code></pre>
 <p>النتيجة: التاريخ بصيغة يوم/شهر/سنة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=TEXT(A2;&quot;dd/mm/yyyy&quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/concat/" title="شرح دالة CONCAT في Excel بالعربي">CONCAT</a></li><li><a href="/excel-ar/formulas/left/" title="شرح دالة LEFT في Excel بالعربي">LEFT</a></li><li><a href="/excel-ar/formulas/lower/" title="شرح دالة LOWER في Excel بالعربي">LOWER</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li><li><a href="/excel-ar/formulas/textjoin/" title="شرح دالة TEXTJOIN في Excel بالعربي">TEXTJOIN</a></li><li><a href="/excel-ar/formulas/weekday/" title="شرح دالة WEEKDAY في Excel بالعربي">WEEKDAY</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

@@ -6,10 +6,11 @@
 <title>شرح دالة TEXTSPLIT في Excel بالعربي</title>
 <meta name="description" content="شرح دالة TEXTSPLIT في Excel: تقسم نصاً إلى عدة خلايا حسب فاصل تحدده، مثل تقسيم الاسم الكامل إلى أجزاء. متوفرة في Excel 365. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="TEXTSPLIT، دالة TEXTSPLIT، شرح TEXTSPLIT، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/textsplit/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة TEXTSPLIT في Excel بالعربي">
 <meta property="og:description" content="شرح دالة TEXTSPLIT في Excel: تقسم نصاً إلى عدة خلايا حسب فاصل تحدده، مثل تقسيم الاسم الكامل إلى أجزاء. متوفرة في Excel 365. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/textsplit/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,40 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=TEXTSPLIT(text, col_delimiter, [row_delimiter], [ignore_empty], [match_mode], [pad_with])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li><li><code dir="ltr">col_delimiter</code>: مطلوب</li><li><code dir="ltr">row_delimiter</code>: اختياري</li><li><code dir="ltr">ignore_empty</code>: اختياري</li><li><code dir="ltr">match_mode</code>: اختياري</li><li><code dir="ltr">pad_with</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">text</code>: النص أو الخلية التي تريد تقسيمها إلى أجزاء. (مطلوب)</li><li><code dir="ltr">col_delimiter</code>: الفاصل الذي يبدأ عنده عمود جديد، مثل مسافة أو نقطتين أو فاصلة. (مطلوب)</li><li><code dir="ltr">row_delimiter</code>: فاصل اختياري يبدأ عنده صف جديد في النتيجة. (اختياري)</li><li><code dir="ltr">ignore_empty</code>: اكتب TRUE لتجاهل الأجزاء الفارغة بين فاصلين متتاليين، والافتراضي FALSE. (اختياري)</li><li><code dir="ltr">match_mode</code>: القيمة 1 تجعل مطابقة الفاصل لا تفرق بين الحروف الإنجليزية الكبيرة والصغيرة، والافتراضي 0. (اختياري)</li><li><code dir="ltr">pad_with</code>: القيمة التي تملأ الخانات الناقصة بدل الخطأ #N/A عندما تختلف أطوال الصفوف. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم TEXTSPLIT</h2>
+<p>كثير من البيانات تصل إلى Excel مكدسة في خلية واحدة: اسم ثلاثي يراد فصله إلى أعمدة، أو طلبية منسوخة من رسالة فيها الأصناف وكمياتها في سطر واحد، أو تقرير مصدر من نظام آخر بفاصل معين. TEXTSPLIT تقسم النص عند الفاصل الذي تحدده وتوزع الأجزاء على أعمدة، ويمكنها أيضاً توزيعها على صفوف، فتنتج جدولاً كاملاً من خلية واحدة. هي البديل الحي لأداة تحويل النص إلى أعمدة، لأن النتيجة تتحدث وحدها كلما تغير النص الأصلي.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li><strong>text</strong>: النص المراد تقسيمه.</li><li><strong>col_delimiter</strong>: الفاصل الذي يبدأ عنده عمود جديد.</li><li><strong>row_delimiter</strong>: فاصل اختياري يبدأ عنده صف جديد.</li><li><strong>ignore_empty</strong>: إذا كان TRUE تجاهلت الدالة الأجزاء الفارغة الناتجة عن فاصلين متتاليين، والافتراضي FALSE.</li><li><strong>match_mode</strong>: القيمة 1 تجعل مطابقة الفاصل غير حساسة لحالة الأحرف الإنجليزية، والافتراضي 0.</li><li><strong>pad_with</strong>: القيمة التي تملأ الخانات الناقصة عندما يكون عدد الأجزاء مختلفاً بين الصفوف، وبدونها يظهر #N/A.</li></ul>
+<p>النتيجة مصفوفة تمتد تلقائياً إلى الخلايا المجاورة.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>وصلت طلبية مخزن في رسالة نصية فنسخت إلى الخلية A2، وفي الخلية A5 اسم موظف ثلاثي:</p>
+<div class="table-wrap"><table><thead><tr><th>الخلية</th><th>المحتوى</th></tr></thead><tbody><tr><td>A2</td><td>قلم:120،دفتر:75،ممحاة:40</td></tr><tr><td>A5</td><td>محمد علي حسن</td></tr></tbody></table></div>
+<p>في A2 يفصل بين كل صنف وكميته نقطتان، وتفصل بين الأصناف فاصلة عربية.</p>
+<p>الصيغة في الخلية C2:</p>
+<pre dir="ltr"><code>=TEXTSPLIT(A2,&quot;:&quot;,&quot;،&quot;)</code></pre>
+<p>النتيجة جدول من ثلاثة صفوف وعمودين يمتد من C2 إلى D4:</p>
+<div class="table-wrap"><table><thead><tr><th>الصنف</th><th>الكمية</th></tr></thead><tbody><tr><td>قلم</td><td>120</td></tr><tr><td>دفتر</td><td>75</td></tr><tr><td>ممحاة</td><td>40</td></tr></tbody></table></div>
+<p>النقطتان تفصلان الأعمدة، والفاصلة العربية تفصل الصفوف.</p>
+<h3>جمع الكميات من الخلية نفسها</h3>
+<p>الأجزاء الناتجة نصوص حتى لو كانت أرقاماً، لذلك نحولها بعلامتي الطرح قبل الجمع:</p>
+<pre dir="ltr"><code>=SUM(--CHOOSECOLS(TEXTSPLIT(A2,&quot;:&quot;,&quot;،&quot;),2))</code></pre>
+<p>النتيجة 235، أي مجموع 120 و 75 و 40.</p>
+<h3>فصل الاسم الثلاثي</h3>
+<p>الفاصل هنا مسافة واحدة، فالصيغة <code dir="ltr">=TEXTSPLIT(A5,&quot; &quot;)</code> تعيد محمد في عمود وعلي في الذي يليه وحسن في الثالث.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #NAME?</strong>: الدالة متاحة في Excel 365 و Excel 2024 و Excel للويب، ولا تعمل في Excel 2021 وما قبله. والأمر نفسه للدالة <a href="/excel-ar/formulas/choosecols/">CHOOSECOLS</a> المستخدمة في المثال.</li><li><strong>الخطأ #SPILL!</strong>: إحدى الخلايا التي ستمتد إليها النتيجة ليست فارغة. أفرغ المنطقة أو انقل الصيغة.</li><li><strong>الخطأ #N/A داخل النتيجة</strong>: أحد الصفوف أقصر من غيره، مثل صنف كتب بلا كمية. أضف الوسيط الأخير: <code dir="ltr">=TEXTSPLIT(A2,&quot;:&quot;,&quot;،&quot;,,,0)</code> فتظهر 0 مكان الكمية الناقصة.</li><li><strong>خلايا فارغة وسط النتيجة</strong>: في النص فاصلان متتاليان مثل مسافتين بين كلمتين. اجعل ignore_empty يساوي TRUE، أو نظف النص بالدالة <a href="/excel-ar/formulas/trim/">TRIM</a> أولاً.</li><li><strong>الجمع يعطي صفراً</strong>: الأجزاء نصوص. حولها إلى أرقام بعلامتي الطرح أو بالدالة VALUE.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>يمكن تحديد أكثر من فاصل في وقت واحد بمصفوفة ثابتة، مثل <code dir="ltr">{&quot;,&quot;,&quot;،&quot;}</code> لقبول الفاصلة الإنجليزية والعربية معاً.</li><li>لعكس العملية وإعادة دمج الأجزاء استخدم <a href="/excel-ar/formulas/textjoin/">TEXTJOIN</a>.</li><li>في الإعدادات الإقليمية العربية تفصل الوسائط بالفاصلة المنقوطة: <code dir="ltr">=TEXTSPLIT(A2;&quot;:&quot;;&quot;،&quot;)</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=TEXTSPLIT(A2,&quot; &quot;)</code></pre>
 <p>النتيجة: إذا كانت A2 = &quot;علي حسن كاظم&quot; تعطي: علي | حسن | كاظم في ثلاث خلايا</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=TEXTSPLIT(A2;&quot; &quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/choosecols/" title="شرح دالة CHOOSECOLS في Excel بالعربي">CHOOSECOLS</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/textjoin/" title="شرح دالة TEXTJOIN في Excel بالعربي">TEXTJOIN</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

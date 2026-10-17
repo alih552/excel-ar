@@ -6,10 +6,11 @@
 <title>شرح دالة VLOOKUP في Excel بالعربي</title>
 <meta name="description" content="شرح دالة VLOOKUP في Excel: تبحث عن قيمة في العمود الأول من جدول وتعيد قيمة من العمود الذي تحدده في الصف نفسه. استخدم FALSE للمطابقة التامة. مع الصيغة ومثال…">
 <meta name="keywords" content="VLOOKUP، دالة VLOOKUP، شرح VLOOKUP، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/vlookup/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة VLOOKUP في Excel بالعربي">
 <meta property="og:description" content="شرح دالة VLOOKUP في Excel: تبحث عن قيمة في العمود الأول من جدول وتعيد قيمة من العمود الذي تحدده في الصف نفسه. استخدم FALSE للمطابقة التامة. مع الصيغة ومثال…">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/vlookup/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,41 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=VLOOKUP(lookup_value, table_array, col_index_num, [range_lookup])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">lookup_value</code>: مطلوب</li><li><code dir="ltr">table_array</code>: مطلوب</li><li><code dir="ltr">col_index_num</code>: مطلوب</li><li><code dir="ltr">range_lookup</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">lookup_value</code>: القيمة التي تبحث عنها في العمود الأول من الجدول، مثل رمز المادة أو الرقم الوظيفي. (مطلوب)</li><li><code dir="ltr">table_array</code>: نطاق الجدول كاملاً، ويجب أن يكون عمود البحث أول عمود فيه، ويُفضّل تثبيته بعلامة الدولار. (مطلوب)</li><li><code dir="ltr">col_index_num</code>: رقم العمود داخل النطاق الذي تريد إرجاع قيمته، والعمود الأول في النطاق رقمه 1. (مطلوب)</li><li><code dir="ltr">range_lookup</code>: نوع المطابقة: FALSE للمطابقة التامة، وTRUE أو تركه فارغاً للمطابقة التقريبية في عمود مرتب تصاعدياً. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم VLOOKUP</h2>
+<p>تستخدم <code dir="ltr">VLOOKUP</code> عندما يكون لديك جدول مرجعي ثابت، مثل قائمة المواد في المخزن أو بيانات الموظفين، وتريد أن تجلب منه معلومة واحدة بمعرفة رمز أو اسم. بدل أن تبحث بعينك في مئات الصفوف، تكتب الرمز فتأتيك الكمية أو القسم أو الوحدة مباشرة. وهي من أكثر الدوال استخداماً في ربط ورقتين ببعضهما، كربط ورقة الطلبات بورقة المواد.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تبحث الدالة عن القيمة في <strong>العمود الأول</strong> من النطاق الذي تحدده فقط، فإذا وجدتها انتقلت أفقياً في الصف نفسه إلى العمود الذي رقمه col_index_num وأعادت ما فيه. والترقيم يبدأ من أول عمود في النطاق نفسه وليس من العمود A في الورقة.</p>
+<p>أما الوسيط الأخير فيحدد نوع البحث:</p>
+<ul><li><strong>FALSE أو 0:</strong> مطابقة تامة، وهي ما تحتاجه في الرموز والأسماء. إن لم توجد القيمة ظهر الخطأ #N/A.</li><li><strong>TRUE أو 1 أو تركه فارغاً:</strong> مطابقة تقريبية، فإن لم تجد القيمة نفسها أعادت أكبر قيمة أصغر منها، وتشترط أن يكون العمود الأول مرتباً تصاعدياً.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>ورقة جرد في مخزن، الرموز في العمود A من A2 إلى A5، والجدول يمتد حتى العمود D:</p>
+<div class="table-wrap"><table><thead><tr><th>الرمز</th><th>المادة</th><th>الكمية المتوفرة</th><th>الوحدة</th></tr></thead><tbody><tr><td>P101</td><td>أقلام حبر</td><td>240</td><td>علبة</td></tr><tr><td>P102</td><td>دفاتر</td><td>120</td><td>رزمة</td></tr><tr><td>P103</td><td>حبر طابعة</td><td>15</td><td>خرطوشة</td></tr><tr><td>P104</td><td>ملفات بلاستيك</td><td>300</td><td>قطعة</td></tr></tbody></table></div>
+<p>لمعرفة الكمية المتوفرة من المادة التي رمزها مكتوب في الخلية G2، وفيها P103:</p>
+<pre dir="ltr"><code>=VLOOKUP(G2,$A$2:$D$5,3,FALSE)</code></pre>
+<p>النتيجة: <strong>15</strong>. وجدت الدالة P103 في الصف الثالث من الجدول، ثم أخذت العمود الثالث من النطاق وهو عمود الكمية. ولو غيّرت الرقم 3 إلى 4 لأعادت كلمة &quot;خرطوشة&quot;.</p>
+<h3>مثال على المطابقة التقريبية</h3>
+<p>جدول تقديرات الطلاب، الحدود الدنيا في F2:F6 مرتبة تصاعدياً والتقدير في G2:G6:</p>
+<div class="table-wrap"><table><thead><tr><th>الحد الأدنى</th><th>التقدير</th></tr></thead><tbody><tr><td>0</td><td>راسب</td></tr><tr><td>50</td><td>مقبول</td></tr><tr><td>65</td><td>جيد</td></tr><tr><td>75</td><td>جيد جداً</td></tr><tr><td>85</td><td>ممتاز</td></tr></tbody></table></div>
+<p>الصيغة <code dir="ltr">=VLOOKUP(78,F2:G6,2,TRUE)</code> تعيد <strong>جيد جداً</strong>، لأن أكبر حد أدنى لا يتجاوز 78 هو 75.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>#N/A مع أن القيمة موجودة:</strong> غالباً هناك مسافة زائدة في آخر الرمز، أو رقم مخزّن كنص في أحد الجدولين. نظّف القيم بالدالة <a href="/excel-ar/formulas/trim/">TRIM</a> أو وحّد نوعها.</li><li><strong>#N/A لأن القيمة غير موجودة فعلاً:</strong> لف الصيغة بالدالة <a href="/excel-ar/formulas/iferror/">IFERROR</a> لتظهر رسالة واضحة بدل الخطأ، مثل <code dir="ltr">=IFERROR(VLOOKUP(G2,$A$2:$D$5,3,FALSE),&quot;غير موجود&quot;)</code>.</li><li><strong>#REF!:</strong> رقم العمود أكبر من عدد أعمدة النطاق، كأن تطلب العمود 5 من نطاق فيه أربعة أعمدة.</li><li><strong>#VALUE!:</strong> رقم العمود أقل من 1.</li><li><strong>نتيجة خاطئة بلا أي خطأ:</strong> نسيت كتابة FALSE فبحثت الدالة تقريبياً في عمود غير مرتب. اكتب FALSE دائماً في الرموز والأسماء.</li><li><strong>الصيغة تعطي نتائج مختلفة بعد سحبها للأسفل:</strong> النطاق تحرك معها. ثبّته بعلامة الدولار كما في المثال.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>لا تستطيع <code dir="ltr">VLOOKUP</code> أن تجلب قيمة من عمود يقع <strong>يسار</strong> عمود البحث. في هذه الحالة استخدم <a href="/excel-ar/formulas/xlookup/">XLOOKUP</a>، أو <a href="/excel-ar/formulas/index/">INDEX</a> مع <a href="/excel-ar/formulas/match/">MATCH</a>.</li><li>إدراج عمود جديد داخل الجدول يغيّر ترتيب الأعمدة، فيصبح الرقم الثابت في الصيغة خاطئاً. احسب رقم العمود بالدالة MATCH من صف العناوين بدل كتابته ثابتاً، مثل <code dir="ltr">=VLOOKUP(G2,$A$2:$D$5,MATCH(&quot;الكمية المتوفرة&quot;,$A$1:$D$1,0),FALSE)</code> التي تعيد 15 أيضاً، أو استخدم XLOOKUP.</li><li>الدالة متوفرة في كل إصدارات Excel، لذلك تبقى مناسبة للملفات التي ستُفتح على أجهزة بإصدارات قديمة.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تفرّق VLOOKUP بين الحروف الكبيرة والصغيرة؟</h3>
+<p>لا، فالرمز p103 والرمز P103 عندها سواء.</p>
+<h3>ماذا لو تكرر الرمز في الجدول؟</h3>
+<p>تعيد الدالة نتيجة أول صف يطابق فقط، وتتجاهل التكرارات بعده.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=VLOOKUP(A2,Products!A:C,3,FALSE)</code></pre>
 <p>النتيجة: سعر المنتج حسب رمزه</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=VLOOKUP(A2;Products!A:C;3;FALSE)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/hlookup/" title="شرح دالة HLOOKUP في Excel بالعربي">HLOOKUP</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/xlookup/" title="شرح دالة XLOOKUP في Excel بالعربي">XLOOKUP</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/hlookup/" title="شرح دالة HLOOKUP في Excel بالعربي">HLOOKUP</a></li><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/ifs/" title="شرح دالة IFS في Excel بالعربي">IFS</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

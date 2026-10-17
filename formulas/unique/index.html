@@ -6,10 +6,11 @@
 <title>شرح دالة UNIQUE في Excel بالعربي</title>
 <meta name="description" content="شرح دالة UNIQUE في Excel: تعيد القيم غير المكررة من نطاق، مثل قائمة العملاء دون تكرار. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="UNIQUE، دالة UNIQUE، شرح UNIQUE، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/unique/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة UNIQUE في Excel بالعربي">
 <meta property="og:description" content="شرح دالة UNIQUE في Excel: تعيد القيم غير المكررة من نطاق، مثل قائمة العملاء دون تكرار. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/unique/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,35 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=UNIQUE(array, [by_col], [exactly_once])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array</code>: مطلوب</li><li><code dir="ltr">by_col</code>: اختياري</li><li><code dir="ltr">exactly_once</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">array</code>: النطاق أو المصفوفة التي تريد استخراج القيم المختلفة منها. (مطلوب)</li><li><code dir="ltr">by_col</code>: اكتب TRUE للمقارنة بين الأعمدة في البيانات الأفقية، والافتراضي FALSE يقارن الصفوف. (اختياري)</li><li><code dir="ltr">exactly_once</code>: اكتب TRUE لإرجاع القيم التي ظهرت مرة واحدة فقط، والافتراضي FALSE. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم UNIQUE</h2>
+<p>عندما تحتاج قائمة بالقيم المختلفة من عمود فيه تكرار: الفروع التي سجلت مبيعات هذا الشهر، أو العملاء الذين اشتروا، أو المواد التي خرجت من المخزن. قبل هذه الدالة كان الحل حذف التكرارات يدوياً أو بناء جدول محوري، وكلاهما لا يتحدث وحده عند إضافة بيانات جديدة. UNIQUE تعيد القائمة بصيغة حية، فتصلح أساساً لتقارير الملخص والقوائم المنسدلة.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<ul><li><strong>array</strong>: النطاق الذي تريد استخراج قيمه المختلفة، عموداً واحداً أو عدة أعمدة.</li><li><strong>by_col</strong>: الافتراضي FALSE ويقارن الصفوف. اجعله TRUE إذا كانت بياناتك أفقية في صف واحد.</li><li><strong>exactly_once</strong>: الافتراضي FALSE ويعيد كل قيمة مرة واحدة. إذا كان TRUE أعاد فقط القيم التي لم تتكرر أبداً.</li><li>تحافظ النتيجة على ترتيب أول ظهور لكل قيمة، وتمتد إلى الخلايا أسفلها تلقائياً.</li><li>إذا أعطيتها عدة أعمدة قارنت الصف كاملاً، فالصف مكرر فقط إذا تطابقت كل خاناته.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل مبيعات يومية للفروع، التاريخ في A والفرع في B والمبيعات في C:</p>
+<div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>الفرع</th><th>المبيعات</th></tr></thead><tbody><tr><td>01/10/2026</td><td>بغداد</td><td>4200</td></tr><tr><td>01/10/2026</td><td>البصرة</td><td>3100</td></tr><tr><td>02/10/2026</td><td>بغداد</td><td>3900</td></tr><tr><td>02/10/2026</td><td>أربيل</td><td>2700</td></tr><tr><td>03/10/2026</td><td>البصرة</td><td>3500</td></tr><tr><td>03/10/2026</td><td>بغداد</td><td>4100</td></tr></tbody></table></div>
+<p>الصيغة في الخلية E2:</p>
+<pre dir="ltr"><code>=UNIQUE(B2:B7)</code></pre>
+<p>النتيجة ثلاث خلايا من E2 إلى E4: بغداد، البصرة، أربيل، بترتيب ظهورها الأول في السجل.</p>
+<p>ولبناء جدول ملخص بجانبها، اكتب في F2:</p>
+<pre dir="ltr"><code>=SUMIF(B2:B7,E2#,C2:C7)</code></pre>
+<p>فتعيد 12200 لبغداد (4200 و 3900 و 4100)، و 6600 للبصرة، و 2700 لأربيل. العلامة # بعد E2 تعني كامل النطاق الممتد، فإذا ظهر فرع جديد في السجل امتد الملخص وحده.</p>
+<h3>القيم التي ظهرت مرة واحدة فقط</h3>
+<pre dir="ltr"><code>=UNIQUE(B2:B7,,TRUE)</code></pre>
+<p>تعيد أربيل فقط، لأنها الفرع الوحيد الذي سجل يوم مبيعات واحداً.</p>
+<h3>عدد القيم المختلفة</h3>
+<p><code dir="ltr">=COUNTA(UNIQUE(B2:B7))</code> تعيد 3، أي عدد الفروع المختلفة.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #NAME?</strong>: الدالة متاحة في Excel 365 و Excel 2021 وما بعده فقط.</li><li><strong>الخطأ #SPILL!</strong>: الخلايا أسفل الصيغة ليست فارغة. أفرغها لتمتد النتيجة.</li><li><strong>صفر في آخر القائمة</strong>: النطاق يشمل خلايا فارغة، فتظهر كقيمة 0. استبعدها بالدالة <a href="/excel-ar/formulas/filter/">FILTER</a>: <code dir="ltr">=UNIQUE(FILTER(B2:B100,B2:B100&lt;&gt;&quot;&quot;))</code>.</li><li><strong>القيمة نفسها تظهر مرتين</strong>: غالباً في إحداهما مسافة زائدة. نظف العمود: <code dir="ltr">=UNIQUE(TRIM(B2:B7))</code>.</li><li><strong>الخطأ #CALC!</strong>: لا توجد قيم تحقق الطلب، مثل استخدام exactly_once في عمود كل قيمه مكررة.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>UNIQUE لا تفرق بين الأحرف الإنجليزية الكبيرة والصغيرة، فتعد Baghdad و baghdad قيمة واحدة.</li><li>للحصول على القائمة مرتبة أبجدياً: <code dir="ltr">=SORT(UNIQUE(B2:B7))</code>.</li><li>يمكن استخدام E2# مصدراً لقائمة منسدلة في التحقق من صحة البيانات، فتتحدث القائمة مع البيانات.</li><li>في الإعدادات الإقليمية العربية تفصل الوسائط بالفاصلة المنقوطة: <code dir="ltr">=UNIQUE(B2:B7;;TRUE)</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=UNIQUE(B2:B500)</code></pre>
 <p>النتيجة: أسماء المدن دون تكرار</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/textjoin/" title="شرح دالة TEXTJOIN في Excel بالعربي">TEXTJOIN</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

@@ -6,10 +6,11 @@
 <title>شرح دالة SEARCH في Excel بالعربي</title>
 <meta name="description" content="شرح دالة SEARCH في Excel: مثل FIND لكنها لا تفرّق بين الحروف الكبيرة والصغيرة وتقبل الرموز البديلة مثل * و ?. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="SEARCH، دالة SEARCH، شرح SEARCH، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/search/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة SEARCH في Excel بالعربي">
 <meta property="og:description" content="شرح دالة SEARCH في Excel: مثل FIND لكنها لا تفرّق بين الحروف الكبيرة والصغيرة وتقبل الرموز البديلة مثل * و ?. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/search/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,38 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=SEARCH(find_text, within_text, [start_num])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">find_text</code>: مطلوب</li><li><code dir="ltr">within_text</code>: مطلوب</li><li><code dir="ltr">start_num</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">find_text</code>: النص الذي تبحث عنه، ويمكن أن يحتوي علامة الاستفهام اللاتينية ? لأي حرف واحد أو النجمة * لأي مجموعة أحرف. (مطلوب)</li><li><code dir="ltr">within_text</code>: النص أو الخلية التي يجري البحث داخلها، مثل وصف صنف أو اسم عميل. (مطلوب)</li><li><code dir="ltr">start_num</code>: اختياري: رقم الحرف الذي يبدأ منه البحث، والقيمة الافتراضية 1 أي من أول النص. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم SEARCH</h2>
+<p>تبحث SEARCH عن نص داخل نص آخر وتعيد رقم الموضع الذي يبدأ فيه. قد يبدو الرقم وحده قليل الفائدة، لكن قوته تظهر عند دمجه مع دوال أخرى:</p>
+<ul><li>معرفة إن كان وصف الصنف يحتوي كلمة معينة لتصنيف الأصناف تلقائيًا.</li><li>تحديد موقع فاصل مثل الشرطة أو المسافة لاقتطاع جزء من النص بالدوال <a href="/excel-ar/formulas/left/">LEFT</a> و<a href="/excel-ar/formulas/mid/">MID</a> و<a href="/excel-ar/formulas/right/">RIGHT</a>.</li><li>عد الملاحظات أو الشكاوى التي تذكر موضوعًا محددًا.</li><li>تصفية قوائم العملاء حسب جزء من الاسم.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تبدأ الدالة من الحرف المحدد في الوسيط الثالث، أو من الحرف الأول إذا حذفته، وتعيد موضع أول ظهور للنص المطلوب. المسافات تحسب أحرفًا، والموضع المعاد يُعدّ دائمًا من أول النص حتى لو بدأ البحث من حرف لاحق. وإذا لم تجد النص تعيد الخطأ #VALUE!.</p>
+<p>تتميز SEARCH عن شقيقتها FIND بأمرين:</p>
+<ol><li>لا تفرّق بين الأحرف اللاتينية الكبيرة والصغيرة، فالبحث عن pro يجد PRO.</li><li>تقبل أحرف البدل: علامة الاستفهام اللاتينية <code dir="ltr">?</code> تمثل أي حرف واحد، والنجمة <code dir="ltr">*</code> تمثل أي عدد من الأحرف. أما علامة الاستفهام العربية ؟ فتُعامل حرفًا عاديًا. وللبحث عن <code dir="ltr">?</code> أو <code dir="ltr">*</code> حرفيًا ضع قبلها <code dir="ltr">~</code>.</li></ol>
+<h2 id="s-3">مثال عملي</h2>
+<p>قائمة أصناف أثاث في مستودع، والوصف في العمود A:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: وصف الصنف</th><th>B: الكمية</th></tr></thead><tbody><tr><td>2</td><td>كرسي مكتب دوار</td><td>18</td></tr><tr><td>3</td><td>طاولة اجتماعات</td><td>4</td></tr><tr><td>4</td><td>مكتب خشبي صغير</td><td>7</td></tr><tr><td>5</td><td>خزانة ملفات للمكتب</td><td>11</td></tr></tbody></table></div>
+<p>للبحث عن كلمة &quot;مكتب&quot; في الوصف الأول اكتب:</p>
+<pre dir="ltr"><code>=SEARCH(&quot;مكتب&quot;,A2)</code></pre>
+<p>النتيجة <strong>6</strong>، لأن كلمة &quot;كرسي&quot; أربعة أحرف تليها مسافة، فتبدأ &quot;مكتب&quot; في الحرف السادس. وفي الصف 4 تعيد <strong>1</strong>، وفي الصف 5 تعيد <strong>15</strong> لأنها تجد الكلمة داخل &quot;للمكتب&quot;. أما الصف 3 فيعطي #VALUE! لعدم وجود الكلمة.</p>
+<p>لتحويل ذلك إلى إجابة نعم أو لا، أحط الدالة بـ ISNUMBER:</p>
+<pre dir="ltr"><code>=ISNUMBER(SEARCH(&quot;مكتب&quot;,A2))</code></pre>
+<p>تعيد TRUE للصفوف 2 و4 و5، وFALSE للصف 3. ولجمع كميات الأصناف المتعلقة بالمكاتب مرة واحدة:</p>
+<pre dir="ltr"><code>=SUMPRODUCT(ISNUMBER(SEARCH(&quot;مكتب&quot;,A2:A5))*B2:B5)</code></pre>
+<p>النتيجة <strong>36</strong>، وهي مجموع 18 و7 و11.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: معناه أن النص غير موجود، أو أن start_num أصغر من 1 أو أكبر من طول النص. استخدم ISNUMBER أو <a href="/excel-ar/formulas/iferror/">IFERROR</a> لمعالجته.</li><li><strong>عدم العثور على كلمة موجودة</strong>: في العربية قد تختلف الهمزات (أ وا وإ) أو التاء المربوطة والهاء، أو تحتوي الكلمة تشكيلًا، فلا يتطابق النص. وحّد الكتابة أو ابحث عن جزء ثابت من الكلمة.</li><li><strong>نتائج زائدة</strong>: البحث عن &quot;مكتب&quot; يجد أيضًا &quot;مكتبة&quot;. للبحث عن الكلمة مستقلة ضع مسافة قبلها وبعدها، وأضف مسافتين حول النص نفسه: <code dir="ltr">=ISNUMBER(SEARCH(&quot; مكتب &quot;,&quot; &quot;&amp;A2&amp;&quot; &quot;))</code>. لاحظ أن هذه الصيغة لا تعدّ &quot;للمكتب&quot; في الصف 5 مطابقة.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>استخدم FIND بدل SEARCH عندما يهم الفرق بين الأحرف الكبيرة والصغيرة في الرموز اللاتينية.</li><li>الدالة متاحة في جميع إصدارات Excel، وفي Excel 365 وExcel 2021 يمكن استخدامها داخل <a href="/excel-ar/formulas/filter/">FILTER</a> لعرض الصفوف المطابقة مباشرة: <code dir="ltr">=FILTER(A2:B5,ISNUMBER(SEARCH(&quot;مكتب&quot;,A2:A5)))</code>.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=ISNUMBER(SEARCH(&quot;بغداد&quot;,A2))</code></pre>
 <p>النتيجة: هل يحتوي العنوان على بغداد؟</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=ISNUMBER(SEARCH(&quot;بغداد&quot;;A2))</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/left/" title="شرح دالة LEFT في Excel بالعربي">LEFT</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

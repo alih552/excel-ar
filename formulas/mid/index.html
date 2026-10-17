@@ -6,10 +6,11 @@
 <title>شرح دالة MID في Excel بالعربي</title>
 <meta name="description" content="شرح دالة MID في Excel: تعيد جزءاً من وسط النص يبدأ من موقع تحدده وبطول تحدده. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="MID، دالة MID، شرح MID، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/mid/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة MID في Excel بالعربي">
 <meta property="og:description" content="شرح دالة MID في Excel: تعيد جزءاً من وسط النص يبدأ من موقع تحدده وبطول تحدده. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/mid/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,38 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=MID(text, start_num, num_chars)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li><li><code dir="ltr">start_num</code>: مطلوب</li><li><code dir="ltr">num_chars</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">text</code>: النص أو الخلية التي تريد استخراج جزء من داخلها. (مطلوب)</li><li><code dir="ltr">start_num</code>: رقم الحرف الذي يبدأ منه الاستخراج، ويبدأ العد من 1 مع احتساب المسافات. (مطلوب)</li><li><code dir="ltr">num_chars</code>: عدد الحروف التي تريد استخراجها بدءاً من موقع البداية. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم MID</h2>
+<p>تستخرج MID جزءاً من داخل النص، وتفيد عندما تكون البيانات مركبة في خلية واحدة بنمط ثابت: رمز فاتورة يضم رمز الفرع والسنة والرقم المتسلسل، أو رمز صنف يحمل اللون والمقاس، أو اسم ثلاثي تريد منه الاسم الأوسط. وبينما تأخذ <a href="/excel-ar/formulas/left/">LEFT</a> من البداية و<a href="/excel-ar/formulas/right/">RIGHT</a> من النهاية، تأخذ MID من أي موقع تحدده.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تحتاج الدالة ثلاثة أشياء: النص، ورقم الحرف الذي يبدأ منه الاستخراج، وعدد الحروف المطلوب.</p>
+<ul><li>العد يبدأ من 1، والمسافات والشرطات تُحسب حروفاً.</li><li>إذا طلبت حروفاً أكثر مما بقي في النص، تعيد الدالة الموجود حتى النهاية دون خطأ.</li><li>النتيجة نص دائماً، حتى لو كانت أرقاماً.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>رموز فواتير بالشكل: رمز الفرع من ثلاثة حروف، ثم شرطة، ثم السنة، ثم شرطة، ثم رقم متسلسل من ثلاثة أرقام:</p>
+<div class="table-wrap"><table><thead><tr><th>الصف</th><th>A: رمز الفاتورة</th><th>B: السنة</th><th>C: الرقم المتسلسل</th></tr></thead><tbody><tr><td>2</td><td>BGD-2026-153</td><td>2026</td><td>153</td></tr><tr><td>3</td><td>RUH-2025-087</td><td>2025</td><td>087</td></tr><tr><td>4</td><td>CAI-2026-412</td><td>2026</td><td>412</td></tr></tbody></table></div>
+<p>لاستخراج السنة اكتب في B2:</p>
+<pre dir="ltr"><code>=MID(A2,5,4)</code></pre>
+<p>الحروف من 1 إلى 3 هي رمز الفرع، والحرف 4 شرطة، فتبدأ السنة من الحرف الخامس بطول أربعة حروف، والنتيجة <strong>2026</strong>.</p>
+<p>ولاستخراج الرقم المتسلسل اكتب في C2:</p>
+<pre dir="ltr"><code>=MID(A2,10,3)</code></pre>
+<p>الشرطة الثانية في الموقع 9، فيبدأ الرقم من الموقع 10، والنتيجة <strong>153</strong>. وفي الصف الثالث تعيد الصيغة 087 مع الصفر في أوله لأنها نص.</p>
+<h3>عندما يتغير الموقع</h3>
+<p>إذا اختلف طول الأجزاء من خلية إلى أخرى، استخدم <a href="/excel-ar/formulas/find/">FIND</a> لتحديد موقع البداية. مثلاً لاستخراج الاسم الأوسط من &quot;أحمد علي حسن&quot; في A2:</p>
+<pre dir="ltr"><code>=MID(A2,FIND(&quot; &quot;,A2)+1,FIND(&quot; &quot;,A2,FIND(&quot; &quot;,A2)+1)-FIND(&quot; &quot;,A2)-1)</code></pre>
+<p>المسافة الأولى في الموقع 5 والثانية في الموقع 9، فتبدأ الدالة من الموقع 6 وتأخذ 3 حروف، والنتيجة &quot;علي&quot;.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر إذا كان رقم البداية أقل من 1، أو كان عدد الحروف سالباً. يظهر أيضاً عندما لا تجد FIND المسافة أو الرمز المطلوب، لذلك أحِط الصيغة بالدالة <a href="/excel-ar/formulas/iferror/">IFERROR</a> عند الحاجة.</li><li><strong>نتيجة فارغة</strong>: رقم البداية أكبر من طول النص. استخدم <a href="/excel-ar/formulas/len/">LEN</a> لمعرفة طول النص.</li><li><strong>الجمع لا يعمل على النتائج</strong>: الناتج نص، فحوّله إلى رقم بإضافة علامتي ناقص قبل الدالة مثل <code dir="ltr">=--MID(A2,5,4)</code> أو باستخدام VALUE.</li><li><strong>حروف زائدة أو ناقصة</strong>: المسافات المخفية في بداية النص تزيح المواقع. نظّف البيانات أولاً بالدالة <a href="/excel-ar/formulas/trim/">TRIM</a>.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>الحركات العربية مثل الفتحة والشدة تُحسب حروفاً مستقلة، فانتبه لها عند العد في النصوص المشكولة.</li><li>في Excel 365 وExcel 2024 تتوفر TEXTBEFORE وTEXTAFTER و<a href="/excel-ar/formulas/textsplit/">TEXTSPLIT</a>، وهي أسهل من دمج MID مع FIND في كثير من الحالات.</li><li>MID متاحة في كل إصدارات Excel.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=MID(A2,4,2)</code></pre>
 <p>النتيجة: حرفان يبدآن من الحرف الرابع</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=MID(A2;4;2)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/left/" title="شرح دالة LEFT في Excel بالعربي">LEFT</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/len/" title="شرح دالة LEN في Excel بالعربي">LEN</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/textsplit/" title="شرح دالة TEXTSPLIT في Excel بالعربي">TEXTSPLIT</a></li><li><a href="/excel-ar/formulas/search/" title="شرح دالة SEARCH في Excel بالعربي">SEARCH</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

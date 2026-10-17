@@ -6,10 +6,11 @@
 <title>شرح دالة XLOOKUP في Excel بالعربي</title>
 <meta name="description" content="شرح دالة XLOOKUP في Excel: دالة البحث الحديثة: تبحث في أي عمود وتعيد من أي عمود، يميناً أو يساراً، مع قيمة جاهزة عند عدم الوجود. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="XLOOKUP، دالة XLOOKUP، شرح XLOOKUP، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/xlookup/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة XLOOKUP في Excel بالعربي">
 <meta property="og:description" content="شرح دالة XLOOKUP في Excel: دالة البحث الحديثة: تبحث في أي عمود وتعيد من أي عمود، يميناً أو يساراً، مع قيمة جاهزة عند عدم الوجود. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/xlookup/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,42 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=XLOOKUP(lookup_value, lookup_array, return_array, [if_not_found], [match_mode], [search_mode])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">lookup_value</code>: مطلوب</li><li><code dir="ltr">lookup_array</code>: مطلوب</li><li><code dir="ltr">return_array</code>: مطلوب</li><li><code dir="ltr">if_not_found</code>: اختياري</li><li><code dir="ltr">match_mode</code>: اختياري</li><li><code dir="ltr">search_mode</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">lookup_value</code>: القيمة التي تبحث عنها، مثل رقم وظيفي أو اسم أو رمز مادة. (مطلوب)</li><li><code dir="ltr">lookup_array</code>: العمود أو الصف الذي تبحث فيه عن القيمة. (مطلوب)</li><li><code dir="ltr">return_array</code>: العمود أو الأعمدة التي تؤخذ منها النتيجة، بطول نطاق البحث نفسه، ويمكن أن تقع يمينه أو يساره. (مطلوب)</li><li><code dir="ltr">if_not_found</code>: ما يظهر إذا لم توجد القيمة، مثل نص &quot;غير مسجل&quot;، وبدونه يظهر الخطأ #N/A. (اختياري)</li><li><code dir="ltr">match_mode</code>: نوع المطابقة: 0 تامة وهي الافتراضية، و-1 تامة أو أقرب قيمة أصغر، و1 تامة أو أقرب قيمة أكبر، و2 لأحرف البدل. (اختياري)</li><li><code dir="ltr">search_mode</code>: اتجاه البحث: 1 من الأول وهو الافتراضي، و-1 من الآخر، و2 أو -2 للبحث الثنائي في بيانات مرتبة. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم XLOOKUP</h2>
+<p><code dir="ltr">XLOOKUP</code> هي الخيار الأول للبحث في الإصدارات الحديثة من Excel. استخدمها كلما أردت جلب معلومة من جدول بمعرفة قيمة مفتاحية، مثل بيانات موظف برقمه الوظيفي، أو اسم العميل برقم الفاتورة، أو الكمية برمز المادة. وهي تحل مشكلات قديمة في <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a>: لا تحتاج رقم عمود يتغير عند إدراج الأعمدة، وتبحث يميناً ويساراً، وتسمح بكتابة رسالة مخصصة عند عدم العثور على القيمة.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تحدد لها ثلاثة أشياء أساسية: القيمة التي تبحث عنها، والعمود الذي تبحث فيه، والعمود الذي تأخذ منه النتيجة. والعمودان منفصلان، لذلك يمكن أن يكون عمود النتيجة قبل عمود البحث أو بعده، ويجب فقط أن يكونا بنفس عدد الصفوف.</p>
+<p>والوسائط الاختيارية تتحكم في التفاصيل:</p>
+<ul><li><strong>match_mode:</strong> القيمة 0 للمطابقة التامة وهي الافتراضية، و-1 للمطابقة التامة أو أقرب قيمة أصغر، و1 للمطابقة التامة أو أقرب قيمة أكبر، و2 لاستخدام أحرف البدل مثل * و?.</li><li><strong>search_mode:</strong> القيمة 1 للبحث من أول القائمة وهي الافتراضية، و-1 للبحث من آخرها، و2 و-2 للبحث الثنائي السريع في بيانات مرتبة تصاعدياً أو تنازلياً.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>جدول الموظفين في قسم شؤون الموظفين، من الصف 2 إلى الصف 6:</p>
+<div class="table-wrap"><table><thead><tr><th>A: الرقم الوظيفي</th><th>B: الاسم</th><th>C: القسم</th><th>D: الراتب الأساسي</th></tr></thead><tbody><tr><td>E-101</td><td>أحمد كريم</td><td>المبيعات</td><td>850</td></tr><tr><td>E-102</td><td>زينب علي</td><td>المحاسبة</td><td>1100</td></tr><tr><td>E-103</td><td>مصطفى حسن</td><td>المخازن</td><td>780</td></tr><tr><td>E-104</td><td>نور سامي</td><td>المبيعات</td><td>920</td></tr><tr><td>E-105</td><td>يوسف جابر</td><td>الموارد البشرية</td><td>1000</td></tr></tbody></table></div>
+<p>لجلب الراتب الأساسي للموظف صاحب الرقم E-104:</p>
+<pre dir="ltr"><code>=XLOOKUP(&quot;E-104&quot;,A2:A6,D2:D6)</code></pre>
+<p>النتيجة: <strong>920</strong>.</p>
+<p>وللبحث بالاسم وإرجاع الرقم الوظيفي الذي يقع في عمود على اليسار، وهو ما لا تستطيعه VLOOKUP:</p>
+<pre dir="ltr"><code>=XLOOKUP(&quot;زينب علي&quot;,B2:B6,A2:A6)</code></pre>
+<p>النتيجة: <strong>E-102</strong>.</p>
+<h3>أمثلة إضافية على الجدول نفسه</h3>
+<ul><li><code dir="ltr">=XLOOKUP(&quot;E-110&quot;,A2:A6,B2:B6,&quot;غير مسجل&quot;)</code> تعيد <strong>غير مسجل</strong> لأن الرقم غير موجود، بدل ظهور الخطأ #N/A.</li><li><code dir="ltr">=XLOOKUP(&quot;E-103&quot;,A2:A6,B2:D6)</code> تعيد ثلاث قيم تنسكب في ثلاث خلايا متجاورة: مصطفى حسن، المخازن، 780.</li><li><code dir="ltr">=XLOOKUP(&quot;المبيعات&quot;,C2:C6,B2:B6,,0,-1)</code> تبحث من آخر الجدول فتعيد <strong>نور سامي</strong>، وهو آخر موظف مسجل في قسم المبيعات. أما بدون -1 فتعيد أحمد كريم.</li></ul>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>#N/A:</strong> القيمة غير موجودة، أو فيها مسافة زائدة، أو رقم مخزّن كنص. استخدم الوسيط if_not_found لرسالة واضحة، ونظّف البيانات بالدالة <a href="/excel-ar/formulas/trim/">TRIM</a>.</li><li><strong>#VALUE!:</strong> عمود البحث وعمود النتيجة مختلفان في عدد الصفوف، كأن تكتب A2:A6 مع D2:D7.</li><li><strong>#SPILL!:</strong> النتيجة متعددة القيم ولا تجد خلايا فارغة تنسكب فيها. أفرغ الخلايا المجاورة.</li><li><strong>#NAME?:</strong> إصدار Excel لديك لا يعرف الدالة، فهي غير موجودة في Excel 2019 وما قبله.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>الدالة متوفرة في Excel 365 وExcel 2021 وما بعدهما وفي Excel على الويب. إذا كان الملف سيُفتح على إصدار أقدم فاستخدم <a href="/excel-ar/formulas/index/">INDEX</a> مع <a href="/excel-ar/formulas/match/">MATCH</a>.</li><li>تحتاج المطابقة التقريبية فيها إلى الترتيب فقط عند البحث الثنائي، أما مع search_mode الافتراضي فتعمل على بيانات غير مرتبة.</li><li>لترك وسيط فارغ والانتقال إلى ما بعده ضع فاصلتين متتاليتين، كما في مثال البحث من الآخر.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل تحتاج XLOOKUP إلى كتابة FALSE كما في VLOOKUP؟</h3>
+<p>لا، فالمطابقة التامة هي الافتراضية فيها، وهذا يمنع خطأً شائعاً في VLOOKUP.</p>
+<h3>هل تفرّق بين الحروف الكبيرة والصغيرة؟</h3>
+<p>لا، فالرمز e-104 والرمز E-104 يعطيان النتيجة نفسها.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=XLOOKUP(A2,Staff!B:B,Staff!E:E,&quot;غير موجود&quot;)</code></pre>
 <p>النتيجة: رقم هاتف الموظف حسب اسمه</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=XLOOKUP(A2;Staff!B:B;Staff!E:E;&quot;غير موجود&quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li><li><a href="/excel-ar/formulas/hlookup/" title="شرح دالة HLOOKUP في Excel بالعربي">HLOOKUP</a></li><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/ifs/" title="شرح دالة IFS في Excel بالعربي">IFS</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

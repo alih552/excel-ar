@@ -6,10 +6,11 @@
 <title>شرح دالة ROUND في Excel بالعربي</title>
 <meta name="description" content="شرح دالة ROUND في Excel: تقرّب الرقم إلى عدد المنازل العشرية الذي تحدده؛ والعدد السالب يقرّب إلى العشرات أو المئات. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="ROUND، دالة ROUND، شرح ROUND، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/round/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة ROUND في Excel بالعربي">
 <meta property="og:description" content="شرح دالة ROUND في Excel: تقرّب الرقم إلى عدد المنازل العشرية الذي تحدده؛ والعدد السالب يقرّب إلى العشرات أو المئات. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/round/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,38 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=ROUND(number, num_digits)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">number</code>: مطلوب</li><li><code dir="ltr">num_digits</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">number</code>: الرقم أو الصيغة التي تريد تقريب نتيجتها، مثل حاصل قسمة راتب أو متوسط درجات. (مطلوب)</li><li><code dir="ltr">num_digits</code>: عدد الخانات العشرية المطلوب: موجب للكسور، وصفر لأقرب عدد صحيح، وسالب للتقريب إلى العشرات والمئات والآلاف. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم ROUND</h2>
+<p>تقرّب ROUND الرقم إلى عدد الخانات الذي تحدده وفق قاعدة التقريب المعتادة. تحتاجها كلما كانت القيمة المخزنة نفسها يجب أن تكون مقرّبة، لا شكلها فقط:</p>
+<ul><li>حساب الأجر اليومي أو أجر الساعة من الراتب الشهري.</li><li>تقريب معدلات الطلاب إلى خانة عشرية واحدة قبل إعلان النتائج.</li><li>تقريب الكميات والتكاليف في الفواتير قبل جمعها حتى يطابق المجموع ما يراه القارئ.</li><li>عرض الأرقام الكبيرة في التقارير مقرّبة إلى أقرب ألف.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تنظر الدالة إلى الخانة التي تلي آخر خانة مطلوبة: إذا كانت 5 أو أكثر رفعت الخانة الأخيرة بمقدار واحد، وإن كانت أقل من 5 أبقتها كما هي. ويحدد الوسيط الثاني موضع التقريب:</p>
+<div class="table-wrap"><table><thead><tr><th>قيمة num_digits</th><th>المعنى</th><th>مثال على 1234.567</th></tr></thead><tbody><tr><td>2</td><td>خانتان عشريتان</td><td>1234.57</td></tr><tr><td>0</td><td>أقرب عدد صحيح</td><td>1235</td></tr><tr><td><code dir="ltr">-1</code></td><td>أقرب عشرة</td><td>1230</td></tr><tr><td><code dir="ltr">-3</code></td><td>أقرب ألف</td><td>1000</td></tr></tbody></table></div>
+<p>وتُقرَّب الأرقام السالبة بالقاعدة نفسها، فالخانة 5 تدفع القيمة بعيدًا عن الصفر: الرقم <code dir="ltr">-2.5</code> يصبح <code dir="ltr">-3</code>.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>قسم الموارد البشرية يحسب الأجر اليومي لكل موظف بقسمة الراتب الشهري على 30:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: الموظف</th><th>B: الراتب الشهري</th></tr></thead><tbody><tr><td>2</td><td>سارة</td><td>950000</td></tr><tr><td>3</td><td>علي</td><td>820000</td></tr><tr><td>4</td><td>مريم</td><td>1100000</td></tr></tbody></table></div>
+<p>القسمة وحدها تعطي لسارة 31666.666 بكسر عشري لا ينتهي. لتقريبها إلى خانتين عشريتين اكتب في C2:</p>
+<pre dir="ltr"><code>=ROUND(B2/30,2)</code></pre>
+<p>النتيجة <strong>31666.67</strong>. ولعلي تعطي 27333.33، ولمريم 36666.67.</p>
+<p>إذا كانت الشركة تعتمد الأعداد الصحيحة فقط:</p>
+<pre dir="ltr"><code>=ROUND(B2/30,0)</code></pre>
+<p>تعيد الصيغة <strong>31667</strong>، ولعلي 27333 ولمريم 36667. ولتقرير مختصر إلى أقرب ألف استخدم <code dir="ltr">=ROUND(B2/30,-3)</code> فتحصل على <strong>32000</strong> لسارة و27000 لعلي.</p>
+<h2 id="s-4">الفرق بين ROUND وتنسيق الخلية</h2>
+<p>تنسيق الخلية بخانتين عشريتين يغيّر الشكل فقط، ويبقى Excel يحسب بالقيمة الكاملة. لذلك قد يختلف مجموع عمود منسّق عن مجموع الأرقام الظاهرة بفارق صغير. أما ROUND فتغيّر القيمة نفسها، فيطابق المجموع ما يظهر للقارئ.</p>
+<h2 id="s-5">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر إذا كانت الخلية تحتوي نصًا لا رقمًا، مثل رقم كُتبت بجانبه وحدة أو كلمة في الخلية نفسها. نظّف البيانات أولًا.</li><li><strong>فروق صغيرة بين الفاتورة والنظام المحاسبي</strong>: تقريب كل سطر ثم الجمع قد يعطي نتيجة تختلف قليلًا عن جمع الأسطر ثم تقريب المجموع. اعتمد الطريقة التي يعمل بها النظام المحاسبي وطبّقها على جميع الفواتير.</li><li><strong>نسيان الوسيط الثاني</strong>: الدالة تتطلب الوسيطين معًا، ولا تقبل الصيغة بوسيط واحد.</li></ul>
+<h2 id="s-6">نصائح</h2>
+<ul><li>للتقريب للأعلى دائمًا استخدم <a href="/excel-ar/formulas/roundup/">ROUNDUP</a>، وللأسفل دائمًا <a href="/excel-ar/formulas/rounddown/">ROUNDDOWN</a>، وللتقريب إلى مضاعف معين مثل 250 استخدم MROUND.</li><li>ROUND متاحة في جميع إصدارات Excel وفي Google Sheets.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=ROUND(B2*C2,-3)</code></pre>
 <p>النتيجة: تقريب المبلغ لأقرب ألف</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=ROUND(B2*C2;-3)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/roundup/" title="شرح دالة ROUNDUP في Excel بالعربي">ROUNDUP</a></li><li><a href="/excel-ar/formulas/rounddown/" title="شرح دالة ROUNDDOWN في Excel بالعربي">ROUNDDOWN</a></li><li><a href="/excel-ar/formulas/int/" title="شرح دالة INT في Excel بالعربي">INT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

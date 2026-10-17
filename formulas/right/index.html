@@ -6,10 +6,11 @@
 <title>شرح دالة RIGHT في Excel بالعربي</title>
 <meta name="description" content="شرح دالة RIGHT في Excel: تعيد عدداً من الحروف من نهاية النص. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="RIGHT، دالة RIGHT، شرح RIGHT، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/right/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة RIGHT في Excel بالعربي">
 <meta property="og:description" content="شرح دالة RIGHT في Excel: تعيد عدداً من الحروف من نهاية النص. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/right/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,40 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=RIGHT(text, [num_chars])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">text</code>: مطلوب</li><li><code dir="ltr">num_chars</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">text</code>: النص أو الخلية التي تريد أخذ الأحرف من نهايتها، مثل رمز صنف أو رقم فاتورة. (مطلوب)</li><li><code dir="ltr">num_chars</code>: اختياري: عدد الأحرف المطلوب أخذها من نهاية النص، وإذا حذفته تعيد الدالة حرفًا واحدًا. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم RIGHT</h2>
+<p>تقتطع RIGHT عددًا محددًا من الأحرف من نهاية النص. تحتاجها عندما تكون المعلومة المفيدة مخزنة في آخر الخلية، مثل:</p>
+<ul><li>استخراج الرقم التسلسلي من رموز الأصناف في المخزن.</li><li>أخذ آخر أرقام من الرقم الوظيفي لعرض مختصر في كشوف الحضور.</li><li>فصل رمز الفرع أو المقاس الموجود في نهاية رمز المنتج.</li><li>التحقق من امتداد اسم ملف في قائمة مستندات.</li></ul>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تبدأ الدالة من آخر حرف في النص وتعدّ نحو البداية بالعدد الذي تحدده، ثم تعيد هذا الجزء. المسافات وعلامات الترقيم تحسب أحرفًا مثل غيرها. وإذا كان العدد المطلوب أكبر من طول النص تعيد النص كاملًا دون خطأ.</p>
+<p>النتيجة نص دائمًا حتى لو بدت رقمًا، لذلك يحاذيها Excel كما يحاذي النصوص، ولا تدخل في الجمع بالدالة <a href="/excel-ar/formulas/sum/">SUM</a> إلا بعد تحويلها إلى رقم.</p>
+<p>مع النصوص العربية، &quot;النهاية&quot; تعني آخر حرف كُتب في الكلمة، وهو الذي يظهر على يسار الكلمة في الشاشة، لأن Excel يتعامل مع ترتيب الكتابة لا مع موقع الحرف المرئي.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>قائمة أصناف في المخزن، رمز كل صنف في العمود A ويتكون من بادئة ثم شرطة ثم رقم:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: رمز الصنف</th><th>B: الكمية</th></tr></thead><tbody><tr><td>2</td><td>LAP-512</td><td>14</td></tr><tr><td>3</td><td>MON-027</td><td>30</td></tr><tr><td>4</td><td>KEY-108</td><td>55</td></tr><tr><td>5</td><td>CAB-009</td><td>120</td></tr></tbody></table></div>
+<p>لأن الجزء الرقمي ثلاثة أحرف دائمًا، اكتب في C2:</p>
+<pre dir="ltr"><code>=RIGHT(A2,3)</code></pre>
+<p>النتيجة <strong>512</strong>، وفي الصفوف التالية تحصل على 027 و108 و009. لاحظ أن الأصفار في البداية بقيت، لأن النتيجة نص.</p>
+<p>إذا أردت النتيجة رقمًا قابلًا للحساب فأحطها بالدالة VALUE:</p>
+<pre dir="ltr"><code>=VALUE(RIGHT(A3,3))</code></pre>
+<p>تعيد الصيغة الرقم <strong>27</strong> بعد حذف الصفر الزائد.</p>
+<h3>عندما يختلف طول الجزء الأخير</h3>
+<p>إذا كانت الرموز بأطوال مختلفة مثل LAP-5 وMONITOR-1200، فاحسب عدد الأحرف بعد الشرطة باستخدام <a href="/excel-ar/formulas/len/">LEN</a> و<a href="/excel-ar/formulas/search/">SEARCH</a>:</p>
+<pre dir="ltr"><code>=RIGHT(A2,LEN(A2)-SEARCH(&quot;-&quot;,A2))</code></pre>
+<p>فلو كان في A2 الرمز MONITOR-1200، فطوله 12 حرفًا والشرطة في الموقع 8، فتأخذ الدالة 4 أحرف وتعيد <strong>1200</strong>. ومع الرمز LAP-5 تعيد <strong>5</strong>.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>الخطأ #VALUE!</strong>: يظهر إذا كان عدد الأحرف سالبًا، ويظهر كذلك في الصيغة المركبة عندما لا تجد SEARCH الشرطة فتعيد هي نفسها هذا الخطأ. أحط الصيغة بـ <a href="/excel-ar/formulas/iferror/">IFERROR</a>.</li><li><strong>مسافات زائدة في النهاية</strong>: البيانات المنسوخة قد تنتهي بمسافة فتأخذها RIGHT ضمن الأحرف. استخدم <code dir="ltr">=RIGHT(TRIM(A2),3)</code>.</li><li><strong>المجموع صفر</strong>: سببه جمع نتائج نصية. حوّلها بـ VALUE أو بضربها في 1.</li><li><strong>التواريخ</strong>: تطبيق RIGHT على خلية تاريخ يعمل على الرقم التسلسلي الداخلي لا على شكل التاريخ المعروض، فاستخدم <a href="/excel-ar/formulas/year/">YEAR</a> أو <a href="/excel-ar/formulas/text/">TEXT</a> بدلًا منها.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>RIGHT متاحة في جميع إصدارات Excel، ولها شقيقتان: <a href="/excel-ar/formulas/left/">LEFT</a> لأخذ الأحرف من البداية و<a href="/excel-ar/formulas/mid/">MID</a> لأخذها من الوسط.</li><li>في Excel 365 وExcel 2024 تستطيع استخدام TEXTAFTER لأخذ كل ما بعد فاصل معين بصيغة أقصر، مثل <code dir="ltr">=TEXTAFTER(A2,&quot;-&quot;)</code>، وهي غير موجودة في Excel 2021 وما قبله.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=RIGHT(A2,4)</code></pre>
 <p>النتيجة: آخر أربعة أرقام من الرمز</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=RIGHT(A2;4)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/len/" title="شرح دالة LEN في Excel بالعربي">LEN</a></li><li><a href="/excel-ar/formulas/search/" title="شرح دالة SEARCH في Excel بالعربي">SEARCH</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/year/" title="شرح دالة YEAR في Excel بالعربي">YEAR</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/left/" title="شرح دالة LEFT في Excel بالعربي">LEFT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

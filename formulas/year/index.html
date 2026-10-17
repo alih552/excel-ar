@@ -6,10 +6,11 @@
 <title>شرح دالة YEAR في Excel بالعربي</title>
 <meta name="description" content="شرح دالة YEAR في Excel: تعيد السنة من تاريخ. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="YEAR، دالة YEAR، شرح YEAR، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/year/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة YEAR في Excel بالعربي">
 <meta property="og:description" content="شرح دالة YEAR في Excel: تعيد السنة من تاريخ. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/year/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,11 +29,34 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=YEAR(serial_number)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">serial_number</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">serial_number</code>: التاريخ الذي تريد استخراج سنته، في خلية أو ناتجاً عن دالة مثل TODAY أو DATE. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم YEAR</h2>
+<p>تستخرج <code dir="ltr">YEAR</code> رقم السنة من تاريخ كامل. وتحتاجها عندما تريد تجميع البيانات أو تصفيتها حسب السنة: عدد الموظفين الذين عُيّنوا في كل سنة، ومجموع الفواتير لكل سنة مالية، وفرز سجلات الطلاب حسب سنة التسجيل، أو حساب عدد السنوات التقريبي منذ تاريخ معين. فبدل أن تكتب السنة يدوياً في عمود جديد، تستخرجها الدالة من التاريخ الموجود أصلاً.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>يخزّن Excel كل تاريخ رقماً تسلسلياً، وتقرأ الدالة هذا الرقم وتعيد السنة الميلادية المقابلة له رقماً من أربع خانات بين 1900 و9999. والنتيجة رقم عادي يمكن مقارنته وجمعه وطرحه، لا تاريخاً.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>سجل تعيين الموظفين، والتواريخ في العمود B من B2 إلى B5:</p>
+<div class="table-wrap"><table><thead><tr><th>A: الموظف</th><th>B: تاريخ التعيين</th><th>C: سنة التعيين</th></tr></thead><tbody><tr><td>حسين</td><td>2015-09-01</td><td>2015</td></tr><tr><td>مريم</td><td>2019-02-14</td><td>2019</td></tr><tr><td>خالد</td><td>2023-11-20</td><td>2023</td></tr><tr><td>رنا</td><td>2019-07-05</td><td>2019</td></tr></tbody></table></div>
+<p>الصيغة في C2، ثم تُسحب للأسفل:</p>
+<pre dir="ltr"><code>=YEAR(B2)</code></pre>
+<p>النتيجة في الصف الأول: <strong>2015</strong>.</p>
+<p>ولعدّ الموظفين الذين عُيّنوا في سنة 2019 دون عمود مساعد:</p>
+<pre dir="ltr"><code>=SUMPRODUCT(--(YEAR(B2:B5)=2019))</code></pre>
+<p>النتيجة: <strong>2</strong>، وهما مريم ورنا.</p>
+<p>ولحساب عدد السنوات التقريبي منذ التعيين حتى السنة الحالية اكتب <code dir="ltr">=YEAR(TODAY())-YEAR(B2)</code>. وهذه طريقة سريعة لكنها تطرح السنوات فقط، فمن عُيّن في آخر السنة يُحسب له عام كامل بعد أيام قليلة. للمدة الدقيقة بالسنوات الكاملة اكتب <code dir="ltr">=DATEDIF(B2,TODAY(),&quot;y&quot;)</code>، وهي دالة قديمة تعمل في كل الإصدارات لكنها لا تظهر في قائمة الإكمال التلقائي.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>#VALUE!:</strong> التاريخ مكتوب كنص لا يتعرف عليه Excel، وهذا يحدث كثيراً مع البيانات المستوردة. حوّله بالدالة DATEVALUE أو بأداة &quot;نص إلى أعمدة&quot;.</li><li><strong>النتيجة 1900:</strong> الخلية فارغة أو فيها صفر، فتقرأها الدالة على أنها أول تاريخ في Excel. أضف شرطاً مثل <code dir="ltr">=IF(B2=&quot;&quot;,&quot;&quot;,YEAR(B2))</code>.</li><li><strong>تظهر النتيجة بشكل تاريخ غريب مثل 1905-07-07 بدل 2015:</strong> خلية النتيجة منسقة كتاريخ. نسّقها كرقم عام، فالسنة رقم وليست تاريخاً.</li><li><strong>خلط اليوم والشهر:</strong> إذا أُدخل التاريخ بترتيب لا يوافق الإعدادات الإقليمية قد يفهمه Excel تاريخاً مختلفاً أو نصاً. استخدم الدالة <a href="/excel-ar/formulas/date/">DATE</a> لبناء التواريخ بوضوح.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>في الجداول الكبيرة يمكنك العدّ حسب السنة بحدود تاريخية بدل YEAR داخل <a href="/excel-ar/formulas/sumproduct/">SUMPRODUCT</a>، وهو أسرع: <code dir="ltr">=COUNTIFS(B2:B5,&quot;&gt;=&quot;&amp;DATE(2019,1,1),B2:B5,&quot;&lt;=&quot;&amp;DATE(2019,12,31))</code> تعيد 2 أيضاً، وبالطريقة نفسها تجمع <a href="/excel-ar/formulas/sumifs/">SUMIFS</a> مبالغ الفواتير لسنة معينة.</li><li>حتى إن كانت الخلية منسقة بالتقويم الهجري، تعيد YEAR السنة الميلادية لأن الرقم المخزن واحد.</li><li>استخدم YEAR مع <a href="/excel-ar/formulas/month/">MONTH</a> و<a href="/excel-ar/formulas/day/">DAY</a> لتفكيك التاريخ، ثم DATE لتركيبه من جديد بعد التعديل.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>هل يمكن استخدام YEAR في الجداول المحورية؟</h3>
+<p>لا حاجة إليها غالباً، فالجدول المحوري يستطيع تجميع التواريخ حسب السنة بأمر التجميع، وتفعل ذلك الإصدارات الحديثة تلقائياً. لكن عمود YEAR يفيد في التصفية والصيغ العادية.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=YEAR(A2)</code></pre>
 <p>النتيجة: سنة التعيين</p>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li><li><a href="/excel-ar/formulas/date/" title="شرح دالة DATE في Excel بالعربي">DATE</a></li><li><a href="/excel-ar/formulas/sumproduct/" title="شرح دالة SUMPRODUCT في Excel بالعربي">SUMPRODUCT</a></li><li><a href="/excel-ar/formulas/sumifs/" title="شرح دالة SUMIFS في Excel بالعربي">SUMIFS</a></li><li><a href="/excel-ar/formulas/month/" title="شرح دالة MONTH في Excel بالعربي">MONTH</a></li><li><a href="/excel-ar/formulas/day/" title="شرح دالة DAY في Excel بالعربي">DAY</a></li><li><a href="/excel-ar/formulas/left/" title="شرح دالة LEFT في Excel بالعربي">LEFT</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

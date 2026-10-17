@@ -6,10 +6,11 @@
 <title>شرح دالة SUMIF في Excel بالعربي</title>
 <meta name="description" content="شرح دالة SUMIF في Excel: تجمع القيم التي يتحقق فيها شرط واحد، مثل مبيعات منطقة معيّنة. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="SUMIF، دالة SUMIF، شرح SUMIF، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/sumif/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة SUMIF في Excel بالعربي">
 <meta property="og:description" content="شرح دالة SUMIF في Excel: تجمع القيم التي يتحقق فيها شرط واحد، مثل مبيعات منطقة معيّنة. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/sumif/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,43 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=SUMIF(range, criteria, [sum_range])</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">range</code>: مطلوب</li><li><code dir="ltr">criteria</code>: مطلوب</li><li><code dir="ltr">sum_range</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">range</code>: النطاق الذي يُفحص فيه الشرط، مثل عمود أسماء الفروع أو التواريخ. (مطلوب)</li><li><code dir="ltr">criteria</code>: الشرط الذي يحدد الخلايا المطلوبة، مثل &quot;الشمالي&quot; أو &quot;&gt;1400&quot; أو مرجع خلية. (مطلوب)</li><li><code dir="ltr">sum_range</code>: الخلايا التي تُجمع فعليًا، وإذا تركتها تُجمع خلايا نطاق الشرط نفسه. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم SUMIF</h2>
+<p>تجمع دالة SUMIF الأرقام التي تحقق شرطًا واحدًا فقط. تحتاجها عندما يكون لديك جدول طويل وتريد مجموع جزء منه، مثل:</p>
+<ul><li>إجمالي مبيعات فرع معين من سجل يضم كل الفروع.</li><li>مجموع ساعات العمل الإضافية لقسم واحد في كشف الرواتب.</li><li>مجموع الفواتير التي تتجاوز قيمة محددة.</li><li>كمية صنف معين من حركة المخزون.</li></ul>
+<p>إذا كان لديك أكثر من شرط فاستخدم <a href="/excel-ar/formulas/sumifs/">SUMIFS</a>.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>تفحص الدالة كل خلية في نطاق الشرط، وعندما تحقق الخلية الشرط تأخذ الرقم المقابل لها في الصف نفسه من نطاق الجمع. الشرط يكتب بين علامتي تنصيص إذا كان نصًا أو مقارنة، مثل &quot;الشمالي&quot; أو &quot;&gt;1400&quot;، أما الرقم المجرد فيمكن كتابته بدون تنصيص. والدالة لا تفرق بين الأحرف الإنجليزية الكبيرة والصغيرة.</p>
+<h2 id="s-3">مثال عملي</h2>
+<p>لديك سجل مبيعات المندوبين في النطاق A2:C6:</p>
+<div class="table-wrap"><table><thead><tr><th></th><th>A: الفرع</th><th>B: المندوب</th><th>C: المبيعات</th></tr></thead><tbody><tr><td>2</td><td>الشمالي</td><td>خالد</td><td>1500</td></tr><tr><td>3</td><td>الجنوبي</td><td>ليلى</td><td>2200</td></tr><tr><td>4</td><td>الشمالي</td><td>سامي</td><td>1800</td></tr><tr><td>5</td><td>الوسط</td><td>خالد</td><td>950</td></tr><tr><td>6</td><td>الجنوبي</td><td>سامي</td><td>1300</td></tr></tbody></table></div>
+<p>لحساب إجمالي مبيعات الفرع الشمالي:</p>
+<pre dir="ltr"><code>=SUMIF(A2:A6,&quot;الشمالي&quot;,C2:C6)</code></pre>
+<p>النتيجة <strong>3300</strong>، وهي مجموع الصفين 2 و4 فقط، أي مبيعات خالد وسامي في الفرع الشمالي.</p>
+<p>ولجمع المبيعات التي تزيد على 1400 فقط، يكون نطاق الشرط هو نطاق الجمع نفسه، فلا داعي للوسيطة الثالثة:</p>
+<pre dir="ltr"><code>=SUMIF(C2:C6,&quot;&gt;1400&quot;)</code></pre>
+<p>النتيجة <strong>5500</strong>، وهي مجموع 1500 و2200 و1800، أي مبيعات خالد وسامي في الفرع الشمالي وليلى في الجنوبي، أما الصفان 5 و6 فقيمتهما أقل من الحد.</p>
+<p>ولجمع مبيعات كل مندوب يبدأ اسمه بحرف الخاء، استخدم النجمة كحرف بدل:</p>
+<pre dir="ltr"><code>=SUMIF(B2:B6,&quot;خ*&quot;,C2:C6)</code></pre>
+<p>النتيجة <strong>2450</strong>، وهي مبيعات خالد في الفرعين.</p>
+<h2 id="s-4">أخطاء شائعة وحلولها</h2>
+<ul><li><strong>النتيجة صفر</strong>: تأكد من تطابق النص تمامًا، فمسافة زائدة في نهاية &quot;الشمالي &quot; تمنع المطابقة. نظّف البيانات بالدالة <a href="/excel-ar/formulas/trim/">TRIM</a>.</li><li><strong>كتابة المقارنة مع مرجع خلية بشكل خاطئ</strong>: الصيغة <code dir="ltr">=SUMIF(C2:C6,&quot;&gt;F2&quot;)</code> تبحث عن النص F2 حرفيًا. الصحيح ربط المقارنة بالمرجع: <code dir="ltr">=SUMIF(C2:C6,&quot;&gt;&quot;&amp;F2)</code>.</li><li><strong>نطاقان بأحجام مختلفة</strong>: إذا كان sum_range أقصر من range فإن Excel يمده تلقائيًا من خلية بدايته، وقد تحصل على نتيجة غير متوقعة. اجعل النطاقين بالحجم نفسه دائمًا.</li><li><strong>الخطأ #VALUE!</strong>: يظهر عندما يشير أحد النطاقين إلى مصنف آخر مغلق. افتح المصنف المصدر أو استخدم <a href="/excel-ar/formulas/sumproduct/">SUMPRODUCT</a>.</li></ul>
+<h2 id="s-5">نصائح</h2>
+<ul><li>اكتب الشرط في خلية منفصلة واجعل الصيغة تشير إليها، مثل <code dir="ltr">=SUMIF(A2:A6,F1,C2:C6)</code>، فتغيّر الفرع دون تعديل الصيغة.</li><li>لجمع المبيعات من تاريخ معين فصاعدًا في جدول عموده A للتواريخ: <code dir="ltr">=SUMIF(A2:A50,&quot;&gt;=&quot;&amp;DATE(2026,3,1),C2:C50)</code>.</li><li>لجمع الخلايا غير الفارغة في نطاق الشرط استخدم الشرط &quot;&lt;&gt;&quot;.</li><li>الدالة متاحة في جميع الإصدارات، وفي الإعدادات الإقليمية العربية تكتب <code dir="ltr">=SUMIF(A2:A6;&quot;الشمالي&quot;;C2:C6)</code>.</li></ul>
+<h2 id="s-6">أسئلة شائعة</h2>
+<h3>كيف أجمع لفرعين معًا؟</h3>
+<p>اجمع صيغتين: <code dir="ltr">=SUMIF(A2:A6,&quot;الشمالي&quot;,C2:C6)+SUMIF(A2:A6,&quot;الجنوبي&quot;,C2:C6)</code>، والنتيجة في المثال 6800.</p>
+<h3>هل يمكن البحث عن علامة النجمة نفسها؟</h3>
+<p>نعم، ضع قبلها علامة التلدة ~ في الشرط، مثل &quot;~*&quot;.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=SUMIF(A2:A100,&quot;بغداد&quot;,C2:C100)</code></pre>
 <p>النتيجة: مجموع مبيعات بغداد</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=SUMIF(A2:A100;&quot;بغداد&quot;;C2:C100)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/sumifs/" title="شرح دالة SUMIFS في Excel بالعربي">SUMIFS</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/sumproduct/" title="شرح دالة SUMPRODUCT في Excel بالعربي">SUMPRODUCT</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>
