@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام</title>
+<meta name="description" content="تعلم كيف تحسب العمر بدقة من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام باستخدام DATEDIF وTODAY مع مثال عملي وأخطاء شائعة.">
+<meta name="keywords" content="حساب العمر في اكسل، حساب العمر من تاريخ الميلاد، معادلة العمر Excel، DATEDIF العمر">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/articles/calculate-age-from-birthdate-excel/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام">
+<meta property="og:description" content="تعلم كيف تحسب العمر بدقة من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام باستخدام DATEDIF وTODAY مع مثال عملي وأخطاء شائعة.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/articles/calculate-age-from-birthdate-excel/">
+<meta property="og:site_name" content="Excel بالعربي">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/excel-ar/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام","description":"تعلم كيف تحسب العمر بدقة من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام باستخدام DATEDIF وTODAY مع مثال عملي وأخطاء شائعة.","inLanguage":"ar","url":"https://alih552.github.io/excel-ar/articles/calculate-age-from-birthdate-excel/","datePublished":"2026-10-17T22:10:51.820Z","dateModified":"2026-10-17T22:10:51.820Z","keywords":"حساب العمر في اكسل, حساب العمر من تاريخ الميلاد, معادلة العمر Excel, DATEDIF العمر","author":{"@type":"Organization","name":"Excel بالعربي"},"publisher":{"@type":"Organization","name":"Excel بالعربي"},"mainEntityOfPage":"https://alih552.github.io/excel-ar/articles/calculate-age-from-birthdate-excel/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://alih552.github.io/excel-ar/"},{"@type":"ListItem","position":2,"name":"المقالات","item":"https://alih552.github.io/excel-ar/articles/"},{"@type":"ListItem","position":3,"name":"حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر…"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما الفرق بين DATEDIF وYEARFRAC في حساب العمر؟","acceptedAnswer":{"@type":"Answer","text":"تعيد DATEDIF سنوات كاملة، بينما تعيد YEARFRAC كسرًا عشريًا مثل 36.4، وهو مفيد في الحسابات المالية لا في عرض العمر."}},{"@type":"Question","name":"هل يتحدث العمر تلقائيًا؟","acceptedAnswer":{"@type":"Answer","text":"نعم، لأن TODAY تتغير كل يوم عند فتح الملف أو إعادة حسابه."}},{"@type":"Question","name":"كيف أحسب العمر في تاريخ معين في الماضي؟","acceptedAnswer":{"@type":"Answer","text":"ضع ذلك التاريخ في خلية واستخدمها بدل TODAY في الصيغة."}},{"@type":"Question","name":"لماذا تظهر #VALUE!؟","acceptedAnswer":{"@type":"Answer","text":"غالبًا لأن تاريخ الميلاد نص وليس تاريخًا حقيقيًا."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="/excel-ar/">Excel بالعربي</a><nav aria-label="الأقسام"><a href="/excel-ar/formulas/">الدوال</a><a href="/excel-ar/articles/">المقالات</a><a href="https://t.me/AdamShopIQ_bot?start=web__nav" rel="noopener">المساعد المجاني</a></nav></div></header>
+<main class="wrap">
+<nav class="crumbs" aria-label="مسار الصفحة"><a href="/excel-ar/">الرئيسية</a> <span aria-hidden="true">›</span> <a href="/excel-ar/articles/">المقالات</a> <span aria-hidden="true">›</span> <span>حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر…</span></nav>
+<article>
+<h1>حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام</h1>
+<p class="meta">آخر تحديث: <time datetime="2026-10-17">2026-10-17</time></p>
+<nav class="toc" aria-label="محتويات المقال"><p class="toc-title">في هذا المقال</p><ol><li><a href="#s-1">حساب العمر من تاريخ الميلاد في Excel</a></li><li><a href="#s-2">الفكرة الأساسية</a></li><li><a href="#s-3">العمر بالسنوات</a></li><li><a href="#s-4">العمر بالسنوات والأشهر والأيام معًا</a></li><li><a href="#s-5">مثال عملي على بيانات</a></li><li><a href="#s-6">طريقة بديلة</a></li><li><a href="#s-7">كيف تحسب من يبلغ سنًا معينة؟</a></li><li><a href="#s-8">أخطاء شائعة</a></li><li><a href="#s-9">نصائح لتنسيق النتيجة</a></li><li><a href="#s-10">أسئلة شائعة</a></li></ol></nav>
+<h2 id="s-1">حساب العمر من تاريخ الميلاد في Excel</h2>
+<p>من أكثر المهام تكرارًا في ملفات الموظفين والطلاب والعملاء حساب العمر انطلاقًا من تاريخ الميلاد. الطريقة الصحيحة تعتمد على الدالة <a href="/excel-ar/formulas/datedif/">DATEDIF</a> مع الدالة <a href="/excel-ar/formulas/today/">TODAY</a>، وهي تعطيك العمر الدقيق دون أن تتأثر بالسنوات الكبيسة.</p>
+<h2 id="s-2">الفكرة الأساسية</h2>
+<p>تحسب DATEDIF الفرق بين تاريخين بوحدة تختارها: سنوات أو أشهر أو أيام. أما TODAY فتعيد تاريخ اليوم تلقائيًا، فيتحدث العمر كلما فتحت الملف.</p>
+<h2 id="s-3">العمر بالسنوات</h2>
+<p>لنفترض أن تاريخ الميلاد في الخلية <code dir="ltr">A2</code>:</p>
+<pre dir="ltr"><code>=DATEDIF(A2,TODAY(),&quot;Y&quot;)</code></pre>
+<p>الرمز <code dir="ltr">Y</code> يعني السنوات الكاملة فقط. إذا كان الميلاد في 15/08/1990 والتاريخ الحالي في 2026، فالنتيجة 36 قبل يوم الميلاد في هذا العام و36 أو 37 حسب وصول التاريخ.</p>
+<h2 id="s-4">العمر بالسنوات والأشهر والأيام معًا</h2>
+<pre dir="ltr"><code>=DATEDIF(A2,TODAY(),&quot;Y&quot;)&amp;&quot; سنة، &quot;&amp;DATEDIF(A2,TODAY(),&quot;YM&quot;)&amp;&quot; شهر، &quot;&amp;DATEDIF(A2,TODAY(),&quot;MD&quot;)&amp;&quot; يوم&quot;</code></pre>
+<p>هنا نستخدم ثلاث وحدات:</p>
+<ul><li><code dir="ltr">Y</code> السنوات الكاملة.</li><li><code dir="ltr">YM</code> الأشهر المتبقية بعد السنوات الكاملة.</li><li><code dir="ltr">MD</code> الأيام المتبقية بعد الأشهر الكاملة.</li></ul>
+<p>ونربط النتائج بالعلامة <code dir="ltr">&amp;</code> مع نصوص بين علامات اقتباس.</p>
+<h2 id="s-5">مثال عملي على بيانات</h2>
+<div class="table-wrap"><table><thead><tr><th>الاسم</th><th>تاريخ الميلاد</th><th>العمر بالسنوات</th></tr></thead><tbody><tr><td>أحمد</td><td>1990-08-15</td><td><code dir="ltr">=DATEDIF(B2,TODAY(),&quot;Y&quot;)</code></td></tr><tr><td>سارة</td><td>2001-02-03</td><td><code dir="ltr">=DATEDIF(B3,TODAY(),&quot;Y&quot;)</code></td></tr><tr><td>علي</td><td>1985-12-30</td><td><code dir="ltr">=DATEDIF(B4,TODAY(),&quot;Y&quot;)</code></td></tr></tbody></table></div>
+<p>اسحب الصيغة لأسفل لتنطبق على كل الصفوف. يمكنك أيضًا حساب العمر في تاريخ محدد بدل اليوم، مثل تاريخ التوظيف، بوضع خلية التاريخ مكان <code dir="ltr">TODAY()</code>:</p>
+<pre dir="ltr"><code>=DATEDIF(B2,D2,&quot;Y&quot;)</code></pre>
+<h2 id="s-6">طريقة بديلة</h2>
+<p>يمكن استخدام <code dir="ltr">=INT((TODAY()-A2)/365.25)</code> وهي تقريبية وقد تخطئ بيوم واحد قرب أعياد الميلاد، لذلك نفضل DATEDIF عندما تحتاج دقة كاملة، مثل كشوف الأعمار القانونية أو شروط التقديم.</p>
+<h2 id="s-7">كيف تحسب من يبلغ سنًا معينة؟</h2>
+<p>لمعرفة من أتم 18 سنة استخدم الدالة <a href="/excel-ar/formulas/if/">IF</a>:</p>
+<pre dir="ltr"><code>=IF(DATEDIF(A2,TODAY(),&quot;Y&quot;)&gt;=18,&quot;بالغ&quot;,&quot;قاصر&quot;)</code></pre>
+<p>ويمكن جمع الحالات بالدالة <a href="/excel-ar/formulas/countif/">COUNTIF</a> بعد إضافة عمود للأعمار، فتعرف عدد من تجاوز عمرًا محددًا.</p>
+<h2 id="s-8">أخطاء شائعة</h2>
+<ol><li><strong>تاريخ مكتوب كنص:</strong> إذا كانت الخلية مُحاذاة لليسار وتبدو نصًا فلن تعمل الصيغة. حوّلها إلى تاريخ حقيقي من تنسيق الخلايا أو باستخدام <a href="/excel-ar/formulas/date/">DATE</a>.</li><li><strong>تاريخ الميلاد بعد تاريخ اليوم:</strong> تظهر الخطأ <code dir="ltr">#NUM!</code> لأن DATEDIF تشترط أن يكون تاريخ البداية أصغر من النهاية.</li><li><strong>الفاصلة المنقوطة:</strong> في بعض الإعدادات الإقليمية تُستبدل الفاصلة <code dir="ltr">,</code> بفاصلة منقوطة <code dir="ltr">;</code> فجرّب ذلك إن ظهر خطأ في الصيغة.</li><li><strong>نسيان علامات الاقتباس حول الوحدة:</strong> يجب كتابة <code dir="ltr">&quot;Y&quot;</code> وليس <code dir="ltr">Y</code>.</li><li><strong>اختلاف صيغة التاريخ:</strong> تأكد أن ترتيب اليوم والشهر مطابق لإعدادات جهازك قبل الإدخال، وإلا يُقرأ التاريخ بشكل خاطئ.</li><li><strong>عدم ظهورها في قائمة الاقتراحات:</strong> DATEDIF دالة موثقة بشكل محدود، فلا تظهر عند الكتابة لكنها تعمل عند كتابتها كاملة.</li></ol>
+<h2 id="s-9">نصائح لتنسيق النتيجة</h2>
+<p>بعد إدخال الصيغة تأكد أن تنسيق الخلية عام أو رقم وليس تاريخًا، وإلا ستظهر النتيجة كتاريخ غريب مثل 1900. وإذا أردت إخفاء الأخطاء في الصفوف الفارغة فغلّف الصيغة بالدالة <a href="/excel-ar/formulas/iferror/">IFERROR</a>:</p>
+<pre dir="ltr"><code>=IFERROR(DATEDIF(A2,TODAY(),&quot;Y&quot;),&quot;&quot;)</code></pre>
+<p>وهكذا تبقى الخلية فارغة عندما لا يوجد تاريخ ميلاد.</p>
+<h2 id="s-10">أسئلة شائعة</h2>
+<h3>ما الفرق بين DATEDIF وYEARFRAC في حساب العمر؟</h3>
+<p>تعيد DATEDIF سنوات كاملة، بينما تعيد YEARFRAC كسرًا عشريًا مثل 36.4، وهو مفيد في الحسابات المالية لا في عرض العمر.</p>
+<h3>هل يتحدث العمر تلقائيًا؟</h3>
+<p>نعم، لأن TODAY تتغير كل يوم عند فتح الملف أو إعادة حسابه.</p>
+<h3>كيف أحسب العمر في تاريخ معين في الماضي؟</h3>
+<p>ضع ذلك التاريخ في خلية واستخدمها بدل TODAY في الصيغة.</p>
+<h3>لماذا تظهر #VALUE!؟</h3>
+<p>غالبًا لأن تاريخ الميلاد نص وليس تاريخًا حقيقيًا.</p>
+<h2>الدوال المستخدمة في هذا المقال</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/datedif/" title="شرح دالة DATEDIF في Excel بالعربي">DATEDIF</a></li><li><a href="/excel-ar/formulas/today/" title="شرح دالة TODAY في Excel بالعربي">TODAY</a></li><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/date/" title="شرح دالة DATE في Excel بالعربي">DATE</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li></ul>
+</article>
+<aside class="cta">
+<p class="cta-title">عندك سؤال عن جدولك؟</p>
+<p>اكتب سؤالك لمساعد Excel المجاني على تيليجرام، وخذ الصيغة المناسبة لبياناتك خلال لحظات.</p>
+<p><a class="btn" href="https://t.me/AdamShopIQ_bot?start=web_calculate-age-from-birthdate-excel" rel="noopener">اسأل مساعد Excel مجاناً على تيليجرام</a></p>
+<p class="cta-more">تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة نصائح Excel</a> لنصيحة عملية كل يوم.</p>
+<p class="cta-more">وفي البوت أيضاً أدلة جاهزة مفصّلة لمن يريد التعمّق.</p>
+</aside>
+</main>
+<footer class="site"><div class="wrap"><p>🤖 المحتوى مكتوب بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء؛ جرّب الصيغ على نسخة من ملفك قبل الاعتماد عليها.</p><p>Excel بالعربي: شروحات مجانية لدوال Excel وصيغه بالعربية، لكل من يعمل على الجداول في البلاد العربية. تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة النصائح على تيليجرام</a>.</p></div></footer>
+</body>
+</html>
