@@ -6,10 +6,11 @@
 <title>شرح دالة MAXIFS في Excel بالعربي</title>
 <meta name="description" content="شرح دالة MAXIFS في Excel: تُرجع أكبر قيمة في نطاق بشرط واحد أو أكثر، دون الحاجة إلى معادلة صفيف. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="MAXIFS، دالة MAXIFS، شرح MAXIFS، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/maxifs/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة MAXIFS في Excel بالعربي">
 <meta property="og:description" content="شرح دالة MAXIFS في Excel: تُرجع أكبر قيمة في نطاق بشرط واحد أو أكثر، دون الحاجة إلى معادلة صفيف. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/maxifs/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,33 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=MAXIFS(max_range, criteria_range1, criteria1, [criteria_range2, criteria2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">max_range</code>: مطلوب</li><li><code dir="ltr">criteria_range1</code>: مطلوب</li><li><code dir="ltr">criteria1</code>: مطلوب</li><li><code dir="ltr">criteria_range2</code>: اختياري</li><li><code dir="ltr">criteria2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">max_range</code>: نطاق الأرقام الذي تريد إيجاد أكبر قيمة فيه. (مطلوب)</li><li><code dir="ltr">criteria_range1</code>: النطاق الأول الذي يُفحص فيه الشرط، بنفس حجم نطاق الأرقام. (مطلوب)</li><li><code dir="ltr">criteria1</code>: الشرط الأول، نص أو رقم أو تعبير مثل &quot;&gt;100&quot;. (مطلوب)</li><li><code dir="ltr">criteria_range2</code>: نطاق شرط إضافي اختياري بنفس الحجم. (اختياري)</li><li><code dir="ltr">criteria2</code>: الشرط الإضافي الاختياري المقابل للنطاق الثاني. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم MAXIFS؟</h2>
+<p>تُستخدم الدالة <code dir="ltr">MAXIFS</code> لإيجاد أكبر قيمة في نطاق رقمي بشرط واحد أو أكثر. مثلاً: أعلى مبيعات لموظف معين، أو أعلى راتب في قسم محدد، أو أغلى فاتورة في شهر معين. قبلها كان الناس يلجؤون إلى صيغ مصفوفات معقدة، أما الآن فهي دالة مباشرة (متوفرة في Excel 2019 وMicrosoft 365).</p>
+<h2 id="s-2">كيف تعمل؟</h2>
+<p>تأخذ الدالة نطاق الأرقام الذي تريد أكبر قيمة منه، ثم أزواجاً من (نطاق الشرط، الشرط). لا تُحسب إلا الصفوف التي تحقق كل الشروط معاً (منطق <a href="/excel-ar/formulas/and/">AND</a>). يجب أن تكون جميع النطاقات بنفس الحجم.</p>
+<h2 id="s-3">مثال عملي</h2>
+<div class="table-wrap"><table><thead><tr><th>A (الموظف)</th><th>B (القسم)</th><th>C (المبيعات)</th></tr></thead><tbody><tr><td>أحمد</td><td>شمال</td><td>1200</td></tr><tr><td>سارة</td><td>جنوب</td><td>1850</td></tr><tr><td>علي</td><td>شمال</td><td>2100</td></tr><tr><td>منى</td><td>جنوب</td><td>950</td></tr><tr><td>خالد</td><td>شمال</td><td>1700</td></tr></tbody></table></div>
+<p>لمعرفة أعلى مبيعات في قسم الشمال:</p>
+<p><code dir="ltr">=MAXIFS(C2:C6,B2:B6,&quot;شمال&quot;)</code></p>
+<p>النتيجة: <strong>2100</strong>.</p>
+<p>بشرطين (القسم شمال والمبيعات أقل من 2000):</p>
+<p><code dir="ltr">=MAXIFS(C2:C6,B2:B6,&quot;شمال&quot;,C2:C6,&quot;&lt;2000&quot;)</code></p>
+<p>النتيجة: <strong>1700</strong>.</p>
+<p>ويمكنك وضع الشرط في خلية: <code dir="ltr">=MAXIFS(C2:C6,B2:B6,F1)</code> فيتغير الناتج بتغيير F1.</p>
+<h2 id="s-4">أخطاء شائعة</h2>
+<ul><li>اختلاف حجم النطاقات يعطي الخطأ <code dir="ltr">#VALUE!</code>.</li><li>إذا لم يتحقق أي صف يرجع الناتج 0 وليس رسالة خطأ، فلا تفسّره على أن القيمة موجودة.</li><li>عوامل المقارنة تُكتب بين علامتي اقتباس مثل <code dir="ltr">&quot;&gt;=100&quot;</code>، وللربط بخلية استخدم <code dir="ltr">&quot;&gt;=&quot;&amp;F1</code>.</li><li>الأرقام المخزنة كنص لا تُحسب؛ حوّلها إلى أرقام أولاً.</li><li>في الإصدارات القديمة من Excel (قبل 2019) الدالة غير موجودة، وتظهر <code dir="ltr">#NAME?</code>.</li></ul>
+<h2 id="s-5">دوال مرتبطة</h2>
+<p>لأصغر قيمة بشرط استخدم MINIFS، وللمجموع بشرط <a href="/excel-ar/formulas/sumifs/">SUMIFS</a>، وللعدّ <a href="/excel-ar/formulas/countifs/">COUNTIFS</a>.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=MAXIFS(C2:C100,A2:A100,&quot;بغداد&quot;)</code></pre>
 <p>النتيجة: تعطي أعلى مبلغ مبيعات في الصفوف التي مدينتها بغداد</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=MAXIFS(C2:C100;A2:A100;&quot;بغداد&quot;)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/max/" title="شرح دالة MAX في Excel بالعربي">MAX</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/and/" title="شرح دالة AND في Excel بالعربي">AND</a></li><li><a href="/excel-ar/formulas/sumifs/" title="شرح دالة SUMIFS في Excel بالعربي">SUMIFS</a></li><li><a href="/excel-ar/formulas/countifs/" title="شرح دالة COUNTIFS في Excel بالعربي">COUNTIFS</a></li><li><a href="/excel-ar/formulas/max/" title="شرح دالة MAX في Excel بالعربي">MAX</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>
