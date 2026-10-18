@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حساب ساعات العمل من وقت الحضور والانصراف في Excel</title>
+<meta name="description" content="تعلم حساب عدد ساعات العمل اليومية من وقت الحضور والانصراف في Excel، مع معالجة الدوام الليلي وجمع الساعات الأسبوعية بصيغ دقيقة.">
+<meta name="keywords" content="حساب ساعات العمل في Excel، كشف الحضور والانصراف، معادلة الفرق بين وقتين، حساب الدوام في اكسل، جمع الساعات في Excel">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/articles/calculate-work-hours-excel/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="حساب ساعات العمل من وقت الحضور والانصراف في Excel">
+<meta property="og:description" content="تعلم حساب عدد ساعات العمل اليومية من وقت الحضور والانصراف في Excel، مع معالجة الدوام الليلي وجمع الساعات الأسبوعية بصيغ دقيقة.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/articles/calculate-work-hours-excel/">
+<meta property="og:site_name" content="Excel بالعربي">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/excel-ar/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"حساب ساعات العمل من وقت الحضور والانصراف في Excel","description":"تعلم حساب عدد ساعات العمل اليومية من وقت الحضور والانصراف في Excel، مع معالجة الدوام الليلي وجمع الساعات الأسبوعية بصيغ دقيقة.","inLanguage":"ar","url":"https://alih552.github.io/excel-ar/articles/calculate-work-hours-excel/","datePublished":"2026-10-18T00:08:17.991Z","dateModified":"2026-10-18T00:08:17.991Z","keywords":"حساب ساعات العمل في Excel, كشف الحضور والانصراف, معادلة الفرق بين وقتين, حساب الدوام في اكسل, جمع الساعات في Excel","author":{"@type":"Organization","name":"Excel بالعربي"},"publisher":{"@type":"Organization","name":"Excel بالعربي"},"mainEntityOfPage":"https://alih552.github.io/excel-ar/articles/calculate-work-hours-excel/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://alih552.github.io/excel-ar/"},{"@type":"ListItem","position":2,"name":"المقالات","item":"https://alih552.github.io/excel-ar/articles/"},{"@type":"ListItem","position":3,"name":"حساب ساعات العمل من وقت الحضور والانصراف في Excel"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"كيف أحسب الفرق بين وقتين في Excel؟","acceptedAnswer":{"@type":"Answer","text":"اطرح الأصغر من الأكبر =C2-B2 ونسّق الخلية كوقت، أو اضرب في 24 للحصول على الساعات."}},{"@type":"Question","name":"لماذا تظهر علامات #### في نتيجة الطرح؟","acceptedAnswer":{"@type":"Answer","text":"لأن الناتج سالب، وهذا يحدث عندما يمتد الدوام إلى ما بعد منتصف الليل. استخدم =MOD(C2-B2,1)."}},{"@type":"Question","name":"كيف أجمع ساعات تزيد عن 24 ساعة؟","acceptedAnswer":{"@type":"Answer","text":"استخدم SUM ثم نسّق الخلية بالصيغة [h]:mm."}},{"@type":"Question","name":"كيف أحول الساعات إلى دقائق؟","acceptedAnswer":{"@type":"Answer","text":"اضرب الفرق في 1440: =MOD(C2-B2,1)*1440."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="/excel-ar/">Excel بالعربي</a><nav aria-label="الأقسام"><a href="/excel-ar/formulas/">الدوال</a><a href="/excel-ar/articles/">المقالات</a><a href="https://t.me/AdamShopIQ_bot?start=web__nav" rel="noopener">المساعد المجاني</a></nav></div></header>
+<main class="wrap">
+<nav class="crumbs" aria-label="مسار الصفحة"><a href="/excel-ar/">الرئيسية</a> <span aria-hidden="true">›</span> <a href="/excel-ar/articles/">المقالات</a> <span aria-hidden="true">›</span> <span>حساب ساعات العمل من وقت الحضور والانصراف في Excel</span></nav>
+<article>
+<h1>حساب ساعات العمل من وقت الحضور والانصراف في Excel</h1>
+<p class="meta">آخر تحديث: <time datetime="2026-10-18">2026-10-18</time></p>
+<nav class="toc" aria-label="محتويات المقال"><p class="toc-title">في هذا المقال</p><ol><li><a href="#s-1">الفكرة الأساسية</a></li><li><a href="#s-2">مثال على بيانات واقعية</a></li><li><a href="#s-3">الطريقة الأولى: عرض الناتج بصيغة وقت</a></li><li><a href="#s-4">الطريقة الثانية: ساعات بشكل رقم عشري</a></li><li><a href="#s-5">الدوام الليلي (الانصراف بعد منتصف الليل)</a></li><li><a href="#s-6">خصم فترة الاستراحة</a></li><li><a href="#s-7">تقريب الناتج</a></li><li><a href="#s-8">جمع الساعات الأسبوعية</a></li><li><a href="#s-9">حساب ساعات العمل الإضافي</a></li><li><a href="#s-10">أخطاء شائعة</a></li><li><a href="#s-11">أسئلة شائعة</a></li></ol></nav>
+<h2 id="s-1">الفكرة الأساسية</h2>
+<p>يخزّن Excel الوقت كجزء من اليوم: الساعة 12:00 ظهراً تساوي 0.5، والساعة 6:00 مساءً تساوي 0.75. لذلك يكون حساب مدة العمل بطرح وقت الحضور من وقت الانصراف، ثم ضرب الناتج في 24 للحصول على الساعات كرقم عشري.</p>
+<h2 id="s-2">مثال على بيانات واقعية</h2>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>الحضور</th><th>الانصراف</th><th>ساعات العمل</th></tr></thead><tbody><tr><td>أحمد</td><td>08:00</td><td>16:30</td><td>8.5</td></tr><tr><td>سارة</td><td>09:15</td><td>17:00</td><td>7.75</td></tr><tr><td>علي</td><td>22:00</td><td>06:00</td><td>8</td></tr></tbody></table></div>
+<p>افترض أن الحضور في العمود B والانصراف في العمود C، وأن الصف الأول للبيانات هو الصف 2.</p>
+<h2 id="s-3">الطريقة الأولى: عرض الناتج بصيغة وقت</h2>
+<p>اكتب في D2:</p>
+<p><code dir="ltr">=C2-B2</code></p>
+<p>ثم نسّق الخلية بصيغة <code dir="ltr">h:mm</code>. ستظهر 8:30 للموظف الأول. هذه الطريقة مناسبة للعرض فقط، لكنها لا تصلح للضرب في أجر الساعة.</p>
+<h2 id="s-4">الطريقة الثانية: ساعات بشكل رقم عشري</h2>
+<p><code dir="ltr">=(C2-B2)*24</code></p>
+<p>الناتج 8.5 للموظف الأول. نسّق الخلية كـ General أو Number، لأن Excel قد يعرضها كوقت تلقائياً بعد الطرح، وهذا خطأ شائع.</p>
+<h2 id="s-5">الدوام الليلي (الانصراف بعد منتصف الليل)</h2>
+<p>عندما يكون وقت الانصراف أصغر من الحضور، يعطي الطرح العادي رقماً سالباً وتظهر علامات ####. الحل باستخدام <a href="/excel-ar/formulas/mod/">MOD</a>:</p>
+<p><code dir="ltr">=MOD(C4-B4,1)*24</code></p>
+<p>النتيجة للموظف علي: 8 ساعات. تعمل هذه الصيغة أيضاً مع الدوام النهاري، لذلك يمكنك استخدامها لكل الصفوف دون تفكير.</p>
+<h2 id="s-6">خصم فترة الاستراحة</h2>
+<p>إذا كانت الاستراحة 30 دقيقة ومكتوبة في E2 بصيغة وقت (0:30):</p>
+<p><code dir="ltr">=MOD(C2-B2,1)*24-E2*24</code></p>
+<h2 id="s-7">تقريب الناتج</h2>
+<p>لتجنب الكسور الطويلة استخدم <a href="/excel-ar/formulas/round/">ROUND</a>:</p>
+<p><code dir="ltr">=ROUND(MOD(C2-B2,1)*24,2)</code></p>
+<h2 id="s-8">جمع الساعات الأسبوعية</h2>
+<p>لجمع الساعات العشرية استخدم <a href="/excel-ar/formulas/sum/">SUM</a> كالمعتاد: <code dir="ltr">=SUM(D2:D8)</code>. أما إذا كانت الأعمدة بصيغة وقت وتتجاوز 24 ساعة فنسّق خلية المجموع بالصيغة <code dir="ltr">[h]:mm</code> بدل <code dir="ltr">h:mm</code>، وإلا سيعود العدّاد إلى الصفر بعد كل 24 ساعة.</p>
+<h2 id="s-9">حساب ساعات العمل الإضافي</h2>
+<p>إذا كان الدوام الرسمي 8 ساعات:</p>
+<p><code dir="ltr">=MAX(0,D2-8)</code></p>
+<p>تعيد الصيغة صفراً عندما لا يوجد وقت إضافي، وتعيد الفرق عندما تزيد الساعات عن 8.</p>
+<h2 id="s-10">أخطاء شائعة</h2>
+<ul><li>كتابة الوقت كنص (مثل <code dir="ltr">8.30</code> بدل <code dir="ltr">8:30</code>)، فلا يتعرف عليه Excel كوقت. تأكد أن الخلية محاذاة لليمين كرقم.</li><li>نسيان الضرب في 24 عند الحاجة إلى رقم عشري.</li><li>ظهور #### بسبب نتيجة سالبة في الدوام الليلي؛ استخدم MOD.</li><li>استخدام تنسيق <code dir="ltr">h:mm</code> لمجموع يتجاوز 24 ساعة بدل <code dir="ltr">[h]:mm</code>.</li><li>وجود خلايا فارغة لموظف غائب تعطي نتيجة غير مقصودة؛ غلّف الصيغة بـ <a href="/excel-ar/formulas/if/">IF</a>:</li></ul>
+<p><code dir="ltr">=IF(OR(B2=&quot;&quot;,C2=&quot;&quot;),&quot;&quot;,MOD(C2-B2,1)*24)</code></p>
+<h2 id="s-11">أسئلة شائعة</h2>
+<h3>كيف أحسب الفرق بين وقتين في Excel؟</h3>
+<p>اطرح الأصغر من الأكبر <code dir="ltr">=C2-B2</code> ونسّق الخلية كوقت، أو اضرب في 24 للحصول على الساعات.</p>
+<h3>لماذا تظهر علامات #### في نتيجة الطرح؟</h3>
+<p>لأن الناتج سالب، وهذا يحدث عندما يمتد الدوام إلى ما بعد منتصف الليل. استخدم <code dir="ltr">=MOD(C2-B2,1)</code>.</p>
+<h3>كيف أجمع ساعات تزيد عن 24 ساعة؟</h3>
+<p>استخدم SUM ثم نسّق الخلية بالصيغة <code dir="ltr">[h]:mm</code>.</p>
+<h3>كيف أحول الساعات إلى دقائق؟</h3>
+<p>اضرب الفرق في 1440: <code dir="ltr">=MOD(C2-B2,1)*1440</code>.</p>
+<h2>الدوال المستخدمة في هذا المقال</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/mod/" title="شرح دالة MOD في Excel بالعربي">MOD</a></li><li><a href="/excel-ar/formulas/round/" title="شرح دالة ROUND في Excel بالعربي">ROUND</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li></ul>
+</article>
+<aside class="cta">
+<p class="cta-title">عندك سؤال عن جدولك؟</p>
+<p>اكتب سؤالك لمساعد Excel المجاني على تيليجرام، وخذ الصيغة المناسبة لبياناتك خلال لحظات.</p>
+<p><a class="btn" href="https://t.me/AdamShopIQ_bot?start=web_calculate-work-hours-excel" rel="noopener">اسأل مساعد Excel مجاناً على تيليجرام</a></p>
+<p class="cta-more">تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة نصائح Excel</a> لنصيحة عملية كل يوم.</p>
+<p class="cta-more">وفي البوت أيضاً أدلة جاهزة مفصّلة لمن يريد التعمّق.</p>
+</aside>
+<h2>مقالات أخرى</h2>
+<ul class="cards"><li><a href="/excel-ar/articles/days-between-two-dates-excel/">حساب عدد الأيام بين تاريخين في Excel (أيام عمل وأيام تقويمية)</a><p>تعلّم حساب عدد الأيام بين تاريخين في Excel بطرق مختلفة: الطرح المباشر، DATEDIF، وأيام العمل فقط مع استثناء العطل الرسمية.</p></li><li><a href="/excel-ar/articles/discount-formula-excel/">معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة</a><p>تعلم كيف تحسب قيمة الخصم والقيمة بعد الخصم ونسبة الخصم في Excel بمعادلات دقيقة ومثال عملي وأخطاء شائعة.</p></li><li><a href="/excel-ar/articles/calculate-age-from-birthdate-excel/">حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام</a><p>تعلم كيف تحسب العمر بدقة من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام باستخدام DATEDIF وTODAY مع مثال عملي وأخطاء شائعة.</p></li></ul>
+</main>
+<footer class="site"><div class="wrap"><p>🤖 المحتوى مكتوب بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء؛ جرّب الصيغ على نسخة من ملفك قبل الاعتماد عليها.</p><p>Excel بالعربي: شروحات مجانية لدوال Excel وصيغه بالعربية، لكل من يعمل على الجداول في البلاد العربية. تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة النصائح على تيليجرام</a>.</p></div></footer>
+</body>
+</html>

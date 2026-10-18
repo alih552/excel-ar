@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة</title>
+<meta name="description" content="تعلم كيف تحسب قيمة الخصم والقيمة بعد الخصم ونسبة الخصم في Excel بمعادلات دقيقة ومثال عملي وأخطاء شائعة.">
+<meta name="keywords" content="معادلة الخصم في Excel، حساب نسبة الخصم في اكسل، حساب القيمة بعد الخصم، discount formula excel">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/articles/discount-formula-excel/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة">
+<meta property="og:description" content="تعلم كيف تحسب قيمة الخصم والقيمة بعد الخصم ونسبة الخصم في Excel بمعادلات دقيقة ومثال عملي وأخطاء شائعة.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/articles/discount-formula-excel/">
+<meta property="og:site_name" content="Excel بالعربي">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/excel-ar/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة","description":"تعلم كيف تحسب قيمة الخصم والقيمة بعد الخصم ونسبة الخصم في Excel بمعادلات دقيقة ومثال عملي وأخطاء شائعة.","inLanguage":"ar","url":"https://alih552.github.io/excel-ar/articles/discount-formula-excel/","datePublished":"2026-10-18T00:06:58.348Z","dateModified":"2026-10-18T00:06:58.348Z","keywords":"معادلة الخصم في Excel, حساب نسبة الخصم في اكسل, حساب القيمة بعد الخصم, discount formula excel","author":{"@type":"Organization","name":"Excel بالعربي"},"publisher":{"@type":"Organization","name":"Excel بالعربي"},"mainEntityOfPage":"https://alih552.github.io/excel-ar/articles/discount-formula-excel/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://alih552.github.io/excel-ar/"},{"@type":"ListItem","position":2,"name":"المقالات","item":"https://alih552.github.io/excel-ar/articles/"},{"@type":"ListItem","position":3,"name":"معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"كيف أحسب الخصم 20% في Excel؟","acceptedAnswer":{"@type":"Answer","text":"اكتب =A1*0.8 للقيمة بعد الخصم، أو =A1*20% لقيمة الخصم نفسها."}},{"@type":"Question","name":"كيف أضيف نسبة بدلاً من الخصم؟","acceptedAnswer":{"@type":"Answer","text":"استخدم =A1*(1+C1) حيث C1 هي نسبة الزيادة."}},{"@type":"Question","name":"كيف أحسب نسبة الخصم من قيمتين؟","acceptedAnswer":{"@type":"Answer","text":"استخدم =(الأصلية-بعد الخصم)/الأصلية ثم نسّق الناتج كنسبة مئوية."}},{"@type":"Question","name":"لماذا تظهر النتيجة بكسور كثيرة؟","acceptedAnswer":{"@type":"Answer","text":"لأن الضرب بالنسب ينتج خانات عشرية، استخدم ROUND لتحديد عدد الخانات."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="/excel-ar/">Excel بالعربي</a><nav aria-label="الأقسام"><a href="/excel-ar/formulas/">الدوال</a><a href="/excel-ar/articles/">المقالات</a><a href="https://t.me/AdamShopIQ_bot?start=web__nav" rel="noopener">المساعد المجاني</a></nav></div></header>
+<main class="wrap">
+<nav class="crumbs" aria-label="مسار الصفحة"><a href="/excel-ar/">الرئيسية</a> <span aria-hidden="true">›</span> <a href="/excel-ar/articles/">المقالات</a> <span aria-hidden="true">›</span> <span>معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة</span></nav>
+<article>
+<h1>معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة</h1>
+<p class="meta">آخر تحديث: <time datetime="2026-10-18">2026-10-18</time></p>
+<nav class="toc" aria-label="محتويات المقال"><p class="toc-title">في هذا المقال</p><ol><li><a href="#s-1">ما المطلوب بالضبط؟</a></li><li><a href="#s-2">تجهيز الجدول</a></li><li><a href="#s-3">الحالة الأولى: حساب قيمة الخصم</a></li><li><a href="#s-4">الحالة الثانية: القيمة بعد الخصم</a></li><li><a href="#s-5">الحالة الثالثة: حساب نسبة الخصم</a></li><li><a href="#s-6">خصم متدرج حسب الكمية</a></li><li><a href="#s-7">تقريب النتيجة</a></li><li><a href="#s-8">جمع الإجماليات</a></li><li><a href="#s-9">أخطاء شائعة</a></li><li><a href="#s-10">أسئلة شائعة</a></li></ol></nav>
+<h2 id="s-1">ما المطلوب بالضبط؟</h2>
+<p>عند التعامل مع فواتير أو قوائم بيع تحتاج غالباً إلى ثلاث نتائج: قيمة الخصم، والقيمة بعد الخصم، ونسبة الخصم عندما تعرف القيمتين. سنشرح كل حالة بمعادلة واضحة ومثال على بيانات بسيطة.</p>
+<h2 id="s-2">تجهيز الجدول</h2>
+<p>افترض أن الجدول التالي يبدأ من الخلية A1:</p>
+<div class="table-wrap"><table><thead><tr><th>المنتج</th><th>القيمة الأصلية</th><th>نسبة الخصم</th><th>قيمة الخصم</th><th>القيمة بعد الخصم</th></tr></thead><tbody><tr><td>قلم</td><td>200</td><td>10%</td><td></td><td></td></tr><tr><td>دفتر</td><td>500</td><td>15%</td><td></td><td></td></tr><tr><td>حقيبة</td><td>1000</td><td>25%</td><td></td><td></td></tr></tbody></table></div>
+<p>تأكد أن عمود نسبة الخصم بتنسيق نسبة مئوية (Percentage)، فالقيمة 10% تخزن داخلياً على شكل 0.1.</p>
+<h2 id="s-3">الحالة الأولى: حساب قيمة الخصم</h2>
+<p>اضرب القيمة الأصلية في نسبة الخصم. في الخلية D2 اكتب:</p>
+<p><code dir="ltr">=B2*C2</code></p>
+<p>النتيجة للصف الأول 20، وللثاني 75، وللثالث 250.</p>
+<h2 id="s-4">الحالة الثانية: القيمة بعد الخصم</h2>
+<p>هناك طريقتان متكافئتان. الأولى أن تطرح قيمة الخصم من القيمة الأصلية:</p>
+<p><code dir="ltr">=B2-D2</code></p>
+<p>والثانية مباشرة بدون عمود وسيط:</p>
+<p><code dir="ltr">=B2*(1-C2)</code></p>
+<p>للصف الأول تعطي 180، وللثاني 425، وللثالث 750. الطريقة الثانية أقصر وتناسب الجداول الكبيرة لأنها تقلل الأعمدة.</p>
+<h2 id="s-5">الحالة الثالثة: حساب نسبة الخصم</h2>
+<p>إذا عرفت القيمة قبل الخصم وبعده، فالنسبة هي الفرق مقسوماً على القيمة الأصلية:</p>
+<p><code dir="ltr">=(B2-E2)/B2</code></p>
+<p>ثم نسّق الخلية كنسبة مئوية. إذا كانت القيمة الأصلية 500 وبعد الخصم 425 فالنتيجة 15%.</p>
+<h2 id="s-6">خصم متدرج حسب الكمية</h2>
+<p>لو أردت خصماً يتغير حسب القيمة، استخدم الدالة <a href="/excel-ar/formulas/if/">IF</a> أو <a href="/excel-ar/formulas/ifs/">IFS</a>. مثال: خصم 10% إذا زادت القيمة عن 500، وإلا فلا خصم:</p>
+<p><code dir="ltr">=IF(B2&gt;500,B2*0.9,B2)</code></p>
+<p>ولعدة شرائح استخدم:</p>
+<p><code dir="ltr">=IFS(B2&gt;=1000,B2*0.75,B2&gt;=500,B2*0.85,TRUE,B2)</code></p>
+<p>انتبه إلى ترتيب الشروط: ابدأ بالأكبر دائماً لأن Excel يتوقف عند أول شرط صحيح.</p>
+<h2 id="s-7">تقريب النتيجة</h2>
+<p>قد تظهر كسور طويلة، فلفها بالدالة <a href="/excel-ar/formulas/round/">ROUND</a>:</p>
+<p><code dir="ltr">=ROUND(B2*(1-C2),2)</code></p>
+<p>الرقم 2 يعني خانتين عشريتين.</p>
+<h2 id="s-8">جمع الإجماليات</h2>
+<p>لمجموع قيمة الخصومات استخدم <code dir="ltr">=SUM(D2:D4)</code>، ولمجموع الصافي <code dir="ltr">=SUM(E2:E4)</code>. ولمجموع الخصم مباشرة بدون عمود وسيط يمكن استخدام <code dir="ltr">=SUMPRODUCT(B2:B4,C2:C4)</code>.</p>
+<h2 id="s-9">أخطاء شائعة</h2>
+<ul><li>كتابة نسبة الخصم كرقم 10 بدل 10%، فتصبح النتيجة أكبر بعشر مرات. اكتب 10% أو 0.1.</li><li>نسيان الأقواس في <code dir="ltr">B2*(1-C2)</code>، فتتغير النتيجة تماماً.</li><li>ترك عمود القيمة بتنسيق نص، فلا تعمل العمليات الحسابية. حوّله إلى رقم.</li><li>تقسيم الفرق على القيمة بعد الخصم بدل القيمة الأصلية عند حساب النسبة.</li><li>نسخ المعادلة دون تثبيت الخلية. إذا كانت النسبة في خلية واحدة فاستخدم <code dir="ltr">$C$1</code> لتثبيتها.</li></ul>
+<h2 id="s-10">أسئلة شائعة</h2>
+<h3>كيف أحسب الخصم 20% في Excel؟</h3>
+<p>اكتب <code dir="ltr">=A1*0.8</code> للقيمة بعد الخصم، أو <code dir="ltr">=A1*20%</code> لقيمة الخصم نفسها.</p>
+<h3>كيف أضيف نسبة بدلاً من الخصم؟</h3>
+<p>استخدم <code dir="ltr">=A1*(1+C1)</code> حيث C1 هي نسبة الزيادة.</p>
+<h3>كيف أحسب نسبة الخصم من قيمتين؟</h3>
+<p>استخدم <code dir="ltr">=(الأصلية-بعد الخصم)/الأصلية</code> ثم نسّق الناتج كنسبة مئوية.</p>
+<h3>لماذا تظهر النتيجة بكسور كثيرة؟</h3>
+<p>لأن الضرب بالنسب ينتج خانات عشرية، استخدم ROUND لتحديد عدد الخانات.</p>
+<h2>الدوال المستخدمة في هذا المقال</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/ifs/" title="شرح دالة IFS في Excel بالعربي">IFS</a></li><li><a href="/excel-ar/formulas/round/" title="شرح دالة ROUND في Excel بالعربي">ROUND</a></li></ul>
+</article>
+<aside class="cta">
+<p class="cta-title">عندك سؤال عن جدولك؟</p>
+<p>اكتب سؤالك لمساعد Excel المجاني على تيليجرام، وخذ الصيغة المناسبة لبياناتك خلال لحظات.</p>
+<p><a class="btn" href="https://t.me/AdamShopIQ_bot?start=web_discount-formula-excel" rel="noopener">اسأل مساعد Excel مجاناً على تيليجرام</a></p>
+<p class="cta-more">تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة نصائح Excel</a> لنصيحة عملية كل يوم.</p>
+<p class="cta-more">📘 <a href="https://t.me/AdamShopIQ_bot?start=p0002_w3f817b29" rel="noopener">في البوت دليل جاهز مفصّل عن هذا الموضوع</a>.</p>
+</aside>
+<h2>مقالات أخرى</h2>
+<ul class="cards"><li><a href="/excel-ar/articles/days-between-two-dates-excel/">حساب عدد الأيام بين تاريخين في Excel (أيام عمل وأيام تقويمية)</a><p>تعلّم حساب عدد الأيام بين تاريخين في Excel بطرق مختلفة: الطرح المباشر، DATEDIF، وأيام العمل فقط مع استثناء العطل الرسمية.</p></li><li><a href="/excel-ar/articles/calculate-work-hours-excel/">حساب ساعات العمل من وقت الحضور والانصراف في Excel</a><p>تعلم حساب عدد ساعات العمل اليومية من وقت الحضور والانصراف في Excel، مع معالجة الدوام الليلي وجمع الساعات الأسبوعية بصيغ دقيقة.</p></li><li><a href="/excel-ar/articles/calculate-age-from-birthdate-excel/">حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام</a><p>تعلم كيف تحسب العمر بدقة من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام باستخدام DATEDIF وTODAY مع مثال عملي وأخطاء شائعة.</p></li></ul>
+</main>
+<footer class="site"><div class="wrap"><p>🤖 المحتوى مكتوب بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء؛ جرّب الصيغ على نسخة من ملفك قبل الاعتماد عليها.</p><p>Excel بالعربي: شروحات مجانية لدوال Excel وصيغه بالعربية، لكل من يعمل على الجداول في البلاد العربية. تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة النصائح على تيليجرام</a>.</p></div></footer>
+</body>
+</html>

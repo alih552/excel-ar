@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://alih552.github.io/excel-ar/</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://alih552.github.io/excel-ar/formulas/</loc><lastmod>2026-10-17</lastmod></url>
-  <url><loc>https://alih552.github.io/excel-ar/articles/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/formulas/</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/articles/</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/abs/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/and/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/average/</loc><lastmod>2026-10-17</lastmod></url>
@@ -72,5 +72,8 @@
   <url><loc>https://alih552.github.io/excel-ar/formulas/xlookup/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/xmatch/</loc><lastmod>2026-10-17</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/formulas/year/</loc><lastmod>2026-10-17</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/articles/days-between-two-dates-excel/</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/articles/calculate-work-hours-excel/</loc><lastmod>2026-10-18</lastmod></url>
+  <url><loc>https://alih552.github.io/excel-ar/articles/discount-formula-excel/</loc><lastmod>2026-10-18</lastmod></url>
   <url><loc>https://alih552.github.io/excel-ar/articles/calculate-age-from-birthdate-excel/</loc><lastmod>2026-10-17</lastmod></url>
 </urlset>

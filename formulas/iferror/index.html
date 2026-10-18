@@ -50,7 +50,7 @@
 <h3>الصفر يغير المتوسط</h3>
 <p>إذا أعادت IFERROR الرقم 0 ثم حسبت متوسط العمود بـ <a href="/excel-ar/formulas/average/">AVERAGE</a> فسيدخل الصفر في الحساب وينخفض المتوسط. أما النص الفارغ &quot;&quot; فتتجاهله AVERAGE. اختر القيمة البديلة حسب ما ستفعله بالعمود لاحقاً.</p>
 <h3>البحث عن قيمة غير موجودة فقط</h3>
-<p>عندما يكون الخطأ الوحيد المتوقع هو عدم العثور على القيمة، استخدم IFNA بدلاً من IFERROR، فهي تلتقط <code dir="ltr">#N/A</code> فقط وتترك باقي الأخطاء ظاهرة لتنبهك.</p>
+<p>عندما يكون الخطأ الوحيد المتوقع هو عدم العثور على القيمة، استخدم <a href="/excel-ar/formulas/ifna/">IFNA</a> بدلاً من IFERROR، فهي تلتقط <code dir="ltr">#N/A</code> فقط وتترك باقي الأخطاء ظاهرة لتنبهك.</p>
 <h2 id="s-5">نصائح</h2>
 <ul><li>الدالة متوفرة منذ Excel 2007، وتعمل في Excel 365 و 2021 و Excel للويب.</li><li>في Excel 365 و Excel 2021 يمكنك تطبيقها على نطاق كامل دفعة واحدة: <code dir="ltr">=IFERROR(B2:B5/C2:C5,0)</code> وتنسكب النتائج في أربع خلايا.</li><li>يمكن أن تكون القيمة البديلة صيغة أخرى، مثل البحث في جدول ثانٍ إذا فشل البحث في الأول.</li><li>في إعدادات Windows العربية قد تحتاج إلى الفاصلة المنقوطة: <code dir="ltr">=IFERROR(B2/C2;0)</code>.</li></ul>
 <h2 id="s-6">أسئلة شائعة</h2>
@@ -65,7 +65,7 @@
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=IFERROR(VLOOKUP(A2;F:G;2;FALSE);&quot;غير موجود&quot;)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/average/" title="شرح دالة AVERAGE في Excel بالعربي">AVERAGE</a></li><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li><li><a href="/excel-ar/formulas/concat/" title="شرح دالة CONCAT في Excel بالعربي">CONCAT</a></li><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/average/" title="شرح دالة AVERAGE في Excel بالعربي">AVERAGE</a></li><li><a href="/excel-ar/formulas/ifna/" title="شرح دالة IFNA في Excel بالعربي">IFNA</a></li><li><a href="/excel-ar/formulas/choose/" title="شرح دالة CHOOSE في Excel بالعربي">CHOOSE</a></li><li><a href="/excel-ar/formulas/concat/" title="شرح دالة CONCAT في Excel بالعربي">CONCAT</a></li><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li></ul>
 <h2>مقالات تستخدم هذه الدالة</h2>
 <ul class="cards"><li><a href="/excel-ar/articles/calculate-age-from-birthdate-excel/">حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام</a><p>تعلم كيف تحسب العمر بدقة من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام باستخدام DATEDIF وTODAY مع مثال عملي وأخطاء شائعة.</p></li></ul>
 </article>
