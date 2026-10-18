@@ -48,7 +48,7 @@
 <h2 id="s-4">أخطاء شائعة وحلولها</h2>
 <ul><li><strong>الخطأ #VALUE!</strong>: يظهر إذا كتبت رقم عمود صفراً أو أكبر من عدد أعمدة النطاق، كأن تطلب العمود 6 من نطاق فيه خمسة أعمدة.</li><li><strong>الخطأ #SPILL!</strong>: معناه أن الخلايا التي يجب أن تنسكب فيها النتيجة ليست فارغة. امسح ما تحتها وعلى جانبها أو انقل الصيغة إلى مكان فارغ.</li><li><strong>الخطأ #NAME?</strong>: يعني أن إصدار Excel لديك لا يعرف الدالة.</li><li><strong>الخلط بين رقم العمود في النطاق ورقم العمود في الورقة</strong>: إذا بدأ نطاقك من العمود C فإن العمود C هو رقم 1 في الدالة.</li></ul>
 <h2 id="s-5">نصائح</h2>
-<ul><li>الدالة متاحة في Microsoft 365 وExcel 2024 وExcel للويب، وليست موجودة في Excel 2021 وما قبله.</li><li>لاختيار العمود باسمه بدلاً من رقمه، استخدم <a href="/excel-ar/formulas/match/">MATCH</a>: <code dir="ltr">=CHOOSECOLS(A1:E5,MATCH(&quot;الراتب&quot;,A1:E1,0))</code> تعيد عمود الراتب لأن MATCH تعيد الرقم 4.</li><li>أخواتها: CHOOSEROWS لاختيار صفوف محددة، و<a href="/excel-ar/formulas/take/">TAKE</a> وDROP لأخذ أول الأعمدة أو آخرها أو حذفها.</li><li>في الإعدادات العربية التي تستخدم الفاصلة المنقوطة: <code dir="ltr">=CHOOSECOLS(A1:E5;2;4)</code>.</li></ul>
+<ul><li>الدالة متاحة في Microsoft 365 وExcel 2024 وExcel للويب، وليست موجودة في Excel 2021 وما قبله.</li><li>لاختيار العمود باسمه بدلاً من رقمه، استخدم <a href="/excel-ar/formulas/match/">MATCH</a>: <code dir="ltr">=CHOOSECOLS(A1:E5,MATCH(&quot;الراتب&quot;,A1:E1,0))</code> تعيد عمود الراتب لأن MATCH تعيد الرقم 4.</li><li>أخواتها: CHOOSEROWS لاختيار صفوف محددة، و<a href="/excel-ar/formulas/take/">TAKE</a> و<a href="/excel-ar/formulas/drop/">DROP</a> لأخذ أول الأعمدة أو آخرها أو حذفها.</li><li>في الإعدادات العربية التي تستخدم الفاصلة المنقوطة: <code dir="ltr">=CHOOSECOLS(A1:E5;2;4)</code>.</li></ul>
 <h2 id="s-6">أسئلة شائعة</h2>
 <h3>هل تتغير النتيجة إذا أضفت صفاً جديداً للجدول؟</h3>
 <p>إذا كان النطاق ثابتاً مثل A1:E5 فلن يدخل الصف الجديد. حوّل البيانات إلى جدول Excel واستخدم اسمه في الصيغة، فيتسع النطاق تلقائياً.</p>
@@ -61,7 +61,7 @@
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=CHOOSECOLS(A2:E100;1;4)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/take/" title="شرح دالة TAKE في Excel بالعربي">TAKE</a></li><li><a href="/excel-ar/formulas/hstack/" title="شرح دالة HSTACK في Excel بالعربي">HSTACK</a></li><li><a href="/excel-ar/formulas/textsplit/" title="شرح دالة TEXTSPLIT في Excel بالعربي">TEXTSPLIT</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/take/" title="شرح دالة TAKE في Excel بالعربي">TAKE</a></li><li><a href="/excel-ar/formulas/drop/" title="شرح دالة DROP في Excel بالعربي">DROP</a></li><li><a href="/excel-ar/formulas/hstack/" title="شرح دالة HSTACK في Excel بالعربي">HSTACK</a></li><li><a href="/excel-ar/formulas/textsplit/" title="شرح دالة TEXTSPLIT في Excel بالعربي">TEXTSPLIT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>
