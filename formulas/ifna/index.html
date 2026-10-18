@@ -6,10 +6,11 @@
 <title>شرح دالة IFNA في Excel بالعربي</title>
 <meta name="description" content="شرح دالة IFNA في Excel: تعيد قيمة بديلة فقط عندما تكون نتيجة المعادلة الخطأ #N/A، وتترك بقية الأخطاء ظاهرة لتكتشفها. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="IFNA، دالة IFNA، شرح IFNA، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/ifna/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة IFNA في Excel بالعربي">
 <meta property="og:description" content="شرح دالة IFNA في Excel: تعيد قيمة بديلة فقط عندما تكون نتيجة المعادلة الخطأ #N/A، وتترك بقية الأخطاء ظاهرة لتكتشفها. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/ifna/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,34 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=IFNA(value, value_if_na)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">value</code>: مطلوب</li><li><code dir="ltr">value_if_na</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">value</code>: القيمة أو المعادلة التي تريد فحصها، مثل VLOOKUP أو XLOOKUP أو MATCH. (مطلوب)</li><li><code dir="ltr">value_if_na</code>: القيمة التي تظهر بدلاً من الخطأ #N/A فقط، مثل نص «غير موجود» أو صفر. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم IFNA؟</h2>
+<p>تُستخدم الدالة <code dir="ltr">IFNA</code> لاستبدال الخطأ <strong>#N/A</strong> فقط برسالة أو قيمة تختارها. يظهر هذا الخطأ غالباً عندما لا تجد دوال البحث مثل <code dir="ltr">VLOOKUP</code> أو <code dir="ltr">MATCH</code> القيمة المطلوبة في الجدول.</p>
+<h2 id="s-2">الفرق بين IFNA وIFERROR</h2>
+<p>الدالة <code dir="ltr">IFERROR</code> تخفي كل أنواع الأخطاء (#DIV/0!‎ و #REF!‎ و #VALUE!‎ وغيرها)، وهذا قد يُخفي أخطاءً حقيقية في المعادلة. أما <code dir="ltr">IFNA</code> فتعالج #N/A فقط، فتبقى الأخطاء الأخرى ظاهرة لتنتبه لها. لذلك تُعد أكثر أماناً مع دوال البحث.</p>
+<h2 id="s-3">الصيغة</h2>
+<p><code dir="ltr">=IFNA(value, value_if_na)</code></p>
+<h2 id="s-4">مثال عملي</h2>
+<p>لدينا جدول أسعار في العمودين A وB، ونبحث عن رمز منتج في الخلية D2:</p>
+<div class="table-wrap"><table><thead><tr><th>الرمز (A)</th><th>السعر (B)</th></tr></thead><tbody><tr><td>P101</td><td>25</td></tr><tr><td>P102</td><td>40</td></tr><tr><td>P103</td><td>15</td></tr></tbody></table></div>
+<p>المعادلة العادية:</p>
+<p><code dir="ltr">=VLOOKUP(D2,A2:B4,2,FALSE)</code></p>
+<p>إذا كتبت في D2 الرمز P999 تحصل على #N/A. استخدم بدلاً منها:</p>
+<p><code dir="ltr">=IFNA(VLOOKUP(D2,A2:B4,2,FALSE),&quot;غير موجود&quot;)</code></p>
+<p>النتيجة: عند إدخال P102 تظهر 40، وعند إدخال P999 تظهر عبارة «غير موجود».</p>
+<h2 id="s-5">أخطاء شائعة</h2>
+<ul><li>استخدام IFNA لإخفاء #N/A دون معرفة سببه: قد تكون هناك مسافات زائدة في البيانات، فجرّب <code dir="ltr">TRIM</code> أولاً.</li><li>الخلط بين نص الرقم والرقم الحقيقي، فلا يتطابق البحث رغم أن القيمة تبدو موجودة.</li><li>نسيان <code dir="ltr">FALSE</code> في <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a> فيعطي نتائج غير دقيقة.</li><li>توقع أن IFNA تعالج #DIV/0!‎؛ هي لا تفعل، استخدم <a href="/excel-ar/formulas/iferror/">IFERROR</a> لذلك.</li></ul>
+<h2 id="s-6">نصيحة</h2>
+<p>مع <code dir="ltr">XLOOKUP</code> يمكنك استخدام المعامل الرابع if_not_found بدل IFNA، لكن IFNA تبقى مفيدة مع VLOOKUP و<a href="/excel-ar/formulas/match/">MATCH</a> و<a href="/excel-ar/formulas/index/">INDEX</a>.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=IFNA(VLOOKUP(A2,F:G,2,FALSE),&quot;غير موجود&quot;)</code></pre>
 <p>النتيجة: تعرض «غير موجود» إذا لم يوجد A2 في القائمة</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=IFNA(VLOOKUP(A2;F:G;2;FALSE);&quot;غير موجود&quot;)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li><li><a href="/excel-ar/formulas/match/" title="شرح دالة MATCH في Excel بالعربي">MATCH</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/xlookup/" title="شرح دالة XLOOKUP في Excel بالعربي">XLOOKUP</a></li><li><a href="/excel-ar/formulas/index/" title="شرح دالة INDEX في Excel بالعربي">INDEX</a></li><li><a href="/excel-ar/formulas/hstack/" title="شرح دالة HSTACK في Excel بالعربي">HSTACK</a></li><li><a href="/excel-ar/formulas/vstack/" title="شرح دالة VSTACK في Excel بالعربي">VSTACK</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

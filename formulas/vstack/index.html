@@ -6,10 +6,11 @@
 <title>شرح دالة VSTACK في Excel بالعربي</title>
 <meta name="description" content="شرح دالة VSTACK في Excel: تدمج عدة نطاقات أو جداول عمودياً فوق بعضها في نطاق واحد ديناميكي. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="VSTACK، دالة VSTACK، شرح VSTACK، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/vstack/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة VSTACK في Excel بالعربي">
 <meta property="og:description" content="شرح دالة VSTACK في Excel: تدمج عدة نطاقات أو جداول عمودياً فوق بعضها في نطاق واحد ديناميكي. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/vstack/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,34 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=VSTACK(array1, [array2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array1</code>: مطلوب</li><li><code dir="ltr">array2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">array1</code>: النطاق أو المصفوفة الأولى التي ستكون في أعلى النتيجة. (مطلوب)</li><li><code dir="ltr">array2</code>: نطاق أو مصفوفة إضافية توضع تحت السابقة، ويمكن إضافة المزيد. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم VSTACK؟</h2>
+<p>الدالة <code dir="ltr">VSTACK</code> تدمج عدة نطاقات أو جداول <strong>عمودياً</strong>، أي تضع كل نطاق تحت الآخر في جدول واحد. هي مفيدة عندما تكون لديك بيانات شهرية أو فروع في أوراق مختلفة وتريد تجميعها دون نسخ ولصق. تتوفر في Microsoft 365 وExcel 2024.</p>
+<h2 id="s-2">الصيغة</h2>
+<p><code dir="ltr">=VSTACK(array1, [array2], ...)</code></p>
+<h2 id="s-3">مثال عملي</h2>
+<p>جدولان للمبيعات، الأول في A2:B3 والثاني في D2:E3:</p>
+<div class="table-wrap"><table><thead><tr><th>المنتج</th><th>الكمية</th></tr></thead><tbody><tr><td>قلم</td><td>10</td></tr><tr><td>دفتر</td><td>5</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>المنتج</th><th>الكمية</th></tr></thead><tbody><tr><td>مسطرة</td><td>7</td></tr><tr><td>ممحاة</td><td>3</td></tr></tbody></table></div>
+<p>المعادلة:</p>
+<p><code dir="ltr">=VSTACK(A2:B3,D2:E3)</code></p>
+<p>النتيجة جدول من أربعة صفوف وعمودين: قلم 10، دفتر 5، مسطرة 7، ممحاة 3. وتتحدث النتيجة تلقائياً عند تغيير البيانات الأصلية.</p>
+<h2 id="s-4">دمج أوراق مختلفة</h2>
+<p>يمكنك الجمع بين أوراق، مثل:</p>
+<p><code dir="ltr">=VSTACK(Sheet1!A2:B10,Sheet2!A2:B10)</code></p>
+<h2 id="s-5">أخطاء شائعة</h2>
+<ul><li>اختلاف عدد الأعمدة بين النطاقات: تملأ Excel الأعمدة الناقصة بالخطأ #N/A. يمكن تغليف النتيجة بـ <code dir="ltr">IFNA</code> لإخفائه.</li><li>وجود خلايا ممتلئة أسفل خلية المعادلة تمنع الانسكاب فيظهر #SPILL!‎.</li><li>تضمين صفوف العناوين من كل نطاق فتتكرر في النتيجة؛ ابدأ من الصف الذي يلي العنوان.</li><li>استخدام نسخة قديمة من Excel لا تدعم الدالة.</li></ul>
+<h2 id="s-6">دوال مرتبطة</h2>
+<p>لدمج النطاقات أفقياً استخدم <code dir="ltr">HSTACK</code>. ولإزالة التكرار بعد الدمج استخدم <code dir="ltr">UNIQUE</code>، ولترتيب النتيجة استخدم <code dir="ltr">SORT</code>، كما في <code dir="ltr">=SORT(UNIQUE(VSTACK(A2:A10,C2:C10)))</code>.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=VSTACK(A2:B10, D2:E10)</code></pre>
 <p>النتيجة: تعرض بيانات النطاقين في جدول واحد متتالٍ</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=VSTACK(A2:B10; D2:E10)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/ifna/" title="شرح دالة IFNA في Excel بالعربي">IFNA</a></li><li><a href="/excel-ar/formulas/hstack/" title="شرح دالة HSTACK في Excel بالعربي">HSTACK</a></li><li><a href="/excel-ar/formulas/unique/" title="شرح دالة UNIQUE في Excel بالعربي">UNIQUE</a></li><li><a href="/excel-ar/formulas/sort/" title="شرح دالة SORT في Excel بالعربي">SORT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

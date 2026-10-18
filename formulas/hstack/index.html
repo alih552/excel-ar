@@ -6,10 +6,11 @@
 <title>شرح دالة HSTACK في Excel بالعربي</title>
 <meta name="description" content="شرح دالة HSTACK في Excel: تدمج عدة نطاقات أفقياً بجانب بعضها في نطاق واحد ديناميكي. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="HSTACK، دالة HSTACK، شرح HSTACK، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/hstack/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة HSTACK في Excel بالعربي">
 <meta property="og:description" content="شرح دالة HSTACK في Excel: تدمج عدة نطاقات أفقياً بجانب بعضها في نطاق واحد ديناميكي. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/hstack/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,14 +29,33 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=HSTACK(array1, [array2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">array1</code>: مطلوب</li><li><code dir="ltr">array2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">array1</code>: النطاق أو المصفوفة الأولى التي ستوضع في بداية الجدول الناتج. (مطلوب)</li><li><code dir="ltr">array2</code>: نطاق أو مصفوفة اختيارية تُضاف أفقياً بجانب السابقة، ويمكن تكرار ذلك لعدة وسائط. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">ما هي الدالة HSTACK؟</h2>
+<p>الدالة <code dir="ltr">HSTACK</code> تدمج عدة نطاقات أو مصفوفات <strong>أفقياً</strong> (جنباً إلى جنب) في مصفوفة واحدة. هي مفيدة عندما تريد جمع أعمدة من أوراق أو جداول مختلفة في جدول واحد دون نسخ ولصق. تتوفر في Excel 365 و Excel 2021 وما بعدها.</p>
+<h2 id="s-2">متى تستخدمها؟</h2>
+<ul><li>دمج عمود الأسماء مع عمود الرواتب من ورقتين مختلفتين.</li><li>إضافة عمود محسوب (مثل المبيعات بعد الضريبة) بجانب بيانات موجودة دون تعديل الجدول الأصلي.</li><li>بناء تقرير يتحدث تلقائياً عند تغيّر البيانات.</li></ul>
+<h2 id="s-3">مثال عملي</h2>
+<p>لدينا الأسماء في A2:A4 والمبيعات في B2:B4:</p>
+<div class="table-wrap"><table><thead><tr><th>الاسم</th><th>المبيعات</th></tr></thead><tbody><tr><td>أحمد</td><td>100</td></tr><tr><td>سارة</td><td>250</td></tr><tr><td>علي</td><td>175</td></tr></tbody></table></div>
+<p>نريد جدولاً يضيف عموداً ثالثاً هو المبيعات بعد إضافة 10%:</p>
+<p><code dir="ltr">=HSTACK(A2:B4, B2:B4*1.1)</code></p>
+<p>النتيجة: ثلاثة أعمدة؛ الاسم، المبيعات، ثم المبيعات مضروبة في 1.1 (أي 110 و275 و192.5). تنسكب النتيجة تلقائياً في الخلايا المجاورة.</p>
+<h2 id="s-4">دمج نطاقين مختلفي الطول</h2>
+<p>إذا اختلف عدد الصفوف بين النطاقات، تملأ Excel الفراغ بالخطأ <code dir="ltr">#N/A</code>. لتجنبه استخدم <a href="/excel-ar/formulas/ifna/">IFNA</a>:</p>
+<p><code dir="ltr">=IFNA(HSTACK(A2:A5, B2:B4), &quot;&quot;)</code></p>
+<h2 id="s-5">أخطاء شائعة</h2>
+<ul><li><strong>#SPILL!</strong>: توجد خلايا غير فارغة في مكان انسكاب النتيجة. أفرغها.</li><li><strong>#NAME?</strong>: إصدار Excel قديم لا يدعم الدالة.</li><li>اختلاف عدد الصفوف يعطي #N/A في الخلايا الناقصة.</li><li>لا تضع الدالة داخل جدول Excel رسمي (Table) لأن الجداول لا تقبل الانسكاب.</li></ul>
+<h2 id="s-6">دوال مرتبطة</h2>
+<p>للدمج العمودي (فوق بعض) استخدم <a href="/excel-ar/formulas/vstack/">VSTACK</a>، ولاختيار أعمدة محددة استخدم <a href="/excel-ar/formulas/choosecols/">CHOOSECOLS</a>، ولأخذ أول عدد من الصفوف استخدم <a href="/excel-ar/formulas/take/">TAKE</a>.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=HSTACK(A2:A10, C2:C10)</code></pre>
 <p>النتيجة: تعرض العمودين متجاورين في جدول واحد</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=HSTACK(A2:A10; C2:C10)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/ifna/" title="شرح دالة IFNA في Excel بالعربي">IFNA</a></li><li><a href="/excel-ar/formulas/vstack/" title="شرح دالة VSTACK في Excel بالعربي">VSTACK</a></li><li><a href="/excel-ar/formulas/choosecols/" title="شرح دالة CHOOSECOLS في Excel بالعربي">CHOOSECOLS</a></li><li><a href="/excel-ar/formulas/take/" title="شرح دالة TAKE في Excel بالعربي">TAKE</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>
