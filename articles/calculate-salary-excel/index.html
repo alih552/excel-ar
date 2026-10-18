@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>طريقة حساب الراتب الصافي في Excel (بدلات واستقطاعات)</title>
+<meta name="description" content="تعلم بناء جدول رواتب في Excel بمعادلات واضحة: الراتب الأساسي والبدلات والاستقطاعات والراتب الصافي مع مثال تطبيقي وأخطاء شائعة.">
+<meta name="keywords" content="حساب الراتب في Excel، جدول رواتب Excel، معادلة الراتب الصافي، حساب الاستقطاعات في اكسل">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/articles/calculate-salary-excel/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="طريقة حساب الراتب الصافي في Excel (بدلات واستقطاعات)">
+<meta property="og:description" content="تعلم بناء جدول رواتب في Excel بمعادلات واضحة: الراتب الأساسي والبدلات والاستقطاعات والراتب الصافي مع مثال تطبيقي وأخطاء شائعة.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/articles/calculate-salary-excel/">
+<meta property="og:site_name" content="Excel بالعربي">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/excel-ar/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"طريقة حساب الراتب الصافي في Excel (بدلات واستقطاعات)","description":"تعلم بناء جدول رواتب في Excel بمعادلات واضحة: الراتب الأساسي والبدلات والاستقطاعات والراتب الصافي مع مثال تطبيقي وأخطاء شائعة.","inLanguage":"ar","url":"https://alih552.github.io/excel-ar/articles/calculate-salary-excel/","datePublished":"2026-10-18T22:29:20.108Z","dateModified":"2026-10-18T22:29:20.108Z","keywords":"حساب الراتب في Excel, جدول رواتب Excel, معادلة الراتب الصافي, حساب الاستقطاعات في اكسل","author":{"@type":"Organization","name":"Excel بالعربي"},"publisher":{"@type":"Organization","name":"Excel بالعربي"},"mainEntityOfPage":"https://alih552.github.io/excel-ar/articles/calculate-salary-excel/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://alih552.github.io/excel-ar/"},{"@type":"ListItem","position":2,"name":"المقالات","item":"https://alih552.github.io/excel-ar/articles/"},{"@type":"ListItem","position":3,"name":"طريقة حساب الراتب الصافي في Excel (بدلات واستقطاعات)"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"كيف أجعل نسبة الاستقطاع موحدة لكل الموظفين؟","acceptedAnswer":{"@type":"Answer","text":"ضع النسبة في خلية واحدة مثل E1 واستخدم $E$1 في المعادلة: =SUM(B2:D2)-B2*$E$1-F2. عند تغيير النسبة تتحدث كل الرواتب."}},{"@type":"Question","name":"كيف أحسب الراتب حسب أيام الحضور؟","acceptedAnswer":{"@type":"Answer","text":"اقسم الأساسي على عدد أيام الشهر ثم اضرب في أيام الحضور: =B2/30*J2 حيث J2 عدد أيام الحضور."}},{"@type":"Question","name":"كيف أمنع ظهور قيم سالبة؟","acceptedAnswer":{"@type":"Answer","text":"غلّف المعادلة بـ MAX: =MAX(0,SUM(B2:D2)-B2*E2-F2)."}},{"@type":"Question","name":"هل يمكن جلب راتب موظف بالاسم؟","acceptedAnswer":{"@type":"Answer","text":"نعم، باستخدام XLOOKUP أو VLOOKUP للبحث عن الاسم وإرجاع عمود الصافي."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="/excel-ar/">Excel بالعربي</a><nav aria-label="الأقسام"><a href="/excel-ar/formulas/">الدوال</a><a href="/excel-ar/articles/">المقالات</a><a href="https://t.me/AdamShopIQ_bot?start=web__nav" rel="noopener">المساعد المجاني</a></nav></div></header>
+<main class="wrap">
+<nav class="crumbs" aria-label="مسار الصفحة"><a href="/excel-ar/">الرئيسية</a> <span aria-hidden="true">›</span> <a href="/excel-ar/articles/">المقالات</a> <span aria-hidden="true">›</span> <span>طريقة حساب الراتب الصافي في Excel (بدلات واستقطاعات)</span></nav>
+<article>
+<h1>طريقة حساب الراتب الصافي في Excel (بدلات واستقطاعات)</h1>
+<p class="meta">آخر تحديث: <time datetime="2026-10-18">2026-10-18</time></p>
+<nav class="toc" aria-label="محتويات المقال"><p class="toc-title">في هذا المقال</p><ol><li><a href="#s-1">فكرة جدول الرواتب</a></li><li><a href="#s-2">تصميم الأعمدة</a></li><li><a href="#s-3">معادلة الراتب الصافي</a></li><li><a href="#s-4">إضافة مكافأة بشرط</a></li><li><a href="#s-5">تقريب النتيجة</a></li><li><a href="#s-6">مجموع الرواتب وأعلى راتب</a></li><li><a href="#s-7">أخطاء شائعة</a></li><li><a href="#s-8">أسئلة شائعة</a></li></ol></nav>
+<h2 id="s-1">فكرة جدول الرواتب</h2>
+<p>يعتمد حساب الراتب الصافي على قاعدة واحدة: <strong>الصافي = الأساسي + البدلات − الاستقطاعات</strong>. الفائدة من Excel أنك تكتب المعادلة مرة واحدة في الصف الأول ثم تسحبها لكل الموظفين، فتتغير النتيجة تلقائياً عند تعديل أي رقم.</p>
+<h2 id="s-2">تصميم الأعمدة</h2>
+<div class="table-wrap"><table><thead><tr><th>A الاسم</th><th>B الأساسي</th><th>C بدل سكن</th><th>D بدل نقل</th><th>E نسبة التقاعد</th><th>F سلف</th><th>G الصافي</th></tr></thead><tbody><tr><td>سعد</td><td>500</td><td>50</td><td>30</td><td>5%</td><td>20</td><td></td></tr><tr><td>منى</td><td>650</td><td>60</td><td>30</td><td>5%</td><td>0</td><td></td></tr></tbody></table></div>
+<p>اجعل العمود E بصيغة نسبة مئوية (Percentage) حتى تكتب 5% وتفهمها Excel كقيمة 0.05.</p>
+<h2 id="s-3">معادلة الراتب الصافي</h2>
+<p>في الخلية G2 اكتب:</p>
+<p><code dir="ltr">=B2+C2+D2-(B2*E2)-F2</code></p>
+<p>الشرح: نجمع الأساسي والبدلات، ثم نطرح استقطاع التقاعد وهو الأساسي مضروباً في النسبة، ثم نطرح السلفة. بعد ذلك اسحب المعادلة للأسفل.</p>
+<p>يمكن استخدام <a href="/excel-ar/formulas/sum/">SUM</a> لجمع البدلات بشكل أنظف:</p>
+<p><code dir="ltr">=SUM(B2:D2)-B2*E2-F2</code></p>
+<h2 id="s-4">إضافة مكافأة بشرط</h2>
+<p>إذا أردت مكافأة فقط لمن تجاوزت ساعات عمله حداً معيناً، أضف عموداً H للساعات واستخدم <a href="/excel-ar/formulas/if/">IF</a>:</p>
+<p><code dir="ltr">=SUM(B2:D2)-B2*E2-F2+IF(H2&gt;=200,25,0)</code></p>
+<p>أي أن الموظف يحصل على المكافأة إذا بلغت ساعاته 200 أو أكثر، وإلا يضاف صفر.</p>
+<h2 id="s-5">تقريب النتيجة</h2>
+<p>عند الضرب في نسب قد تظهر كسور عشرية طويلة. استخدم <a href="/excel-ar/formulas/round/">ROUND</a>:</p>
+<p><code dir="ltr">=ROUND(SUM(B2:D2)-B2*E2-F2,0)</code></p>
+<h2 id="s-6">مجموع الرواتب وأعلى راتب</h2>
+<ul><li>إجمالي الصافي: <code dir="ltr">=SUM(G2:G20)</code></li><li>أعلى راتب: <code dir="ltr">=MAX(G2:G20)</code></li><li>متوسط الرواتب: <code dir="ltr">=AVERAGE(G2:G20)</code></li><li>مجموع رواتب قسم معين: <code dir="ltr">=SUMIF(I2:I20,&quot;المبيعات&quot;,G2:G20)</code> حيث العمود I يحوي اسم القسم.</li></ul>
+<h2 id="s-7">أخطاء شائعة</h2>
+<ol><li><strong>كتابة النسبة كرقم صحيح</strong>: كتابة 5 في عمود غير منسق كنسبة تعني خمسة أضعاف الأساسي. اكتب 5% أو 0.05.</li><li><strong>نسيان الأقواس</strong>: الضرب يُحسب قبل الطرح تلقائياً، لكن الأقواس توضح قصدك وتمنع الأخطاء عند تعقيد المعادلة.</li><li><strong>أرقام مخزنة كنص</strong>: إذا ظهر مثلث أخضر في الخلية فالرقم نص ولن يُجمع. حوله إلى رقم.</li><li><strong>تغيير النطاق عند السحب</strong>: عند الإشارة إلى خلية ثابتة مثل نسبة موحدة، ثبّتها بـ <code dir="ltr">$E$1</code> حتى لا تتحرك.</li></ol>
+<h2 id="s-8">أسئلة شائعة</h2>
+<h3>كيف أجعل نسبة الاستقطاع موحدة لكل الموظفين؟</h3>
+<p>ضع النسبة في خلية واحدة مثل <code dir="ltr">E1</code> واستخدم <code dir="ltr">$E$1</code> في المعادلة: <code dir="ltr">=SUM(B2:D2)-B2*$E$1-F2</code>. عند تغيير النسبة تتحدث كل الرواتب.</p>
+<h3>كيف أحسب الراتب حسب أيام الحضور؟</h3>
+<p>اقسم الأساسي على عدد أيام الشهر ثم اضرب في أيام الحضور: <code dir="ltr">=B2/30*J2</code> حيث J2 عدد أيام الحضور.</p>
+<h3>كيف أمنع ظهور قيم سالبة؟</h3>
+<p>غلّف المعادلة بـ <a href="/excel-ar/formulas/max/">MAX</a>: <code dir="ltr">=MAX(0,SUM(B2:D2)-B2*E2-F2)</code>.</p>
+<h3>هل يمكن جلب راتب موظف بالاسم؟</h3>
+<p>نعم، باستخدام <a href="/excel-ar/formulas/xlookup/">XLOOKUP</a> أو <a href="/excel-ar/formulas/vlookup/">VLOOKUP</a> للبحث عن الاسم وإرجاع عمود الصافي.</p>
+<h2>الدوال المستخدمة في هذا المقال</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/round/" title="شرح دالة ROUND في Excel بالعربي">ROUND</a></li><li><a href="/excel-ar/formulas/max/" title="شرح دالة MAX في Excel بالعربي">MAX</a></li><li><a href="/excel-ar/formulas/xlookup/" title="شرح دالة XLOOKUP في Excel بالعربي">XLOOKUP</a></li><li><a href="/excel-ar/formulas/vlookup/" title="شرح دالة VLOOKUP في Excel بالعربي">VLOOKUP</a></li></ul>
+</article>
+<aside class="cta">
+<p class="cta-title">عندك سؤال عن جدولك؟</p>
+<p>اكتب سؤالك لمساعد Excel المجاني على تيليجرام، وخذ الصيغة المناسبة لبياناتك خلال لحظات.</p>
+<p><a class="btn" href="https://t.me/AdamShopIQ_bot?start=web_calculate-salary-excel" rel="noopener">اسأل مساعد Excel مجاناً على تيليجرام</a></p>
+<p class="cta-more">تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة نصائح Excel</a> لنصيحة عملية كل يوم.</p>
+<p class="cta-more">وفي البوت أيضاً أدلة جاهزة مفصّلة لمن يريد التعمّق.</p>
+</aside>
+<h2>مقالات أخرى</h2>
+<ul class="cards"><li><a href="/excel-ar/articles/days-between-two-dates-excel/">حساب عدد الأيام بين تاريخين في Excel (أيام عمل وأيام تقويمية)</a><p>تعلّم حساب عدد الأيام بين تاريخين في Excel بطرق مختلفة: الطرح المباشر، DATEDIF، وأيام العمل فقط مع استثناء العطل الرسمية.</p></li><li><a href="/excel-ar/articles/calculate-work-hours-excel/">حساب ساعات العمل من وقت الحضور والانصراف في Excel</a><p>تعلم حساب عدد ساعات العمل اليومية من وقت الحضور والانصراف في Excel، مع معالجة الدوام الليلي وجمع الساعات الأسبوعية بصيغ دقيقة.</p></li><li><a href="/excel-ar/articles/discount-formula-excel/">معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة</a><p>تعلم كيف تحسب قيمة الخصم والقيمة بعد الخصم ونسبة الخصم في Excel بمعادلات دقيقة ومثال عملي وأخطاء شائعة.</p></li><li><a href="/excel-ar/articles/calculate-age-from-birthdate-excel/">حساب العمر من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام</a><p>تعلم كيف تحسب العمر بدقة من تاريخ الميلاد في Excel بالسنوات والأشهر والأيام باستخدام DATEDIF وTODAY مع مثال عملي وأخطاء شائعة.</p></li></ul>
+</main>
+<footer class="site"><div class="wrap"><p>🤖 المحتوى مكتوب بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء؛ جرّب الصيغ على نسخة من ملفك قبل الاعتماد عليها.</p><p>Excel بالعربي: شروحات مجانية لدوال Excel وصيغه بالعربية، لكل من يعمل على الجداول في البلاد العربية. تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة النصائح على تيليجرام</a>.</p></div></footer>
+</body>
+</html>
