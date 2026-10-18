@@ -52,7 +52,7 @@
 <p>إذا كانت ساعات العمل الإضافي في A2 مسجلة بالكسور العشرية، مثل 7.8، وكانت الشركة تحتسب أنصاف الساعات الكاملة فقط، فإن <code dir="ltr">=INT(A2*2)/2</code> تعيد 7.5: الرقم 7.8 مضروباً في 2 يساوي 15.6، وجزؤه الصحيح 15، ونصفه 7.5.</p>
 <h2 id="s-5">أخطاء شائعة وحلولها</h2>
 <h3>الخطأ #VALUE!</h3>
-<p>يظهر إذا كان الوسيط نصاً لا يمثل رقماً، مثل كلمة مكتوبة بالحروف. تحقق من الخلية بالدالة ISNUMBER.</p>
+<p>يظهر إذا كان الوسيط نصاً لا يمثل رقماً، مثل كلمة مكتوبة بالحروف. تحقق من الخلية بالدالة <a href="/excel-ar/formulas/isnumber/">ISNUMBER</a>.</p>
 <h3>نتيجة غير متوقعة مع الأرقام السالبة</h3>
 <p>من يتوقع أن تعيد INT الرقم سالب 4 من سالب 4.3 سيتفاجأ بسالب 5. إذا كنت تريد حذف الكسور فقط بلا تقريب فاستخدم TRUNC، فهي تعيد سالب 4.</p>
 <h3>فرق بسيط بسبب الكسور العشرية</h3>
@@ -63,7 +63,7 @@
 <pre dir="ltr"><code>=INT(A2/60)</code></pre>
 <p>النتيجة: عدد الساعات الكاملة من الدقائق</p>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/mod/" title="شرح دالة MOD في Excel بالعربي">MOD</a></li><li><a href="/excel-ar/formulas/round/" title="شرح دالة ROUND في Excel بالعربي">ROUND</a></li><li><a href="/excel-ar/formulas/rounddown/" title="شرح دالة ROUNDDOWN في Excel بالعربي">ROUNDDOWN</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/mod/" title="شرح دالة MOD في Excel بالعربي">MOD</a></li><li><a href="/excel-ar/formulas/isnumber/" title="شرح دالة ISNUMBER في Excel بالعربي">ISNUMBER</a></li><li><a href="/excel-ar/formulas/round/" title="شرح دالة ROUND في Excel بالعربي">ROUND</a></li><li><a href="/excel-ar/formulas/rounddown/" title="شرح دالة ROUNDDOWN في Excel بالعربي">ROUNDDOWN</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

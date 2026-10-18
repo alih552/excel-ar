@@ -44,7 +44,7 @@
 <p>للبحث عن كلمة &quot;مكتب&quot; في الوصف الأول اكتب:</p>
 <pre dir="ltr"><code>=SEARCH(&quot;مكتب&quot;,A2)</code></pre>
 <p>النتيجة <strong>6</strong>، لأن كلمة &quot;كرسي&quot; أربعة أحرف تليها مسافة، فتبدأ &quot;مكتب&quot; في الحرف السادس. وفي الصف 4 تعيد <strong>1</strong>، وفي الصف 5 تعيد <strong>15</strong> لأنها تجد الكلمة داخل &quot;للمكتب&quot;. أما الصف 3 فيعطي #VALUE! لعدم وجود الكلمة.</p>
-<p>لتحويل ذلك إلى إجابة نعم أو لا، أحط الدالة بـ ISNUMBER:</p>
+<p>لتحويل ذلك إلى إجابة نعم أو لا، أحط الدالة بـ <a href="/excel-ar/formulas/isnumber/">ISNUMBER</a>:</p>
 <pre dir="ltr"><code>=ISNUMBER(SEARCH(&quot;مكتب&quot;,A2))</code></pre>
 <p>تعيد TRUE للصفوف 2 و4 و5، وFALSE للصف 3. ولجمع كميات الأصناف المتعلقة بالمكاتب مرة واحدة:</p>
 <pre dir="ltr"><code>=SUMPRODUCT(ISNUMBER(SEARCH(&quot;مكتب&quot;,A2:A5))*B2:B5)</code></pre>
@@ -60,7 +60,7 @@
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=ISNUMBER(SEARCH(&quot;بغداد&quot;;A2))</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/left/" title="شرح دالة LEFT في Excel بالعربي">LEFT</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/left/" title="شرح دالة LEFT في Excel بالعربي">LEFT</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li><li><a href="/excel-ar/formulas/isnumber/" title="شرح دالة ISNUMBER في Excel بالعربي">ISNUMBER</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>
