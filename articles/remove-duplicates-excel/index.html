@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>طريقة حذف القيم المكررة في Excel وإيجاد التكرار (3 طرق)</title>
+<meta name="description" content="تعلّم كيف تكتشف التكرار وتحذفه في Excel بثلاث طرق: أداة إزالة التكرارات، دالة UNIQUE، والتنسيق الشرطي، مع مثال عملي وأخطاء شائعة.">
+<meta name="keywords" content="حذف المكرر في Excel، إزالة التكرارات في اكسل، كشف القيم المكررة، UNIQUE في Excel، تمييز المكرر">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/articles/remove-duplicates-excel/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="طريقة حذف القيم المكررة في Excel وإيجاد التكرار (3 طرق)">
+<meta property="og:description" content="تعلّم كيف تكتشف التكرار وتحذفه في Excel بثلاث طرق: أداة إزالة التكرارات، دالة UNIQUE، والتنسيق الشرطي، مع مثال عملي وأخطاء شائعة.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/articles/remove-duplicates-excel/">
+<meta property="og:site_name" content="Excel بالعربي">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/excel-ar/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"طريقة حذف القيم المكررة في Excel وإيجاد التكرار (3 طرق)","description":"تعلّم كيف تكتشف التكرار وتحذفه في Excel بثلاث طرق: أداة إزالة التكرارات، دالة UNIQUE، والتنسيق الشرطي، مع مثال عملي وأخطاء شائعة.","inLanguage":"ar","url":"https://alih552.github.io/excel-ar/articles/remove-duplicates-excel/","datePublished":"2026-10-19T00:17:24.211Z","dateModified":"2026-10-19T00:17:24.211Z","keywords":"حذف المكرر في Excel, إزالة التكرارات في اكسل, كشف القيم المكررة, UNIQUE في Excel, تمييز المكرر","author":{"@type":"Organization","name":"Excel بالعربي"},"publisher":{"@type":"Organization","name":"Excel بالعربي"},"mainEntityOfPage":"https://alih552.github.io/excel-ar/articles/remove-duplicates-excel/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://alih552.github.io/excel-ar/"},{"@type":"ListItem","position":2,"name":"المقالات","item":"https://alih552.github.io/excel-ar/articles/"},{"@type":"ListItem","position":3,"name":"طريقة حذف القيم المكررة في Excel وإيجاد التكرار (3 طرق)"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"كيف أحذف المكرر وأبقي نسخة واحدة في Excel؟","acceptedAnswer":{"@type":"Answer","text":"استخدم بيانات ثم إزالة التكرارات، فيبقي Excel أول ظهور لكل قيمة ويحذف ما بعده."}},{"@type":"Question","name":"هل يمكن إيجاد المكرر دون حذفه؟","acceptedAnswer":{"@type":"Answer","text":"نعم، بالتنسيق الشرطي لقيم مكررة أو بعمود COUNTIF يعرض عدد مرات الظهور."}},{"@type":"Question","name":"لماذا لا يكتشف Excel بعض التكرارات الواضحة؟","acceptedAnswer":{"@type":"Answer","text":"غالباً بسبب مسافات زائدة أو اختلاف في كتابة الحروف أو أرقام مخزنة كنص؛ نظّف البيانات بـ TRIM أولاً."}},{"@type":"Question","name":"هل UNIQUE متاحة في كل الإصدارات؟","acceptedAnswer":{"@type":"Answer","text":"لا، فهي في Excel 365 وExcel 2021 وما بعدهما فقط؛ في الإصدارات الأقدم استخدم أداة إزالة التكرارات."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="/excel-ar/">Excel بالعربي</a><nav aria-label="الأقسام"><a href="/excel-ar/formulas/">الدوال</a><a href="/excel-ar/articles/">المقالات</a><a href="https://t.me/AdamShopIQ_bot?start=web__nav" rel="noopener">المساعد المجاني</a></nav></div></header>
+<main class="wrap">
+<nav class="crumbs" aria-label="مسار الصفحة"><a href="/excel-ar/">الرئيسية</a> <span aria-hidden="true">›</span> <a href="/excel-ar/articles/">المقالات</a> <span aria-hidden="true">›</span> <span>طريقة حذف القيم المكررة في Excel وإيجاد التكرار (3 طرق)</span></nav>
+<article>
+<h1>طريقة حذف القيم المكررة في Excel وإيجاد التكرار (3 طرق)</h1>
+<p class="meta">آخر تحديث: <time datetime="2026-10-19">2026-10-19</time></p>
+<nav class="toc" aria-label="محتويات المقال"><p class="toc-title">في هذا المقال</p><ol><li><a href="#s-1">متى تحتاج إلى حذف التكرار؟</a></li><li><a href="#s-2">مثال البيانات</a></li><li><a href="#s-3">الطريقة الأولى: أداة إزالة التكرارات</a></li><li><a href="#s-4">الطريقة الثانية: دالة UNIQUE دون المساس بالأصل</a></li><li><a href="#s-5">الطريقة الثالثة: تمييز المكرر بالتنسيق الشرطي</a></li><li><a href="#s-6">عدّ مرات التكرار بصيغة</a></li><li><a href="#s-7">أخطاء شائعة</a></li><li><a href="#s-8">أي طريقة تختار؟</a></li><li><a href="#s-9">أسئلة شائعة</a></li></ol></nav>
+<h2 id="s-1">متى تحتاج إلى حذف التكرار؟</h2>
+<p>عند جمع قوائم العملاء أو الموظفين أو الفواتير من أكثر من مصدر، تظهر صفوف مكررة تفسد المجاميع والتقارير. في هذا الدليل ثلاث طرق لاكتشاف التكرار وحذفه، ومتى تستخدم كل واحدة.</p>
+<h2 id="s-2">مثال البيانات</h2>
+<div class="table-wrap"><table><thead><tr><th>A: الاسم</th><th>B: الهاتف</th><th>C: المدينة</th></tr></thead><tbody><tr><td>أحمد</td><td>1001</td><td>بغداد</td></tr><tr><td>سارة</td><td>1002</td><td>البصرة</td></tr><tr><td>أحمد</td><td>1001</td><td>بغداد</td></tr><tr><td>علي</td><td>1003</td><td>أربيل</td></tr><tr><td>سارة</td><td>1002</td><td>البصرة</td></tr></tbody></table></div>
+<p>الصفوف 3 و5 مكررة وتريد الإبقاء على نسخة واحدة من كل صف.</p>
+<h2 id="s-3">الطريقة الأولى: أداة إزالة التكرارات</h2>
+<p>هذه أسرع طريقة وتحذف التكرار من الجدول نفسه.</p>
+<ol><li>حدّد نطاق البيانات بالكامل مع العناوين.</li><li>من تبويب <strong>بيانات (Data)</strong> اختر <strong>إزالة التكرارات (Remove Duplicates)</strong>.</li><li>فعّل خيار أن بياناتي تحتوي على رؤوس.</li><li>اختر الأعمدة التي تُقارن؛ اختر كل الأعمدة لحذف الصف المطابق تماماً، أو عموداً واحداً مثل الهاتف لحذف التكرار بحسبه.</li><li>اضغط موافق، وسيخبرك Excel بعدد الصفوف المحذوفة.</li></ol>
+<blockquote><p>تنبيه: الحذف نهائي، فاحتفظ بنسخة من الملف أو انسخ البيانات إلى ورقة أخرى قبل التنفيذ.</p></blockquote>
+<h2 id="s-4">الطريقة الثانية: دالة UNIQUE دون المساس بالأصل</h2>
+<p>في Excel 365 و2021 يمكنك استخراج قائمة بلا تكرار في مكان آخر مع بقاء البيانات الأصلية:</p>
+<p><code dir="ltr">=UNIQUE(A2:C6)</code></p>
+<p>تعيد الدالة الصفوف الفريدة فقط: أحمد، سارة، علي. ولاستخراج الأسماء الفريدة فقط:</p>
+<p><code dir="ltr">=UNIQUE(A2:A6)</code></p>
+<p>ولإظهار ما ظهر مرة واحدة فقط ضع الوسيط الثالث:</p>
+<p><code dir="ltr">=UNIQUE(A2:A6,FALSE,TRUE)</code></p>
+<p>هذه الطريقة تتحدّث تلقائياً عند تغيّر البيانات، وهي الأفضل للتقارير الدائمة.</p>
+<h2 id="s-5">الطريقة الثالثة: تمييز المكرر بالتنسيق الشرطي</h2>
+<p>إذا أردت المراجعة قبل الحذف:</p>
+<ol><li>حدّد العمود المطلوب.</li><li>من <strong>الشريط الرئيسي</strong> اختر <strong>تنسيق شرطي</strong> ثم <strong>قواعد تمييز الخلايا</strong> ثم <strong>قيم مكررة</strong>.</li><li>اختر لوناً، فتظهر كل القيم المتكررة ملوّنة.</li></ol>
+<h2 id="s-6">عدّ مرات التكرار بصيغة</h2>
+<p>لإضافة عمود يبيّن عدد ظهور كل اسم ضع في D2:</p>
+<p><code dir="ltr">=COUNTIF($A$2:$A$6,A2)</code></p>
+<p>أي رقم أكبر من 1 يعني أن الاسم مكرر. ولتعليم النسخ الثانية فقط وإبقاء الأولى:</p>
+<p><code dir="ltr">=IF(COUNTIF($A$2:A2,A2)&gt;1,&quot;مكرر&quot;,&quot;&quot;)</code></p>
+<p>ثم رشّح العمود على كلمة مكرر واحذف تلك الصفوف.</p>
+<h2 id="s-7">أخطاء شائعة</h2>
+<ul><li><strong>مسافات زائدة:</strong> الاسم &quot;أحمد &quot; يختلف عن &quot;أحمد&quot; فلا يُعدّ مكرراً. استخدم <code dir="ltr">=TRIM(A2)</code> لتنظيف النص أولاً.</li><li><strong>اختلاف الهمزات:</strong> أحمد وإحمد تُعامل كقيمتين مختلفتين.</li><li><strong>اختيار أعمدة ناقصة:</strong> مقارنة عمود الاسم فقط قد تحذف شخصين مختلفين يحملان الاسم نفسه.</li><li><strong>نسيان النسخة الاحتياطية</strong> قبل استخدام أداة الحذف.</li><li><strong>الأرقام المخزنة كنص:</strong> 1001 كنص لا يطابق 1001 كرقم.</li></ul>
+<h2 id="s-8">أي طريقة تختار؟</h2>
+<ul><li>تنظيف لمرة واحدة: أداة إزالة التكرارات.</li><li>تقرير يتحدّث تلقائياً: <a href="/excel-ar/formulas/unique/">UNIQUE</a>.</li><li>مراجعة يدوية قبل القرار: التنسيق الشرطي مع <a href="/excel-ar/formulas/countif/">COUNTIF</a>.</li></ul>
+<h2 id="s-9">أسئلة شائعة</h2>
+<h3>كيف أحذف المكرر وأبقي نسخة واحدة في Excel؟</h3>
+<p>استخدم بيانات ثم إزالة التكرارات، فيبقي Excel أول ظهور لكل قيمة ويحذف ما بعده.</p>
+<h3>هل يمكن إيجاد المكرر دون حذفه؟</h3>
+<p>نعم، بالتنسيق الشرطي لقيم مكررة أو بعمود <code dir="ltr">COUNTIF</code> يعرض عدد مرات الظهور.</p>
+<h3>لماذا لا يكتشف Excel بعض التكرارات الواضحة؟</h3>
+<p>غالباً بسبب مسافات زائدة أو اختلاف في كتابة الحروف أو أرقام مخزنة كنص؛ نظّف البيانات بـ <a href="/excel-ar/formulas/trim/">TRIM</a> أولاً.</p>
+<h3>هل UNIQUE متاحة في كل الإصدارات؟</h3>
+<p>لا، فهي في Excel 365 وExcel 2021 وما بعدهما فقط؛ في الإصدارات الأقدم استخدم أداة إزالة التكرارات.</p>
+<h2>الدوال المستخدمة في هذا المقال</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/unique/" title="شرح دالة UNIQUE في Excel بالعربي">UNIQUE</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li></ul>
+</article>
+<aside class="cta">
+<p class="cta-title">عندك سؤال عن جدولك؟</p>
+<p>اكتب سؤالك لمساعد Excel المجاني على تيليجرام، وخذ الصيغة المناسبة لبياناتك خلال لحظات.</p>
+<p><a class="btn" href="https://t.me/AdamShopIQ_bot?start=web_remove-duplicates-excel" rel="noopener">اسأل مساعد Excel مجاناً على تيليجرام</a></p>
+<p class="cta-more">تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة نصائح Excel</a> لنصيحة عملية كل يوم.</p>
+<p class="cta-more">وفي البوت أيضاً أدلة جاهزة مفصّلة لمن يريد التعمّق.</p>
+</aside>
+<h2>مقالات أخرى</h2>
+<ul class="cards"><li><a href="/excel-ar/articles/calculate-percentage-excel/">طريقة حساب النسبة المئوية في Excel خطوة بخطوة (مع أمثلة)</a><p>تعلم حساب النسبة المئوية في Excel: نسبة الجزء من الكل، نسبة التغيير بين رقمين، وزيادة رقم بنسبة معينة، مع أمثلة جاهزة.</p></li><li><a href="/excel-ar/articles/calculate-salary-excel/">طريقة حساب الراتب الصافي في Excel (بدلات واستقطاعات)</a><p>تعلم بناء جدول رواتب في Excel بمعادلات واضحة: الراتب الأساسي والبدلات والاستقطاعات والراتب الصافي مع مثال تطبيقي وأخطاء شائعة.</p></li><li><a href="/excel-ar/articles/days-between-two-dates-excel/">حساب عدد الأيام بين تاريخين في Excel (أيام عمل وأيام تقويمية)</a><p>تعلّم حساب عدد الأيام بين تاريخين في Excel بطرق مختلفة: الطرح المباشر، DATEDIF، وأيام العمل فقط مع استثناء العطل الرسمية.</p></li><li><a href="/excel-ar/articles/calculate-work-hours-excel/">حساب ساعات العمل من وقت الحضور والانصراف في Excel</a><p>تعلم حساب عدد ساعات العمل اليومية من وقت الحضور والانصراف في Excel، مع معالجة الدوام الليلي وجمع الساعات الأسبوعية بصيغ دقيقة.</p></li><li><a href="/excel-ar/articles/discount-formula-excel/">معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة</a><p>تعلم كيف تحسب قيمة الخصم والقيمة بعد الخصم ونسبة الخصم في Excel بمعادلات دقيقة ومثال عملي وأخطاء شائعة.</p></li></ul>
+</main>
+<footer class="site"><div class="wrap"><p>🤖 المحتوى مكتوب بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء؛ جرّب الصيغ على نسخة من ملفك قبل الاعتماد عليها.</p><p>Excel بالعربي: شروحات مجانية لدوال Excel وصيغه بالعربية، لكل من يعمل على الجداول في البلاد العربية. تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة النصائح على تيليجرام</a>.</p></div></footer>
+</body>
+</html>

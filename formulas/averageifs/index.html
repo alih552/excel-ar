@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>شرح دالة AVERAGEIFS في Excel بالعربي</title>
+<meta name="description" content="شرح دالة AVERAGEIFS في Excel: تحسب متوسط الخلايا التي تحقق شرطاً واحداً أو أكثر في الوقت نفسه. مع الصيغة ومثال عملي.">
+<meta name="keywords" content="AVERAGEIFS، دالة AVERAGEIFS، شرح AVERAGEIFS، Excel، اكسل">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="شرح دالة AVERAGEIFS في Excel بالعربي">
+<meta property="og:description" content="شرح دالة AVERAGEIFS في Excel: تحسب متوسط الخلايا التي تحقق شرطاً واحداً أو أكثر في الوقت نفسه. مع الصيغة ومثال عملي.">
+<meta property="og:site_name" content="Excel بالعربي">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/excel-ar/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"شرح دالة AVERAGEIFS في Excel بالعربي","description":"شرح دالة AVERAGEIFS في Excel: تحسب متوسط الخلايا التي تحقق شرطاً واحداً أو أكثر في الوقت نفسه. مع الصيغة ومثال عملي.","inLanguage":"ar","url":"https://alih552.github.io/excel-ar/formulas/averageifs/","author":{"@type":"Organization","name":"Excel بالعربي"},"publisher":{"@type":"Organization","name":"Excel بالعربي"},"about":{"@type":"Thing","name":"AVERAGEIFS (Excel)"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://alih552.github.io/excel-ar/"},{"@type":"ListItem","position":2,"name":"الدوال","item":"https://alih552.github.io/excel-ar/formulas/"},{"@type":"ListItem","position":3,"name":"AVERAGEIFS"}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="/excel-ar/">Excel بالعربي</a><nav aria-label="الأقسام"><a href="/excel-ar/formulas/">الدوال</a><a href="/excel-ar/articles/">المقالات</a><a href="https://t.me/AdamShopIQ_bot?start=web__nav" rel="noopener">المساعد المجاني</a></nav></div></header>
+<main class="wrap">
+<nav class="crumbs" aria-label="مسار الصفحة"><a href="/excel-ar/">الرئيسية</a> <span aria-hidden="true">›</span> <a href="/excel-ar/formulas/">الدوال</a> <span aria-hidden="true">›</span> <span>AVERAGEIFS</span></nav>
+<article>
+<h1>شرح دالة AVERAGEIFS في Excel بالعربي</h1>
+<p class="lead">تحسب متوسط الخلايا التي تحقق شرطاً واحداً أو أكثر في الوقت نفسه.</p>
+<h2>الصيغة العامة</h2>
+<pre dir="ltr"><code>=AVERAGEIFS(average_range, criteria_range1, criteria1, [criteria_range2, criteria2], ...)</code></pre>
+<h2>الوسائط</h2>
+<ul><li><code dir="ltr">average_range</code>: مطلوب</li><li><code dir="ltr">criteria_range1</code>: مطلوب</li><li><code dir="ltr">criteria1</code>: مطلوب</li><li><code dir="ltr">criteria_range2</code>: اختياري</li><li><code dir="ltr">criteria2</code>: اختياري</li></ul>
+<p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
+<h2>مثال عملي</h2>
+<pre dir="ltr"><code>=AVERAGEIFS(C2:C100,A2:A100,&quot;بغداد&quot;,B2:B100,&quot;&gt;=50&quot;)</code></pre>
+<p>النتيجة: متوسط المبيعات في بغداد للقيم 50 فأكثر</p>
+<h2>إذا رفض Excel الصيغة</h2>
+<p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
+<pre dir="ltr"><code>=AVERAGEIFS(C2:C100;A2:A100;&quot;بغداد&quot;;B2:B100;&quot;&gt;=50&quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/average/" title="شرح دالة AVERAGE في Excel بالعربي">AVERAGE</a></li><li><a href="/excel-ar/formulas/averageif/" title="شرح دالة AVERAGEIF في Excel بالعربي">AVERAGEIF</a></li></ul>
+</article>
+<aside class="cta">
+<p class="cta-title">عندك سؤال عن جدولك؟</p>
+<p>اكتب سؤالك لمساعد Excel المجاني على تيليجرام، وخذ الصيغة المناسبة لبياناتك خلال لحظات.</p>
+<p><a class="btn" href="https://t.me/AdamShopIQ_bot?start=web_fx_averageifs" rel="noopener">اسأل مساعد Excel مجاناً على تيليجرام</a></p>
+<p class="cta-more">تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة نصائح Excel</a> لنصيحة عملية كل يوم.</p>
+<p class="cta-more">وفي البوت أيضاً أدلة جاهزة مفصّلة لمن يريد التعمّق.</p>
+</aside>
+</main>
+<footer class="site"><div class="wrap"><p>🤖 المحتوى مكتوب بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء؛ جرّب الصيغ على نسخة من ملفك قبل الاعتماد عليها.</p><p>Excel بالعربي: شروحات مجانية لدوال Excel وصيغه بالعربية، لكل من يعمل على الجداول في البلاد العربية. تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة النصائح على تيليجرام</a>.</p></div></footer>
+</body>
+</html>

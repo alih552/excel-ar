@@ -6,10 +6,11 @@
 <title>شرح دالة ISNUMBER في Excel بالعربي</title>
 <meta name="description" content="شرح دالة ISNUMBER في Excel: تفحص هل القيمة رقم فتُرجع TRUE أو FALSE. مفيدة للتحقق من البيانات وللبحث عن نص داخل خلية مع SEARCH. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="ISNUMBER، دالة ISNUMBER، شرح ISNUMBER، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/isnumber/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة ISNUMBER في Excel بالعربي">
 <meta property="og:description" content="شرح دالة ISNUMBER في Excel: تفحص هل القيمة رقم فتُرجع TRUE أو FALSE. مفيدة للتحقق من البيانات وللبحث عن نص داخل خلية مع SEARCH. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/isnumber/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,16 +29,29 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=ISNUMBER(value)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">value</code>: مطلوب</li></ul>
+<ul><li><code dir="ltr">value</code>: القيمة أو مرجع الخلية المراد فحصها لمعرفة هل هي رقم صحيح. (مطلوب)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى نستخدم ISNUMBER؟</h2>
+<p>تفحص الدالة <code dir="ltr">ISNUMBER</code> قيمة ما وتعيد <code dir="ltr">TRUE</code> إذا كانت رقماً (ويشمل التواريخ والأوقات لأنها أرقام داخلياً)، وتعيد <code dir="ltr">FALSE</code> إذا كانت نصاً أو خلية فارغة أو خطأ. تفيد في التحقق من البيانات قبل الحساب، وفي اكتشاف الأرقام المخزنة كنص، وفي البحث عن كلمة داخل نص عند دمجها مع <code dir="ltr">SEARCH</code>.</p>
+<h2 id="s-2">الصيغة</h2>
+<p><code dir="ltr">=ISNUMBER(value)</code></p>
+<h2 id="s-3">مثال على بيانات</h2>
+<div class="table-wrap"><table><thead><tr><th>A (القيمة)</th><th>النتيجة</th></tr></thead><tbody><tr><td>150</td><td>TRUE</td></tr><tr><td>&#39;150 (نص)</td><td>FALSE</td></tr><tr><td>أحمد</td><td>FALSE</td></tr><tr><td>2026/01/05</td><td>TRUE</td></tr><tr><td>(فارغة)</td><td>FALSE</td></tr></tbody></table></div>
+<p>الصيغة في B2: <code dir="ltr">=ISNUMBER(A2)</code> تعيد TRUE للرقم و FALSE للنص.</p>
+<h2 id="s-4">الاستخدام مع IF</h2>
+<p>لإظهار رسالة عند وجود خطأ إدخال: <code dir="ltr">=IF(ISNUMBER(A2),&quot;سليم&quot;,&quot;أدخل رقماً&quot;)</code>.</p>
+<h2 id="s-5">البحث عن كلمة داخل نص</h2>
+<p>الدالة <code dir="ltr">SEARCH</code> تعيد رقم الموضع إذا وجدت الكلمة وخطأ إذا لم تجدها، لذلك: <code dir="ltr">=ISNUMBER(SEARCH(&quot;عقد&quot;,A2))</code> تعيد TRUE إذا احتوت الخلية على كلمة عقد. يمكن استعمالها داخل <code dir="ltr">COUNTIF</code> أو <code dir="ltr">SUMPRODUCT</code> لعد الخلايا المحتوية على كلمة: <code dir="ltr">=SUMPRODUCT(--ISNUMBER(SEARCH(&quot;عقد&quot;,A2:A100)))</code>.</p>
+<h2 id="s-6">أخطاء شائعة</h2>
+<ul><li>الأرقام المستوردة من أنظمة أخرى تكون غالباً نصاً، فتعيد الدالة FALSE رغم أنها تبدو أرقاماً؛ حوّلها بـ <code dir="ltr">VALUE</code> أو اضرب في 1.</li><li>الخلية الفارغة ليست رقماً، فتعيد FALSE.</li><li>الدالة لا تعالج الخطأ؛ إن كانت القيمة خطأ تعيد FALSE ولا تظهر رسالة الخطأ.</li><li>نسيان علامات التنصيص حول النص في <code dir="ltr">SEARCH</code> يسبب خطأ في الصيغة.</li></ul>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=ISNUMBER(SEARCH(&quot;أحمد&quot;,A2))</code></pre>
 <p>النتيجة: تُرجع TRUE إذا كانت الخلية A2 تحتوي على كلمة أحمد</p>
 <h2>إذا رفض Excel الصيغة</h2>
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=ISNUMBER(SEARCH(&quot;أحمد&quot;;A2))</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/search/" title="شرح دالة SEARCH في Excel بالعربي">SEARCH</a></li><li><a href="/excel-ar/formulas/int/" title="شرح دالة INT في Excel بالعربي">INT</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/search/" title="شرح دالة SEARCH في Excel بالعربي">SEARCH</a></li><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/sumproduct/" title="شرح دالة SUMPRODUCT في Excel بالعربي">SUMPRODUCT</a></li><li><a href="/excel-ar/formulas/int/" title="شرح دالة INT في Excel بالعربي">INT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

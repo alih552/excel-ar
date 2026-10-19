@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>طريقة حساب النسبة المئوية في Excel خطوة بخطوة (مع أمثلة)</title>
+<meta name="description" content="تعلم حساب النسبة المئوية في Excel: نسبة الجزء من الكل، نسبة التغيير بين رقمين، وزيادة رقم بنسبة معينة، مع أمثلة جاهزة.">
+<meta name="keywords" content="حساب النسبة المئوية في Excel، معادلة النسبة المئوية، نسبة التغيير في اكسل، كيف احسب النسبة في الاكسل">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/articles/calculate-percentage-excel/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="طريقة حساب النسبة المئوية في Excel خطوة بخطوة (مع أمثلة)">
+<meta property="og:description" content="تعلم حساب النسبة المئوية في Excel: نسبة الجزء من الكل، نسبة التغيير بين رقمين، وزيادة رقم بنسبة معينة، مع أمثلة جاهزة.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/articles/calculate-percentage-excel/">
+<meta property="og:site_name" content="Excel بالعربي">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/excel-ar/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"طريقة حساب النسبة المئوية في Excel خطوة بخطوة (مع أمثلة)","description":"تعلم حساب النسبة المئوية في Excel: نسبة الجزء من الكل، نسبة التغيير بين رقمين، وزيادة رقم بنسبة معينة، مع أمثلة جاهزة.","inLanguage":"ar","url":"https://alih552.github.io/excel-ar/articles/calculate-percentage-excel/","datePublished":"2026-10-19T00:13:23.866Z","dateModified":"2026-10-19T00:13:23.866Z","keywords":"حساب النسبة المئوية في Excel, معادلة النسبة المئوية, نسبة التغيير في اكسل, كيف احسب النسبة في الاكسل","author":{"@type":"Organization","name":"Excel بالعربي"},"publisher":{"@type":"Organization","name":"Excel بالعربي"},"mainEntityOfPage":"https://alih552.github.io/excel-ar/articles/calculate-percentage-excel/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://alih552.github.io/excel-ar/"},{"@type":"ListItem","position":2,"name":"المقالات","item":"https://alih552.github.io/excel-ar/articles/"},{"@type":"ListItem","position":3,"name":"طريقة حساب النسبة المئوية في Excel خطوة بخطوة (مع أمثلة)"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"كيف أحسب النسبة المئوية في Excel بين رقمين؟","acceptedAnswer":{"@type":"Answer","text":"اقسم الجزء على الكل بالمعادلة =A2/B2 ثم نسّق الخلية بتنسيق النسبة المئوية."}},{"@type":"Question","name":"كيف أحسب نسبة الزيادة؟","acceptedAnswer":{"@type":"Answer","text":"استخدم =(الجديد-القديم)/القديم وبعدها نسّق الناتج كنسبة مئوية."}},{"@type":"Question","name":"لماذا تظهر لي نسبة كبيرة جداً؟","acceptedAnswer":{"@type":"Answer","text":"غالباً طبّقت تنسيق النسبة على رقم صحيح مثل 90، فيتحول إلى 9000%. اقسم أولاً أو اكتب القيمة بصيغة عشرية."}},{"@type":"Question","name":"كيف أضيف نسبة مئوية إلى رقم؟","acceptedAnswer":{"@type":"Answer","text":"اضرب الرقم في (1+النسبة) مثل =A2*(1+10%)."}},{"@type":"Question","name":"كيف أحصل على نسبة بدون كسور؟","acceptedAnswer":{"@type":"Answer","text":"استخدم زر إنقاص المنازل العشرية أو الدالة ROUND."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="/excel-ar/">Excel بالعربي</a><nav aria-label="الأقسام"><a href="/excel-ar/formulas/">الدوال</a><a href="/excel-ar/articles/">المقالات</a><a href="https://t.me/AdamShopIQ_bot?start=web__nav" rel="noopener">المساعد المجاني</a></nav></div></header>
+<main class="wrap">
+<nav class="crumbs" aria-label="مسار الصفحة"><a href="/excel-ar/">الرئيسية</a> <span aria-hidden="true">›</span> <a href="/excel-ar/articles/">المقالات</a> <span aria-hidden="true">›</span> <span>طريقة حساب النسبة المئوية في Excel خطوة بخطوة (مع أمثلة)</span></nav>
+<article>
+<h1>طريقة حساب النسبة المئوية في Excel خطوة بخطوة (مع أمثلة)</h1>
+<p class="meta">آخر تحديث: <time datetime="2026-10-19">2026-10-19</time></p>
+<nav class="toc" aria-label="محتويات المقال"><p class="toc-title">في هذا المقال</p><ol><li><a href="#s-1">حساب النسبة المئوية في Excel</a></li><li><a href="#s-2">الحالة الأولى: نسبة جزء من الكل</a></li><li><a href="#s-3">الحالة الثانية: نسبة التغيير بين رقمين</a></li><li><a href="#s-4">الحالة الثالثة: زيادة أو إنقاص رقم بنسبة معينة</a></li><li><a href="#s-5">الحالة الرابعة: إيجاد الكل من الجزء والنسبة</a></li><li><a href="#s-6">حساب نسبة العناصر المستوفية لشرط</a></li><li><a href="#s-7">أخطاء شائعة</a></li><li><a href="#s-8">أسئلة شائعة</a></li></ol></nav>
+<h2 id="s-1">حساب النسبة المئوية في Excel</h2>
+<p>النسبة المئوية من أكثر العمليات استخداماً في الجداول: نسبة النجاح، نسبة المبيعات، نسبة الزيادة في الأسعار، ونسبة الإنجاز. في هذا الدليل ستتعلم ثلاث حالات أساسية بمعادلات دقيقة وأمثلة واضحة.</p>
+<h2 id="s-2">الحالة الأولى: نسبة جزء من الكل</h2>
+<p>القاعدة: النسبة = الجزء ÷ الكل. ثم نحوّل الخلية إلى تنسيق النسبة المئوية.</p>
+<div class="table-wrap"><table><thead><tr><th>A (الطالب)</th><th>B (الدرجة)</th><th>C (الدرجة الكلية)</th><th>D (النسبة)</th></tr></thead><tbody><tr><td>سارة</td><td>45</td><td>50</td><td>90%</td></tr><tr><td>علي</td><td>38</td><td>50</td><td>76%</td></tr><tr><td>نور</td><td>30</td><td>50</td><td>60%</td></tr></tbody></table></div>
+<p>في الخلية D2 اكتب:</p>
+<p><code dir="ltr">=B2/C2</code></p>
+<p>ثم من تبويب الصفحة الرئيسية اختر الرمز % (تنسيق النسبة المئوية). ستظهر النتيجة 90%. اسحب المعادلة للأسفل لبقية الصفوف.</p>
+<h3>نسبة كل عنصر من المجموع</h3>
+<p>إذا أردت نسبة كل رقم من إجمالي عمود، ثبّت خلية الإجمالي بعلامة الدولار:</p>
+<p><code dir="ltr">=B2/$B$6</code></p>
+<p>حيث B6 تحتوي المجموع <code dir="ltr">=SUM(B2:B5)</code>. التثبيت يمنع تحرك الخلية عند السحب.</p>
+<h2 id="s-3">الحالة الثانية: نسبة التغيير بين رقمين</h2>
+<p>لمعرفة نسبة الزيادة أو النقصان بين قيمة قديمة وقيمة جديدة:</p>
+<p><code dir="ltr">=(الجديد-القديم)/القديم</code></p>
+<div class="table-wrap"><table><thead><tr><th>A (الشهر)</th><th>B (المبيعات)</th><th>C (نسبة التغيير)</th></tr></thead><tbody><tr><td>يناير</td><td>200</td><td></td></tr><tr><td>فبراير</td><td>250</td><td>25%</td></tr><tr><td>مارس</td><td>225</td><td>-10%</td></tr></tbody></table></div>
+<p>في C3 اكتب <code dir="ltr">=(B3-B2)/B2</code> ثم نسّق الخلية كنسبة مئوية. الناتج 25% يعني زيادة، والناتج السالب يعني نقصاناً.</p>
+<p>لتجنب خطأ القسمة على صفر عندما تكون القيمة القديمة صفراً:</p>
+<p><code dir="ltr">=IFERROR((B3-B2)/B2,0)</code></p>
+<p>تعرف على الدالة <a href="/excel-ar/formulas/iferror/">IFERROR</a> لمعالجة الأخطاء.</p>
+<h2 id="s-4">الحالة الثالثة: زيادة أو إنقاص رقم بنسبة معينة</h2>
+<p>لزيادة رقم بنسبة 15%:</p>
+<p><code dir="ltr">=A2*(1+15%)</code></p>
+<p>ولإنقاصه بنسبة 15%:</p>
+<p><code dir="ltr">=A2*(1-15%)</code></p>
+<p>مثال: الرقم 400 مع زيادة 15% يعطي 460، ومع إنقاص 15% يعطي 340.</p>
+<p>يمكنك وضع النسبة في خلية مستقلة مثل E1 واستخدام <code dir="ltr">=A2*(1+$E$1)</code> حتى يتغير كل شيء بتعديل خلية واحدة.</p>
+<h2 id="s-5">الحالة الرابعة: إيجاد الكل من الجزء والنسبة</h2>
+<p>إذا عرفت أن 60 تمثل 20% من رقم ما، فالرقم هو:</p>
+<p><code dir="ltr">=60/20%</code></p>
+<p>والناتج 300.</p>
+<h2 id="s-6">حساب نسبة العناصر المستوفية لشرط</h2>
+<p>لحساب نسبة الناجحين (الدرجة 25 فأكثر) من قائمة في B2:B21:</p>
+<p><code dir="ltr">=COUNTIF(B2:B21,&quot;&gt;=25&quot;)/COUNTA(B2:B21)</code></p>
+<p>راجع صفحتي <a href="/excel-ar/formulas/countif/">COUNTIF</a> و<a href="/excel-ar/formulas/counta/">COUNTA</a> لفهم الوسائط. وللنسبة من المجموع حسب شرط استخدم <a href="/excel-ar/formulas/sumif/">SUMIF</a> مقسومة على <a href="/excel-ar/formulas/sum/">SUM</a>.</p>
+<h2 id="s-7">أخطاء شائعة</h2>
+<ul><li><strong>كتابة 90 بدل 90%:</strong> إذا نسّقت الخلية كنسبة بعد كتابة 90 سيظهر 9000%. اكتب المعادلة أو القيمة 0.9 أولاً ثم نسّق.</li><li><strong>نسيان الأقواس:</strong> <code dir="ltr">=B3-B2/B2</code> تعطي نتيجة خاطئة لأن القسمة تُنفَّذ قبل الطرح. الصحيح <code dir="ltr">=(B3-B2)/B2</code>.</li><li><strong>عدم تثبيت الإجمالي:</strong> يؤدي السحب إلى تحرك الخلية وظهور أخطاء قسمة.</li><li><strong>القسمة على خلايا فارغة:</strong> تعطي #DIV/0! فاستخدم IFERROR.</li><li><strong>التقريب:</strong> استخدم <a href="/excel-ar/formulas/round/">ROUND</a> مثل <code dir="ltr">=ROUND(B2/C2,2)</code> للتحكم بعدد الخانات.</li></ul>
+<h2 id="s-8">أسئلة شائعة</h2>
+<h3>كيف أحسب النسبة المئوية في Excel بين رقمين؟</h3>
+<p>اقسم الجزء على الكل بالمعادلة <code dir="ltr">=A2/B2</code> ثم نسّق الخلية بتنسيق النسبة المئوية.</p>
+<h3>كيف أحسب نسبة الزيادة؟</h3>
+<p>استخدم <code dir="ltr">=(الجديد-القديم)/القديم</code> وبعدها نسّق الناتج كنسبة مئوية.</p>
+<h3>لماذا تظهر لي نسبة كبيرة جداً؟</h3>
+<p>غالباً طبّقت تنسيق النسبة على رقم صحيح مثل 90، فيتحول إلى 9000%. اقسم أولاً أو اكتب القيمة بصيغة عشرية.</p>
+<h3>كيف أضيف نسبة مئوية إلى رقم؟</h3>
+<p>اضرب الرقم في <code dir="ltr">(1+النسبة)</code> مثل <code dir="ltr">=A2*(1+10%)</code>.</p>
+<h3>كيف أحصل على نسبة بدون كسور؟</h3>
+<p>استخدم زر إنقاص المنازل العشرية أو الدالة ROUND.</p>
+<h2>الدوال المستخدمة في هذا المقال</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/counta/" title="شرح دالة COUNTA في Excel بالعربي">COUNTA</a></li><li><a href="/excel-ar/formulas/sumif/" title="شرح دالة SUMIF في Excel بالعربي">SUMIF</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/round/" title="شرح دالة ROUND في Excel بالعربي">ROUND</a></li></ul>
+</article>
+<aside class="cta">
+<p class="cta-title">عندك سؤال عن جدولك؟</p>
+<p>اكتب سؤالك لمساعد Excel المجاني على تيليجرام، وخذ الصيغة المناسبة لبياناتك خلال لحظات.</p>
+<p><a class="btn" href="https://t.me/AdamShopIQ_bot?start=web_calculate-percentage-excel" rel="noopener">اسأل مساعد Excel مجاناً على تيليجرام</a></p>
+<p class="cta-more">تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة نصائح Excel</a> لنصيحة عملية كل يوم.</p>
+<p class="cta-more">وفي البوت أيضاً أدلة جاهزة مفصّلة لمن يريد التعمّق.</p>
+</aside>
+<h2>مقالات أخرى</h2>
+<ul class="cards"><li><a href="/excel-ar/articles/remove-duplicates-excel/">طريقة حذف القيم المكررة في Excel وإيجاد التكرار (3 طرق)</a><p>تعلّم كيف تكتشف التكرار وتحذفه في Excel بثلاث طرق: أداة إزالة التكرارات، دالة UNIQUE، والتنسيق الشرطي، مع مثال عملي وأخطاء شائعة.</p></li><li><a href="/excel-ar/articles/calculate-salary-excel/">طريقة حساب الراتب الصافي في Excel (بدلات واستقطاعات)</a><p>تعلم بناء جدول رواتب في Excel بمعادلات واضحة: الراتب الأساسي والبدلات والاستقطاعات والراتب الصافي مع مثال تطبيقي وأخطاء شائعة.</p></li><li><a href="/excel-ar/articles/days-between-two-dates-excel/">حساب عدد الأيام بين تاريخين في Excel (أيام عمل وأيام تقويمية)</a><p>تعلّم حساب عدد الأيام بين تاريخين في Excel بطرق مختلفة: الطرح المباشر، DATEDIF، وأيام العمل فقط مع استثناء العطل الرسمية.</p></li><li><a href="/excel-ar/articles/calculate-work-hours-excel/">حساب ساعات العمل من وقت الحضور والانصراف في Excel</a><p>تعلم حساب عدد ساعات العمل اليومية من وقت الحضور والانصراف في Excel، مع معالجة الدوام الليلي وجمع الساعات الأسبوعية بصيغ دقيقة.</p></li><li><a href="/excel-ar/articles/discount-formula-excel/">معادلة حساب الخصم في Excel بالنسبة المئوية خطوة بخطوة</a><p>تعلم كيف تحسب قيمة الخصم والقيمة بعد الخصم ونسبة الخصم في Excel بمعادلات دقيقة ومثال عملي وأخطاء شائعة.</p></li></ul>
+</main>
+<footer class="site"><div class="wrap"><p>🤖 المحتوى مكتوب بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء؛ جرّب الصيغ على نسخة من ملفك قبل الاعتماد عليها.</p><p>Excel بالعربي: شروحات مجانية لدوال Excel وصيغه بالعربية، لكل من يعمل على الجداول في البلاد العربية. تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة النصائح على تيليجرام</a>.</p></div></footer>
+</body>
+</html>

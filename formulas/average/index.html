@@ -53,17 +53,17 @@
 <h2 id="s-4">أخطاء شائعة وحلولها</h2>
 <ul><li><strong>الخطأ #DIV/0!</strong>: يظهر إذا لم يكن في النطاق أي رقم، كأن تكون الخلايا كلها فارغة أو نصية. الحل: <code dir="ltr">=IFERROR(AVERAGE(B2:B6),&quot;لا توجد بيانات&quot;)</code>.</li><li><strong>أرقام مخزنة كنص</strong>: إذا استوردت البيانات من نظام آخر فقد تبدو الأرقام صحيحة لكنها نصوص تُحاذى كما يُحاذى النص لا الرقم، ويظهر في زاوية الخلية مثلث أخضر صغير، فتتجاهلها الدالة بصمت ويخرج المتوسط خاطئاً. حوّلها إلى أرقام من خيار التحويل الذي يظهر بجانب الخلية.</li><li><strong>الخلط بين الصفر والفراغ</strong>: كما في المثال، الصفر يدخل في الحساب والفراغ لا يدخل. قرر أيهما يعبّر عن بياناتك قبل الحساب.</li><li><strong>الصفوف المخفية بالتصفية</strong>: تبقى داخلة في حساب AVERAGE. لحساب متوسط الصفوف الظاهرة فقط استخدم <code dir="ltr">=SUBTOTAL(101,B2:B6)</code>.</li></ul>
 <h2 id="s-5">نصائح</h2>
-<ul><li>لتقريب النتيجة إلى رقم عشري واحد: <code dir="ltr">=ROUND(AVERAGE(B2:D2),1)</code>.</li><li>إذا أردت أن تُحسب النصوص على أنها صفر، فاستخدم AVERAGEA بدلاً منها.</li><li>لحساب المتوسط حسب شرط، مثل متوسط شعبة معينة، استخدم <a href="/excel-ar/formulas/averageif/">AVERAGEIF</a>، ولعدة شروط استخدم AVERAGEIFS.</li><li>في الإعدادات العربية التي تفصل الوسائط بفاصلة منقوطة: <code dir="ltr">=AVERAGE(B2:B6;D2:D6)</code>.</li></ul>
+<ul><li>لتقريب النتيجة إلى رقم عشري واحد: <code dir="ltr">=ROUND(AVERAGE(B2:D2),1)</code>.</li><li>إذا أردت أن تُحسب النصوص على أنها صفر، فاستخدم AVERAGEA بدلاً منها.</li><li>لحساب المتوسط حسب شرط، مثل متوسط شعبة معينة، استخدم <a href="/excel-ar/formulas/averageif/">AVERAGEIF</a>، ولعدة شروط استخدم <a href="/excel-ar/formulas/averageifs/">AVERAGEIFS</a>.</li><li>في الإعدادات العربية التي تفصل الوسائط بفاصلة منقوطة: <code dir="ltr">=AVERAGE(B2:B6;D2:D6)</code>.</li></ul>
 <h2 id="s-6">أسئلة شائعة</h2>
 <h3>هل تتجاهل AVERAGE الخلايا الفارغة؟</h3>
 <p>نعم، الخلية الفارغة لا تدخل في المجموع ولا في عدد القيم، بخلاف الخلية التي تحتوي صفراً.</p>
 <h3>ما الفرق بين AVERAGE وMEDIAN؟</h3>
-<p>المتوسط الحسابي يتأثر كثيراً بالقيم الشاذة، أما MEDIAN فتعيد القيمة التي تقع في المنتصف بعد ترتيب الأرقام، فلا يرفعها راتب واحد مرتفع جداً مثلاً.</p>
+<p>المتوسط الحسابي يتأثر كثيراً بالقيم الشاذة، أما <a href="/excel-ar/formulas/median/">MEDIAN</a> فتعيد القيمة التي تقع في المنتصف بعد ترتيب الأرقام، فلا يرفعها راتب واحد مرتفع جداً مثلاً.</p>
 <h2>مثال سريع</h2>
 <pre dir="ltr"><code>=AVERAGE(C2:C40)</code></pre>
 <p>النتيجة: متوسط درجات الصف</p>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/averageif/" title="شرح دالة AVERAGEIF في Excel بالعربي">AVERAGEIF</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/averageif/" title="شرح دالة AVERAGEIF في Excel بالعربي">AVERAGEIF</a></li><li><a href="/excel-ar/formulas/averageifs/" title="شرح دالة AVERAGEIFS في Excel بالعربي">AVERAGEIFS</a></li><li><a href="/excel-ar/formulas/median/" title="شرح دالة MEDIAN في Excel بالعربي">MEDIAN</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>
