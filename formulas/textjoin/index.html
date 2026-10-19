@@ -32,7 +32,7 @@
 <ul><li><code dir="ltr">delimiter</code>: النص الذي يوضع بين كل قيمتين، مثل &quot;، &quot; أو مسافة، ويكتب بين علامتي تنصيص. (مطلوب)</li><li><code dir="ltr">ignore_empty</code>: اكتب TRUE لتتخطى الدالة الخلايا الفارغة، أو FALSE لتضع الفاصل مكانها أيضاً. (مطلوب)</li><li><code dir="ltr">text1</code>: أول قيمة أو نطاق تريد دمجه، مثل A2:A20. (مطلوب)</li><li><code dir="ltr">text2</code>: قيم أو نطاقات إضافية اختيارية تدمج بعد الأولى، وأقصى عدد للقيم كلها 252. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
 <h2 id="s-1">متى تستخدم TEXTJOIN</h2>
-<p>عندما تريد جمع عدة قيم نصية في خلية واحدة يفصل بينها فاصل ثابت: أسماء الغائبين في يوم واحد، أو أصناف طلبية واحدة، أو بيانات موظف في سطر واحد. قبل هذه الدالة كان الدمج يتم بعلامة &amp; أو بالدالة CONCATENATE خلية خلية، مع كتابة الفاصل يدوياً بين كل قيمتين ومعالجة الخلايا الفارغة بصيغ إضافية. TEXTJOIN تقبل نطاقاً كاملاً وتضع الفاصل تلقائياً.</p>
+<p>عندما تريد جمع عدة قيم نصية في خلية واحدة يفصل بينها فاصل ثابت: أسماء الغائبين في يوم واحد، أو أصناف طلبية واحدة، أو بيانات موظف في سطر واحد. قبل هذه الدالة كان الدمج يتم بعلامة &amp; أو بالدالة <a href="/excel-ar/formulas/concatenate/">CONCATENATE</a> خلية خلية، مع كتابة الفاصل يدوياً بين كل قيمتين ومعالجة الخلايا الفارغة بصيغ إضافية. TEXTJOIN تقبل نطاقاً كاملاً وتضع الفاصل تلقائياً.</p>
 <h2 id="s-2">كيف تعمل</h2>
 <ul><li><strong>الفاصل</strong> هو النص الذي يوضع بين كل قيمتين، مثل &quot;، &quot; أو &quot; - &quot; أو مسافة واحدة. يمكن أن يكون نصاً فارغاً &quot;&quot; فتلتصق القيم ببعضها.</li><li><strong>تجاهل الفراغات</strong>: إذا كان TRUE تخطت الدالة الخلايا الفارغة فلا يظهر فاصلان متتاليان، وإذا كان FALSE وضعت الفاصل حتى مكان الخلية الفارغة.</li><li>بعد ذلك تكتب القيم: خلايا منفردة أو نطاقات أو مصفوفات ناتجة من صيغة، حتى 252 وسيطاً.</li><li>الأرقام تدخل بقيمتها المخزنة لا بتنسيقها الظاهر في الخلية، والنتيجة نص دائماً.</li></ul>
 <h2 id="s-3">مثال عملي</h2>
@@ -58,7 +58,7 @@
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=TEXTJOIN(&quot;، &quot;;TRUE;A2:A10)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li><li><a href="/excel-ar/formulas/unique/" title="شرح دالة UNIQUE في Excel بالعربي">UNIQUE</a></li><li><a href="/excel-ar/formulas/concat/" title="شرح دالة CONCAT في Excel بالعربي">CONCAT</a></li><li><a href="/excel-ar/formulas/textsplit/" title="شرح دالة TEXTSPLIT في Excel بالعربي">TEXTSPLIT</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/concatenate/" title="شرح دالة CONCATENATE في Excel بالعربي">CONCATENATE</a></li><li><a href="/excel-ar/formulas/if/" title="شرح دالة IF في Excel بالعربي">IF</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li><li><a href="/excel-ar/formulas/unique/" title="شرح دالة UNIQUE في Excel بالعربي">UNIQUE</a></li><li><a href="/excel-ar/formulas/concat/" title="شرح دالة CONCAT في Excel بالعربي">CONCAT</a></li><li><a href="/excel-ar/formulas/textsplit/" title="شرح دالة TEXTSPLIT في Excel بالعربي">TEXTSPLIT</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

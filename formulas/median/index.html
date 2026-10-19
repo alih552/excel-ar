@@ -6,10 +6,11 @@
 <title>شرح دالة MEDIAN في Excel بالعربي</title>
 <meta name="description" content="شرح دالة MEDIAN في Excel: تعيد القيمة الوسطى في مجموعة أرقام، وهي مفيدة عندما توجد قيم شاذة تشوّه المتوسط الحسابي. مع الصيغة ومثال عملي.">
 <meta name="keywords" content="MEDIAN، دالة MEDIAN، شرح MEDIAN، Excel، اكسل">
-<meta name="robots" content="noindex">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/formulas/median/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="شرح دالة MEDIAN في Excel بالعربي">
 <meta property="og:description" content="شرح دالة MEDIAN في Excel: تعيد القيمة الوسطى في مجموعة أرقام، وهي مفيدة عندما توجد قيم شاذة تشوّه المتوسط الحسابي. مع الصيغة ومثال عملي.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/formulas/median/">
 <meta property="og:site_name" content="Excel بالعربي">
 <meta property="og:locale" content="ar_AR">
 <meta name="twitter:card" content="summary">
@@ -28,13 +29,29 @@
 <h2>الصيغة العامة</h2>
 <pre dir="ltr"><code>=MEDIAN(number1, [number2], ...)</code></pre>
 <h2>الوسائط</h2>
-<ul><li><code dir="ltr">number1</code>: مطلوب</li><li><code dir="ltr">number2</code>: اختياري</li></ul>
+<ul><li><code dir="ltr">number1</code>: الرقم الأول أو النطاق الذي تريد حساب وسيطه. (مطلوب)</li><li><code dir="ltr">number2</code>: أرقام أو نطاقات إضافية اختيارية يتم تضمينها في الحساب. (اختياري)</li></ul>
 <p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
-<h2>مثال عملي</h2>
+<h2 id="s-1">متى تستخدم MEDIAN؟</h2>
+<p>تعيد الدالة MEDIAN القيمة الوسطى في مجموعة أرقام بعد ترتيبها: نصف القيم أكبر منها ونصفها أصغر. تفيد عندما توجد قيم شاذة (مثل راتب مرتفع جداً) تجعل المتوسط <a href="/excel-ar/formulas/average/">AVERAGE</a> مضللاً.</p>
+<h2 id="s-2">كيف تعمل</h2>
+<p>يرتب Excel الأرقام داخلياً. إذا كان عددها فردياً فالوسيط هو الرقم في المنتصف. وإذا كان زوجياً فالوسيط هو متوسط الرقمين الأوسطين. تتجاهل الدالة الخلايا الفارغة والنصوص في النطاق.</p>
+<h2 id="s-3">مثال عملي</h2>
+<div class="table-wrap"><table><thead><tr><th>الموظف</th><th>الراتب</th></tr></thead><tbody><tr><td>أحمد</td><td>500</td></tr><tr><td>سارة</td><td>550</td></tr><tr><td>علي</td><td>600</td></tr><tr><td>ليلى</td><td>620</td></tr><tr><td>عمر</td><td>5000</td></tr></tbody></table></div>
+<p>الصيغة:</p>
+<p><code dir="ltr">=MEDIAN(B2:B6)</code></p>
+<p>النتيجة: 600. بينما <code dir="ltr">=AVERAGE(B2:B6)</code> تعطي 1454، وهو رقم لا يمثل معظم الموظفين بسبب القيمة 5000.</p>
+<h2 id="s-4">وسيط بشرط</h2>
+<p>لا توجد MEDIANIF، لكن يمكنك استخدام <a href="/excel-ar/formulas/filter/">FILTER</a> في الإصدارات الحديثة:</p>
+<p><code dir="ltr">=MEDIAN(FILTER(B2:B100,A2:A100=&quot;مبيعات&quot;))</code></p>
+<h2 id="s-5">أخطاء شائعة</h2>
+<ul><li>الأرقام المخزنة كنص لا تُحسب، فتأكد أنها أرقام فعلية.</li><li>القيمة 0 تُحسب كرقم، أما الخلية الفارغة فلا.</li><li>إذا كان النطاق كله فارغاً تظهر <code dir="ltr">#NUM!</code>.</li><li>الخلط بين الوسيط والمتوسط: الوسيط لا يتأثر بالقيم المتطرفة.</li></ul>
+<h2 id="s-6">نصيحة</h2>
+<p>قارن دائماً بين MEDIAN وAVERAGE؛ إن كان الفرق كبيراً فبياناتك فيها قيم شاذة تستحق المراجعة.</p>
+<h2>مثال سريع</h2>
 <pre dir="ltr"><code>=MEDIAN(B2:B50)</code></pre>
 <p>النتيجة: الراتب الأوسط بين 49 موظفاً</p>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/average/" title="شرح دالة AVERAGE في Excel بالعربي">AVERAGE</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/average/" title="شرح دالة AVERAGE في Excel بالعربي">AVERAGE</a></li><li><a href="/excel-ar/formulas/filter/" title="شرح دالة FILTER في Excel بالعربي">FILTER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

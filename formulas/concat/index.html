@@ -35,7 +35,7 @@
 <p>تستخدم CONCAT لدمج محتوى عدة خلايا أو نصوص في نص واحد: بناء الاسم الكامل من الاسم الأول واسم الأب واسم العائلة، أو تكوين رمز فاتورة من رمز الفرع ورقم الفاتورة، أو كتابة جملة تلخيص مثل &quot;عدد الطلبات اليوم 45&quot; لتظهر في رأس التقرير.</p>
 <h2 id="s-2">كيف تعمل</h2>
 <p>تأخذ الدالة نصاً واحداً أو أكثر، وتلصقها متتالية بالترتيب الذي كتبته دون أي فاصل بينها. لذلك إذا أردت مسافة أو شرطة بين الأجزاء فعليك إضافتها بنفسك كنص بين علامتي تنصيص مثل <code dir="ltr">&quot; &quot;</code> أو <code dir="ltr">&quot;-&quot;</code>. وتقبل الدالة مراجع خلايا مفردة ونطاقات كاملة، والأرقام تُحوّل إلى نص كما هي مخزنة.</p>
-<p>وهي البديل الحديث للدالة CONCATENATE، والفرق الأساسي أن CONCAT تقبل نطاقاً مثل <code dir="ltr">A2:C2</code> بينما القديمة تحتاج كل خلية على حدة.</p>
+<p>وهي البديل الحديث للدالة <a href="/excel-ar/formulas/concatenate/">CONCATENATE</a>، والفرق الأساسي أن CONCAT تقبل نطاقاً مثل <code dir="ltr">A2:C2</code> بينما القديمة تحتاج كل خلية على حدة.</p>
 <h2 id="s-3">مثال عملي</h2>
 <p>جدول عملاء فيه الأسماء ورمز الفرع ورقم آخر فاتورة:</p>
 <div class="table-wrap"><table><thead><tr><th>الاسم الأول (A)</th><th>اسم الأب (B)</th><th>اسم العائلة (C)</th><th>الفرع (D)</th><th>رقم الفاتورة (E)</th></tr></thead><tbody><tr><td>محمد</td><td>علي</td><td>الحسني</td><td>BGD</td><td>1045</td></tr><tr><td>زينب</td><td>حسن</td><td>العبيدي</td><td>BSR</td><td>1046</td></tr><tr><td>كريم</td><td>جاسم</td><td>الربيعي</td><td>ERB</td><td>1047</td></tr></tbody></table></div>
@@ -64,7 +64,7 @@
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=CONCAT(A2;&quot; &quot;;B2)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/textjoin/" title="شرح دالة TEXTJOIN في Excel بالعربي">TEXTJOIN</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/concatenate/" title="شرح دالة CONCATENATE في Excel بالعربي">CONCATENATE</a></li><li><a href="/excel-ar/formulas/textjoin/" title="شرح دالة TEXTJOIN في Excel بالعربي">TEXTJOIN</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>
