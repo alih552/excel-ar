@@ -54,7 +54,7 @@
 <h3>الأرقام والتواريخ</h3>
 <p>نتيجة LEFT نص، فلا تجمعها <a href="/excel-ar/formulas/sum/">SUM</a> مباشرة. حوّلها إلى رقم بالدالة VALUE. وإذا طبقت LEFT على خلية تاريخ فستعمل على الرقم التسلسلي المخزن لا على التاريخ المعروض، فاستخدم <a href="/excel-ar/formulas/year/">YEAR</a> أو <a href="/excel-ar/formulas/text/">TEXT</a> بدلاً منها.</p>
 <h2 id="s-5">نصائح</h2>
-<ul><li>LEFT متوفرة في كل نسخ Excel.</li><li>الحركات مثل الفتحة والشدة تحسب حروفاً، فقد تقتطع LEFT من &quot;مُحمّد&quot; أقل مما تتوقع.</li><li>في Microsoft 365 و Excel 2024 تعطي الدالة TEXTBEFORE النتيجة نفسها بصيغة أبسط: <code dir="ltr">=TEXTBEFORE(A2,&quot; &quot;)</code>، لكنها تعيد <code dir="ltr">#N/A</code> إذا لم تجد مسافة. وهي غير موجودة في Excel 2021.</li><li>في إعدادات Windows العربية: <code dir="ltr">=LEFT(A2;FIND(&quot; &quot;;A2)-1)</code>.</li></ul>
+<ul><li>LEFT متوفرة في كل نسخ Excel.</li><li>الحركات مثل الفتحة والشدة تحسب حروفاً، فقد تقتطع LEFT من &quot;مُحمّد&quot; أقل مما تتوقع.</li><li>في Microsoft 365 و Excel 2024 تعطي الدالة <a href="/excel-ar/formulas/textbefore/">TEXTBEFORE</a> النتيجة نفسها بصيغة أبسط: <code dir="ltr">=TEXTBEFORE(A2,&quot; &quot;)</code>، لكنها تعيد <code dir="ltr">#N/A</code> إذا لم تجد مسافة. وهي غير موجودة في Excel 2021.</li><li>في إعدادات Windows العربية: <code dir="ltr">=LEFT(A2;FIND(&quot; &quot;;A2)-1)</code>.</li></ul>
 <h2>مثال سريع</h2>
 <pre dir="ltr"><code>=LEFT(A2,3)</code></pre>
 <p>النتيجة: أول ثلاثة أحرف من الرمز</p>
@@ -62,7 +62,7 @@
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=LEFT(A2;3)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/year/" title="شرح دالة YEAR في Excel بالعربي">YEAR</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/countif/" title="شرح دالة COUNTIF في Excel بالعربي">COUNTIF</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/year/" title="شرح دالة YEAR في Excel بالعربي">YEAR</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li><li><a href="/excel-ar/formulas/textbefore/" title="شرح دالة TEXTBEFORE في Excel بالعربي">TEXTBEFORE</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

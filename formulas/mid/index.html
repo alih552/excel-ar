@@ -52,7 +52,7 @@
 <h2 id="s-4">أخطاء شائعة وحلولها</h2>
 <ul><li><strong>الخطأ #VALUE!</strong>: يظهر إذا كان رقم البداية أقل من 1، أو كان عدد الحروف سالباً. يظهر أيضاً عندما لا تجد FIND المسافة أو الرمز المطلوب، لذلك أحِط الصيغة بالدالة <a href="/excel-ar/formulas/iferror/">IFERROR</a> عند الحاجة.</li><li><strong>نتيجة فارغة</strong>: رقم البداية أكبر من طول النص. استخدم <a href="/excel-ar/formulas/len/">LEN</a> لمعرفة طول النص.</li><li><strong>الجمع لا يعمل على النتائج</strong>: الناتج نص، فحوّله إلى رقم بإضافة علامتي ناقص قبل الدالة مثل <code dir="ltr">=--MID(A2,5,4)</code> أو باستخدام VALUE.</li><li><strong>حروف زائدة أو ناقصة</strong>: المسافات المخفية في بداية النص تزيح المواقع. نظّف البيانات أولاً بالدالة <a href="/excel-ar/formulas/trim/">TRIM</a>.</li></ul>
 <h2 id="s-5">نصائح</h2>
-<ul><li>الحركات العربية مثل الفتحة والشدة تُحسب حروفاً مستقلة، فانتبه لها عند العد في النصوص المشكولة.</li><li>في Excel 365 وExcel 2024 تتوفر TEXTBEFORE وTEXTAFTER و<a href="/excel-ar/formulas/textsplit/">TEXTSPLIT</a>، وهي أسهل من دمج MID مع FIND في كثير من الحالات.</li><li>MID متاحة في كل إصدارات Excel.</li></ul>
+<ul><li>الحركات العربية مثل الفتحة والشدة تُحسب حروفاً مستقلة، فانتبه لها عند العد في النصوص المشكولة.</li><li>في Excel 365 وExcel 2024 تتوفر <a href="/excel-ar/formulas/textbefore/">TEXTBEFORE</a> و<a href="/excel-ar/formulas/textafter/">TEXTAFTER</a> و<a href="/excel-ar/formulas/textsplit/">TEXTSPLIT</a>، وهي أسهل من دمج MID مع FIND في كثير من الحالات.</li><li>MID متاحة في كل إصدارات Excel.</li></ul>
 <h2>مثال سريع</h2>
 <pre dir="ltr"><code>=MID(A2,4,2)</code></pre>
 <p>النتيجة: حرفان يبدآن من الحرف الرابع</p>
@@ -60,7 +60,7 @@
 <p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
 <pre dir="ltr"><code>=MID(A2;4;2)</code></pre>
 <h2>دوال ذات صلة</h2>
-<ul class="grid"><li><a href="/excel-ar/formulas/left/" title="شرح دالة LEFT في Excel بالعربي">LEFT</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/len/" title="شرح دالة LEN في Excel بالعربي">LEN</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/textsplit/" title="شرح دالة TEXTSPLIT في Excel بالعربي">TEXTSPLIT</a></li><li><a href="/excel-ar/formulas/search/" title="شرح دالة SEARCH في Excel بالعربي">SEARCH</a></li></ul>
+<ul class="grid"><li><a href="/excel-ar/formulas/left/" title="شرح دالة LEFT في Excel بالعربي">LEFT</a></li><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/iferror/" title="شرح دالة IFERROR في Excel بالعربي">IFERROR</a></li><li><a href="/excel-ar/formulas/len/" title="شرح دالة LEN في Excel بالعربي">LEN</a></li><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/textbefore/" title="شرح دالة TEXTBEFORE في Excel بالعربي">TEXTBEFORE</a></li><li><a href="/excel-ar/formulas/textafter/" title="شرح دالة TEXTAFTER في Excel بالعربي">TEXTAFTER</a></li></ul>
 </article>
 <aside class="cta">
 <p class="cta-title">عندك سؤال عن جدولك؟</p>

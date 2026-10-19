@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تحويل النص إلى رقم في Excel وحل مشكلة الأرقام المخزنة كنص</title>
+<meta name="description" content="تعرف على أسباب عدم جمع الأرقام في Excel لأنها مخزنة كنص، وطرق تحويلها إلى أرقام حقيقية بالمعادلات والأدوات خطوة بخطوة.">
+<meta name="keywords" content="تحويل النص إلى رقم في Excel، الأرقام مخزنة كنص، Excel لا يجمع الأرقام، VALUE في إكسل">
+<link rel="canonical" href="https://alih552.github.io/excel-ar/articles/convert-text-to-number-excel/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="تحويل النص إلى رقم في Excel وحل مشكلة الأرقام المخزنة كنص">
+<meta property="og:description" content="تعرف على أسباب عدم جمع الأرقام في Excel لأنها مخزنة كنص، وطرق تحويلها إلى أرقام حقيقية بالمعادلات والأدوات خطوة بخطوة.">
+<meta property="og:url" content="https://alih552.github.io/excel-ar/articles/convert-text-to-number-excel/">
+<meta property="og:site_name" content="Excel بالعربي">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/excel-ar/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"تحويل النص إلى رقم في Excel وحل مشكلة الأرقام المخزنة كنص","description":"تعرف على أسباب عدم جمع الأرقام في Excel لأنها مخزنة كنص، وطرق تحويلها إلى أرقام حقيقية بالمعادلات والأدوات خطوة بخطوة.","inLanguage":"ar","url":"https://alih552.github.io/excel-ar/articles/convert-text-to-number-excel/","datePublished":"2026-10-19T00:19:24.140Z","dateModified":"2026-10-19T00:19:24.140Z","keywords":"تحويل النص إلى رقم في Excel, الأرقام مخزنة كنص, Excel لا يجمع الأرقام, VALUE في إكسل","author":{"@type":"Organization","name":"Excel بالعربي"},"publisher":{"@type":"Organization","name":"Excel بالعربي"},"mainEntityOfPage":"https://alih552.github.io/excel-ar/articles/convert-text-to-number-excel/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://alih552.github.io/excel-ar/"},{"@type":"ListItem","position":2,"name":"المقالات","item":"https://alih552.github.io/excel-ar/articles/"},{"@type":"ListItem","position":3,"name":"تحويل النص إلى رقم في Excel وحل مشكلة الأرقام المخزنة كنص"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"لماذا يعطي SUM صفرًا رغم وجود أرقام؟","acceptedAnswer":{"@type":"Answer","text":"لأن الأرقام مخزنة كنص، والدالة SUM تتجاهل النصوص. حوّلها بإحدى الطرق السابقة."}},{"@type":"Question","name":"كيف أحول عمودًا كاملًا بسرعة؟","acceptedAnswer":{"@type":"Answer","text":"استخدم Text to Columns أو لصق خاص مع Multiply، فكلاهما يعمل على العمود كله دفعة واحدة."}},{"@type":"Question","name":"كيف أحول الرقم إلى نص عكسيًا؟","acceptedAnswer":{"@type":"Answer","text":"استخدم الدالة TEXT مثل =TEXT(A2,\"0\") للحصول على نص من الرقم."}},{"@type":"Question","name":"هل تحذف VALUE المسافات؟","acceptedAnswer":{"@type":"Answer","text":"تتعامل مع المسافات العادية في الأطراف أحيانًا، لكن الأفضل استخدام TRIM معها لضمان النتيجة."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="/excel-ar/">Excel بالعربي</a><nav aria-label="الأقسام"><a href="/excel-ar/formulas/">الدوال</a><a href="/excel-ar/articles/">المقالات</a><a href="https://t.me/AdamShopIQ_bot?start=web__nav" rel="noopener">المساعد المجاني</a></nav></div></header>
+<main class="wrap">
+<nav class="crumbs" aria-label="مسار الصفحة"><a href="/excel-ar/">الرئيسية</a> <span aria-hidden="true">›</span> <a href="/excel-ar/articles/">المقالات</a> <span aria-hidden="true">›</span> <span>تحويل النص إلى رقم في Excel وحل مشكلة الأرقام المخزنة كنص</span></nav>
+<article>
+<h1>تحويل النص إلى رقم في Excel وحل مشكلة الأرقام المخزنة كنص</h1>
+<p class="meta">آخر تحديث: <time datetime="2026-10-19">2026-10-19</time></p>
+<nav class="toc" aria-label="محتويات المقال"><p class="toc-title">في هذا المقال</p><ol><li><a href="#s-1">لماذا لا يجمع Excel أرقامي؟</a></li><li><a href="#s-2">كيف تعرف أن الرقم نص؟</a></li><li><a href="#s-3">الطريقة الأولى: أيقونة التحويل</a></li><li><a href="#s-4">الطريقة الثانية: دالة VALUE</a></li><li><a href="#s-5">الطريقة الثالثة: الضرب في 1</a></li><li><a href="#s-6">الطريقة الرابعة: لصق خاص بدون معادلات</a></li><li><a href="#s-7">الطريقة الخامسة: نص إلى أعمدة</a></li><li><a href="#s-8">مثال عملي</a></li><li><a href="#s-9">أخطاء شائعة</a></li><li><a href="#s-10">أسئلة شائعة</a></li></ol></nav>
+<h2 id="s-1">لماذا لا يجمع Excel أرقامي؟</h2>
+<p>من أكثر المشكلات شيوعًا أن تكتب أرقامًا في عمود، ثم تعطيك المعادلة <code dir="ltr">=SUM(A2:A10)</code> النتيجة صفرًا، أو تجد مثلثًا أخضر صغيرًا في زاوية الخلية. السبب أن الأرقام مخزنة كنص، أي أن Excel يعاملها ككلمات لا كأرقام. يحدث هذا غالبًا عند نسخ البيانات من موقع أو ملف PDF أو نظام محاسبي، أو عند وجود مسافات زائدة أو apostrophe قبل الرقم.</p>
+<h2 id="s-2">كيف تعرف أن الرقم نص؟</h2>
+<ul><li>يظهر الرقم محاذيًا لليسار (في الإعدادات الإنجليزية) بدل اليمين.</li><li>يظهر مثلث أخضر صغير في زاوية الخلية.</li><li>تعطي المعادلة <code dir="ltr">=ISNUMBER(A2)</code> القيمة FALSE.</li><li>لا يتغير مجموع الشريط السفلي عند تحديد الخلايا.</li></ul>
+<h2 id="s-3">الطريقة الأولى: أيقونة التحويل</h2>
+<ol><li>حدد الخلايا التي فيها المثلث الأخضر.</li><li>اضغط على أيقونة التنبيه التي تظهر بجانبها.</li><li>اختر <strong>Convert to Number</strong> (تحويل إلى رقم).</li></ol>
+<p>هذه أسرع طريقة عندما تكون البيانات نظيفة.</p>
+<h2 id="s-4">الطريقة الثانية: دالة VALUE</h2>
+<p>إذا كانت القيمة في A2 فاكتب في B2:</p>
+<pre dir="ltr"><code>=VALUE(A2)</code></pre>
+<p>ثم اسحب المعادلة للأسفل. إذا كان في النص مسافات زائدة فاستخدم <a href="/excel-ar/formulas/trim/">TRIM</a> معها:</p>
+<pre dir="ltr"><code>=VALUE(TRIM(A2))</code></pre>
+<p>وإذا جاءت المسافة من نسخ الويب (مسافة غير قابلة للكسر) فاستبدلها:</p>
+<pre dir="ltr"><code>=VALUE(SUBSTITUTE(A2,CHAR(160),&quot;&quot;))</code></pre>
+<h2 id="s-5">الطريقة الثالثة: الضرب في 1</h2>
+<p>يمكنك تحويل النص دون دالة بكتابة:</p>
+<pre dir="ltr"><code>=A2*1</code></pre>
+<p>أو <code dir="ltr">=--A2</code>. تنجح الطريقة لأن العملية الحسابية تجبر Excel على قراءة النص كرقم.</p>
+<h2 id="s-6">الطريقة الرابعة: لصق خاص بدون معادلات</h2>
+<ol><li>اكتب 1 في خلية فارغة وانسخها.</li><li>حدد الأرقام المخزنة كنص.</li><li>اضغط لصق خاص (Paste Special) ثم اختر <strong>Multiply</strong>.</li><li>اضغط موافق، وستتحول القيم إلى أرقام في مكانها.</li></ol>
+<h2 id="s-7">الطريقة الخامسة: نص إلى أعمدة</h2>
+<ol><li>حدد العمود كاملًا.</li><li>من تبويب Data اختر <strong>Text to Columns</strong>.</li><li>اضغط Finish مباشرة دون تغيير أي خيار.</li></ol>
+<p>تعيد هذه الطريقة قراءة العمود كله وتحوّله إلى أرقام في خطوة واحدة.</p>
+<h2 id="s-8">مثال عملي</h2>
+<div class="table-wrap"><table><thead><tr><th>A (كما وصل)</th><th><a href="/excel-ar/formulas/isnumber/">ISNUMBER</a></th><th>بعد التحويل</th></tr></thead><tbody><tr><td>&quot;150&quot;</td><td>FALSE</td><td>150</td></tr><tr><td>&quot; 200&quot;</td><td>FALSE</td><td>200</td></tr><tr><td>&quot;75&quot;</td><td>FALSE</td><td>75</td></tr></tbody></table></div>
+<p>قبل التحويل يعطي <code dir="ltr">=SUM(A2:A4)</code> صفرًا، وبعد التحويل يعطي 425.</p>
+<h2 id="s-9">أخطاء شائعة</h2>
+<ul><li><strong>الفاصلة العشرية:</strong> إذا كان الرقم مكتوبًا بفاصلة مختلفة عن إعدادات جهازك (مثل 3,5)، فقد يفشل التحويل؛ استبدل الفاصلة بالنقطة بـ <a href="/excel-ar/formulas/substitute/">SUBSTITUTE</a>.</li><li><strong>الأرقام العربية الهندية:</strong> الأرقام مثل ١٢٣ قد تُقرأ نصًا في بعض الإعدادات، فجرّب VALUE أو غيّر إعدادات المنطقة.</li><li><strong>تنسيق الخلية:</strong> تغيير التنسيق إلى Number لا يحوّل النص الموجود؛ يجب إعادة إدخال القيمة أو استخدام إحدى الطرق أعلاه.</li><li><strong>نسيان نسخ القيم:</strong> بعد استخدام VALUE انسخ النتائج والصقها كقيم (Paste Values) قبل حذف العمود الأصلي.</li></ul>
+<h2 id="s-10">أسئلة شائعة</h2>
+<h3>لماذا يعطي SUM صفرًا رغم وجود أرقام؟</h3>
+<p>لأن الأرقام مخزنة كنص، والدالة <a href="/excel-ar/formulas/sum/">SUM</a> تتجاهل النصوص. حوّلها بإحدى الطرق السابقة.</p>
+<h3>كيف أحول عمودًا كاملًا بسرعة؟</h3>
+<p>استخدم Text to Columns أو لصق خاص مع Multiply، فكلاهما يعمل على العمود كله دفعة واحدة.</p>
+<h3>كيف أحول الرقم إلى نص عكسيًا؟</h3>
+<p>استخدم الدالة <a href="/excel-ar/formulas/text/">TEXT</a> مثل <code dir="ltr">=TEXT(A2,&quot;0&quot;)</code> للحصول على نص من الرقم.</p>
+<h3>هل تحذف VALUE المسافات؟</h3>
+<p>تتعامل مع المسافات العادية في الأطراف أحيانًا، لكن الأفضل استخدام TRIM معها لضمان النتيجة.</p>
+<h2>الدوال المستخدمة في هذا المقال</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/trim/" title="شرح دالة TRIM في Excel بالعربي">TRIM</a></li><li><a href="/excel-ar/formulas/isnumber/" title="شرح دالة ISNUMBER في Excel بالعربي">ISNUMBER</a></li><li><a href="/excel-ar/formulas/substitute/" title="شرح دالة SUBSTITUTE في Excel بالعربي">SUBSTITUTE</a></li><li><a href="/excel-ar/formulas/sum/" title="شرح دالة SUM في Excel بالعربي">SUM</a></li><li><a href="/excel-ar/formulas/text/" title="شرح دالة TEXT في Excel بالعربي">TEXT</a></li></ul>
+</article>
+<aside class="cta">
+<p class="cta-title">عندك سؤال عن جدولك؟</p>
+<p>اكتب سؤالك لمساعد Excel المجاني على تيليجرام، وخذ الصيغة المناسبة لبياناتك خلال لحظات.</p>
+<p><a class="btn" href="https://t.me/AdamShopIQ_bot?start=web_convert-text-to-number-excel" rel="noopener">اسأل مساعد Excel مجاناً على تيليجرام</a></p>
+<p class="cta-more">تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة نصائح Excel</a> لنصيحة عملية كل يوم.</p>
+<p class="cta-more">وفي البوت أيضاً أدلة جاهزة مفصّلة لمن يريد التعمّق.</p>
+</aside>
+<h2>مقالات أخرى</h2>
+<ul class="cards"><li><a href="/excel-ar/articles/remove-duplicates-excel/">طريقة حذف القيم المكررة في Excel وإيجاد التكرار (3 طرق)</a><p>تعلّم كيف تكتشف التكرار وتحذفه في Excel بثلاث طرق: أداة إزالة التكرارات، دالة UNIQUE، والتنسيق الشرطي، مع مثال عملي وأخطاء شائعة.</p></li><li><a href="/excel-ar/articles/calculate-percentage-excel/">طريقة حساب النسبة المئوية في Excel خطوة بخطوة (مع أمثلة)</a><p>تعلم حساب النسبة المئوية في Excel: نسبة الجزء من الكل، نسبة التغيير بين رقمين، وزيادة رقم بنسبة معينة، مع أمثلة جاهزة.</p></li><li><a href="/excel-ar/articles/calculate-salary-excel/">طريقة حساب الراتب الصافي في Excel (بدلات واستقطاعات)</a><p>تعلم بناء جدول رواتب في Excel بمعادلات واضحة: الراتب الأساسي والبدلات والاستقطاعات والراتب الصافي مع مثال تطبيقي وأخطاء شائعة.</p></li><li><a href="/excel-ar/articles/days-between-two-dates-excel/">حساب عدد الأيام بين تاريخين في Excel (أيام عمل وأيام تقويمية)</a><p>تعلّم حساب عدد الأيام بين تاريخين في Excel بطرق مختلفة: الطرح المباشر، DATEDIF، وأيام العمل فقط مع استثناء العطل الرسمية.</p></li><li><a href="/excel-ar/articles/calculate-work-hours-excel/">حساب ساعات العمل من وقت الحضور والانصراف في Excel</a><p>تعلم حساب عدد ساعات العمل اليومية من وقت الحضور والانصراف في Excel، مع معالجة الدوام الليلي وجمع الساعات الأسبوعية بصيغ دقيقة.</p></li></ul>
+</main>
+<footer class="site"><div class="wrap"><p>🤖 المحتوى مكتوب بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء؛ جرّب الصيغ على نسخة من ملفك قبل الاعتماد عليها.</p><p>Excel بالعربي: شروحات مجانية لدوال Excel وصيغه بالعربية، لكل من يعمل على الجداول في البلاد العربية. تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة النصائح على تيليجرام</a>.</p></div></footer>
+</body>
+</html>

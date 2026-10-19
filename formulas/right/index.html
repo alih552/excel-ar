@@ -54,7 +54,7 @@
 <h2 id="s-4">أخطاء شائعة وحلولها</h2>
 <ul><li><strong>الخطأ #VALUE!</strong>: يظهر إذا كان عدد الأحرف سالبًا، ويظهر كذلك في الصيغة المركبة عندما لا تجد SEARCH الشرطة فتعيد هي نفسها هذا الخطأ. أحط الصيغة بـ <a href="/excel-ar/formulas/iferror/">IFERROR</a>.</li><li><strong>مسافات زائدة في النهاية</strong>: البيانات المنسوخة قد تنتهي بمسافة فتأخذها RIGHT ضمن الأحرف. استخدم <code dir="ltr">=RIGHT(TRIM(A2),3)</code>.</li><li><strong>المجموع صفر</strong>: سببه جمع نتائج نصية. حوّلها بـ VALUE أو بضربها في 1.</li><li><strong>التواريخ</strong>: تطبيق RIGHT على خلية تاريخ يعمل على الرقم التسلسلي الداخلي لا على شكل التاريخ المعروض، فاستخدم <a href="/excel-ar/formulas/year/">YEAR</a> أو <a href="/excel-ar/formulas/text/">TEXT</a> بدلًا منها.</li></ul>
 <h2 id="s-5">نصائح</h2>
-<ul><li>RIGHT متاحة في جميع إصدارات Excel، ولها شقيقتان: <a href="/excel-ar/formulas/left/">LEFT</a> لأخذ الأحرف من البداية و<a href="/excel-ar/formulas/mid/">MID</a> لأخذها من الوسط.</li><li>في Excel 365 وExcel 2024 تستطيع استخدام TEXTAFTER لأخذ كل ما بعد فاصل معين بصيغة أقصر، مثل <code dir="ltr">=TEXTAFTER(A2,&quot;-&quot;)</code>، وهي غير موجودة في Excel 2021 وما قبله.</li></ul>
+<ul><li>RIGHT متاحة في جميع إصدارات Excel، ولها شقيقتان: <a href="/excel-ar/formulas/left/">LEFT</a> لأخذ الأحرف من البداية و<a href="/excel-ar/formulas/mid/">MID</a> لأخذها من الوسط.</li><li>في Excel 365 وExcel 2024 تستطيع استخدام <a href="/excel-ar/formulas/textafter/">TEXTAFTER</a> لأخذ كل ما بعد فاصل معين بصيغة أقصر، مثل <code dir="ltr">=TEXTAFTER(A2,&quot;-&quot;)</code>، وهي غير موجودة في Excel 2021 وما قبله.</li></ul>
 <h2>مثال سريع</h2>
 <pre dir="ltr"><code>=RIGHT(A2,4)</code></pre>
 <p>النتيجة: آخر أربعة أرقام من الرمز</p>

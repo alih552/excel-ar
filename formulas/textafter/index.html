@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>شرح دالة TEXTAFTER في Excel بالعربي</title>
+<meta name="description" content="شرح دالة TEXTAFTER في Excel: تعيد الجزء من النص الذي يقع بعد فاصل معين، وتغني عن الجمع بين RIGHT وLEN وFIND. مع الصيغة ومثال عملي.">
+<meta name="keywords" content="TEXTAFTER، دالة TEXTAFTER، شرح TEXTAFTER، Excel، اكسل">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="شرح دالة TEXTAFTER في Excel بالعربي">
+<meta property="og:description" content="شرح دالة TEXTAFTER في Excel: تعيد الجزء من النص الذي يقع بعد فاصل معين، وتغني عن الجمع بين RIGHT وLEN وFIND. مع الصيغة ومثال عملي.">
+<meta property="og:site_name" content="Excel بالعربي">
+<meta property="og:locale" content="ar_AR">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="/excel-ar/assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","headline":"شرح دالة TEXTAFTER في Excel بالعربي","description":"شرح دالة TEXTAFTER في Excel: تعيد الجزء من النص الذي يقع بعد فاصل معين، وتغني عن الجمع بين RIGHT وLEN وFIND. مع الصيغة ومثال عملي.","inLanguage":"ar","url":"https://alih552.github.io/excel-ar/formulas/textafter/","author":{"@type":"Organization","name":"Excel بالعربي"},"publisher":{"@type":"Organization","name":"Excel بالعربي"},"about":{"@type":"Thing","name":"TEXTAFTER (Excel)"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://alih552.github.io/excel-ar/"},{"@type":"ListItem","position":2,"name":"الدوال","item":"https://alih552.github.io/excel-ar/formulas/"},{"@type":"ListItem","position":3,"name":"TEXTAFTER"}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="brand" href="/excel-ar/">Excel بالعربي</a><nav aria-label="الأقسام"><a href="/excel-ar/formulas/">الدوال</a><a href="/excel-ar/articles/">المقالات</a><a href="https://t.me/AdamShopIQ_bot?start=web__nav" rel="noopener">المساعد المجاني</a></nav></div></header>
+<main class="wrap">
+<nav class="crumbs" aria-label="مسار الصفحة"><a href="/excel-ar/">الرئيسية</a> <span aria-hidden="true">›</span> <a href="/excel-ar/formulas/">الدوال</a> <span aria-hidden="true">›</span> <span>TEXTAFTER</span></nav>
+<article>
+<h1>شرح دالة TEXTAFTER في Excel بالعربي</h1>
+<p class="lead">تعيد الجزء من النص الذي يقع بعد فاصل معين، وتغني عن الجمع بين <a href="/excel-ar/formulas/right/">RIGHT</a> و<a href="/excel-ar/formulas/len/">LEN</a> و<a href="/excel-ar/formulas/find/">FIND</a>.</p>
+<h2>الصيغة العامة</h2>
+<pre dir="ltr"><code>=TEXTAFTER(text, delimiter, [instance_num], [match_mode], [match_end], [if_not_found])</code></pre>
+<h2>الوسائط</h2>
+<ul><li><code dir="ltr">text</code>: مطلوب</li><li><code dir="ltr">delimiter</code>: مطلوب</li><li><code dir="ltr">instance_num</code>: اختياري</li><li><code dir="ltr">match_mode</code>: اختياري</li><li><code dir="ltr">match_end</code>: اختياري</li><li><code dir="ltr">if_not_found</code>: اختياري</li></ul>
+<p>الوسيط الذي بين قوسين مربعين في الصيغة العامة اختياري، ويمكنك حذفه.</p>
+<h2>مثال عملي</h2>
+<pre dir="ltr"><code>=TEXTAFTER(A2,&quot;-&quot;)</code></pre>
+<p>النتيجة: إذا كانت A2 تحتوي على &quot;INV-2024&quot; تعطي &quot;2024&quot;</p>
+<h2>إذا رفض Excel الصيغة</h2>
+<p>في كثير من إعدادات Windows العربية تُفصل وسائط الدالة بفاصلة منقوطة (;) بدل الفاصلة (,). إذا ظهرت رسالة خطأ عند كتابة الصيغة فجرّبها هكذا:</p>
+<pre dir="ltr"><code>=TEXTAFTER(A2;&quot;-&quot;)</code></pre>
+<h2>دوال ذات صلة</h2>
+<ul class="grid"><li><a href="/excel-ar/formulas/right/" title="شرح دالة RIGHT في Excel بالعربي">RIGHT</a></li><li><a href="/excel-ar/formulas/len/" title="شرح دالة LEN في Excel بالعربي">LEN</a></li><li><a href="/excel-ar/formulas/find/" title="شرح دالة FIND في Excel بالعربي">FIND</a></li><li><a href="/excel-ar/formulas/mid/" title="شرح دالة MID في Excel بالعربي">MID</a></li></ul>
+</article>
+<aside class="cta">
+<p class="cta-title">عندك سؤال عن جدولك؟</p>
+<p>اكتب سؤالك لمساعد Excel المجاني على تيليجرام، وخذ الصيغة المناسبة لبياناتك خلال لحظات.</p>
+<p><a class="btn" href="https://t.me/AdamShopIQ_bot?start=web_fx_textafter" rel="noopener">اسأل مساعد Excel مجاناً على تيليجرام</a></p>
+<p class="cta-more">تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة نصائح Excel</a> لنصيحة عملية كل يوم.</p>
+<p class="cta-more">وفي البوت أيضاً أدلة جاهزة مفصّلة لمن يريد التعمّق.</p>
+</aside>
+</main>
+<footer class="site"><div class="wrap"><p>🤖 المحتوى مكتوب بمساعدة الذكاء الاصطناعي، وقد يحتوي أخطاء؛ جرّب الصيغ على نسخة من ملفك قبل الاعتماد عليها.</p><p>Excel بالعربي: شروحات مجانية لدوال Excel وصيغه بالعربية، لكل من يعمل على الجداول في البلاد العربية. تابع <a href="https://t.me/excel_iraq_shop" rel="noopener">قناة النصائح على تيليجرام</a>.</p></div></footer>
+</body>
+</html>
